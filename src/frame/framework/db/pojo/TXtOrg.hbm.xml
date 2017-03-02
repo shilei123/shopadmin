@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="framework.db.pojo.TXtOrg" table="T_XT_ORG">
+    	<id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="orgId" type="java.lang.String">
+            <column name="ORG_ID" length="50">
+                <comment>部门编码</comment>
+            </column>
+        </property>
+        <property name="orgName" type="java.lang.String">
+            <column name="ORG_NAME" length="500">
+                <comment>部门名称</comment>
+            </column>
+        </property>
+        <property name="parentOrgId" type="java.lang.String">
+            <column name="PARENT_ORG_ID" length="36">
+                <comment>上级机构id</comment>
+            </column>
+        </property>
+        <property name="order" type="int">
+            <column name="ORDER_" precision="22" scale="0">
+                <comment>顺序</comment>
+            </column>
+        </property>
+        <property name="root" type="java.lang.String">
+            <column name="ROOT" length="1">
+                <comment>是否根节点</comment>
+            </column>
+        </property>
+        <property name="shortName" type="java.lang.String">
+            <column name="SHORT_NAME" length="500">
+                <comment>部门简称</comment>
+            </column>
+        </property>
+        <property name="orgPath" type="java.lang.String">
+            <column name="ORG_PATH" length="1000">
+                <comment>组织结构全路径</comment>
+            </column>
+        </property>
+        <property name="orgLevel" type="int">
+            <column name="ORG_LEVEL">
+                <comment>机构登记</comment>
+            </column>
+        </property>
+        <property name="orgCode" type="java.lang.String">
+            <column name="ORG_CODE" length="36">
+                <comment>组织结构全路径</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

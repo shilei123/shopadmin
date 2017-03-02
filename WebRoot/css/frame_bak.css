@@ -1,0 +1,89 @@
+.am-table-compact > thead > tr > th,
+.am-table-compact > tbody > tr > th,
+.am-table-compact > tfoot > tr > th,
+.am-table-compact > thead > tr > td,
+.am-table-compact > tbody > tr > td,
+.am-table-compact > tfoot > tr > td {
+  padding: 0rem;
+}
+
+.am-table>tbody>tr>td, .am-table>tbody>tr>th, .am-table>tfoot>tr>td, .am-table>tfoot>tr>th, .am-table>thead>tr>td, .am-table>thead>tr>th {
+	padding: 5px;
+}
+
+.admin-sidebar {
+	width:230px;
+}
+.frame-search-panel {
+	padding: 5px;margin: 0px;
+}
+.frame-search-button {
+	margin-top: 0px;
+}
+
+.frame-query-table {
+	width: 100%;
+	border: 0;
+}
+.am-form-field {
+	width: auto;
+}
+.frame-div-padd10 {
+	padding:10px;
+}
+.frame-div-paddbottom20 {
+	padding-bottom:20px;
+}
+.frame-no-padding {
+	padding:0px;
+}
+
+label.error {
+	margin-left: 10px;
+	width: auto;
+	color: red;
+}
+label {
+	margin-bottom: 0px;
+}
+/* input.error { border: 1px dotted red; } */
+
+
+.admin-content, .admin-sidebar {
+	overflow: auto;
+}
+
+.am-datepicker-date.am-input-group {
+	display: inline-block;
+}
+
+.am-input-group .am-form-field {
+	width: 110px;
+}
+
+.am-panel-primary {
+	border-color: #DDDDDD
+}
+
+.admin-offcanvas-bar, .admin-sidebar-sub {
+	background: #fff;
+}
+
+/* body {
+	font-size: 14px;
+	color: #000000;
+	white-space: nowrap;
+	border-collapse: sseparate;
+}
+
+table {
+	font-size: 14px;
+	color: #000000;
+	white-space: nowrap;
+	border-collapse: sseparate;
+} */
+
+.page-table-main {
+	/* height: 450px; */
+	height: auto;
+}

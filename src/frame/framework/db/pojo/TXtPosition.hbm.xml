@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="framework.db.pojo.TXtPosition" table="T_XT_POSITION">
+		<id name="positionId" type="java.lang.String">
+			<column name="POSITION_ID" length="36" />
+			<generator class="assigned" />
+		</id>
+		<property name="positionName" type="java.lang.String">
+			<column name="POSITION_NAME" length="200">
+				<comment>职位名称</comment>
+			</column>
+		</property>
+		<property name="positionDesc" type="java.lang.String">
+			<column name="POSITION_DESC" length="200">
+				<comment>职位描述</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

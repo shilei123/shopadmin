@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="framework.db.pojo.TXtHelp" table="T_XT_HELP">
+        <composite-id name="id" class="framework.db.pojo.TXtHelpId">
+            <key-property name="menuId" type="java.lang.String">
+                <column name="MENU_ID" length="36" />
+            </key-property>
+            <key-property name="userType" type="java.lang.String">
+                <column name="USER_TYPE" length="36" />
+            </key-property>
+        </composite-id>
+        <property name="url" type="java.lang.String">
+            <column name="URL" length="2000" />
+        </property>
+        <property name="yxBj" type="java.lang.String">
+            <column name="YX_BJ" length="1" />
+        </property>
+        <property name="lrSj" type="java.sql.Timestamp">
+            <column name="LR_SJ" length="26" not-null="true" />
+        </property>
+        <property name="xgSj" type="java.sql.Timestamp">
+            <column name="XG_SJ" length="26" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="CONTENT" />
+        </property>
+    </class>
+</hibernate-mapping>

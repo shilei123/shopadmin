@@ -1,0 +1,207 @@
+body table {
+	font-size: 14px;
+}
+
+.am-btn {
+	font-size: 14px;
+}
+
+.am-cf {
+	font-size: 14px;
+}
+
+.am-modal-btn {
+	font-size: 14px;
+} 
+
+/* .am-table {
+	border-collapse: collapse;
+} */
+
+.am-table-compact > thead > tr > th,
+.am-table-compact > tbody > tr > th,
+.am-table-compact > tfoot > tr > th,
+.am-table-compact > thead > tr > td,
+.am-table-compact > tbody > tr > td,
+.am-table-compact > tfoot > tr > td {
+  padding: 0rem;
+}
+
+.am-table>tbody>tr>td, .am-table>tbody>tr>th, .am-table>tfoot>tr>td, .am-table>tfoot>tr>th, .am-table>thead>tr>td, .am-table>thead>tr>th {
+	padding: 3px;
+}
+
+.am-table>thead>tr>th {
+	/* color: #787878; */
+	border-bottom: 0px solid #ddd;
+	/* background-color: #F3F3F3; */
+	background:url(../images/1.png);
+	vertical-align: middle;
+	height: 40px;
+}
+
+.am-form input[type=number], .am-form input[type=search], .am-form input[type=text], .am-form input[type=password], .am-form input[type=datetime], .am-form input[type=datetime-local], .am-form input[type=date], .am-form input[type=month], .am-form input[type=time], .am-form input[type=week], .am-form input[type=email], .am-form input[type=url], .am-form input[type=tel], .am-form input[type=color], .am-form select, .am-form textarea, .am-form-field {
+	font-size: 14px;
+}
+
+.admin-sidebar {
+	width:210px;
+}
+.frame-search-panel {
+	padding: 5px;margin: 0px;
+	background-color: #F5F5F5;
+}
+.frame-search-button {
+	margin-top: 0px;
+}
+
+.frame-query-table {
+	width: 100%;
+	border: 0;
+}
+
+.frame-modal-table {
+	width: 100%;
+	border: 0;
+}
+
+.frame-modal-table tr {
+	height: 40px;
+}
+
+.table_title {
+	text-align: right;
+	width: 100px;
+}
+
+.table_content>input {
+	width: 90%;
+}
+
+.am-form-field {
+	width: auto;
+}
+.frame-div-padd10 {
+	padding:10px;
+}
+.frame-div-paddbottom20 {
+	padding-bottom:20px;
+}
+.frame-no-padding {
+	padding:0px;
+}
+
+label.error {
+	margin-left: 10px;
+	width: auto;
+	color: red;
+}
+label {
+	margin-bottom: 0px;
+}
+/* input.error { border: 1px dotted red; } */
+
+
+.admin-content, .admin-sidebar {
+	overflow: auto;
+}
+
+.am-input-group .am-form-field, .am-input-group-btn>.am-btn {
+	height: 32px;
+	margin-top: 5px;
+}
+
+.am-input-group .am-form-field, .am-input-group-btn, .am-input-group-label {
+	display: inline;
+}
+
+.am-datepicker-date.am-input-group {
+	display: inline-block;
+}
+
+.am-input-group .am-form-field {
+	width: 110px;
+}
+
+.am-panel-primary {
+	border-color: #DDDDDD
+}
+
+.admin-offcanvas-bar, .admin-sidebar-sub {
+	background: #fff;
+}
+
+/* body {
+	font-size: 14px;
+	color: #000000;
+	white-space: nowrap;
+	border-collapse: sseparate;
+}
+
+table {
+	font-size: 14px;
+	color: #000000;
+	white-space: nowrap;
+	border-collapse: sseparate;
+} */
+
+.page-table-main {
+	/* height: 450px; */
+	height: auto;
+}
+
+.am-padding {
+	padding-left: 20px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-top: 5px;	
+}
+
+.am-panel-hd {
+	font-size: 14px;
+	padding-left: 5px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	background-color: #1091D2;
+	color: #FFFFFF;
+}
+
+.frame-am-modal-bd {
+	margin-top: -20px;
+	text-align: left;
+}
+
+*+hr {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.am-selected-btn.am-btn-default {
+	background-color: #FFF;
+}
+
+/* .am-btn-default.am-active, .am-btn-default:active, */ .am-dropdown.am-active .am-btn-default.am-dropdown-toggle {
+	background-color: #fff;
+}
+
+.am-panel-noborder {
+	/* border: none; */
+}
+
+fieldset {
+	margin: 0px;
+	/* padding: 0px; */	
+}
+
+legend {
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+/* .am-u-sm-12 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+} */

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="demo.agencyManager.pojo.TAgency" table="T_AGENCY">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="agencyId" type="java.lang.String">
+            <column name="AGENCY_ID" length="50">
+                <comment>机构编码</comment>
+            </column>
+        </property>
+        <property name="agencyName" type="java.lang.String">
+            <column name="AGENCY_NAME" length="50">
+                <comment>机构名称</comment>
+            </column>
+        </property>
+        <property name="shortName" type="java.lang.String">
+            <column name="SHORT_NAME" length="50">
+                <comment>机构简称</comment>
+            </column>
+        </property>
+        <property name="parentAgencyId" type="java.lang.String">
+            <column name="PARENT_AGENCY_ID" length="50">
+                <comment>上级机构编码</comment>
+            </column>
+        </property>
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_" precision="22" scale="0">
+                <comment>机构顺序</comment>
+            </column>
+        </property>
+        <property name="root" type="java.lang.String">
+            <column name="ROOT" length="1">
+                <comment>是否根机构</comment>
+            </column>
+        </property>
+        <property name="agencyPath" type="java.lang.String">
+            <column name="AGENCY_PATH" length="200">
+                <comment>机构路径</comment>
+            </column>
+        </property>
+        <property name="agencyLevel" type="java.lang.Integer">
+            <column name="AGENCY_LEVEL" precision="22" scale="0">
+                <comment>机构级别</comment>
+            </column>
+        </property>
+        <property name="addr" type="java.lang.String">
+            <column name="ADDR" length="200">
+                <comment>机构地址</comment>
+            </column>
+        </property>
+        <property name="initFlag" type="java.lang.String">
+            <column name="INIT_FLAG" length="1" not-null="true">
+                <comment>默认0: 1已经初始化，0未初始</comment>
+            </column>
+        </property>
+        <property name="sts" type="java.lang.String">
+            <column name="STS" length="1" not-null="true">
+                <comment>默认1: 1启用，0停用</comment>
+            </column>
+        </property>
+        <property name="openTime" type="java.util.Date">
+            <column name="OPEN_TIME" length="7" />
+        </property>
+        <property name="closeTime" type="java.util.Date">
+            <column name="CLOSE_TIME" length="7" />
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7" />
+        </property>
+        <property name="updateUserId" type="java.lang.String">
+            <column name="UPDATE_USER_ID" length="36" />
+        </property>
+        <property name="updateTime" type="java.util.Date">
+            <column name="UPDATE_TIME" length="7" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" not-null="true">
+                <comment>默认0: 0启用，1停用</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

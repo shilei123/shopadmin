@@ -1,0 +1,19 @@
+.bgColor{
+	background-color: #EFEFEF;
+	overflow: visible; 
+}
+.hr{
+ font-size: 2px;
+}
+
+.tablestyle01{background-color:#EFEFEF;}
+.tablestyle01 td{ padding:3px 0px 3px 6px; border-bottom:1px dashed #ACB3B9; font-size:12px;}
+.righttd{text-align:right}
+.styleList{width: 80px; height: 80px; border:1px; border-color:blue; 
+border-style:solid; font-size: 16px; margin-left: 10px; cursor: pointer; 
+padding-top: 16px;margin-top: 10px;}
+
+a:link { text-decoration: none;}
+a:active { text-decoration:blink}
+a:hover { text-decoration:underline;color: red} 
+a:visited { text-decoration: none;}

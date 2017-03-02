@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="framework.db.pojo.TXtRoleUser" table="T_XT_ROLE_USER">
+        <composite-id name="id" class="framework.db.pojo.TXtRoleUserId">
+            <key-property name="roleId" type="java.lang.String">
+                <column name="ROLE_ID" length="36" />
+            </key-property>
+            <key-property name="UId" type="java.lang.String">
+                <column name="U_ID" length="36" />
+            </key-property>
+        </composite-id>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="CREATE_TIME" length="26" not-null="true" />
+        </property>
+        <property name="updateTime" type="java.sql.Timestamp">
+            <column name="UPDATE_TIME" length="26" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="system" extends="json-default" namespace="/view/system">
+		<action name="treeSave" class="framework.action.system.MenuAction" method="save">
+			<result type="json"></result><!-- 保存菜单 -->
+		</action>
+		<action name="treeDelete" class="framework.action.system.MenuAction" method="delete">
+			<result type="json"></result><!-- 删除菜单 -->
+		</action>
+		
+		<action name="roleSave" class="framework.action.system.RoleAction" method="save">
+			<result type="json"></result><!-- 角色保存  -->
+		</action>
+		<action name="roleDelete" class="framework.action.system.RoleAction" method="delete">
+			<result type="json"></result><!-- 角色删除  -->
+		</action>
+		<action name="roleQuery" class="framework.action.system.RoleAction" method="query">
+			<result type="json"><param name="ignoreHierarchy">false</param></result><!-- 角色列表  -->
+		</action>
+		<action name="comboboxRoles" class="framework.action.system.RoleAction" method="comboboxRoles">
+			<result type="json"><param name="ignoreHierarchy">false</param></result><!-- 角色列表  -->
+		</action>
+		<action name="roleSingle" class="framework.action.system.RoleAction" method="querySingle">
+			<result type="json"></result><!-- 单个角色  -->
+		</action>
+		<action name="roleMenuQuery" class="framework.action.system.RoleAction" method="queryRoleMenu">
+			<result type="json"></result><!-- 角色菜单，菜单id查询  -->
+		</action>
+		<action name="roleMenuSave" class="framework.action.system.RoleAction" method="saveRoleMenu">
+			<result type="json"></result><!-- 角色菜单，角色菜单保存  -->
+		</action>
+		 
+		<action name="menuTree" class="framework.action.system.MenuAction" method="menuTreeAll">
+			<result type="json"></result><!-- 获取菜单 -->
+		</action>
+		
+		<action name="log" class="framework.action.system.LogAction" >
+			<result type="json"><param name="ignoreHierarchy">false</param></result><!-- 日志操作 -->
+		</action>
+		<action name="keyvalue" class="framework.action.system.KeyValueAction" >
+			<result type="json"><param name="ignoreHierarchy">false</param></result><!-- 键值对 -->
+		</action>
+		<action name="user" class="framework.action.system.UserAction" ><!-- 用户管理-->
+			<result type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+		<action name="help" class="framework.action.system.HelpAction" ><!-- 帮助管理-->
+			<result type="json"></result>
+		</action>
+		
+		<action name="cacheTable" class="framework.action.system.CacheTableAction" ><!-- 缓存表 -->
+			<result type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+		<!-- 机构管理Action -->
+		<action name="orgTree" class="framework.action.system.OrgAction" method="orgTree">
+			<result type="json"></result><!-- 获取机构 -->
+		</action>
+		
+		<action name="orgSave" class="framework.action.system.OrgAction" method="saveOrg">
+			<result type="json"></result><!-- 保存机构 -->
+		</action>
+		
+		<action name="orgDel" class="framework.action.system.OrgAction" method="delete">
+			<result type="json"></result><!-- 删除机构 -->
+		</action>
+		
+		<action name="workday" class="framework.action.system.WorkdayAction" ><!-- 工作日 -->
+			<result type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+		<action name="data" class="framework.action.system.DataAction" ><!-- 数据导入导出 -->
+			<result name="success">/view/system/data_fileupload.jsp</result>
+			<result name="error">/view/system/data_fileupload.jsp</result>
+		</action>
+		
+		<action name="datasource" class="framework.action.system.PublicDatasourceAction" ><!-- 数据源 -->
+			<result name="json" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+		<action name="group" class="framework.action.system.GroupAction" ><!-- 用户组 -->
+			<result name="json" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+	</package>
+	
+	<package name="welcome" extends="json-default" namespace="/view/welcome">
+		<action name="welcomeAction" class="com.htpt.welcome.WelcomeAction" method="welcome">
+			<result name="success">/view/welcome.jsp</result>
+			<result name="error">/view/welcome.jsp</result>
+		</action>
+	</package>
+</struts>    

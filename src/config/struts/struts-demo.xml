@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="bankInfo" extends="json-default" namespace="/view/bank">
+		<action name="bankQuery" class="demo.bankManager.action.BankAction">
+			<result type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+	</package>
+	
+	<package name="agency" extends="json-default" namespace="/view/agency">
+		<action name="agency" class="demo.agencyManager.action.AgencyAction">
+			<result type="json"></result>
+		</action>
+	</package>
+</struts>    

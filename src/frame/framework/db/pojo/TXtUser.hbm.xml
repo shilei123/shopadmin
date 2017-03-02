@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="framework.db.pojo.TXtUser" table="T_XT_USER">
+        <id name="UId" type="java.lang.String">
+            <column name="U_ID" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="UPwd" type="java.lang.String">
+            <column name="U_PWD" length="36" />
+        </property>
+        <property name="UName" type="java.lang.String">
+            <column name="U_NAME" length="200" />
+        </property>
+        <property name="URemark" type="java.lang.String">
+            <column name="U_REMARK" length="2000" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="CREATE_TIME" length="26" not-null="true" />
+        </property>
+        <property name="updateTime" type="java.sql.Timestamp">
+            <column name="UPDATE_TIME" length="26" />
+        </property>
+        <property name="order" type="int">
+            <column name="ORDER_" length="26" />
+        </property>
+    </class>
+</hibernate-mapping>

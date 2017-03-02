@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!--表单 -->	
+	<package name="public" extends="json-default" namespace="/view/public">
+		<action name="fileupload" class="framework.action.system.FileUploadAction" method="upload">
+			<result name="success">fileupload.jsp</result><!-- 文件上传公共页面 -->
+			<result name="error">fileupload.jsp</result><!-- 文件上传公共页面 -->
+			<param name="maximumSize">38654705664</param>
+		</action>
+		<action name="uploadfileSetValid" class="framework.action.system.FileUploadAction" method="uploadfileSetValid">
+			<result type="json"></result><!-- 设置上传文件有效 -->
+		</action>
+		<action name="uploadfileDelete" class="framework.action.system.FileUploadAction" method="uploadfileDelete">
+			<result type="json"></result><!-- delete上传文件 -->
+		</action>
+		<action name="fileLoad" class="framework.action.system.FileUploadAction" method="load">
+			<result type="json"></result><!-- 获取文件信息上传文件 -->
+		</action>
+		
+		<!-- 公开缓存表 -->
+		<action name="cacheTable" class="framework.action.system.CacheTableAction" method="query">
+		</action>
+		
+		<!-- 工作流 -->
+		<action name="workflow" class="framework.action.workflow.WorkflowAction">
+			<result name="json" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+		<!-- 信息提示 -->
+		<action name="message" class="framework.action.system.MessageAction">
+			<result name="json" type="json">
+				<param name="ignoreHierarchy">false</param>
+				 <param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<!-- 公共aciton提示 -->
+		<action name="pub" class="framework.action.pub.PublicAction">
+			<result name="json" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+		<!-- 数据源 -->
+		<action name="datasource" class="framework.action.system.PublicDatasourceAction" method="data" >
+			<result name="json" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+	</package>
+
+</struts>    

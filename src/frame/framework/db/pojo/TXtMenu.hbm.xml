@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="framework.db.pojo.TXtMenu" table="T_XT_MENU">
+        <id name="menuId" type="java.lang.String">
+            <column name="MENU_ID" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="menuName" type="java.lang.String">
+            <column name="MENU_NAME" length="400" not-null="true" />
+        </property>
+        <property name="menuParentId" type="java.lang.String">
+            <column name="MENU_PARENT_ID" length="36" not-null="true" />
+        </property>
+        <property name="menuParentIds" type="java.lang.String">
+            <column name="MENU_PARENT_IDS" length="2000" not-null="true" />
+        </property>
+        <property name="url" type="java.lang.String">
+            <column name="URL" length="2000" />
+        </property>
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_" />
+        </property>
+        <property name="openMethod" type="java.lang.String">
+            <column name="OPEN_METHOD" length="72" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="CREATE_TIME" length="26" not-null="true" />
+        </property>
+        <property name="updateTime" type="java.sql.Timestamp">
+            <column name="UPDATE_TIME" length="26" />
+        </property>
+        <property name="logo" type="java.lang.String">
+            <column name="LOGO" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

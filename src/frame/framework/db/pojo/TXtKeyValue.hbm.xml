@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="framework.db.pojo.TXtKeyValue" table="T_XT_KEY_VALUE">
+        <id name="kvKey" type="java.lang.String">
+            <column name="KV_KEY" length="200" />
+            <generator class="assigned" />
+        </id>
+        <property name="kvValue" type="java.lang.String">
+            <column name="KV_VALUE" length="2000" />
+        </property>
+        <property name="yxBj" type="java.lang.String">
+            <column name="YX_BJ" length="1" />
+        </property>
+        <property name="lrSj" type="java.sql.Timestamp">
+            <column name="LR_SJ" length="26" not-null="true" />
+        </property>
+        <property name="xgSj" type="java.sql.Timestamp">
+            <column name="XG_SJ" length="26" />
+        </property>
+    </class>
+</hibernate-mapping>
