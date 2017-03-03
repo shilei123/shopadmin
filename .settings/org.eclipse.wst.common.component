@@ -2,8 +2,8 @@
     <wb-module deploy-name="shopadmin">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/frame"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/shopadmin"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/framework"/>
         <property name="java-output-path" value="/shopadmin/WebRoot/WEB-INF/classes"/>
         <property name="context-root" value="shopadmin"/>
     </wb-module>
