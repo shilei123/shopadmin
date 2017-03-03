@@ -2,3 +2,8 @@
 /config
 /demo
 /framework
+/applicationContext.xml
+/dbconfig.properties
+/hibernate.cfg_bak.xml
+/log4j.properties
+/struts.xml
