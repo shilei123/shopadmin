@@ -1,5 +1,11 @@
 var createTr = function(data, targetId) {
 	var tableTh = $("#"+targetId+" thead tr th");
+	
+	//如果没有记录
+	if(data.rows != null && data.rows == 0 && tableTh != null && tableTh.length > 0) {
+		return "<tr><td colspan='"+tableTh.length+"' style='text-align:center;height:50px;vertical-align: middle;'>&nbsp;暂无记录!</td></tr>";
+	}
+	
 	var html = "";
 	$(data.rows).each(function(index) {
 		var row = data.rows[index];
@@ -15,7 +21,7 @@ var createTr = function(data, targetId) {
 				html += "&nbsp;";
 			} else {
 				if(fieldName=="index") {//字段名为index,返回序号列
-					html += "" + index2 + "";
+					html += "<div style='text-align: center;'>" + index2 + "</div>";
 				} else {
 					if(formatter==undefined) { //格式化为空，则返回文本列
 						html += getColumnValue(row[fieldName]);
@@ -50,6 +56,7 @@ function pageData(url, targetId, params, currPageNum, rowCount, page) {
 		data : params,
 		dataType: "json",
 		success : function(data) {
+			//console.log(data);
 			$('#'+targetId+' tbody').empty();
 			var html = createTr(data, targetId);
 			$("#"+targetId).append(html);

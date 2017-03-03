@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 最大36M单个文件 -->
+	<constant name="struts.multipart.maxSize" value="38654705664"/>
+	<!-- 为了使struts的Action中能用到spring注解对象，将struts的Action交由spring管理 -->
+	<constant name="struts.objectFactory" value="spring"/>
+	<!-- 记载所有的struts多模块配置文件 -->
+	<include file="config/struts/struts-*.xml"/>
+	
+	<!-- 顶层配置 -->
+	<package name="default" extends="json-default" >
+		<action name="login" class="framework.action.LoginAction" method="checkUser">
+			<result type="json"></result><!-- 用户登录 -->
+		</action>
+		<action name="userOut" class="framework.action.LoginAction" method="userOut">
+			<result type="json"></result><!-- 用户退出 -->
+		</action>
+	</package>
+
+	<!--视图顶层配置 -->	
+	<package name="view" extends="json-default" namespace="/view">
+		<action name="menuTree" class="framework.action.system.MenuAction" method="menuTree">
+			<result type="json"></result><!-- 获取菜单 -->
+		</action>
+		
+		<action name="userMsg" class="framework.action.system.UserAction" method="userSessionMsg">
+			<result type="json"></result><!-- 获取登录用户信息 SESSION -->
+		</action>
+		<action name="help" class="framework.action.system.HelpAction" method="queryHelpUrl">
+			<result type="json"></result><!-- 获取帮助显示的URL -->
+		</action>
+	</package>
+	
+
+</struts>    

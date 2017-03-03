@@ -60,6 +60,14 @@ body table {
 	border: 0;
 }
 
+.frame-query-table tr {
+	height:35px;
+}
+
+.frame-query-table .query_title {
+	text-align: right;
+}
+
 .frame-modal-table {
 	width: 100%;
 	border: 0;
@@ -121,6 +129,10 @@ label {
 
 .am-input-group .am-form-field {
 	width: 110px;
+}
+
+.am-panel {
+	margin-bottom: 10px;
 }
 
 .am-panel-primary {

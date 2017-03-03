@@ -29,3 +29,7 @@ var showModal = function(id, w, h) {
 var closeModal = function(id) {
 	$('#'+id).modal("close");
 };
+
+var formatterFlag = function(value, row){
+	return value=="0"?"有效":"无效";
+};

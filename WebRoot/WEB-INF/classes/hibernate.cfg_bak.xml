@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+<session-factory>
+	<!-- org.hibernate.dialect.OracleDialect 解决只返回一个字符的问题 -->
+	<!-- framework.db.MyOracle10gDialect -->
+	<!-- mysql5.0:org.hibernate.dialect.MySQLDialect -->
+	<!-- mysql5.0+:org.hibernate.dialect.MySQL5InnoDBDialect -->
+	<!--<property name="dialect">framework.db.MySqlDialect</property>
+	<property name="connection.url">jdbc:mysql://localhost:3306/frame?useUnicode=true&amp;characterEncoding=GBK&amp;useOldAliasMetadataBehavior=true</property>
+	<property name="connection.username">root</property> 
+	<property name="connection.password"></property> 
+	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+	<property name="myeclipse.connection.profile">JDBC</property>
+	<property name="connection.pool_size">30</property>
+	<property name="format_sql">true</property>
+	<property name="show_sql">true</property>-->
+	<property name="dialect">framework.db.MyOracle10gDialect</property>
+	<property name="connection.url">jdbc:oracle:thin:@192.168.0.30:1521:orcl</property>
+	<property name="connection.username">ywt</property>
+	<property name="connection.password">ywt</property>
+	<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+	<property name="myeclipse.connection.profile">JDBC</property>
+	<property name="connection.pool_size">15</property>
+	<property name="format_sql">true</property>
+	<property name="show_sql">true</property>
+	
+	<mapping resource="framework/db/pojo/TXtEmp.hbm.xml" />
+	<mapping resource="framework/db/pojo/TXtMenu.hbm.xml" />
+	<mapping resource="framework/db/pojo/TXtUser.hbm.xml" />
+	<mapping resource="framework/db/pojo/TPbUploadfile.hbm.xml" />
+	<mapping resource="framework/db/pojo/TXtRoleMenu.hbm.xml" />
+	<mapping resource="framework/db/pojo/TXtRole.hbm.xml" />
+	<mapping resource="framework/db/pojo/TXtRoleUser.hbm.xml" />
+	<mapping resource="framework/db/pojo/SysCode.hbm.xml" />
+	<mapping resource="framework/db/pojo/TXtOrg.hbm.xml" />
+	<mapping resource="framework/db/pojo/TXtPosition.hbm.xml" />
+	<mapping resource="framework/db/pojo/TXtWorkday.hbm.xml" />
+	<mapping resource="framework/db/pojo/TAuditLog.hbm.xml" />
+	<!-- <mapping resource="framework/db/pojo/TXtKeyValue.hbm.xml" /> -->
+	<!-- <mapping resource="framework/db/pojo/TXtHelp.hbm.xml" /> -->
+	<!-- <mapping resource="framework/db/pojo/TXtCacheTable.hbm.xml" /> -->
+	<!-- <mapping resource="framework/db/pojo/TXtMessage.hbm.xml" /> -->
+	<!-- <mapping resource="framework/db/pojo/TPbDatasource.hbm.xml" /> -->
+	<!-- <mapping resource="framework/db/pojo/TXtGroup.hbm.xml" /> -->
+	<!-- <mapping resource="framework/db/pojo/TXtGroupUser.hbm.xml" /> -->
+	
+	<mapping resource="com/ywt/admin/noticeManager/pojo/TNotice.hbm.xml" />
+	<mapping resource="com/ywt/admin/noticeManager/pojo/TNoticeType.hbm.xml" />
+	<mapping resource="com/ywt/admin/agencyManager/pojo/TAgency.hbm.xml" />
+	<mapping resource="com/ywt/admin/agencyManager/pojo/TAgencyParams.hbm.xml" />
+	<mapping resource="com/ywt/admin/bankManager/pojo/TBankInfo.hbm.xml" />
+	<mapping resource="com/ywt/admin/saleCardManager/pojo/TSaleCard.hbm.xml" />
+	<mapping resource="com/ywt/admin/vipManager/pojo/TNet.hbm.xml" />
+	<mapping resource="com/ywt/admin/vipManager/pojo/TVip.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TAccountRecord.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TBonus.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TCollision.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TFloorConfig.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TGrade.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TIntegral.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TIntegralTotal.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TNetChange.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TPerformance.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TProdToBonus.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TStaticTodo.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TVipBank.hbm.xml" />
+	<mapping resource="com/ywt/web/pojo/TWithdrawApp.hbm.xml" />
+</session-factory>
+</hibernate-configuration>

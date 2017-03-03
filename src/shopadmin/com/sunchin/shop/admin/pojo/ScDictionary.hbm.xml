@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScDictionary" table="SC_DICTIONARY" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="type" type="java.lang.String">
+            <column name="TYPE" length="50" />
+        </property>
+        <property name="code" type="java.lang.String">
+            <column name="CODE" length="50" />
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" length="100" />
+        </property>
+        <property name="ename" type="java.lang.String">
+            <column name="ENAME" length="100" />
+        </property>
+        <property name="pcode" type="java.lang.String">
+            <column name="PCODE" length="50" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" length="100" />
+        </property>
+        <property name="isuse" type="java.lang.String">
+            <column name="ISUSE" length="1" />
+        </property>
+        <property name="isedit" type="java.lang.String">
+            <column name="ISEDIT" length="1" />
+        </property>
+        <property name="sort" type="int">
+            <column name="SORT" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" not-null="true">
+                <comment>默认0: 0启用，1停用</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -25,15 +25,21 @@
 							<div class="am-panel-bd am-collapse am-in frame-search-panel"id="collapse-panel-1">
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
-										<td style="width:50px;">类型：</td>
-										<td><input name="queryParams.bankName" class="am-form-field"/></td>
-										<td style="width:50px;">代码：</td>
-										<td><input name="queryParams.bankDesc" class="am-form-field"/></td>
-										<td style="width:80px;">中文名称：</td>
-										<td><input name="queryParams.bankDesc" class="am-form-field"/></td>
-										<td>
+										<td class="query_title" style="width:50px;">类型：</td>
+										<td><input name="queryParams.type" class="am-form-field"/></td>
+										<td class="query_title" style="width:50px;">代码：</td>
+										<td><input name="queryParams.code" class="am-form-field"/></td>
+										<td class="query_title" style="width:80px;">中文名称：</td>
+										<td><input name="queryParams.name" class="am-form-field"/></td>
+									</tr>
+									<tr>
+										<td class="query_title" style="width:80px;">英文名称：</td>
+										<td><input name="queryParams.ename" class="am-form-field"/></td>
+										<td class="query_title" style="width:80px;">描述：</td>
+										<td><input name="queryParams.remark" class="am-form-field"/></td>
+										<td colspan="2">
+											<button type="button" id="addBtn" class="am-btn am-btn-primary frame-search-button">新增</button>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
-											<button type="button" id="openBankBtn" class="am-btn am-btn-primary frame-search-button">新增</button>
 										</td>
 									</tr>
 								</table>
@@ -43,21 +49,20 @@
 				</div>
 				<div class="am-g">
 					<div class="am-u-sm-12 page-table-main">
-						<table class="am-table am-table-bordered am-table-striped am-table-hover" id="bankListTable">
+						<table class="am-table am-table-bordered am-table-striped am-table-hover" id="dictListTable">
 							<thead>
 								<tr>
 									<th width="2%" field="index"></th>
-									<th width="10%" field="bankName" formatter="formatterBankName">类型</th>
-									<th width="10%" field="tel">代码</th>
-									<th width="13%" field="url" formatter="formatterUrl">中文名称</th>
-									<th width="10%" field="bankDesc">英文名称</th>
-									<th width="10%" field="bankDesc">父ID</th>
-									<th width="10%" field="bankDesc">备注说明</th>
-									<th width="5%" field="bankDesc">有效</th>
-									<th width="5%" field="bankDesc">可删除</th>
-									<th width="5%" field="bankDesc">可编辑</th>
-									<th width="10%" field="bankDesc">排序</th>
-									<th width="10%" field="bankDesc">创建时间</th>
+									<th width="10%" field="type">类型</th>
+									<th width="8%" field="code">代码</th>
+									<th width="13%" field="name">中文名称</th>
+									<th width="8%" field="ename">英文名称</th>
+									<th width="15%" formatter="formatterParent">父信息</th>
+									<th width="4%" field="isuse" formatter="formatterIsuse">有效</th>
+									<th width="4%" field="isedit" formatter="formatterIsEdit">编辑</th>
+									<th width="4%" field="sort">排序</th>
+									<th width="12%" field="createTime">创建时间</th>
+									<th width="15%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>
 						</table>
@@ -71,32 +76,43 @@
 	</div>
 	<!-- content end -->
 	
-	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="editDictModal">
 		<div class="am-modal-dialog">
-	    	<div class="am-modal-hd"><span id="title">新增银行</span>
+	    	<div class="am-modal-hd"><span id="title">新增</span>
 	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 	    	</div>
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
 		        <div align="center">
-		        	<input name="bankInfo.id" id="bankId" type="hidden"/>
-		        	<table class="frame-modal-table" border="0" bordercolor="black">
+		        	<table id="edit_dict_table" class="frame-modal-table" border="0" bordercolor="black">
 			        	<tr>
-			        		<td width="100" class="table_title">银行名称：</td>
-			        		<td><input name="bankInfo.bankName" id="bankName" placeholder="银行名称" class="am-form-field" style="width:90%" minlength="3" required/></td>
+			        		<td width="100" class="table_title">ID：</td>
+			        		<td><input name="dict.id" id="dictId" placeholder="ID,自动生成，不可编辑" readonly="readonly" class="am-form-field" style="width:90%" required/></td>
 			        	</tr>
 			        	<tr>
-			        		<td class="table_title">电话：</td>
-			        		<td><input name="bankInfo.tel" id="tel" placeholder="电话" class="am-form-field" style="width:90%" required/></td>
+			        		<td class="table_title">父ID：</td>
+			        		<td><input name="dict.pcode" id="pcode" placeholder="父ID" readonly="readonly" class="am-form-field" style="width:90%"/></td>
 			        	</tr>
 			        	<tr>
-			        		<td class="table_title">网址：</td>
-			        		<td><input name="bankInfo.url" id="url" placeholder="网址" class="am-form-field" style="width:90%"/></td>
+			        		<td width="100" class="table_title">类型：</td>
+			        		<td><input name="dict.type" id="type" placeholder="类型" class="am-form-field" style="width:90%" required/></td>
 			        	</tr>
 			        	<tr>
-			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">银行描述：</div></td>
+			        		<td class="table_title">代码：</td>
+			        		<td><input name="dict.code" id="code" placeholder="代码" class="am-form-field" style="width:90%" required/></td>
+			        	</tr>
+			        	<tr>
+			        		<td class="table_title">中文名称：</td>
+			        		<td><input name="dict.name" id="name" placeholder="中文名称" class="am-form-field" style="width:90%"/></td>
+			        	</tr>
+			        	<tr>
+			        		<td class="table_title">英文名称：</td>
+			        		<td><input name="dict.ename" id="ename" placeholder="英文名称" class="am-form-field" style="width:90%"/></td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">描述：</div></td>
 			        		<td valign="top"> 
-			        			<textarea rows="" cols="" name="bankInfo.bankDesc" id="bankDesc" placeholder="银行描述" style="width:90%;height:100px;margin-top: 5px;" class="am-form-field"></textarea> 
+			        			<textarea rows="" cols="" name="dict.remark" id="remark" placeholder="银行描述" style="width:90%;height:50px;margin-top: 5px;" class="am-form-field"></textarea> 
 			        		</td>
 			        	</tr>
 		       	 	</table>
