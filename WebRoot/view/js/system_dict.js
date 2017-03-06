@@ -66,6 +66,7 @@ $("#saveBtn").click(function() {
 });
 
 var clearForm = function() {
+	$("#dictId").val('');
 	$("#type").val('');
 	$("#code").val('');
 	$("#name").val('');

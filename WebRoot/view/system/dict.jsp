@@ -112,7 +112,7 @@
 			        	<tr>
 			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">描述：</div></td>
 			        		<td valign="top"> 
-			        			<textarea rows="" cols="" name="dict.remark" id="remark" placeholder="银行描述" style="width:90%;height:50px;margin-top: 5px;" class="am-form-field"></textarea> 
+			        			<textarea rows="" cols="" name="dict.remark" id="remark" placeholder="描述" style="width:90%;height:50px;margin-top: 5px;" class="am-form-field"></textarea> 
 			        		</td>
 			        	</tr>
 		       	 	</table>
