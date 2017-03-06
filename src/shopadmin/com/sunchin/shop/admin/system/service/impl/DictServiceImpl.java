@@ -66,8 +66,8 @@ public class DictServiceImpl implements DictService {
 			ScDictionary vo = (ScDictionary) db.get(ScDictionary.class, dict.getId());
 			vo.setType(dict.getType());
 			vo.setCode(dict.getCode());
-			vo.setIsedit(dict.getIsedit());
-			vo.setIsuse(dict.getIsuse());
+			/*vo.setIsedit(dict.getIsedit());
+			vo.setIsuse(dict.getIsuse());*/
 			vo.setName(dict.getName());
 			vo.setEname(dict.getEname());
 			vo.setRemark(dict.getRemark());
