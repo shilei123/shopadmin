@@ -4,7 +4,7 @@
 <head>
 <jsp:include page="/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>银行管理</title>
+<title>数据字典管理</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 </head>
 <body>
