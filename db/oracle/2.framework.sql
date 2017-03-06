@@ -459,6 +459,8 @@ insert into T_XT_MENU (MENU_ID, MENU_NAME, MENU_PARENT_ID, MENU_PARENT_IDS, URL,
 values ('5e60867a-9f1e-4830-b1be-64b025803e11', '系统监控管理', 'c962e30d-2dec-4be4-8c9b-1e0cc5290c56', 'root,xt,c962e30d-2dec-4be4-8c9b-1e0cc5290c56,5e60867a-9f1e-4830-b1be-64b025803e11', '/druid/index.html', 1, 'open', '1', to_timestamp('27-12-2016 21:50:27.929000', 'dd-mm-yyyy hh24:mi:ss.ff'), to_timestamp('27-12-2016 21:51:36.018000', 'dd-mm-yyyy hh24:mi:ss.ff'), null);
 insert into T_XT_MENU (MENU_ID, MENU_NAME, MENU_PARENT_ID, MENU_PARENT_IDS, URL, ORDER_, OPEN_METHOD, FLAG, CREATE_TIME, UPDATE_TIME, LOGO)
 values ('0e280917-2f27-46ae-8495-0632c0283062', '工作日管理', 'c962e30d-2dec-4be4-8c9b-1e0cc5290c56', 'root,xt,c962e30d-2dec-4be4-8c9b-1e0cc5290c56,0e280917-2f27-46ae-8495-0632c0283062', '/view/system/workday.jsp', 2, 'tab', '1', to_timestamp('28-12-2016 11:50:27.556000', 'dd-mm-yyyy hh24:mi:ss.ff'), null, null);
+insert into T_XT_MENU (MENU_ID, MENU_NAME, MENU_PARENT_ID, MENU_PARENT_IDS, URL, ORDER_, OPEN_METHOD, FLAG, CREATE_TIME, UPDATE_TIME, LOGO)
+values ('ee602084-42f3-4633-a1e8-c68c9bb7aabd', '数据字典管理', 'c962e30d-2dec-4be4-8c9b-1e0cc5290c56', 'root,xt,c962e30d-2dec-4be4-8c9b-1e0cc5290c56,ee602084-42f3-4633-a1e8-c68c9bb7aabd', '/view/shop/system/dict.jsp', 4, 'tab', '1', to_timestamp('02-03-2017 11:55:56.215000', 'dd-mm-yyyy hh24:mi:ss.ff'), to_timestamp('06-03-2017 12:56:24.714000', 'dd-mm-yyyy hh24:mi:ss.ff'), null);
 commit;
 insert into T_XT_ORG (ID, ORG_ID, ORG_NAME, PARENT_ORG_ID, ORDER_, ROOT, ORG_CODE, SHORT_NAME, ORG_PATH, ORG_LEVEL)
 values ('9ee3fed0-d4cb-414b-959b-e381dc0f18b5', '001001', '办公室', '001', 1, null, null, '办公室', '根机构/办公室', 2);
