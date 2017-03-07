@@ -8,7 +8,7 @@
 	</package> -->
 	
 	<package name="category" extends="json-default" namespace="/view/category">
-		<action name="category" class="com.sunchin.shop.admin.category.action">
+		<action name="category" class="com.sunchin.shop.admin.category.action.CategoryAction">
 			<result type="json"></result>
 		</action>
 	</package>
