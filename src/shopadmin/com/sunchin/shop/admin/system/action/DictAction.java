@@ -4,14 +4,14 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.pojo.ScDictionary;
-import com.sunchin.shop.admin.system.service.IDictService;
+import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
 
 public class DictAction extends PageAction {
 	@Resource(name = "dictService")
-	private IDictService dictService;
+	private DictService dictService;
 	private ScDictionary dict;
 	
 	/**
