@@ -9,7 +9,6 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 </head>
 <body>
-<form id="form1" method="post">
 <div class="am-cf ">
 	<div class="admin-content">
     	<div class="admin-content-body">
@@ -22,6 +21,7 @@
 					<div class="am-btn-toolbar frame-div-paddbottom20">
 			            <div class="am-btn-group am-btn-group-sm">
 			              <button type="button" class="am-btn am-btn-primary" id="addCategoryBtn"><span class="am-icon-plus"></span> 新增</button>
+			              <button type="button" class="am-btn am-btn-success" id="editCategoryBtn"><span class="am-icon-edit"></span> 编辑</button>
 			              <button type="button" class="am-btn am-btn-danger" id="delCategoryBtn"><span class="am-icon-trash-o"></span> 删除</button> 
 			              <button type="button" class="am-btn am-btn-primary" id="openCategoryParamsBtn"><span class="am-icon-cog"></span> 商品类别配置</button> 
 			            </div>
@@ -45,7 +45,7 @@
 								<div class="am-panel am-panel-default">
 							  		<div class="am-panel-hd">商品类别信息</div>
 							  		<div class="am-panel-bd frame-no-padding">
-							  			<table class="frame-query-table" id="category_detail_table">
+							  			<table class="frame-query-table">
 											<tr>
 												<td width="150">
 													<div class="frame-div-padd10">
@@ -54,7 +54,8 @@
 												</td>
 												<td>
 													<div class="frame-div-padd10">
-								        				<input type="text" name="tree.categoryName" id="inp_categoryName" style="width: 300px;" disabled="disabled">
+								        				<input type="text" id="inp_categoryName" style="width: 300px;" disabled="disabled">
+								        				<input type="hidden" id="inp_levels" style="width: 300px;" disabled="disabled">
 								        			</div>
 												</td>
 											</tr>
@@ -66,7 +67,19 @@
 												</td>
 												<td>
 													<div class="frame-div-padd10">
-								        				<input type="text" id="inp_memo" name="tree.memo" style="width: 300px;" disabled="disabled">
+								        				<input type="text" id="inp_memo" style="width: 300px;" disabled="disabled">
+								        			</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="frame-div-padd10">
+								        				<label for="inp_cateOrder" class="am-form-label">排序序号：</label>
+								        			</div>
+												</td>
+												<td>
+													<div class="frame-div-padd10">
+								        				<input type="text" id="inp_cateOrder" style="width: 300px;" disabled="disabled">
 								        			</div>
 												</td>
 											</tr>
@@ -78,7 +91,7 @@
 												</td>
 												<td>
 													<div class="frame-div-padd10">
-								        				<input type="text" name="tree.logo" id="inp_logo" style="width: 300px;" disabled="disabled"/>
+								        				<input type="text" id="inp_logo" style="width: 300px;" disabled="disabled"/>
 								        			</div>
 												</td>
 											</tr>
@@ -90,7 +103,7 @@
 												</td>
 												<td>
 													<div class="frame-div-padd10">
-								        				<input type="text" name="tree.url" id="inp_url" style="width: 120px;" disabled="disabled"/>
+								        				<input type="text" id="inp_url" style="width: 120px;" disabled="disabled"/>
 								        			</div>
 												</td>
 											</tr>
@@ -102,7 +115,7 @@
 												</td>
 												<td>
 													<div class="frame-div-padd10">
-								        				<input type="text" name="tree.isuse" id="inp_isuse" style="width: 120px;" disabled="disabled"/>
+								        				<input type="text" id="inp_isuse" style="width: 120px;" disabled="disabled"/>
 								        			</div>
 												</td>
 											</tr>
@@ -126,19 +139,8 @@
 	    	</div>
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
-	    		<table border="0" bordercolor="red" align="center">
-	    			<!-- <tr>
-						<td width="150">
-							<div class="frame-div-padd10">
-		        				<label for="parent_cateName" class="am-form-label">上级类别名称：</label>
-		        			</div>
-						</td>
-						<td>
-							<div class="frame-div-padd10">
-		        				<input type="text" id="parent_cateName" style="width: 300px;" disabled="disabled"/>
-		        			</div>
-						</td>
-					</tr> -->
+				<form id="form1" method="post">
+	    		<table border="0" bordercolor="red" align="center" id="category_detail_table">
 	    			<tr>
 						<td width="150">
 							<div class="frame-div-padd10">
@@ -147,7 +149,21 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" id="cateName" style="width:300px;"/>
+		        				<input type="text" id="cate-parentId" name="category.parentId" style="width:300px;"/>
+		        				<input type="text" id="cate-levels" name="category.levels" style="width:300px;"/>
+		        				<input type="text" name="category.cateName" style="width:300px;" placeholder="请输入类别名称"/>
+		        			</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="frame-div-padd10">
+		        				<label for="inp_cateOrder" class="am-form-label">排序序号：</label>
+		        			</div>
+						</td>
+						<td>
+							<div class="frame-div-padd10">
+		        				<input type="text" id="inp_cateOrder" style="width: 300px;" placeholder="请输入排序序号">
 		        			</div>
 						</td>
 					</tr>
@@ -159,7 +175,7 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" id="memo" style="width: 300px;"/>
+		        				<input type="text" name="category.memo" style="width: 300px;" placeholder="请输入类别描述"/>
 		        			</div>
 						</td>
 					</tr>
@@ -171,7 +187,7 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" id="logo" style="width: 300px;"/>
+		        				<input type="text" name="category.logo" style="width: 300px;"/>
 		        				<button>上传</button>
 		        			</div>
 						</td>
@@ -184,7 +200,7 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" id="url" style="width: 120px;"/>
+		        				<input type="text" name="category.url" style="width: 120px;"/>
 		        			</div>
 						</td>
 					</tr>
@@ -196,7 +212,7 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<select id="isuse">
+		        				<select name="category.isuse">
 		        					<option value="">--请选择--</option>
 		        					<option value="1">有效</option>
 		        					<option value="0">无效</option>
@@ -211,6 +227,7 @@
 						</td>
 					</tr>
 	    		</table>
+	    		</form>
 	    	</div>
 		</div>
 	</div>
@@ -227,6 +244,5 @@
 		</div>
 	</div>
 </div>
-</form>
 </body>
 </html>

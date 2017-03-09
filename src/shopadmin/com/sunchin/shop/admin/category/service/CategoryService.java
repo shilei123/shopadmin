@@ -11,5 +11,12 @@ public interface CategoryService {
 	 * @throws Exception
 	 */
 	public ScCategory queryCategoryInfo(String categoryId) throws Exception;
+
+	/**
+	 * 新增商品类别
+	 * @param category
+	 * @throws Exception
+	 */
+	public void saveCategory(ScCategory category) throws Exception;
 	
 }

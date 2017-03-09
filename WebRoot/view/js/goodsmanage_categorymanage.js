@@ -12,9 +12,6 @@ $(function() {
 	//新增窗口的保存按钮
 	$("#saveCategoryBtn").click(function() {
 		var node = $("#ul_category_tree").tree("getSelected");
-		console.log("node");
-		console.log(node);
-		console.log("node");
 		if(node==null){ return; }
 		$("#form1").validate({
 	        submitHandler:function(form){
@@ -27,9 +24,10 @@ $(function() {
 		    			showAlert("操作成功！");
 		    			initCategoryTree();
 		    			$("#category_detail_table input").each(function(i,n){n.value = "";});
+		    			closeParamsModal("doc-modal-add");
 		    		}
 		    	});
-	        }    
+	        }
 	    });
 		$("#form1").submit();
 	});
@@ -66,15 +64,24 @@ $('#addCategoryBtn').click(function() {
 		showAlert("请选择一个分类！");
 		return;
 	}
-	var msg = getCategoryInfo(node);
+	var obj = getCategoryInfo(node);
+	$("#category_detail_table input").each(function(i,n){n.value = "";});
+	$("#cate-parentId").val(obj.parentId);
+	$("#cate-levels").val(parseInt(obj.levels)+1);
 	showModal("doc-modal-add", 600, 400);
-	/*$("#category_detail_table input").each(function(i,n){n.value = "";});
-	$("#inp_sts").val("1");
-	$("#inp_initFlag").val("0");
-	$("#inp_parentGoodsId").val(msg.goodsId);
-	$("#inp_parentGoodsName").val(msg.goodsName);
-	$("#inp_parentShortName").val(msg.shortName);*/
-	//document.getElementById("inp_parentGoodsPath").value = msg.goodsPath;
+});
+
+$('#editCategoryBtn').click(function() {
+	var node = $("#ul_category_tree").tree("getSelected");
+	if(node==null){
+		showAlert("请选择一个分类！");
+		return;
+	}
+	//edit
+	showModal("doc-modal-add", 600, 400);
+	$("#category_detail_table input").each(function(i,n){n.value = "";});
+	//var obj = getCategoryInfo(node);
+	//$("#inp_parentGoodsId").val(obj.goodsId);
 });
 
 $("#delCategoryBtn").click(function() {
@@ -128,7 +135,7 @@ var closeParamsModal = function(id) {
 
 var checkForm = function() {
 	var valid = $('#form1').validate();
-	return false;
+	return true;
 };
 
 var getCategoryInfo = function(node){
@@ -136,20 +143,17 @@ var getCategoryInfo = function(node){
 	obj.categoryId = node.pkId;
 	obj.categoryName = node.text;
 	obj.parentId = node.parentId;
+	obj.levels = node.levels;
 	if(node.attributes!=null){
 		obj.memo = node.attributes.memo;
 		obj.cateOrder = node.attributes.cateOrder;
-		obj.levels = node.attributes.levels;
 		obj.logo = node.attributes.logo;
 		obj.url = node.attributes.url;
 		obj.isuse = node.attributes.isuse;
 	}
-	/*var pnode = $('#ul_category_tree').tree('getParent',node.target); 
+	var pnode = $('#ul_category_tree').tree('getParent',node.target);
 	if(pnode!=null){
-		obj.parentId = pnode.id;
-		obj.parentName = pnode.text;
-		//obj.parentShortName = pnode.attributes.shortName;
-		//obj.parentGoodsPath = pnode.attributes.goodsPath;
-	}*/
+		obj.parentId = pnode.pkId;
+	}
 	return obj;
 }

@@ -1,51 +1,59 @@
 package com.sunchin.shop.admin.category.action;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
+import com.sunchin.shop.admin.category.service.CategoryService;
+import com.sunchin.shop.admin.pojo.ScCategory;
+
 import framework.config.SysDict;
 import framework.db.DBUtil;
-import framework.util.ComparatorOrgVO;
+import framework.util.CommonUtils;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class CategoryAction {
 	
 	@Resource(name="categoryService")
+	private CategoryService categoryService; 
 	private List<Map> trees;
+	private String msg;
+	private ScCategory category;
 	
-	private static final String AGENCY_SQL = " select o.id,o.agency_id,o.agency_name,o.short_name,o.parent_agency_id,o.agency_path,o.agency_level,o.order_,o.root,o.sts,o.init_flag from t_agency o where o.flag=? ";
+	private static final String CATEGORY_SQL = " select o.id,o.cate_name,o.memo,o.cate_order,o.levels,o.logo,o.url,decode(o.isuse,'1','有效','0','无效')as isuse,o.parent_id from sc_category o where o.flag=? ";
 	
-	public String agencyTree() {
-		agencyTreeQuery();
+	public String categoryTree() {
+		categoryTreeQuery();
 		return Action.SUCCESS;
 	}
 	
-	private void agencyTreeQuery() {
+	private void categoryTreeQuery() {
 		DBUtil db = DBUtil.getInstance();
-		List<Map> list = db.queryBySQL(AGENCY_SQL, SysDict.FLAG_ACT);
+		List<Map> list = db.queryBySQL(CATEGORY_SQL, SysDict.FLAG_ACT);
 		Map root = null;
 		Map<String,Map> temp = new TreeMap();
 		for (Map pojo : list) {
 			Map node = new TreeMap();
-			node.put("id", pojo.get("agencyId")); //机构编码
-			node.put("text", pojo.get("agencyName")); //机构名称
-			node.put("parentId", pojo.get("parentAgencyId")); //上机机构编码
-			Map attributes = new HashMap(7);
-			attributes.put("agencyPkId", pojo.get("id")); //机构主键
-			attributes.put("shortName", pojo.get("shortName")); //机构简称
-			attributes.put("agencyPath", pojo.get("agencyPath")); //机构全路径
-			attributes.put("order", pojo.get("order_")); //排序序号
-			attributes.put("agencyLevel", pojo.get("agencyLevel")); //机构等级 
-			attributes.put("sts", pojo.get("sts")); //状态
-			attributes.put("initFlag", pojo.get("initFlag")); //是否初始化
+			node.put("pkId", pojo.get("id")); //类别主键
+			node.put("text", pojo.get("cateName")); //类别名称
+			node.put("parentId", pojo.get("parentId")); //上级类别编码
+			node.put("levels", pojo.get("levels")); //上级类别编码
+			Map attributes = new HashMap(6);
+			attributes.put("memo", pojo.get("memo")); //类别描述
+			attributes.put("cateOrder", pojo.get("cateOrder")); //类别排序
+//			Integer levels = new Integer(CommonUtils.getString(pojo.get("levels")));
+//			attributes.put("levels", levels.toString()); //类别级别
+			attributes.put("logo", pojo.get("logo")); //logo
+			attributes.put("url", pojo.get("url")); //类别url 
+			attributes.put("isuse", pojo.get("isuse")); //是否有效
 			node.put("attributes", attributes);
-			temp.put(pojo.get("agencyId").toString(), node);
-			if("1".equals(pojo.get("root"))) {
+			temp.put(pojo.get("id").toString(), node);
+			if("0".equals(pojo.get("levels"))) {
 				root = node;
 			}
 		}
@@ -72,7 +80,7 @@ public class CategoryAction {
 			if(node.get("children") != null) {
 				List childOrgList = (ArrayList) node.get("children");
 				if(!childOrgList.isEmpty()) {
-					Collections.sort(childOrgList, new ComparatorOrgVO());
+//					Collections.sort(childOrgList, new ComparatorOrgVO());
 					node.put("state", "closed"); //节点状态：关闭
 				}
 			} 
@@ -82,6 +90,39 @@ public class CategoryAction {
 		if(root != null) {
 			trees.add(root);
 		}
+	}
+	
+	public String saveCategory(){
+		System.out.println(category==null);
+		System.out.println("==================================");
+		//System.out.println(category.toString());
+		//System.out.println("==================================");
+		return Action.SUCCESS;
+	}
+	
+
+	public List<Map> getTrees() {
+		return trees;
+	}
+
+	public void setTrees(List<Map> trees) {
+		this.trees = trees;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public ScCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(ScCategory category) {
+		this.category = category;
 	}
 
 }
