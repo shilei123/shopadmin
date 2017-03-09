@@ -31,6 +31,29 @@ $(function() {
 	    });
 		$("#form1").submit();
 	});
+	
+	//编辑窗口的保存按钮
+	$("#editSaveCategoryBtn").click(function() {
+		var node = $("#ul_category_tree").tree("getSelected");
+		if(node==null){ return; }
+		$("#form1").validate({
+			submitHandler:function(form){
+				$('#form1').form('submit', {
+					url:  path_ + "/view/category/category!updateCategory.action",
+					onSubmit: function() {
+						return checkForm();
+					},
+					success:function(data) {
+						showAlert("操作成功！");
+						initCategoryTree();
+						$("#category_detail_table input").each(function(i,n){n.value = "";});
+						closeParamsModal("doc-modal-add");
+					}
+				});
+			}
+		});
+		$("#form1").submit();
+	});
 });
 
 function initCategoryTree() {
@@ -64,10 +87,13 @@ $('#addCategoryBtn').click(function() {
 		showAlert("请选择一个分类！");
 		return;
 	}
+	$('#modalTitle-add').text('新增类别');
+	$('#editSaveCategoryBtn').attr('style','display:none');
+	$('#saveCategoryBtn').attr('style','display:inline');
 	var obj = getCategoryInfo(node);
 	$("#category_detail_table input").each(function(i,n){n.value = "";});
-	$("#cate-parentId").val(obj.parentId);
-	$("#cate-levels").val(parseInt(obj.levels)+1);
+	$("#inp2-parentId").val(obj.categoryId);
+	$("inp2-levels").val(parseInt(obj.levels)+1);
 	showModal("doc-modal-add", 600, 400);
 });
 
@@ -77,17 +103,26 @@ $('#editCategoryBtn').click(function() {
 		showAlert("请选择一个分类！");
 		return;
 	}
-	//edit
+	$('#modalTitle-add').text('编辑类别');
+	$('#editSaveCategoryBtn').attr('style','display:inline');
+	$('#saveCategoryBtn').attr('style','display:none');
+	var obj = getCategoryInfo(node);
+	$("#inp2-id").val(obj.categoryId);
+	$("#inp2-cateName").val(obj.categoryName);
+	$("#inp2-cateOrder").val(obj.cateOrder);
+	$("#inp2-memo").val(obj.memo);
+	$("#inp2-levels").val(obj.levels);
+	$("#inp2-parentId").val(obj.parentId);
+	$("#inp2-logo").val(obj.logo);
+	$("#inp2-url").val(obj.url);
+	$("#inp2-isuse").val(obj.isuse);
 	showModal("doc-modal-add", 600, 400);
-	$("#category_detail_table input").each(function(i,n){n.value = "";});
-	//var obj = getCategoryInfo(node);
-	//$("#inp_parentGoodsId").val(obj.goodsId);
 });
 
 $("#delCategoryBtn").click(function() {
-	/*var node = $("#ul_Category_tree").tree("getSelected");
+	var node = $("#ul_category_tree").tree("getSelected");
 	if(node==null){
-		showAlert("请选择一个分类！");
+		showAlert("请选择一个类别！");
 		return;
 	}
 	var msg = getCategoryInfo(node);
@@ -98,27 +133,26 @@ $("#delCategoryBtn").click(function() {
 	showConfirm("确认删除？",function() {
 		$.ajax( {
 			type : "POST",
-			url : path_ + "/view/category/category!delete.action",
+			url : path_ + "/view/category/category!delCategory.action",
 			dataType : "json",
-			data: {"tree.id": $("#inp_id").val(),"tree.categoryId": $("#inp_categoryId").val()},
+			data: {"category.id": $("#inp_categoryId").val()},
 			success : function(json) {
 				if(json.msg==null || json.msg=="null") {
 					$("#category_detail_table input").each(function(i,n){n.value = "";});
-					initGoodsTree();//初始化菜单
+					initCategoryTree();//初始化菜单
 					showAlert("删除成功");
 				} else {
 					showAlert(json.msg);
 				}
 			},
 			error: function(e) {
-				//alert(e);
 				showAlert("删除失败，请检查该类别是否有子类别！");
 			} 
 		});
-	});*/
+	});
 });
 
-$("#openCategoryParamsBtn").click(function() {
+/*$("#openCategoryParamsBtn").click(function() {
 	var node = $("#ul_category_tree").tree("getSelected");
 	if(node==null){
 		showAlert("请选择一个分类！");
@@ -127,7 +161,7 @@ $("#openCategoryParamsBtn").click(function() {
 	var msg = getCategoryInfo(node);
 	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/goodsmanage/categoryParamCfg.jsp?categoryId='+msg.categoryId);
 	showModal("doc-modal-1", 600, 450);
-});
+});*/
 
 var closeParamsModal = function(id) {
 	$('#'+id).modal('close');

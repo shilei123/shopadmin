@@ -55,6 +55,7 @@
 												<td>
 													<div class="frame-div-padd10">
 								        				<input type="text" id="inp_categoryName" style="width: 300px;" disabled="disabled">
+								        				<input type="hidden" id="inp_categoryId" style="width: 300px;" disabled="disabled">
 								        				<input type="hidden" id="inp_levels" style="width: 300px;" disabled="disabled">
 								        			</div>
 												</td>
@@ -115,7 +116,12 @@
 												</td>
 												<td>
 													<div class="frame-div-padd10">
-								        				<input type="text" id="inp_isuse" style="width: 120px;" disabled="disabled"/>
+								        				<!-- <input type="text" id="inp_isuse" style="width: 120px;" disabled="disabled"/> -->
+								        				<select name="category.isuse" id="inp_isuse" disabled="disabled">
+								        					<option value="">--请选择--</option>
+								        					<option value="1">有效</option>
+								        					<option value="0">无效</option>
+								        				</select>
 								        			</div>
 												</td>
 											</tr>
@@ -130,11 +136,11 @@
     	</div>
   	</div>
   	
-  	<script type="text/javascript" src="${path }/view/js/goodsmanage_categorymanage.js"></script>
+  	<script type="text/javascript" src="${path }/view/js/category_categorymanage.js"></script>
   	
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-add">
 		<div class="am-modal-dialog">
-	    	<div class="am-modal-hd"><span id="modalTitle-add">新增类别</span>
+	    	<div class="am-modal-hd"><span id="modalTitle-add"></span>
 	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 	    	</div>
 	    	<hr>
@@ -149,21 +155,22 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" id="cate-parentId" name="category.parentId" style="width:300px;"/>
-		        				<input type="text" id="cate-levels" name="category.levels" style="width:300px;"/>
-		        				<input type="text" name="category.cateName" style="width:300px;" placeholder="请输入类别名称"/>
+		        				<input type="hidden" id="inp2-id" name="category.id" style="width:300px;"/>
+		        				<input type="hidden" id="inp2-parentId" name="category.parentId" style="width:300px;"/>
+		        				<input type="hidden" id="inp2-levels" name="category.levels" style="width:300px;"/>
+		        				<input type="text" name="category.cateName" id="inp2-cateName" style="width:300px;" placeholder="请输入类别名称"/>
 		        			</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<div class="frame-div-padd10">
-		        				<label for="inp_cateOrder" class="am-form-label">排序序号：</label>
+		        				<label for="category.cateOrder" class="am-form-label">排序序号：</label>
 		        			</div>
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" id="inp_cateOrder" style="width: 300px;" placeholder="请输入排序序号">
+		        				<input type="text" name="category.cateOrder" id="inp2-cateOrder" style="width: 300px;" placeholder="请输入排序序号">
 		        			</div>
 						</td>
 					</tr>
@@ -175,7 +182,8 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" name="category.memo" style="width: 300px;" placeholder="请输入类别描述"/>
+		        				<input type="text" name="category.memo" id="inp2-memo" style="width: 300px;" placeholder="请输入类别描述"/>
+		        				
 		        			</div>
 						</td>
 					</tr>
@@ -187,7 +195,7 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" name="category.logo" style="width: 300px;"/>
+		        				<input type="text" name="category.logo" id="inp2-logo" style="width: 300px;"/>
 		        				<button>上传</button>
 		        			</div>
 						</td>
@@ -200,7 +208,7 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" name="category.url" style="width: 120px;"/>
+		        				<input type="text" name="category.url" id="inp2-url" style="width: 120px;"/>
 		        			</div>
 						</td>
 					</tr>
@@ -212,7 +220,7 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<select name="category.isuse">
+		        				<select name="category.isuse" id="inp2-isuse">
 		        					<option value="">--请选择--</option>
 		        					<option value="1">有效</option>
 		        					<option value="0">无效</option>
@@ -223,6 +231,7 @@
 					<tr>
 						<td colspan="2" align="center">
 							<button type="button" class="am-btn am-btn-success" id="saveCategoryBtn"><span class="am-icon-save"></span> 保存</button>
+							<button type="button" class="am-btn am-btn-success" id="editSaveCategoryBtn" style="display:none"><span class="am-icon-save"></span> 保存</button>
 							<button type="button" class="am-btn am-btn-default" id="cancelBtn"><span class="am-icon-close"></span> 取消</button>
 						</td>
 					</tr>

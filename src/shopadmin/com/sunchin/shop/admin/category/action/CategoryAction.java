@@ -14,7 +14,6 @@ import com.sunchin.shop.admin.pojo.ScCategory;
 
 import framework.config.SysDict;
 import framework.db.DBUtil;
-import framework.util.CommonUtils;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CategoryAction {
@@ -25,7 +24,7 @@ public class CategoryAction {
 	private String msg;
 	private ScCategory category;
 	
-	private static final String CATEGORY_SQL = " select o.id,o.cate_name,o.memo,o.cate_order,o.levels,o.logo,o.url,decode(o.isuse,'1','有效','0','无效')as isuse,o.parent_id from sc_category o where o.flag=? ";
+	private static final String CATEGORY_SQL = " select o.id,o.cate_name,o.memo,o.cate_order,o.levels,o.logo,o.url,o.isuse,o.parent_id from sc_category o where o.flag=? ";
 	
 	public String categoryTree() {
 		categoryTreeQuery();
@@ -43,7 +42,7 @@ public class CategoryAction {
 			node.put("text", pojo.get("cateName")); //类别名称
 			node.put("parentId", pojo.get("parentId")); //上级类别编码
 			node.put("levels", pojo.get("levels")); //上级类别编码
-			Map attributes = new HashMap(6);
+			Map attributes = new HashMap(5);
 			attributes.put("memo", pojo.get("memo")); //类别描述
 			attributes.put("cateOrder", pojo.get("cateOrder")); //类别排序
 //			Integer levels = new Integer(CommonUtils.getString(pojo.get("levels")));
@@ -93,13 +92,36 @@ public class CategoryAction {
 	}
 	
 	public String saveCategory(){
-		System.out.println(category==null);
-		System.out.println("==================================");
-		//System.out.println(category.toString());
-		//System.out.println("==================================");
+		try {
+			categoryService.saveCategory(category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	
+	public String updateCategory(){
+		try {
+			categoryService.updateCategory(category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	public String delCategory(){
+		try {
+			List<ScCategory> list = categoryService.queryCategory(category.getId());
+			if(list!=null && !list.isEmpty()){
+				this.msg = "该类别下已有子类别，无法删除！";
+			}else{
+				categoryService.delCategory(category.getId());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
 
 	public List<Map> getTrees() {
 		return trees;
