@@ -9,18 +9,19 @@ import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.sunchin.shop.admin.system.service.DictService;
+
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.IsEditEnum;
 import com.sunchin.shop.admin.dict.IsUseEnum;
 import com.sunchin.shop.admin.pojo.ScDictionary;
 import com.sunchin.shop.admin.system.dao.ScDictionaryDAO;
-import com.sunchin.shop.admin.system.service.IDictService;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
 
 @Service("dictService")
-public class DictServiceImpl implements IDictService {
+public class DictServiceImpl implements DictService {
 	@Resource(name = "scDictionaryDAO")
 	private ScDictionaryDAO dictDAO;
 	
@@ -65,8 +66,8 @@ public class DictServiceImpl implements IDictService {
 			ScDictionary vo = (ScDictionary) db.get(ScDictionary.class, dict.getId());
 			vo.setType(dict.getType());
 			vo.setCode(dict.getCode());
-			vo.setIsedit(dict.getIsedit());
-			vo.setIsuse(dict.getIsuse());
+			/*vo.setIsedit(dict.getIsedit());
+			vo.setIsuse(dict.getIsuse());*/
 			vo.setName(dict.getName());
 			vo.setEname(dict.getEname());
 			vo.setRemark(dict.getRemark());

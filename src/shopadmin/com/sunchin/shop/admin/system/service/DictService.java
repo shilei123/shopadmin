@@ -4,7 +4,7 @@ import com.sunchin.shop.admin.pojo.ScDictionary;
 
 import framework.bean.PageBean;
 
-public interface IDictService {
+public interface DictService {
 	
 	/**
 	 * 查询
