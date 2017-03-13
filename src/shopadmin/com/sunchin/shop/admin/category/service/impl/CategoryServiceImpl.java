@@ -15,7 +15,6 @@ import com.sunchin.shop.admin.pojo.ScCategory;
 
 import framework.config.SysDict;
 import framework.db.DBUtil;
-import framework.util.CommonUtils;
 
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
@@ -28,11 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public void saveCategory(ScCategory category) throws Exception {
 		DBUtil db = DBUtil.getInstance();
-		String cateOrder = CommonUtils.getString(category.getCateOrder());
+		/*String cateOrder = CommonUtils.getString(category.getCateOrder());
 		if(cateOrder.length()==1){
 			cateOrder = "0" + cateOrder;
 		}
-		category.setCateOrder(cateOrder);
+		category.setCateOrder(cateOrder);*/
 		category.setId(UUID.randomUUID().toString());
 		category.setFlag(FlagEnum.ACT.getCode());
 		category.setCreateTime(new Date());

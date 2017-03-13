@@ -1,6 +1,7 @@
 package com.sunchin.shop.admin.category.action;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import com.sunchin.shop.admin.pojo.ScCategory;
 
 import framework.config.SysDict;
 import framework.db.DBUtil;
+import framework.util.ComparatorCategoryVO;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CategoryAction {
@@ -79,7 +81,7 @@ public class CategoryAction {
 			if(node.get("children") != null) {
 				List childOrgList = (ArrayList) node.get("children");
 				if(!childOrgList.isEmpty()) {
-//					Collections.sort(childOrgList, new ComparatorOrgVO());
+					Collections.sort(childOrgList, new ComparatorCategoryVO());
 					node.put("state", "closed"); //节点状态：关闭
 				}
 			} 
