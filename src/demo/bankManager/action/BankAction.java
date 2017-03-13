@@ -3,13 +3,13 @@ package demo.bankManager.action;
 import javax.annotation.Resource;
 import com.opensymphony.xwork2.Action;
 import demo.bankManager.pojo.TBankInfo;
-import demo.bankManager.servise.IBankService;
+import demo.bankManager.servise.BankService;
 import framework.action.PageAction;
 import framework.bean.PageBean;
 
 public class BankAction extends PageAction {
 	@Resource(name = "bankService")
-	private IBankService bankService;
+	private BankService bankService;
 	private TBankInfo bankInfo;
 	
 	/**

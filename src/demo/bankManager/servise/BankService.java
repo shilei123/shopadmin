@@ -4,7 +4,7 @@ import demo.bankManager.pojo.TBankInfo;
 
 import framework.bean.PageBean;
 
-public interface IBankService {
+public interface BankService {
 	
 	/**
 	 * 查询
@@ -30,7 +30,6 @@ public interface IBankService {
 	public void saveBankInfo(TBankInfo bankInfo);
 
 	/**
-	 * 
 	 * 修改
 	 * @param id
 	 * @return

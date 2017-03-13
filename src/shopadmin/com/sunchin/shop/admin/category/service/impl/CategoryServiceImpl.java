@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		category.setCateOrder(cateOrder);
 		category.setId(UUID.randomUUID().toString());
-		category.setFlag(FlagEnum.HIS.getCode());
+		category.setFlag(FlagEnum.ACT.getCode());
 		category.setCreateTime(new Date());
 		db.insert(category);
 	}

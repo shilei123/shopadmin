@@ -70,7 +70,7 @@
 	<mapping resource="com/ywt/web/pojo/TVipBank.hbm.xml" />
 	<mapping resource="com/ywt/web/pojo/TWithdrawApp.hbm.xml" />
 	
-	
 	<mapping resource="com/sunchin/shop/admin/pojo/ScCategory.hbm.xml" />
+	<mapping resource="com/sunchin/shop/admin/pojo/ScProperty.hbm.xml" />
 </session-factory>
 </hibernate-configuration>
