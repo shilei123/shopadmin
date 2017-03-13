@@ -107,6 +107,8 @@
 			        			<input name="property.propCode" id="propCode" placeholder="属性编码" class="am-form-field" style="width:90%" required/>
 			        			<input name="property.id" id="propId" type="hidden"/>	
 			        			<input name="property.flag" id="propFlag" type="hidden"/>	
+			        			<input name="property.createTime" id="propCreateTime" type="hidden"/>	
+			        			<input name="property.createPeople" id="propCreatePeople" type="hidden"/>	
 			        		</td>
 			        	</tr>
 			        	<tr>

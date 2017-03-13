@@ -13,7 +13,6 @@ import com.sunchin.shop.admin.pojo.ScProperty;
 import com.sunchin.shop.admin.property.dao.PropertyDAO;
 import com.sunchin.shop.admin.property.service.PropertyService;
 
-import demo.bankManager.pojo.TBankInfo;
 import framework.bean.PageBean;
 import framework.config.SysDict;
 import framework.db.DBUtil;
@@ -46,7 +45,12 @@ public class PropertyServiceImpl implements PropertyService {
 	
 	@Override
 	public void updateProperty(ScProperty property) throws Exception {
-		db.update(property);
+		ScProperty prop = (ScProperty) db.get(ScProperty.class, property.getId());
+		prop.setPropName(property.getPropName());
+		prop.setPropCode(property.getPropCode());
+		prop.setPropOrder(property.getPropOrder());
+		prop.setFlag(property.getFlag());
+		db.update(prop);
 	}
 	
 	/**

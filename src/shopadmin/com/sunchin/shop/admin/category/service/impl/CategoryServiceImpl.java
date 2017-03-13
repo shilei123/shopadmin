@@ -53,8 +53,16 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public void updateCategory(ScCategory category) throws Exception {
+		ScCategory cate = (ScCategory) db.get(ScCategory.class, category.getId());
+		cate.setCateName(category.getCateName());
+		cate.setCateOrder(category.getCateOrder());
+		cate.setMemo(category.getMemo());
+		cate.setLogo(category.getLogo());
+		cate.setUrl(category.getUrl());
+		cate.setCateCode(category.getCateCode());
+		cate.setIsuse(category.getIsuse());
 		category.setUpdateTime(new Date());
-		db.update(category);
+		db.update(cate);
 	}
 
 }
