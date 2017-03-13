@@ -4,7 +4,7 @@
 <head>
 <jsp:include page="/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>银行管理</title>
+<title>属性管理</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <style>
   #vld-tooltip {
@@ -39,7 +39,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">属性管理</strong> / <small>属性的新增、修改、查看</small>
+						<strong class="am-text-primary am-text-lg">属性管理</strong> / <small>属性的新增、删除、修改、查看</small>
 					</div>
 				</div>
 				<hr>
@@ -107,8 +107,6 @@
 			        			<input name="property.propCode" id="propCode" placeholder="属性编码" class="am-form-field" style="width:90%" required/>
 			        			<input name="property.id" id="propId" type="hidden"/>	
 			        			<input name="property.flag" id="propFlag" type="hidden"/>	
-			        			<input name="property.createTime" id="propCreateTime" type="hidden"/>	
-			        			<input name="property.createPeople" id="propCreatePeople" type="hidden"/>	
 			        		</td>
 			        	</tr>
 			        	<tr>

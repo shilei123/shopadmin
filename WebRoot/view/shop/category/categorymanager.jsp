@@ -5,7 +5,7 @@
 <jsp:include page="/include/common.jsp"></jsp:include>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>商品类别管理</title>
+<title>类别管理</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 </head>
 <body>

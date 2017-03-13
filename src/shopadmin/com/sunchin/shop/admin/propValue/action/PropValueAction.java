@@ -4,9 +4,7 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.pojo.ScPropValue;
-import com.sunchin.shop.admin.pojo.ScProperty;
 import com.sunchin.shop.admin.propValue.service.PropValueService;
-import com.sunchin.shop.admin.property.service.PropertyService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
@@ -24,7 +22,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String query() {
 		try {
-			PageBean resultData = propValueService.queryPropertyList(this.getPageBean());
+			PageBean resultData = propValueService.queryPropValueList(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
@@ -39,7 +37,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String delete() {
 		try {
-			propValueService.delProperty(propValue.getId());
+			propValueService.delPropValue(propValue.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,9 +48,9 @@ public class PropValueAction extends PageAction {
 	 * 修改
 	 * @return
 	 */
-	public String updateProperty() {
+	public String updatePropValue() {
 		try {
-			propValueService.updateProperty(propValue);
+			propValueService.updatePropValue(propValue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,9 +61,9 @@ public class PropValueAction extends PageAction {
 	 * 新增
 	 * @return
 	 */
-	public String addProperty() {
+	public String addPropValue() {
 		try {
-			propValueService.addProperty(propValue);
+			propValueService.addPropValue(propValue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,9 +74,9 @@ public class PropValueAction extends PageAction {
 	 * 修改的查询
 	 * @return
 	 */
-	public String queryPropertyById() {
+	public String queryPropValueById() {
 		try {
-			propValue = propValueService.queryProperty(propValue.getId());
+			propValue = propValueService.queryPropValue(propValue.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

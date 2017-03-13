@@ -51,7 +51,7 @@ public class PropertyDAO extends PageDAO{
 				sql.append(" and t.prop_code like ? ");
 			}
 		}
-		sql.append(" order by t.prop_order ");
+		sql.append(" order by t.create_time desc ");
 		return sql.toString();
 	}
 	

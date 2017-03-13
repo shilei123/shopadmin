@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScPropValue;
-import com.sunchin.shop.admin.pojo.ScProperty;
+import com.sunchin.shop.admin.propValue.dao.PropValueDAO;
 import com.sunchin.shop.admin.propValue.service.PropValueService;
-import com.sunchin.shop.admin.property.dao.PropertyDAO;
 
 import framework.bean.PageBean;
 import framework.config.SysDict;
@@ -21,56 +20,56 @@ import framework.db.DBUtil;
 @Service("propValueService")
 public class PropValueServiceImpl implements PropValueService {
 
-	@Resource(name="propertyDAO")
-	private PropertyDAO propertyDAO;
+	@Resource(name="propValueDAO")
+	private PropValueDAO propValueDAO;
 	@Resource(name="dbUtil")
 	private DBUtil db;
 	
 	@Override
-	public PageBean queryPropertyList(PageBean pageBean) throws Exception {
-		int total = propertyDAO.queryPropertyCount(pageBean);
+	public PageBean queryPropValueList(PageBean pageBean) throws Exception {
+		int total = propValueDAO.queryPropValueCount(pageBean);
 		pageBean.setTotal(total);
-		List<ScProperty> pageData = propertyDAO.queryPropertyPagination(pageBean);
+		List<ScPropValue> pageData = propValueDAO.queryPropValuePagination(pageBean);
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}
 	
 	@Override
-	public void delProperty(String id) throws Exception {
-		List<ScProperty> list = propertyDAO.getProp(id);
+	public void delPropValue(String id) throws Exception {
+		List<ScPropValue> list = propValueDAO.getProp(id);
 		if(list!=null && !list.isEmpty()){
-			String hql = " update ScProperty set flag=? where id=? ";
+			String hql = " update ScPropValue set flag=? where id=? ";
 			db.executeHql(hql, SysDict.FLAG_HIS, id);
 		}
 	}
 	
 	@Override
-	public void updateProperty(ScPropValue propValue) throws Exception {
-		/*ScProperty prop = (ScProperty) db.get(ScProperty.class, property.getId());
-		prop.setPropName(property.getPropName());
-		prop.setPropCode(property.getPropCode());
-		prop.setPropOrder(property.getPropOrder());
-		prop.setFlag(property.getFlag());
-		db.update(prop);*/
+	public void updatePropValue(ScPropValue propValue) throws Exception {
+		ScPropValue val = (ScPropValue) db.get(ScPropValue.class, propValue.getId());
+		val.setValName(propValue.getValName());
+		val.setValCode(propValue.getValCode());
+		val.setValOrder(propValue.getValOrder());
+		val.setFlag(propValue.getFlag());
+		db.update(val);
 	}
 	
 	/**
 	 * 新增
 	 */
 	@Override
-	public void addProperty(ScPropValue propValue) throws Exception {
-		/*property.setId(UUID.randomUUID().toString());
-		property.setCreateTime(new Date());
-		property.setFlag(FlagEnum.ACT.getCode());
-		db.insert(property);*/
+	public void addPropValue(ScPropValue propValue) throws Exception {
+		propValue.setId(UUID.randomUUID().toString());
+		propValue.setCreateTime(new Date());
+		propValue.setFlag(FlagEnum.ACT.getCode());
+		db.insert(propValue);
 	}
 
 	@Override
-	public ScPropValue queryProperty(String id) throws Exception {
-		/*Object obj = db.get(ScProperty.class, id);
+	public ScPropValue queryPropValue(String id) throws Exception {
+		Object obj = db.get(ScPropValue.class, id);
 		if(obj != null) {
-			return (ScProperty) obj;
-		}*/
+			return (ScPropValue) obj;
+		}
 		return null;
 	}
 
