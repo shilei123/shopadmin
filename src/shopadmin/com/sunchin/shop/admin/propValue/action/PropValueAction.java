@@ -3,7 +3,9 @@ package com.sunchin.shop.admin.propValue.action;
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
+import com.sunchin.shop.admin.pojo.ScPropValue;
 import com.sunchin.shop.admin.pojo.ScProperty;
+import com.sunchin.shop.admin.propValue.service.PropValueService;
 import com.sunchin.shop.admin.property.service.PropertyService;
 
 import framework.action.PageAction;
@@ -11,10 +13,10 @@ import framework.bean.PageBean;
 
 public class PropValueAction extends PageAction {
 	
-	@Resource(name="propertyService")
-	private PropertyService propertyService; 
+	@Resource(name="propValueService")
+	private PropValueService propValueService; 
 	
-	private ScProperty property;
+	private ScPropValue propValue;
 	
 	/**
 	 * 查询
@@ -22,7 +24,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String query() {
 		try {
-			PageBean resultData = propertyService.queryPropertyList(this.getPageBean());
+			PageBean resultData = propValueService.queryPropertyList(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
@@ -37,7 +39,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String delete() {
 		try {
-			propertyService.delProperty(property.getId());
+			propValueService.delProperty(propValue.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,7 +52,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String updateProperty() {
 		try {
-			propertyService.updateProperty(property);
+			propValueService.updateProperty(propValue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,7 +65,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String addProperty() {
 		try {
-			propertyService.addProperty(property);
+			propValueService.addProperty(propValue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,19 +78,19 @@ public class PropValueAction extends PageAction {
 	 */
 	public String queryPropertyById() {
 		try {
-			property = propertyService.queryProperty(property.getId());
+			propValue = propValueService.queryProperty(propValue.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}
 
-	public ScProperty getProperty() {
-		return property;
+	public ScPropValue getPropValue() {
+		return propValue;
 	}
 
-	public void setProperty(ScProperty property) {
-		this.property = property;
+	public void setPropValue(ScPropValue propValue) {
+		this.propValue = propValue;
 	}
 
 }

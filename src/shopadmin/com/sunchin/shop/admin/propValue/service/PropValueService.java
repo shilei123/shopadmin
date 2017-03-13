@@ -1,5 +1,6 @@
 package com.sunchin.shop.admin.propValue.service;
 
+import com.sunchin.shop.admin.pojo.ScPropValue;
 import com.sunchin.shop.admin.pojo.ScProperty;
 
 import framework.bean.PageBean;
@@ -26,14 +27,14 @@ public interface PropValueService {
 	 * @param property
 	 * @throws Exception
 	 */
-	public void updateProperty(ScProperty property) throws Exception;
+	public void updateProperty(ScPropValue propValue) throws Exception;
 
 	/**
 	 * 新增属性
 	 * @param property
 	 * @throws Exception
 	 */
-	public void addProperty(ScProperty property) throws Exception;
+	public void addProperty(ScPropValue propValue) throws Exception;
 
 	/**
 	 * 查询某个
@@ -41,5 +42,5 @@ public interface PropValueService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ScProperty queryProperty(String id) throws Exception;
+	public ScPropValue queryProperty(String id) throws Exception;
 }

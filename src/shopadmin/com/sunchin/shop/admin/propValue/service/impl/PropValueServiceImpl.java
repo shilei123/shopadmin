@@ -9,16 +9,17 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
+import com.sunchin.shop.admin.pojo.ScPropValue;
 import com.sunchin.shop.admin.pojo.ScProperty;
+import com.sunchin.shop.admin.propValue.service.PropValueService;
 import com.sunchin.shop.admin.property.dao.PropertyDAO;
-import com.sunchin.shop.admin.property.service.PropertyService;
 
 import framework.bean.PageBean;
 import framework.config.SysDict;
 import framework.db.DBUtil;
 
-@Service("propertyService")
-public class PropValueServiceImpl implements PropertyService {
+@Service("propValueService")
+public class PropValueServiceImpl implements PropValueService {
 
 	@Resource(name="propertyDAO")
 	private PropertyDAO propertyDAO;
@@ -44,32 +45,32 @@ public class PropValueServiceImpl implements PropertyService {
 	}
 	
 	@Override
-	public void updateProperty(ScProperty property) throws Exception {
-		ScProperty prop = (ScProperty) db.get(ScProperty.class, property.getId());
+	public void updateProperty(ScPropValue propValue) throws Exception {
+		/*ScProperty prop = (ScProperty) db.get(ScProperty.class, property.getId());
 		prop.setPropName(property.getPropName());
 		prop.setPropCode(property.getPropCode());
 		prop.setPropOrder(property.getPropOrder());
 		prop.setFlag(property.getFlag());
-		db.update(prop);
+		db.update(prop);*/
 	}
 	
 	/**
 	 * 新增
 	 */
 	@Override
-	public void addProperty(ScProperty property) throws Exception {
-		property.setId(UUID.randomUUID().toString());
+	public void addProperty(ScPropValue propValue) throws Exception {
+		/*property.setId(UUID.randomUUID().toString());
 		property.setCreateTime(new Date());
 		property.setFlag(FlagEnum.ACT.getCode());
-		db.insert(property);
+		db.insert(property);*/
 	}
 
 	@Override
-	public ScProperty queryProperty(String id) throws Exception {
-		Object obj = db.get(ScProperty.class, id);
+	public ScPropValue queryProperty(String id) throws Exception {
+		/*Object obj = db.get(ScProperty.class, id);
 		if(obj != null) {
 			return (ScProperty) obj;
-		}
+		}*/
 		return null;
 	}
 
