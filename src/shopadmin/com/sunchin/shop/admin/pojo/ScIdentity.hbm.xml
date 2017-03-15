@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScIdentity" table="SC_IDENTITY" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="userId" type="java.lang.String">
+             <column name="USER_ID" length="36">
+                <comment>会员id</comment>
+            </column>
+        </property>
+        <property name="userName" type="java.lang.String">
+             <column name="USER_NAME" length="50">
+                <comment>用户名</comment>
+            </column>
+        </property>
+        <property name="identityCard" type="java.lang.String">
+            <column name="IDENTITY_CARD" length="50">
+                <comment>身份证号码</comment>
+            </column>
+        </property>
+        <property name="identityCardValidity" type="java.util.Date">
+            <column name="IDENTITY_CARD_VALIDITY">
+                <comment>身份证有效期</comment>
+            </column>
+        </property>
+        <property name="identityIssuing" type="java.lang.String">
+            <column name="IDENTITY_ISSUING" length="50">
+                <comment>发证机关</comment>
+            </column>
+        </property>
+        <property name="identityStatus" type="java.lang.String">
+             <column name="IDENTITY_STATUS" length="1">
+                <comment>身份证状态/未认证0 申请中1 已认证2</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
