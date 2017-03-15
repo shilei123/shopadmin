@@ -10,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.system.service.DictService;
-
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.IsEditEnum;
 import com.sunchin.shop.admin.dict.IsUseEnum;
@@ -66,8 +65,8 @@ public class DictServiceImpl implements DictService {
 			ScDictionary vo = (ScDictionary) db.get(ScDictionary.class, dict.getId());
 			vo.setType(dict.getType());
 			vo.setCode(dict.getCode());
-			/*vo.setIsedit(dict.getIsedit());
-			vo.setIsuse(dict.getIsuse());*/
+			vo.setIsedit(dict.getIsedit());
+			vo.setIsuse(dict.getIsuse());
 			vo.setName(dict.getName());
 			vo.setEname(dict.getEname());
 			vo.setRemark(dict.getRemark());
@@ -84,6 +83,13 @@ public class DictServiceImpl implements DictService {
 			dict.setFlag(FlagEnum.HIS.getCode());
 			db.update(dict);
 		}
+	}
+
+	@Override
+	public List<ScDictionary> getDictByType(String type) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return null;
 	}
 
 }

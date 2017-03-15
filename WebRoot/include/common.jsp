@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="framework.bean.UserMsg"%>
+<%@ page import="framework.util.ConfigUtil"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
@@ -8,12 +9,19 @@ request.setAttribute("basePath", basePath);
 request.setAttribute("title", application.getInitParameter("title"));
 UserMsg user = session.getAttribute("user")==null?new UserMsg():(UserMsg)session.getAttribute("user");
 request.setAttribute("user",user);
+
+String imageServer = ConfigUtil.getInstance().getImageServer();
+String attachServer = ConfigUtil.getInstance().getAttachServer();
+request.setAttribute("imageServer", imageServer);
+request.setAttribute("attachServer", attachServer);
 %>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 <!--
 var path_ = "${path}";
 var basePath_ = "${basePath}";
+var imageServer_ = "${imageServer}";
+var attachServer_ = "${attachServer}";
 //-->
 </script>
 <script type="text/javascript" src="${path }/js/common.js"></script>
@@ -33,5 +41,7 @@ var basePath_ = "${basePath}";
 <script type="text/javascript" src="${path }/js/framePage.js"></script>
 <script type="text/javascript" src="${path }/js/json2.js"></script>
 <!-- jQuery validate -->
-<script src="${path }/js/validation/jquery.validate.js"></script>
-<script src="${path }/js/validation/messages_zh.js"></script>
+<script type="text/javascript" src="${path }/js/validation/jquery.validate.js"></script>
+<script type="text/javascript" src="${path }/js/validation/messages_zh.js"></script>
+<!-- jQuery ajaxfileupload -->
+<script type="text/javascript" src="${path }/js/ajaxfileupload.js"></script>

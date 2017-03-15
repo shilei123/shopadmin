@@ -1,9 +1,25 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<package name="dict" extends="json-default" namespace="/view/dict">
+	<!-- 商城后台管理的系统管理模块struts配置文件 -->
+	<package name="shopadmin" extends="json-default" namespace="/view/shop/admin">
+		<!-- 数据字典管理 -->
 		<action name="dict" class="com.sunchin.shop.admin.system.action.DictAction">
 			<result type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		<!-- 图片服务管理 -->
+		<action name="imageUpload" class="com.sunchin.shop.admin.system.action.ImageUploadAction">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		<!-- 附件管理 -->
+		<action name="attachUpload" class="com.sunchin.shop.admin.system.action.AttachUploadAction">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
 		</action>
 	</package>
 </struts>
