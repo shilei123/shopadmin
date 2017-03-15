@@ -29,7 +29,7 @@
 										<td><input name="queryParams.couponName" class="am-form-field"/></td>
 										<td class="query_title" >有效天数：</td>
 										<td><input name="queryParams.expiryDate" class="am-form-field"/></td>
-										<td>创建时间：</td>
+										<td class="query_title">创建时间：</td>
 					        			<td valign="top">
 					        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
 										  <input type="text" name="queryParams.startRegTime" id="startRegTime" class="am-form-field">

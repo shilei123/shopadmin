@@ -22,10 +22,11 @@ var queryCouponType = function() {
 		data : null,
 		dataType: "json",
 		success : function(data) {
+			console.log(data);
 			var html = "<option value='-1'>-请选择-</option>";
 			$(data.dictionaryList).each(function(index) {
 				var couponType = data.dictionaryList[index];
-				html += "<option value='" + couponType.id + "'>" + couponType.name + "</option>";
+				html += "<option value='" + couponType.code + "'>" + couponType.name + "</option>";
 			});
 			couponTypeHtml = html;
 			couponType.append(html);

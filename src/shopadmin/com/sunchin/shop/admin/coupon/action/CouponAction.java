@@ -69,12 +69,13 @@ public class CouponAction extends PageAction{
 	 */
 	public String couponType(){
 		try {
-			dictionaryList = couponService.findCouponType("优惠券");
+			dictionaryList = couponService.findCouponType("COUPON_TYPE");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}
+	
 	/**
 	 * 删除
 	 * @return

@@ -57,11 +57,11 @@
 									<th width="8%" field="code">代码</th>
 									<th width="13%" field="name">中文名称</th>
 									<th width="8%" field="ename">英文名称</th>
-									<th width="15%" formatter="formatterParent">父信息</th>
+									<th width="13%" formatter="formatterParent">父信息</th>
 									<th width="4%" field="isuse" formatter="formatterIsuse">有效</th>
 									<th width="4%" field="isedit" formatter="formatterIsEdit">编辑</th>
 									<th width="4%" field="sort">排序</th>
-									<th width="12%" field="createTime">创建时间</th>
+									<th width="14%" field="createTime">创建时间</th>
 									<th width="15%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>

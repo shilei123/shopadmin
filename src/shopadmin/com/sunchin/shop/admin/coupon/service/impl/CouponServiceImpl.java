@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sunchin.shop.admin.coupon.dao.CouponDAO;
 import com.sunchin.shop.admin.coupon.dao.UserCouponDAO;
@@ -65,6 +66,7 @@ public class CouponServiceImpl implements ICouponService{
 	 * 保存
 	 */
 	@Override
+	@Transactional
 	public void saveCoupon(ScCoupon coupon) {
 		if (coupon == null) {
 			return;
@@ -97,6 +99,7 @@ public class CouponServiceImpl implements ICouponService{
 	 *删除
 	 */
 	@Override
+	@Transactional
 	public void deleteCoupon(String id) {
 		DBUtil db = DBUtil.getInstance();
 		ScUserCoupon userCoupon = userCouponDAO.findUserCoupon(id);
