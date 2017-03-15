@@ -1,7 +1,5 @@
 package com.sunchin.shop.admin.system.action;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
@@ -15,7 +13,6 @@ public class DictAction extends PageAction {
 	@Resource(name = "dictService")
 	private DictService dictService;
 	private ScDictionary dict;
-	private List<ScDictionary> dicts;
 	
 	/**
 	 * 查询
@@ -32,19 +29,6 @@ public class DictAction extends PageAction {
 		return Action.SUCCESS;
 	}
 
-	/**
-	 * 查询类别查询数据字典记录
-	 * @return
-	 */
-	public String queryDictByType() {
-		try {
-			dicts = dictService.getDictByType(dict.getType());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return Action.SUCCESS;
-	}
-	
 	/**
 	 * 查询单条记录
 	 * @return
@@ -91,12 +75,6 @@ public class DictAction extends PageAction {
 	public void setDict(ScDictionary dict) {
 		this.dict = dict;
 	}
-
-	public List<ScDictionary> getDicts() {
-		return dicts;
-	}
-
-	public void setDicts(List<ScDictionary> dicts) {
-		this.dicts = dicts;
-	}
+	
+	
 }

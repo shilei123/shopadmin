@@ -27,7 +27,6 @@ public class CouponDAO extends PageDAO{
 		String sql = this.buildWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
-
 	@SuppressWarnings("unchecked")
 	public List<ScCoupon> queryCouponPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
