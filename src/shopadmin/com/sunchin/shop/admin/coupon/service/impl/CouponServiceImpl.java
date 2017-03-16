@@ -115,10 +115,4 @@ public class CouponServiceImpl implements ICouponService{
 			}
 		}
 	}
-
-	@Override
-	public List<ScDictionary> findCouponType(String type) throws Exception {
-			return couponDAO.queryCouponType(type);
-	}
-	
 }

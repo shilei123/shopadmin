@@ -79,5 +79,15 @@ public class ScDictionaryDAO extends PageDAO {
 		sql.append(" order by t.create_time desc ");
 		return sql.toString();
 	}
+
+	
+	@SuppressWarnings("unchecked")
+	public List<ScDictionary> queryDictionaryType(String type) {
+		DBUtil db = DBUtil.getInstance();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", type);
+		params.put("flag", FlagEnum.ACT.getCode());
+		return db.queryByPojo(ScDictionary.class, params);
+	}
 	
 }

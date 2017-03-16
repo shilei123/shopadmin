@@ -35,7 +35,12 @@ public class EventsinfoAction extends PageAction{
 	 * 查看单条记录
 	 */
 	public String queryEventsinfo(){
-		eventsinfo = eventsinfoService.queryEventsinfo(eventsinfo.getId());
+		try {
+			eventsinfo = eventsinfoService.queryEventsinfo(eventsinfo.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	
@@ -43,7 +48,12 @@ public class EventsinfoAction extends PageAction{
 	 * 保存
 	 */
 	public String save(){
-		eventsinfoService.saveEventsinfo(eventsinfo);
+		try {
+			eventsinfoService.saveEventsinfo(eventsinfo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	

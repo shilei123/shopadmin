@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScPurse" table="SC_PURSE" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="tradeType" type="java.lang.String">
+             <column name="TRADE_TYPE" length="1">
+                <comment>交易类型/支付宝0 微信 1 银联 2等等</comment>
+            </column>
+        </property>
+        <property name="tradeAmount" type="java.lang.Double">
+             <column name="TRADE_AMOUNT" precision="10">
+                <comment>交易金额</comment>
+            </column>
+        </property>
+        <property name="tradeSn" type="java.lang.String">
+               <column name="TRADE_SN" length="50" >
+                <comment>交易流水号</comment>
+            </column>
+        </property>
+        <property name="tradeState" type="java.lang.String">
+               <column name="TRADE_STATE" length="1" >
+                <comment>交易状态/支付失败0 待支付1 支付成功2</comment>
+            </column>
+        </property>
+        <property name="optionType" type="java.lang.String">
+               <column name="OPTION_TYPE" length="1" >
+                <comment>操作类型/进0 出1</comment>
+            </column>
+        </property>
+         <property name="orderId" type="java.lang.String">
+               <column name="ORDER_ID" length="36" >
+                <comment>订单id</comment>
+            </column>
+        </property>
+        <property name="userId" type="java.lang.String">
+               <column name="USER_ID" length="36" >
+                <comment>用户id</comment>
+            </column>
+        </property>
+        <property name="userAmount" type="java.lang.Double">
+            <column name="USER_AMOUNT" precision="10">
+                <comment>交易完成可用金额</comment>
+            </column>
+        </property> 
+        <property name="purseType" type="java.lang.String">
+               <column name="PURSE_TYPE" length="1" >
+                <comment>钱包类型/分红1 积分2 可用余额0/数据字典查看</comment>
+            </column>
+        </property>
+         <property name="payAccount" type="java.lang.String">
+               <column name="PAY_ACCOUNT" length="50" >
+                <comment>支付账户</comment>
+            </column>
+        </property>
+         <property name="payOpenBank" type="java.lang.String">
+               <column name="PAY_OPEN_BANK" length="50" >
+                <comment>支付银行卡</comment>
+            </column>
+        </property>
+         <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>有效期起</comment>
+            </column>
+        </property>
+         <property name="optionTime" type="java.util.Date">
+               <column name="OPTION_TIME">
+                <comment>有效期止</comment>
+            </column>
+        </property>
+        <property name="optionAdminid" type="java.lang.String">
+               <column name="OPTION_ADMINID" length="36" >
+                <comment>操作人id</comment>
+            </column>
+        </property>
+         <property name="optionAdminname" type="java.lang.String">
+               <column name="OPTION_ADMINNAME" length="50" >
+                <comment>操作人名称</comment>
+            </column>
+        </property>
+        <property name="optionRemark" type="java.lang.String">
+               <column name="OPTION_REMARK" length="100" >
+                <comment>备注</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

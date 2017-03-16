@@ -24,6 +24,7 @@ public class CouponDAO extends PageDAO{
 	public int queryCouponCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
+		params.add("COUPON_TYPE");
 		String sql = this.buildWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
@@ -31,6 +32,7 @@ public class CouponDAO extends PageDAO{
 	public List<ScCoupon> queryCouponPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
+		params.add("COUPON_TYPE");
 		String sql = this.buildWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
@@ -40,8 +42,9 @@ public class CouponDAO extends PageDAO{
 		sql.append(" t1.coupon_xf_balance,t1.coupon_expiry_date,decode(t1.coupon_status,'0','是','1','否') coupon_status, ");
 		sql.append(" t1.coupon_remark,to_char(t1.create_time,'yyyy-mm-dd hh24:mi:ss') create_time,t2.name ");
 		sql.append(" from sc_coupon t1 ");
-		sql.append(" left join sc_dictionary t2 on t2.id=t1.coupon_type ");
+		sql.append(" left join sc_dictionary t2 on t2.code=t1.coupon_type ");
 		sql.append(" where t1.coupon_flag=?");
+		sql.append(" and t2.type=?");
 		
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String couponName = pageBean.getQueryParams().get("couponName");
@@ -57,7 +60,7 @@ public class CouponDAO extends PageDAO{
 			String couponType = pageBean.getQueryParams().get("couponType");
 			if (StringUtils.isNotBlank(couponType)&&!"-1".equals(couponType)){
 				params.add(couponType);
-				sql.append(" and t2.id=? ");
+				sql.append(" and t2.code=? ");
 			}
 			String startTime = pageBean.getQueryParams().get("startRegTime");
 			if (StringUtils.isNotBlank(startTime)){
@@ -72,14 +75,5 @@ public class CouponDAO extends PageDAO{
 		}
 		sql.append(" order by t1.create_time desc ");
 		return sql.toString();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<ScDictionary> queryCouponType(String type) throws Exception {
-		DBUtil db = DBUtil.getInstance();
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("type", type);
-		params.put("flag", FlagEnum.ACT.getCode());
-		return db.queryByPojo(ScDictionary.class, params);
 	}
 }

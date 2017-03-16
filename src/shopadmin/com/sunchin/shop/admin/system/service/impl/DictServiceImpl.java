@@ -10,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.system.service.DictService;
-
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.IsEditEnum;
 import com.sunchin.shop.admin.dict.IsUseEnum;
@@ -85,5 +84,12 @@ public class DictServiceImpl implements DictService {
 			db.update(dict);
 		}
 	}
+	
+	/**
+	 * 查询类型
+	 */
+	 public List<ScDictionary> findDictionaryType(String type) {
+		return dictDAO.queryDictionaryType(type);
+}
 
 }

@@ -8,9 +8,10 @@ $(function() {
 var queryUser = function() {
 	var data = formGet("from_query");
 	var url = path_ + "/view/shop/userManagement/user!queryUser.action";
-	pageData(url, "couponListTable", data); 
+	pageData(url, "userSecutityListTable", data);
 };
 
+//账户状态
 var userStatus = function() {
 	var userStatus = $("#userStatus");
 	userStatus.empty();
@@ -21,6 +22,7 @@ var userStatus = function() {
 		userStatus.append(html);
 };
 
+//提现状态
 var tixianStatus = function() {
 	var tixianStatus = $("#tixianStatus");
 	tixianStatus.empty();
@@ -30,6 +32,7 @@ var tixianStatus = function() {
 		tixianStatus.append(html);
 };
 
+//身份证状态
 var identityStatus = function() {
 	var identityStatus = $("#identityStatus");
 	identityStatus.empty();

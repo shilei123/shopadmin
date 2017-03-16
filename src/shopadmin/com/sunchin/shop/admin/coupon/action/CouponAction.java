@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.coupon.service.ICouponService;
 import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScDictionary;
+import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
@@ -17,10 +18,13 @@ public class CouponAction extends PageAction{
 
 	@Resource(name="couponService")
 	private ICouponService couponService;
+	@Resource(name = "dictService")
+	private DictService dictService;
 	
 	private ScCoupon coupon;
 	
 	private List<ScDictionary> dictionaryList;
+	
 	
 	/**
 	 * 查询
@@ -69,12 +73,13 @@ public class CouponAction extends PageAction{
 	 */
 	public String couponType(){
 		try {
-			dictionaryList = couponService.findCouponType("COUPON_TYPE");
+			dictionaryList = dictService.findDictionaryType("COUPON_TYPE");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}
+	
 	/**
 	 * 删除
 	 * @return

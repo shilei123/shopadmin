@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sunchin.shop.admin.pojo.ScBcuser;
+import com.sunchin.shop.admin.pojo.ScPurse;
 import com.sunchin.shop.admin.pojo.ScUser;
 import com.sunchin.shop.admin.userManagement.dao.UserDAO;
 import com.sunchin.shop.admin.userManagement.service.IUserService;
@@ -48,6 +49,15 @@ public class UserServiceImpl implements IUserService{
 		user.setLoginPwd(MD5Utils.getMD5("123456"));
 		user.setOptionTime(new Date());
 		DBUtil.getInstance().update(user);
+	}
+
+	@Override
+	public PageBean queryUserPurseList(PageBean pageBean) throws Exception {
+		int total = userDAO.queryUserPurseCount(pageBean);
+		pageBean.setTotal(total);
+		List<ScPurse> pageData = userDAO.queryUserPursePagination(pageBean);
+		pageBean.setPageData(pageData);
+		return pageBean;
 	}
 	
 }

@@ -6,12 +6,12 @@ import framework.bean.PageBean;
 
 public interface IEventsinfoService {
 
-	PageBean queryEventsinfoList(PageBean pageBean);
+	PageBean queryEventsinfoList(PageBean pageBean) throws Exception;
 
-	void deleteEventsinfo(String id);
+	void deleteEventsinfo(String id) throws Exception;
 
-	ScEventsinfo queryEventsinfo(String id);
+	ScEventsinfo queryEventsinfo(String id) throws Exception;
 
-	void saveEventsinfo(ScEventsinfo eventsinfo);
+	void saveEventsinfo(ScEventsinfo eventsinfo) throws Exception;
 
 }

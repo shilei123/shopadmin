@@ -1,5 +1,7 @@
 package com.sunchin.shop.admin.system.service;
 
+import java.util.List;
+
 import com.sunchin.shop.admin.pojo.ScDictionary;
 
 import framework.bean.PageBean;
@@ -35,4 +37,10 @@ public interface DictService {
 	 * @throws Exception
 	 */
 	public void deleteDict(String id) throws Exception;
+	
+	/**
+	 * 查询类型
+	 */
+	public List<ScDictionary> findDictionaryType(String type);
+	
 }

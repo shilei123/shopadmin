@@ -8,14 +8,14 @@ import framework.bean.PageBean;
 
 public interface IAdvertiseService {
 
-	PageBean queryAdvertiseList(PageBean pageBean);
+	PageBean queryAdvertiseList(PageBean pageBean) throws Exception;
 
-	void deleteAdvertise(String id);
+	void deleteAdvertise(String id) throws Exception;
 
-	void saveAdvertise(ScAdvertise advertise);
+	void saveAdvertise(ScAdvertise advertise) throws Exception;
 
-	ScAdvertise queryAdvertise(String id);
+	ScAdvertise queryAdvertise(String id)throws Exception;
 
-	Map<String, Object> findAdvertise(String id);
+	Map<String, Object> findAdvertise(String id)throws Exception;
 
 }

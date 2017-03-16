@@ -38,7 +38,12 @@ public class AdvertiseAction extends PageAction{
 	 * 查询单条记录
 	 */
 	public String queryAdvertise(){
-		advertise = advertiseService.queryAdvertise(advertise.getId());
+		try {
+			advertise = advertiseService.queryAdvertise(advertise.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	
@@ -47,7 +52,12 @@ public class AdvertiseAction extends PageAction{
 	 * @return
 	 */
 	public String findAdvertise(){
-		map = advertiseService.findAdvertise(advertise.getId());
+		try {
+			map = advertiseService.findAdvertise(advertise.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	
@@ -55,7 +65,12 @@ public class AdvertiseAction extends PageAction{
 	 *保存 
 	 */
 	public String save(){
-		advertiseService.saveAdvertise(advertise);
+		try {
+			advertiseService.saveAdvertise(advertise);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	
@@ -64,7 +79,12 @@ public class AdvertiseAction extends PageAction{
 	 * @return
 	 */
 	public String delete(){
-		advertiseService.deleteAdvertise(advertise.getId());
+		try {
+			advertiseService.deleteAdvertise(advertise.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	public ScAdvertise getAdvertise() {

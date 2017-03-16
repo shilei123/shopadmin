@@ -6,9 +6,9 @@ import framework.bean.PageBean;
 
 public interface IUserCouponService {
 
-	PageBean queryUserCouponList(PageBean pageBean);
+	PageBean queryUserCouponList(PageBean pageBean) throws Exception;
 
-	ScUserCoupon getUserCoupon(String id);
+	ScUserCoupon getUserCoupon(String id) throws Exception;
 
-	void saveUserCoupon(ScUserCoupon userCoupon);
+	void saveUserCoupon(ScUserCoupon userCoupon) throws Exception;
 }
