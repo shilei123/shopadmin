@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.StatusEnum;
 import com.sunchin.shop.admin.pojo.ScUserCoupon;
 
@@ -20,6 +21,7 @@ public class UserCouponDAO extends PageDAO{
 	
 	public int queryUserCouponCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.COUPON_STATUS.getType());
 		String sql = this.UserCouponWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
@@ -27,6 +29,7 @@ public class UserCouponDAO extends PageDAO{
 	@SuppressWarnings("unchecked")
 	public List<ScUserCoupon> queryUserCouponPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.COUPON_STATUS.getType());
 		String sql = this.UserCouponWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
@@ -35,9 +38,10 @@ public class UserCouponDAO extends PageDAO{
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer("select t1.id,t1.user_name,t1.coupon_name,t1.coupon_blance,t1.coupon_xf_balance,t1.order_sn, ");
 		sql.append(" to_char(t1.coupon_creatdate,'yyyy-mm-dd') coupon_creatdate,to_char(t1.coupon_expirydate,'yyyy-mm-dd') coupon_expirydate, ");
-		sql.append(" decode(t1.coupon_status,'0','未使用','1','已使用','2','作废') coupon_status ");
+		sql.append(" t2.name coupon_status ");
 		sql.append(" from sc_user_coupon t1 ");
-		sql.append(" where 1=1 ");
+		sql.append(" left join sc_dictionary t2 on t2.code=t1.coupon_status ");
+		sql.append(" where t2.type=?");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String sts = pageBean.getQueryParams().get("sts");
 			if (StringUtils.isNotBlank(sts)&& !"-1".equals(sts)){

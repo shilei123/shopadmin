@@ -1,10 +1,15 @@
 package com.sunchin.shop.admin.eventsinfo.action;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
+import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.eventsinfo.service.IEventsinfoService;
+import com.sunchin.shop.admin.pojo.ScDictionary;
 import com.sunchin.shop.admin.pojo.ScEventsinfo;
+import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
@@ -13,8 +18,11 @@ public class EventsinfoAction extends PageAction{
 
 	@Resource(name="eventsinfoService")
 	private IEventsinfoService eventsinfoService;
+	@Resource(name = "dictService")
+	private DictService dictService;
 	
 	private ScEventsinfo eventsinfo;
+	private List<ScDictionary> dictionaryList;
 	
 	/**
 	 * 查询
@@ -70,6 +78,15 @@ public class EventsinfoAction extends PageAction{
 		return Action.SUCCESS;
 	}
 
+	public String queryEventsinfoType(){
+		try {
+			dictionaryList = dictService.findDictionaryType(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
 	public ScEventsinfo getEventsinfo() {
 		return eventsinfo;
 	}
@@ -78,4 +95,13 @@ public class EventsinfoAction extends PageAction{
 		this.eventsinfo = eventsinfo;
 	}
 
+	public List<ScDictionary> getDictionaryList() {
+		return dictionaryList;
+	}
+
+	public void setDictionaryList(List<ScDictionary> dictionaryList) {
+		this.dictionaryList = dictionaryList;
+	}
+
+	
 }

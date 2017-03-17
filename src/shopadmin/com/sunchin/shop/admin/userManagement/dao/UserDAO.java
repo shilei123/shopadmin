@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.hssf.record.chart.PlotAreaRecord;
 import org.springframework.stereotype.Repository;
 
+import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
 import com.sunchin.shop.admin.pojo.ScBcuser;
+import com.sunchin.shop.admin.pojo.ScIdentity;
 import com.sunchin.shop.admin.pojo.ScPurse;
 import com.sunchin.shop.admin.pojo.ScUser;
 
@@ -23,6 +26,7 @@ public class UserDAO extends PageDAO{
 
 	public int queryUserBcuserCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.USER_SEX.getType());
 		String sql = this.buildWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
@@ -30,14 +34,16 @@ public class UserDAO extends PageDAO{
 	@SuppressWarnings("unchecked")
 	public List<ScBcuser> queryUserBcuserPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.USER_SEX.getType());
 		String sql = this.buildWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
 	
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
-		StringBuffer sql = new StringBuffer("   select t1.id,t1.user_id,t1.user_name,t1.true_name,t1.user_phone,t1.user_mail,decode(t1.user_sex,'0','男','1','女') user_sex from sc_bcuser t1 ");
-		sql.append(" where 1=1 ");
+		StringBuffer sql = new StringBuffer("   select t1.id,t1.user_id,t1.user_name,t1.true_name,t1.user_phone,t1.user_mail,t2.name user_sex from sc_bcuser t1 ");
+		sql.append(" left join sc_dictionary t2 on t2.code=t1.user_sex ");
+		sql.append(" where t2.type=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String userName = pageBean.getQueryParams().get("userName");
 			if (StringUtils.isNotBlank(userName)){
@@ -60,6 +66,8 @@ public class UserDAO extends PageDAO{
 
 	public int queryUserCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.IDENTITY_STATUS.getType());
+		params.add(DictionaryTypeEnum.USER_STATUS.getType());
 		String sql = this.userWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
@@ -67,6 +75,8 @@ public class UserDAO extends PageDAO{
 	@SuppressWarnings("unchecked")
 	public List<ScUser> queryUserPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.IDENTITY_STATUS.getType());
+		params.add(DictionaryTypeEnum.USER_STATUS.getType());
 		String sql = this.userWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
@@ -75,11 +85,15 @@ public class UserDAO extends PageDAO{
 	private String userWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(" select t1.id,t1.user_name,t1.nick_name, ");
-		sql.append(" to_char(t1.create_time,'yyyy-mm-dd') create_time,decode(t1.user_status,'0','注销','1','正常','2','冻结') user_status,t2.identity_card,to_char(t2.identity_card_validity,'yyyy-mm-dd') identity_card_validity, ");
-		sql.append(" decode(t2.identity_status,'0','未认证','1','申请中','2','已认证') identity_status ");
+		sql.append(" to_char(t1.create_time,'yyyy-mm-dd') create_time,t4.name user_status,t2.identity_card,to_char(t2.identity_card_validity,'yyyy-mm-dd') identity_card_validity, ");
+		sql.append(" t3.name identity_status ");
 		sql.append(" from sc_user t1 ");
 		sql.append(" left join sc_identity t2 on t1.id=t2.user_id ");
-		sql.append(" where 1=1 ");
+		sql.append(" left join sc_dictionary t3 on t3.code=t2.identity_status ");
+		sql.append(" left join sc_dictionary t4 on t4.code=t1.user_status ");
+		sql.append(" where t3.type=? ");
+		sql.append(" and t4.type=? ");
+		
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String userName = pageBean.getQueryParams().get("userName");
 			if (StringUtils.isNotBlank(userName)){
@@ -118,6 +132,10 @@ public class UserDAO extends PageDAO{
 	
 	public int queryUserPurseCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.TRADE_TYPE.getType());
+		params.add(DictionaryTypeEnum.TRADE_TYPE.getType());
+		params.add(DictionaryTypeEnum.OPTION_TYPE.getType());
+		params.add(DictionaryTypeEnum.PURSE_TYPE.getType());
 		String sql = this.userPurseWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
@@ -125,6 +143,10 @@ public class UserDAO extends PageDAO{
 	@SuppressWarnings("unchecked")
 	public List<ScPurse> queryUserPursePagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.TRADE_TYPE.getType());
+		params.add(DictionaryTypeEnum.TRADE_TYPE.getType());
+		params.add(DictionaryTypeEnum.OPTION_TYPE.getType());
+		params.add(DictionaryTypeEnum.PURSE_TYPE.getType());
 		String sql = this.userPurseWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
@@ -132,12 +154,19 @@ public class UserDAO extends PageDAO{
 	private String userPurseWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(" select t1.id,t1.trade_amount,t1.user_amount,t1.trade_sn,t1.pay_account,t1.pay_open_bank,t2.user_name, ");
-		sql.append(" decode(t1.trade_type,'0','支付宝','1','微信','2','银联') trade_type,decode(t1.trade_state,'0','支付失败','1','待支付','2','支付成功') trade_state, ");
-		sql.append(" decode(t1.option_type,'0','进账','1','出账') option_type,decode(t1.purse_type,'0','可用余额','1','分红','2','积分') purse_type, ");
+		sql.append(" t3.name trade_type,t4.name trade_state, ");
+		sql.append(" t5.name option_type,t6.name purse_type, ");
 		sql.append(" to_char(t1.create_time,'yyyy-MM-dd hh24:mi:ss') create_time,to_char(t1.option_time,'yyyy-MM-dd hh24:mi:ss') option_time ");
 		sql.append(" from sc_purse t1 ");
 		sql.append(" left join sc_user t2 on t2.id=t1.user_id ");
-		sql.append(" where 1=1 ");
+		sql.append(" left join sc_dictionary t3 on t3.code=t1.trade_type ");
+		sql.append(" left join sc_dictionary t4 on t4.code=t1.trade_state ");
+		sql.append(" left join sc_dictionary t5 on t5.code=t1.option_type ");
+		sql.append(" left join sc_dictionary t6 on t6.code=t1.purse_type ");
+		sql.append(" where t3.type=? ");
+		sql.append(" and t4.type=? ");
+		sql.append(" and t5.type=? ");
+		sql.append(" and t6.type=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String userName = pageBean.getQueryParams().get("userName");
 			if (StringUtils.isNotBlank(userName)){
@@ -178,8 +207,58 @@ public class UserDAO extends PageDAO{
 		return sql.toString();
 	}
 	
+	public int queryUserIdentityCount(PageBean pageBean) {
+		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.IDENTITY_STATUS.getType());
+		String sql = this.userIdentityWhereSql(pageBean, params);
+		return DBUtil.getInstance().queryCountBySQL(sql, params);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ScIdentity> queryUserIdentityPagination(PageBean pageBean) {
+		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.IDENTITY_STATUS.getType());
+		String sql = this.userIdentityWhereSql(pageBean, params);
+		return this.query(sql, params, DBUtil.getInstance(), pageBean);
+	}
 	
-	
+	private String userIdentityWhereSql(PageBean pageBean, List<String> params) {
+		// 拼接查询条件
+		StringBuffer sql = new StringBuffer(" select t1.id,t1.user_name,t1.identity_card,t2.name identity_status,t1.identity_frontal,t1.identity_back,t1.identity_hold_frontal, ");
+		sql.append(" to_char(t1.application_time,'yyyy-MM-dd hh24:mi:ss') application_time,t1.applicant,t1.failure_reason ");
+		sql.append(" from sc_identity t1 ");
+		sql.append(" left join sc_dictionary t2 on t2.code=t1.identity_status ");
+		sql.append(" where t2.type=? ");
+		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
+			String userName = pageBean.getQueryParams().get("userName");
+			if (StringUtils.isNotBlank(userName)){
+				params.add("%"+userName+"%");
+				sql.append(" and t1.user_name like ? ");
+			}
+			String identityCard = pageBean.getQueryParams().get("identityCard");
+			if (StringUtils.isNotBlank(identityCard)){
+				params.add("%"+identityCard+"%");
+				sql.append(" and t1.identity_card like ? ");
+			}
+			String identityStatus = pageBean.getQueryParams().get("identityStatus");
+			if (StringUtils.isNotBlank(identityStatus) && !"-1".equals(identityStatus)){
+				params.add(identityStatus);
+				sql.append(" and t1.identity_status=? ");
+			}
+			String startTime = pageBean.getQueryParams().get("startRegTime");
+			if (StringUtils.isNotBlank(startTime)){
+				params.add(startTime);
+				sql.append(" and t1.application_time >= to_date(?,'yyyy-MM-dd hh24:mi:ss')");
+			}
+			String endTime = pageBean.getQueryParams().get("endRegTime");
+			if (StringUtils.isNotBlank(endTime)){
+				params.add(endTime+" 23:59:59 ");
+				sql.append(" and t1.application_time <= to_date(?,'yyyy-MM-dd hh24:mi:ss')");
+			}
+		}
+		return sql.toString();
+	}
+
 	@SuppressWarnings("unchecked")
 	public ScUser queryUserById(String id) {
 		Map<String, Object> params = new HashMap<String,Object>();
@@ -190,6 +269,4 @@ public class UserDAO extends PageDAO{
 		}
 		return null;
 	}
-
-	
 }

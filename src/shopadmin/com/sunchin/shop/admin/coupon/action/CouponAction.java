@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.coupon.service.ICouponService;
+import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScDictionary;
 import com.sunchin.shop.admin.system.service.DictService;
@@ -73,7 +74,7 @@ public class CouponAction extends PageAction{
 	 */
 	public String couponType(){
 		try {
-			dictionaryList = dictService.findDictionaryType("COUPON_TYPE");
+			dictionaryList = dictService.findDictionaryType(DictionaryTypeEnum.COUPON_TYPE.getType());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

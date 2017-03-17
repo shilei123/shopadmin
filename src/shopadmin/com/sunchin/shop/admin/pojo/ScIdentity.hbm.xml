@@ -38,5 +38,45 @@
                 <comment>身份证状态/未认证0 申请中1 已认证2</comment>
             </column>
         </property>
+        <property name="identityFrontal" type="java.lang.String">
+            <column name="IDENTITY_FRONTAL" length="100">
+                <comment>身份证正面照</comment>
+            </column>
+        </property>
+        <property name="identityBack" type="java.lang.String">
+            <column name="IDENTITY_BACK" length="100">
+                <comment>身份证背面照</comment>
+            </column>
+        </property>
+        <property name="identityHoldFrontal" type="java.lang.String">
+            <column name="IDENTITY_HOLD_FRONTAL" length="100">
+                <comment>手持身份证正面</comment>
+            </column>
+        </property>
+        <property name="applicationTime" type="java.util.Date">
+            <column name="APPLICATION_TIME">
+                <comment>申请认证时间</comment>
+            </column>
+        </property>
+        <property name="applicant" type="java.lang.String">
+            <column name="APPLICANT" length="50">
+                <comment>申请人</comment>
+            </column>
+        </property>
+        <property name="authenticationTime" type="java.util.Date">
+            <column name="AUTHENTICATION_TIME">
+                <comment>认证时间</comment>
+            </column>
+        </property>
+        <property name="authenticator" type="java.lang.String">
+            <column name="AUTHENTICATOR" length="50">
+                <comment>认证人</comment>
+            </column>
+        </property>
+        <property name="failureReason" type="java.lang.String">
+            <column name="FAILURE_REASON" length="100">
+                <comment>失败理由</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

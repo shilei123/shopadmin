@@ -14,7 +14,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">广告管理</strong> / <small>广告的增加、修改、查看、删除</small>
+						<strong class="am-text-primary am-text-lg">广告管理</strong> / <small>广告的新增、编辑、查看、删除</small>
 					</div>
 				</div>
 				<hr>
@@ -29,26 +29,26 @@
 										<td><input name="queryParams.Name" class="am-form-field"/></td>
 										<td class="query_title">广告类型：</td>
 										<td>
-										<select id="linkkind" name="queryParams.linkkind" data-am-selected="{btnWidth: '164px'}">
-										</select>
+											<select id="linkkind" name="queryParams.linkkind" data-am-selected="{btnWidth: '164px'}">
+											</select>
 										</td>
 										<td class="query_title">广告开始时间：</td>
 					        			<td valign="top">
-					        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-										  <input type="text" name="queryParams.startRegTime" id="startRegTime" class="am-form-field">
-										  <span class="am-input-group-btn am-datepicker-add-on">
-										    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-										  </span>
-										</div>
+						        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+											  <input type="text" name="queryParams.startRegTime" id="startRegTime" class="am-form-field">
+											  <span class="am-input-group-btn am-datepicker-add-on">
+											    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+											  </span>
+											</div>
 										</td>
 										<td class="query_title">广告结束时间：</td>
 										<td>
-										<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-										  <input type="text" name="queryParams.endRegTime" id="endRegTime" class="am-form-field">
-										  <span class="am-input-group-btn am-datepicker-add-on">
-										    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-										  </span>
-										</div>
+											<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+												  <input type="text" name="queryParams.endRegTime" id="endRegTime" class="am-form-field">
+												  <span class="am-input-group-btn am-datepicker-add-on">
+												    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+												  </span>
+											</div>
 					        			</td>
 									</tr>
 									<tr>
@@ -67,12 +67,12 @@
 						<table class="am-table am-table-bordered am-table-striped am-table-hover" id="advertiseListTable">
 							<thead>
 								<tr>
-									<th width="2%" field="index"></th>
+									<th width="2%"  field="index"></th>
 									<th width="10%" field="name">广告名称</th>
-									<th width="6%" field="linkkind">广告类型</th>
-									<th width="6%" field="ordernumb">显示顺序</th>
-									<th width="6%" field="type" formatter="formatterType">广告位置</th>
-									<th width="6%" field="isuse">是否启用</th>
+									<th width="6%"  field="linkkind">广告类型</th>
+									<th width="6%"  field="ordernumb">显示顺序</th>
+									<th width="6%"  field="type" formatter="formatterType">广告位置</th>
+									<th width="6%"  field="isuse">是否启用</th>
 									<th width="8%"  field="kind">类型</th>
 									<th width="12%" field="startTime">广告开始时间</th>
 									<th width="12%" field="endTime">广告结束时间</th>

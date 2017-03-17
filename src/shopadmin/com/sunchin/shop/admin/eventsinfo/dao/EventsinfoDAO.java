@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScEventsinfo;
 
@@ -21,6 +22,7 @@ public class EventsinfoDAO extends PageDAO{
 	public int queryEventsinfoCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
+		params.add(DictionaryTypeEnum.COUPON_STATUSS.getType());
 		String sql = this.buildWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
@@ -29,16 +31,18 @@ public class EventsinfoDAO extends PageDAO{
 	public List<ScEventsinfo> queryEventsinfoPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
+		params.add(DictionaryTypeEnum.COUPON_STATUSS.getType());
 		String sql = this.buildWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
-		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t1.memo,decode(t1.isuse,'0','是','1','否') isuse, ");
+		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t2.name isuse, ");
 		sql.append(" to_char(t1.starttime,'yyyy-mm-dd') starttime,to_char(t1.endtime,'yyyy-mm-dd') endtime,t1.createtime ");
 		sql.append(" from sc_eventsinfo t1 ");
+		sql.append(" left join sc_dictionary t2 on t2.code=t1.isuse ");
 		sql.append(" where t1.flag=? ");
-		
+		sql.append(" and t2.type=?");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String name = pageBean.getQueryParams().get("name");
 			if (StringUtils.isNotBlank(name)){

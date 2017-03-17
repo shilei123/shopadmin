@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
 import com.sunchin.shop.admin.pojo.ScBcuser;
@@ -23,6 +24,8 @@ public class AdvertiseDAO extends PageDAO{
 	public int queryAdvertiseCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
+		params.add(DictionaryTypeEnum.ADVERTISE_LINKKIND.getType());
+		params.add(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
 		String sql = this.buildWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
@@ -31,16 +34,22 @@ public class AdvertiseDAO extends PageDAO{
 	public List<ScBcuser> queryAdvertisefoPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
+		params.add(DictionaryTypeEnum.ADVERTISE_LINKKIND.getType());
+		params.add(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
 		String sql = this.buildWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
 
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
-		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t1.memo,decode(t1.linkkind,'0','商品','1','活动','2','其他URL','3','类别') linkkind,t1.ordernumb,decode(t1.isuse,'0','是','1','否') isuse, ");
+		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t1.memo,t2.name linkkind,t1.ordernumb,t3.name isuse, ");
 		sql.append(" t1.type,t1.kind,to_char(t1.start_time,'yyyy-mm-dd') start_time,to_char(t1.end_time,'yyyy-mm-dd') end_time,t1.create_time ");
 		sql.append(" from sc_advertise t1 ");
+		sql.append(" left join sc_dictionary t2 on t2.code=t1.linkkind ");
+		sql.append(" left join sc_dictionary t3 on t3.code=t1.isuse ");
 		sql.append(" where t1.flag=? ");
+		sql.append(" and t2.type=?");
+		sql.append(" and t3.type=?");
 		
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String name = pageBean.getQueryParams().get("name");

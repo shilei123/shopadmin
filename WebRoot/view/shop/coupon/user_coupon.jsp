@@ -47,7 +47,7 @@
 					        			</td>
 									</tr>
 									<tr>
-									<td class="query_title">优惠券状态：</td>
+										<td class="query_title">优惠券状态：</td>
 										<td>
 										<select id="status" name="queryParams.sts" data-am-selected="{btnWidth: '164px'}">
 										</select>
@@ -66,7 +66,7 @@
 						<table class="am-table am-table-bordered am-table-striped am-table-hover" id="userCouponListTable">
 							<thead>
 								<tr>
-									<th width="2%" field="index"></th>
+									<th width="2%"  field="index"></th>
 									<th width="10%" field="userName">用户名</th>
 									<th width="10%" field="couponName">优惠券名称</th>
 									<th width="10%" field="couponBlance">优惠券金额</th>

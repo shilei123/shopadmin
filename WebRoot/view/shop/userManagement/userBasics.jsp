@@ -31,8 +31,8 @@
 										<td><input name="queryParams.trueName" class="am-form-field"/></td>
 										<td class="query_title" >性别</td>
 										<td>
-										<select id="userSex" name="queryParams.userSex" data-am-selected="{btnWidth: '164px'}">
-										</select>
+											<select id="userSex" name="queryParams.userSex" data-am-selected="{btnWidth: '164px'}">
+											</select>
 										</td>
 									</tr>
 									<tr>
@@ -50,7 +50,7 @@
 						<table class="am-table am-table-bordered am-table-striped am-table-hover" id="userBcuserListTable">
 							<thead>
 								<tr>
-									<th width="2%" field="index"></th>
+									<th width="2%"  field="index"></th>
 									<th width="10%" field="userName">用户名</th>
 									<th width="10%" field="trueName">姓名</th>
 									<th width="10%" field="userSex">性别</th>

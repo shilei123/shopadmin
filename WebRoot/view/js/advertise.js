@@ -4,7 +4,6 @@ var AdvertiseIsuseHtml = "";
 
 $(function() {
 	queryAdvertise();
-	queryAdvertiseType();
 	findAdvertiseType();
 	findAdvertiseIsuse();
 });
@@ -13,21 +12,6 @@ var queryAdvertise = function() {
 	var data = formGet("from_query");
 	var url = path_ + "/view/shop/advertise/advertise!query.action";
 	pageData(url, "advertiseListTable", data); 
-};
-
-var queryAdvertiseType = function() {
-	var linkkind = $("#linkkind");
-	var linkkinds = $("#linkkinds");
-	linkkind.empty();
-	linkkinds.empty();
-	var html = "<option value='-1'>请选择</option>";
-		html += "<option value='0'>商品</option>";
-		html += "<option value='1'>活动</option>";
-		html += "<option value='2'>其他URL</option>";
-		html += "<option value='3'>类别</option>";
-		AdvertiseLinkkindHtml = html;
-		linkkind.append(html);
-		linkkinds.append(html);
 };
 
 var findAdvertiseType = function() {
@@ -43,11 +27,35 @@ var findAdvertiseType = function() {
 var findAdvertiseIsuse = function() {
 	var isuse = $("#isuse");
 	isuse.empty();
-	//var html = "<option value='-1'>请选择</option>";
-	var	html =	"<option value='0'>启用</option>"
-		html +=	"<option value='1'>不启用</option>"
-		AdvertiseIsuseHtml = html;
-		isuse.append(html);
+	var linkkind = $("#linkkind");
+	var linkkinds = $("#linkkinds");
+	linkkind.empty();
+	linkkinds.empty();
+		$.ajax({
+			url :path_ + "/view/shop/advertise/advertise!AdvertiseType.action",
+			type : 'POST',
+			data : null,
+			dataType: "json",
+			success : function(data) {
+				console.log(data);
+				var html = "<option value=''>-请选择-</option>";
+				$(data.isuseList).each(function(index) {
+					var isuseinfoType = data.isuseList[index];
+					html += "<option value='" + isuseinfoType.code + "'>" + isuseinfoType.name + "</option>";
+				});
+				AdvertiseIsuseHtml = html;
+				isuse.append(html);
+				
+				var html = "<option value='-1'>-请选择-</option>";
+				$(data.dictionaryList).each(function(index) {
+					var advertiseType = data.dictionaryList[index];
+					html += "<option value='" + advertiseType.code + "'>" + advertiseType.name + "</option>";
+				});
+				AdvertiseLinkkindHtml = html;
+				linkkind.append(html);
+				linkkinds.append(html);
+			}
+		});
 };
 
 var formatterType = function(value, row){

@@ -17,6 +17,14 @@ public class ScIdentity  implements java.io.Serializable {
      private Date identityCardValidity;
      private String identityIssuing;
      private String identityStatus;
+     private String identityFrontal;
+     private String identityBack;
+     private String identityHoldFrontal;
+     private Date applicationTime;
+     private String applicant;
+     private Date authenticationTime;
+     private String authenticator;
+     private String failureReason;
 
     public ScIdentity() {
     }
@@ -75,6 +83,70 @@ public class ScIdentity  implements java.io.Serializable {
 
 	public void setIdentityStatus(String identityStatus) {
 		this.identityStatus = identityStatus;
+	}
+
+	public String getIdentityFrontal() {
+		return identityFrontal;
+	}
+
+	public void setIdentityFrontal(String identityFrontal) {
+		this.identityFrontal = identityFrontal;
+	}
+
+	public String getIdentityBack() {
+		return identityBack;
+	}
+
+	public void setIdentityBack(String identityBack) {
+		this.identityBack = identityBack;
+	}
+
+	public String getIdentityHoldFrontal() {
+		return identityHoldFrontal;
+	}
+
+	public void setIdentityHoldFrontal(String identityHoldFrontal) {
+		this.identityHoldFrontal = identityHoldFrontal;
+	}
+
+	public Date getApplicationTime() {
+		return applicationTime;
+	}
+
+	public void setApplicationTime(Date applicationTime) {
+		this.applicationTime = applicationTime;
+	}
+
+	public String getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(String applicant) {
+		this.applicant = applicant;
+	}
+
+	public Date getAuthenticationTime() {
+		return authenticationTime;
+	}
+
+	public void setAuthenticationTime(Date authenticationTime) {
+		this.authenticationTime = authenticationTime;
+	}
+
+	public String getAuthenticator() {
+		return authenticator;
+	}
+
+	public void setAuthenticator(String authenticator) {
+		this.authenticator = authenticator;
+	}
+
+	public String getFailureReason() {
+		return failureReason;
+	}
+
+	public void setFailureReason(String failureReason) {
+		this.failureReason = failureReason;
 	}
 
 }

@@ -1,12 +1,16 @@
 package com.sunchin.shop.admin.advertise.action;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.advertise.service.IAdvertiseService;
+import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
+import com.sunchin.shop.admin.pojo.ScDictionary;
+import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
@@ -15,9 +19,12 @@ public class AdvertiseAction extends PageAction{
 
 	@Resource(name="advertiseService")
 	private IAdvertiseService advertiseService;
+	@Resource(name = "dictService")
+	private DictService dictService;
 	
 	private ScAdvertise advertise;
-	
+	private List<ScDictionary> dictionaryList; //广告类型
+	private List<ScDictionary> isuseList; //是否启用
 	private Map<String, Object> map;
 	/**
 	 * 查询
@@ -87,6 +94,19 @@ public class AdvertiseAction extends PageAction{
 		}
 		return Action.SUCCESS;
 	}
+	
+	public String AdvertiseType(){
+		try {
+			dictionaryList = dictService.findDictionaryType(DictionaryTypeEnum.ADVERTISE_LINKKIND.getType());
+			isuseList = dictService.findDictionaryType(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+		
+	}
+	
+	
 	public ScAdvertise getAdvertise() {
 		return advertise;
 	}
@@ -100,6 +120,22 @@ public class AdvertiseAction extends PageAction{
 
 	public void setMap(Map<String, Object> map) {
 		this.map = map;
+	}
+
+	public List<ScDictionary> getDictionaryList() {
+		return dictionaryList;
+	}
+
+	public void setDictionaryList(List<ScDictionary> dictionaryList) {
+		this.dictionaryList = dictionaryList;
+	}
+
+	public List<ScDictionary> getIsuseList() {
+		return isuseList;
+	}
+
+	public void setIsuseList(List<ScDictionary> isuseList) {
+		this.isuseList = isuseList;
 	}
 	
 }

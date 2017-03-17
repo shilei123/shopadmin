@@ -29,41 +29,41 @@
 										<td><input name="queryParams.userName" class="am-form-field"/></td>
 										<td class="query_title" style="width:100px;">交易状态：</td>
 										<td>
-										<select id="tradeState" name="queryParams.tradeState" data-am-selected="{btnWidth: '164px'}">
-										</select>
+											<select id="tradeState" name="queryParams.tradeState" data-am-selected="{btnWidth: '164px'}">
+											</select>
 										</td>
-										<td class="query_title">有效期时间：</td>
+										<td class="query_title">交易时间：</td>
 					        			<td valign="top" colspan="2">
-					        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-										  <input type="text" name="queryParams.startRegTime" id="startRegTime" class="am-form-field" style="width: 122px">
-										  <span class="am-input-group-btn am-datepicker-add-on">
-										    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-										  </span>
-										</div>
-										~
-										<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-										  <input type="text" name="queryParams.endRegTime" id="endRegTime" class="am-form-field">
-										  <span class="am-input-group-btn am-datepicker-add-on">
-										    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-										  </span>
-										</div>
+						        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+											  <input type="text" name="queryParams.startRegTime" id="startRegTime" class="am-form-field" style="width: 122px">
+											  <span class="am-input-group-btn am-datepicker-add-on">
+											    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+											  </span>
+											</div>
+											~
+											<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+											  <input type="text" name="queryParams.endRegTime" id="endRegTime" class="am-form-field">
+											  <span class="am-input-group-btn am-datepicker-add-on">
+											    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+											  </span>
+											</div>
 					        			</td>
 									</tr>
 									<tr>
 										<td class="query_title" style="width:100px;">交易类型：</td>
 										<td>
-										<select id="tradeType" name="queryParams.tradeType" data-am-selected="{btnWidth: '164px'}">
-										</select>
+											<select id="tradeType" name="queryParams.tradeType" data-am-selected="{btnWidth: '164px'}">
+											</select>
 										</td>
 										<td class="query_title" style="width:50px;">钱包类型：</td>
 										<td>
-										<select id="purseType" name="queryParams.purseType" data-am-selected="{btnWidth: '164px'}">
-										</select>
+											<select id="purseType" name="queryParams.purseType" data-am-selected="{btnWidth: '164px'}">
+											</select>
 										</td>
 										<td class="query_title" style="width:100px;">操作类型：</td>
 										<td>
-										<select id="optionType" name="queryParams.optionType" data-am-selected="{btnWidth: '164px'}">
-										</select>
+											<select id="optionType" name="queryParams.optionType" data-am-selected="{btnWidth: '164px'}">
+											</select>
 										</td>
 										<td colspan="1" >
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
@@ -80,18 +80,17 @@
 							<thead>
 								<tr>
 									<th width="2%"  field="index"></th>
-									<th width="5%" field="userName">用户名</th>
+									<th width="5%"  field="userName">用户名</th>
 									<th width="6%"  field="tradeType">交易类型</th>
 									<th width="6%"  field="tradeAmount">交易金额</th>
 									<th width="9%"  field="tradeSn">交易流水号</th>
 									<th width="6%"  field="tradeState">交易状态</th>
 									<th width="6%"  field="optionType">操作类型</th>
-									<th width="6%" field="userAmount">可用金额</th>
-									<th width="7%" field="purseType">钱包类型</th>
-									<th width="9%" field="payAccount">支付账户</th>
+									<th width="6%"  field="userAmount">可用金额</th>
+									<th width="7%"  field="purseType">钱包类型</th>
+									<th width="9%"  field="payAccount">支付账户</th>
 									<th width="12%" field="payOpenBank">支付银行卡</th>
-									<th width="13%" field="createTime">有效期起</th>
-									<th width="13%" field="optionTime">有效期止</th>
+									<th width="13%" field="createTime">交易日期</th>
 								</tr>
 							</thead>
 						</table>

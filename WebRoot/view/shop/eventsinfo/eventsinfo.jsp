@@ -14,7 +14,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">活动管理</strong> / <small>活动的新增、修改、查看、删除</small>
+						<strong class="am-text-primary am-text-lg">活动管理</strong> / <small>活动的新增、编辑、查看、删除</small>
 					</div>
 				</div>
 				<hr>
@@ -38,12 +38,12 @@
 										</td>
 										<td class="query_title">活动结束时间：</td>
 										<td>
-										<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-										  <input type="text" name="queryParams.endRegTime" id="endRegTime" class="am-form-field">
-										  <span class="am-input-group-btn am-datepicker-add-on">
-										    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-										  </span>
-										</div>
+											<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+											  <input type="text" name="queryParams.endRegTime" id="endRegTime" class="am-form-field">
+											  <span class="am-input-group-btn am-datepicker-add-on">
+											    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+											  </span>
+											</div>
 					        			</td>
 					        			<td>
 											<button type="button" id="addBtn" class="am-btn am-btn-primary frame-search-button">新增</button>
@@ -60,7 +60,7 @@
 						<table class="am-table am-table-bordered am-table-striped am-table-hover" id="eventsinfoListTable">
 							<thead>
 								<tr>
-									<th width="2%" field="index"></th>
+									<th width="2%"  field="index"></th>
 									<th width="18%" field="name">活动名称</th>
 									<th width="10%" field="starttime">活动开始时间</th>
 									<th width="10%" field="endtime">活动结束时间</th>

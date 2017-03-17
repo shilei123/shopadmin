@@ -14,11 +14,21 @@ var queryEventsinfo = function() {
 var queryEventsinfoType = function() {
 	var isuse = $("#isuse");
 	isuse.empty();
-	var html = "<option value='-1'>请选择</option>";
-		html += "<option value='0'>启用</option>";
-		html += "<option value='1'>不启用</option>";
-		eventsinfoTypeHtml = html;
-		isuse.append(html);
+		$.ajax({
+			url :path_ + "/view/shop/eventsinfo/eventsinfo!queryEventsinfoType.action",
+			type : 'POST',
+			data : null,
+			dataType: "json",
+			success : function(data) {
+				var html = "<option value='-1'>-请选择-</option>";
+				$(data.dictionaryList).each(function(index) {
+					var eventsinfoType = data.dictionaryList[index];
+					html += "<option value='" + eventsinfoType.code + "'>" + eventsinfoType.name + "</option>";
+				});
+				eventsinfoTypeHtml = html;
+				isuse.append(html);
+			}
+		});
 };
 
 //绑定搜索按钮的分页

@@ -12,10 +12,20 @@ var queryUserBcuser = function() {
 var queryUserSex = function() {
 	var userSex = $("#userSex");
 	userSex.empty();
-	var html = "<option value='-1'>-请选择-</option>";
-		html += "<option value='0'>男</option>";
-		html += "<option value='1'>女</option>";
-		userSex.append(html);
+	$.ajax({
+		url :path_ + "/view/shop/userManagement/user!queryType.action",
+		type : 'POST',
+		data : null,
+		dataType: "json",
+		success : function(data) {
+			var html = "<option value='-1'>-请选择-</option>";
+			$(data.userSexList).each(function(index) {
+				var userSexType = data.userSexList[index];
+				html += "<option value='" + userSexType.code + "'>" + userSexType.name + "</option>";
+			});
+			userSex.append(html);
+		}
+	});
 };
 
 //绑定搜索按钮的分页
