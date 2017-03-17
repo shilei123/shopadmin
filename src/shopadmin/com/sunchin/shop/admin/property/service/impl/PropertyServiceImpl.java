@@ -2,6 +2,7 @@ package com.sunchin.shop.admin.property.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -29,7 +30,7 @@ public class PropertyServiceImpl implements PropertyService {
 	public PageBean queryPropertyList(PageBean pageBean) throws Exception {
 		int total = propertyDAO.queryPropertyCount(pageBean);
 		pageBean.setTotal(total);
-		List<ScProperty> pageData = propertyDAO.queryPropertyPagination(pageBean);
+		List<Map<String, Object>> pageData = propertyDAO.queryPropertyPagination(pageBean);
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}

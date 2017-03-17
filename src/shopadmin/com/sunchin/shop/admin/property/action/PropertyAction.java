@@ -3,6 +3,7 @@ package com.sunchin.shop.admin.property.action;
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
+import com.sunchin.shop.admin.pojo.ScCategory;
 import com.sunchin.shop.admin.pojo.ScProperty;
 import com.sunchin.shop.admin.property.service.PropertyService;
 
@@ -15,12 +16,28 @@ public class PropertyAction extends PageAction {
 	private PropertyService propertyService; 
 	
 	private ScProperty property;
+	private ScCategory category;
 	
 	/**
 	 * 查询
 	 * @return
 	 */
 	public String query() {
+		try {
+			PageBean resultData = propertyService.queryPropertyList(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 查询和类别有关联的属性
+	 * @return
+	 */
+	public String queryByCategoryId() {
 		try {
 			PageBean resultData = propertyService.queryPropertyList(this.getPageBean());
 			this.setTotal(resultData.getTotal());
@@ -89,6 +106,14 @@ public class PropertyAction extends PageAction {
 
 	public void setProperty(ScProperty property) {
 		this.property = property;
+	}
+
+	public ScCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(ScCategory category) {
+		this.category = category;
 	}
 
 }

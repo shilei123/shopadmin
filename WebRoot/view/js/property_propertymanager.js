@@ -12,6 +12,7 @@ var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
 	/*html += "<a href='javascript:void(0)' onclick='showEditBankWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span>查看</a>";*/
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditPropWin(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>修改</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showConfigModel(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>属性与属性值配置</a>";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteProp(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
 	html += "</div>";
 	return html;
@@ -56,7 +57,7 @@ $("#saveBtn").click(function() {
 	var propCode = $("#propCode").val();
 	var propOrder = $("#propOrder").val();
 	var url = "";
-	if(propId!=null /*&& propId!=undefine*/ && propId!=""){
+	if(propId!=null && propId!=undefined && propId!=""){
 		url = path_ + "/view/property/property!updateProperty.action"
 	}else{
 		url = path_ + "/view/property/property!addProperty.action"
@@ -141,3 +142,14 @@ var deleteProp = function(id) {
 		});
 	});
 };
+
+//属性属性值配置
+var showConfigModel = function(id) {
+	alert("待补充功能" + id);
+	/*var data = {"property.id" : id};
+	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/category/category_property.jsp.jsp?categoryId='+obj.categoryId);
+	showModal("doc-modal-1", 600, 450);*/
+}
+
+
+

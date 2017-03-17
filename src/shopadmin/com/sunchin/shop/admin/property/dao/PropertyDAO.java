@@ -28,11 +28,11 @@ public class PropertyDAO extends PageDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ScProperty> queryPropertyPagination(PageBean pageBean) {
+	public List<Map<String, Object>> queryPropertyPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
 		String sql = this.buildWhereSql(pageBean, params);
-		List<ScProperty> pageData = this.query(sql, params, DBUtil.getInstance(), pageBean);
+		List<Map<String, Object>> pageData = this.query(sql, params, DBUtil.getInstance(), pageBean);
 		return pageData;
 	}
 

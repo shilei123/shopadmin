@@ -152,16 +152,20 @@ $("#delCategoryBtn").click(function() {
 	});
 });
 
-/*$("#openCategoryParamsBtn").click(function() {
+$("#openCategoryParamsBtn").click(function() {
 	var node = $("#ul_category_tree").tree("getSelected");
 	if(node==null){
-		showAlert("请选择一个分类！");
+		showAlert("请选择一个类别！");
 		return;
 	}
-	var msg = getCategoryInfo(node);
-	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/goodsmanage/categoryParamCfg.jsp?categoryId='+msg.categoryId);
+	if(node.children!=null){
+		showAlert("请选择一个具体的商品！");
+		return;
+	}
+	var obj = getCategoryInfo(node);
+	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/category/category_property.jsp?categoryId='+obj.categoryId);
 	showModal("doc-modal-1", 600, 450);
-});*/
+});
 
 var closeParamsModal = function(id) {
 	$('#'+id).modal('close');
