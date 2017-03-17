@@ -148,7 +148,6 @@ request.setAttribute("categoryId", categoryId);
 			}
 		};
 		$("#checkPropIds").val(checkPropIdsNew);
-		
 	};
 	
 	var getColumnValueCurrentJsp = function(fieldValue) {
@@ -167,7 +166,6 @@ request.setAttribute("categoryId", categoryId);
 			data : params,
 			dataType: "json",
 			success : function(data) {
-				checkProp(data);
 				console.log(data);
 				$('#'+targetId+' tbody').empty();
 				var html = createTrCurrentJsp(data, targetId);

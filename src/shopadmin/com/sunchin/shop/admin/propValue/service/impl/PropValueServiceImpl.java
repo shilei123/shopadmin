@@ -36,7 +36,7 @@ public class PropValueServiceImpl implements PropValueService {
 	
 	@Override
 	public void delPropValue(String id) throws Exception {
-		List<ScPropValue> list = propValueDAO.getProp(id);
+		List<ScPropValue> list = propValueDAO.getPropValue(id);
 		if(list!=null && !list.isEmpty()){
 			String hql = " update ScPropValue set flag=? where id=? ";
 			db.executeHql(hql, SysDict.FLAG_HIS, id);
