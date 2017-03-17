@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScAttachments" table="SC_ATTACHMENTS">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="attachName" type="java.lang.String">
+            <column name="ATTACH_NAME" length="240"  />
+        </property>
+        <property name="kind" type="java.lang.String">
+            <column name="KIND" />
+        </property>
+        <property name="fileName" type="java.lang.String">
+            <column name="FILE_NAME" length="240"  />
+        </property>
+        <property name="attachType" type="java.lang.String">
+            <column name="ATTACH_TYPE" length="24" />
+        </property>
+        <property name="absPath" type="java.lang.String">
+            <column name="ABS_PATH" length="320" not-null="false" />
+        </property>
+        <property name="attachPath" type="java.lang.String">
+            <column name="ATTACH_PATH" length="320"  />
+        </property>
+        <property name="parentId" type="java.lang.String">
+            <column name="PARENT_ID" length="240"  />
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="240"  />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="CREATE_TIME" length="26"  />
+        </property>
+        <property name="attachSize" type="java.lang.Double">
+            <column name="ATTACH_SIZE"  />
+        </property>
+        <property name="belong" type="java.lang.String">
+            <column name="BELONG"  />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK"  />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" not-null="true">
+                <comment>默认1: 1启用，0停用</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
