@@ -1,7 +1,9 @@
 package com.sunchin.shop.admin.system.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -9,12 +11,12 @@ import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
-import com.sunchin.shop.admin.system.service.DictService;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.IsEditEnum;
 import com.sunchin.shop.admin.dict.IsUseEnum;
 import com.sunchin.shop.admin.pojo.ScDictionary;
 import com.sunchin.shop.admin.system.dao.ScDictionaryDAO;
+import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
@@ -34,7 +36,7 @@ public class DictServiceImpl implements DictService {
 	}
 
 	/**
-	 * 查询单条记录
+	 * 鏌ヨ鍗曟潯璁板綍
 	 */
 	public ScDictionary getDict(String id) {
 		Object obj = DBUtil.getInstance().get(ScDictionary.class, id);
@@ -45,14 +47,14 @@ public class DictServiceImpl implements DictService {
 	}
 	
 	/**
-	 * 保存
+	 * 淇濆瓨
 	 */
 	public void saveDict(ScDictionary dict) {
 		if (dict == null) {
 			return;
 		}
 		DBUtil db = DBUtil.getInstance();
-		// 新增
+		// 鏂板
 		if (StringUtils.isBlank(dict.getId())) {
 			String id = UUID.randomUUID().toString();
 			dict.setId(id);
@@ -61,7 +63,7 @@ public class DictServiceImpl implements DictService {
 			dict.setIsuse(IsUseEnum.VALID.getCode());
 			dict.setIsedit(IsEditEnum.EDIT.getCode());
 			db.insert(dict);
-		} else { // 修改
+		} else { // 淇敼
 			ScDictionary vo = (ScDictionary) db.get(ScDictionary.class, dict.getId());
 			vo.setType(dict.getType());
 			vo.setCode(dict.getCode());
@@ -87,8 +89,11 @@ public class DictServiceImpl implements DictService {
 
 	@Override
 	public List<ScDictionary> getDictByType(String type) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		DBUtil db = DBUtil.getInstance();
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("flag", FlagEnum.ACT.getCode());
+		params.put("type", type);
+		return db.queryByPojo(ScDictionary.class, params);
 	}
 
 }
