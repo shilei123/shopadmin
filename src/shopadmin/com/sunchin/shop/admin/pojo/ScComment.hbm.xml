@@ -9,20 +9,20 @@
         </id>
         <property name="type" type="java.lang.String">
             <column name="TYPE" length="1">
-                <comment>类型</comment>
+                <comment>评论或者追评</comment>
             </column>
         </property>
-        <property name="comments" type="java.lang.String">
-            <column name="COMMENTS" length="500">
+        <property name="content" type="java.lang.String">
+            <column name="CONTENT" length="500">
                 <comment>评论内容</comment>
             </column>
         </property>
-        <property name="createTime" type="java.util.Date">
-            <column name="CREATE_TIME" length="7">
+        <property name="contentTime" type="java.util.Date">
+            <column name="CONTENT_TIME" length="7">
                 <comment>评论时间</comment>
             </column>
         </property>
-        <property name="score" type="java.lang.Byte">
+        <property name="score" type="java.lang.Double">
             <column name="SCORE" precision="2" scale="0">
                 <comment>评分</comment>
             </column>
@@ -32,9 +32,14 @@
                 <comment>1匿名 0不匿名 默认不匿名</comment>
             </column>
         </property>
-        <property name="orderid" type="java.lang.String">
-            <column name="ORDERID" length="36">
-                <comment>订单id</comment>
+        <property name="parentId" type="java.lang.String">
+            <column name="PARENT_ID" length="36">
+                <comment>父评论id</comment>
+            </column>
+        </property>
+        <property name="contentPeople" type="java.lang.String">
+            <column name="CONTENT_PEOPLE" length="36">
+                <comment>评论人id</comment>
             </column>
         </property>
     </class>

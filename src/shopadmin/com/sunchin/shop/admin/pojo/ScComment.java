@@ -10,11 +10,12 @@ public class ScComment implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String type;
-	private String comments;
-	private Date createTime;
-	private Byte score;
+	private String content;
+	private Date contentTime;
+	private Double score;
 	private String ishidden;
-	private String orderid;
+	private String parentId;
+	private String contentPeople;
 
 	public String getId() {
 		return this.id;
@@ -32,27 +33,27 @@ public class ScComment implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public String getComments() {
-		return this.comments;
+	public String getContent() {
+		return this.content;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public Date getCreateTime() {
-		return this.createTime;
+	public Date getContentTime() {
+		return this.contentTime;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setContentTime(Date contentTime) {
+		this.contentTime = contentTime;
 	}
 
-	public Byte getScore() {
+	public Double getScore() {
 		return this.score;
 	}
 
-	public void setScore(Byte score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
 
@@ -64,12 +65,20 @@ public class ScComment implements java.io.Serializable {
 		this.ishidden = ishidden;
 	}
 
-	public String getOrderid() {
-		return this.orderid;
+	public String getParentId() {
+		return this.parentId;
 	}
 
-	public void setOrderid(String orderid) {
-		this.orderid = orderid;
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getContentPeople() {
+		return this.contentPeople;
+	}
+
+	public void setContentPeople(String contentPeople) {
+		this.contentPeople = contentPeople;
 	}
 
 }
