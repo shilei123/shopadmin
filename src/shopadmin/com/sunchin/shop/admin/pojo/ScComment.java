@@ -16,6 +16,7 @@ public class ScComment implements java.io.Serializable {
 	private String ishidden;
 	private String parentId;
 	private String contentPeople;
+	private String flag;
 
 	public String getId() {
 		return this.id;
@@ -79,6 +80,14 @@ public class ScComment implements java.io.Serializable {
 
 	public void setContentPeople(String contentPeople) {
 		this.contentPeople = contentPeople;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 }

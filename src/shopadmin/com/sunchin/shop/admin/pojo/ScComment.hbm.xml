@@ -42,5 +42,10 @@
                 <comment>评论人id</comment>
             </column>
         </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1">
+                <comment>数据有效性</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

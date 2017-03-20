@@ -56,7 +56,7 @@ function pageData(url, targetId, params, currPageNum, rowCount, page) {
 		data : params,
 		dataType: "json",
 		success : function(data) {
-			//console.log(data);
+			console.log(data);
 			$('#'+targetId+' tbody').empty();
 			var html = createTr(data, targetId);
 			$("#"+targetId).append(html);
