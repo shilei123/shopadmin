@@ -82,6 +82,15 @@ body table {
 	width: 100px;
 }
 
+.table_error_info {
+	width: 200px;
+}
+.table_error_info>div {
+	text-align: left;
+	color: red;
+	margin-left: 5px;
+}
+
 .table_content>input {
 	width: 90%;
 }

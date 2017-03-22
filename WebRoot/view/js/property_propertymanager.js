@@ -8,6 +8,7 @@ var query = function() {
 	pageData(url, "propertyListTable", data);
 };
 
+<<<<<<< HEAD
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditPropWin(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>修改</a>";
@@ -318,3 +319,5 @@ $("#saveBtn1").click(function() {
 $("#closeBtn1").click(function() {
 	closeModal("doc-modal-1");
 });
+=======
+>>>>>>> refs/remotes/origin/yangchaowen

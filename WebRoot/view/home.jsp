@@ -282,7 +282,7 @@
   	
   	//初始化菜单
   	var menuInit = function() {
-		$.ajax({type: "POST",url: "${path }/view/menuTree.action",dataType: "json",error:function(){alert("加载菜单异常");},
+		$.ajax({type: "POST",url: "${path }/view/menuTree.action",dataType: "json",error:function(){/* alert("加载菜单异常"); */},
 			success: function(json){
 				var root = json.trees[0];
 		  		var html = buildMenus(root.children, false);
@@ -338,13 +338,26 @@
 		});
 	};
     
+    var showMsg_ = function(msg) {
+    	layer.alert(msg,{icon: 1,shade: 0.1});
+    };
+    
     var showAlert_ = function(msg) {
-    	$("#alertMsg").text(msg);
-    	$('#my-alert').modal("open");
+    	layer.alert(msg,{icon: 7,shade: 0.1});
+    	/* $("#alertMsg").text(msg);
+    	$('#my-alert').modal("open"); */
     };
     
     var showConfirm_ = function(msg,callbackfun) {
-    	$("#confirmMsg").text(msg);
+    	//询问框
+    	layer.confirm(msg, {
+    		icon: 2,btn: ['确认','取消'] //按钮
+    	}, function(){
+    		callbackfun();
+    	}, function(){
+    	 
+    	});
+    	/* $("#confirmMsg").text(msg);
     	var $confirm = $('#my-confirm');
         var confirm = $confirm.data('amui.modal');
         if (confirm) {
@@ -357,7 +370,7 @@
     			onConfirm: callbackfun,
     			onCancel: function() {}
     		});
-        } 
+        }  */
     };
 </script>
 </body>

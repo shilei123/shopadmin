@@ -42,16 +42,19 @@ public class ScImagesDAO extends PageDAO {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(SELECT_SQL);
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
-			String bankName = pageBean.getQueryParams().get("bankName");
-			if (StringUtils.isNotBlank(bankName)){
-				params.add("%"+bankName+"%");
-				sql.append(" and t.bank_name like ? ");
+<<<<<<< HEAD
+=======
+			String imgName = pageBean.getQueryParams().get("imgName");
+			if (StringUtils.isNotBlank(imgName)){
+				params.add("%"+imgName+"%");
+				sql.append(" and t.img_name like ? ");
 			}
-			String bankDesc = pageBean.getQueryParams().get("bankDesc");
+			/*String bankDesc = pageBean.getQueryParams().get("bankDesc");
 			if (StringUtils.isNotBlank(bankDesc)){
 				params.add("%"+bankDesc+"%");
 				sql.append(" and t.bank_desc like ? ");
-			}
+			}*/
+>>>>>>> refs/remotes/origin/yangchaowen
 		}
 		sql.append(" order by t.create_time desc ");
 		return sql.toString();

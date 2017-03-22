@@ -49,15 +49,18 @@ public class ScAttachmentsDAO extends PageDAO {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(SELECT_SQL);
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
-			String bankName = pageBean.getQueryParams().get("bankName");
-			if (StringUtils.isNotBlank(bankName)){
-				params.add("%"+bankName+"%");
-				sql.append(" and t.bank_name like ? ");
+<<<<<<< HEAD
+=======
+			String attachName = pageBean.getQueryParams().get("attachName");
+			if (StringUtils.isNotBlank(attachName)){
+				params.add("%"+attachName+"%");
+				sql.append(" and t.attach_name like ? ");
 			}
-			String bankDesc = pageBean.getQueryParams().get("bankDesc");
-			if (StringUtils.isNotBlank(bankDesc)){
-				params.add("%"+bankDesc+"%");
-				sql.append(" and t.bank_desc like ? ");
+			String remark = pageBean.getQueryParams().get("remark");
+			if (StringUtils.isNotBlank(remark)){
+				params.add("%"+remark+"%");
+				sql.append(" and t.remark like ? ");
+>>>>>>> refs/remotes/origin/yangchaowen
 			}
 		}
 		sql.append(" order by t.create_time desc ");

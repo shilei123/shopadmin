@@ -26,11 +26,13 @@
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
 										<td style="width:100px;">图片名称：</td>
-										<td style="width:200px;"><input name="queryParams.bankName" class="am-form-field"/></td>
+<<<<<<< HEAD
+=======
+										<td style="width:200px;"><input name="queryParams.imgName" id="imgName" class="am-form-field"/></td>
 										<td style="width:100px;">&nbsp;图片描述：</td>
-										<td style="width:200px;"><input name="queryParams.bankDesc" class="am-form-field"/></td>
+										<td style="width:200px;"><input name="queryParams.remark" id="remark" class="am-form-field"/></td>
 										<td>
-											&nbsp;<button type="button" id="openBankBtn" class="am-btn am-btn-primary frame-search-button">图片上传</button>
+											&nbsp;<button type="button" id="openImageUploadBtn" class="am-btn am-btn-primary frame-search-button">图片上传</button>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>
 									</tr>
@@ -80,23 +82,28 @@
 	<img id="full-img" alt="" src="" width="100%" height="100%" style="display: none;">
 	
 	<!-- 图片上传组件引用 -->
-	<jsp:include page="/view/shop/system/imageUpload.jsp">
+	<%-- <jsp:include page="/view/shop/system/imageUpload.jsp">
 		<jsp:param value="false" name="showSelectTab"/>
-	</jsp:include>
+	</jsp:include> --%>
 </body>
 <script type="text/javascript">
 //打开图片上传窗口
-$("#openBankBtn").click(function() {
-	showImgUploadModal();
+$("#openImageUploadBtn").click(function() {
+	//打开图片上传的窗口
+	showImgUploadModal({showSelectTab:true});
 });
 
-//选择图片
+//选择图片的回调函数
 var selectImg = function(imgId, imgSrc) {
 	console.log("点击了自定义的："+imgId+","+imgSrc);
+	$('#imgName').val(imgId);
+	$('#remark').val(imgSrc);
 };
 
-//调用扩展
-var queryExtend = function() {
+//上传按钮调用完成之后回调函数
+var uploadAfter = function() {
+	console.log("调用扩展");
+>>>>>>> refs/remotes/origin/yangchaowen
 	query();
 };
 

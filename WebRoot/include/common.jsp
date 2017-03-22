@@ -28,6 +28,7 @@ var attachServer_ = "${attachServer}";
 <script type="text/javascript" src="${path }/js/jquery-1.8.0.min.js"></script>
 <!-- laypage -->
 <script type="text/javascript" src="${path }/js/laypage-v1.3/laypage/laypage.js"></script>
+<script type="text/javascript" src="${path }/js/layer-v3.0.3/layer/layer.js"></script>
 <!-- easyui1.4 -->
 <link rel="stylesheet" type="text/css" href="${path }/js/jquery-easyui-1.4/themes/gray/easyui.css">
 <link rel="stylesheet" type="text/css" href="${path }/js/jquery-easyui-1.4/themes/icon.css">

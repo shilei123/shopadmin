@@ -59,7 +59,10 @@ public class PropValueDAO extends PageDAO{
 	 *	获得属性值信息
 	 */
 	@SuppressWarnings("unchecked")
+<<<<<<< HEAD
 	public List<ScPropValue> getPropValue(String id) {
+=======
+>>>>>>> refs/remotes/origin/yangchaowen
 		Map<String, Object> params = new HashMap<String, Object>(1);
 		params.put("flag", FlagEnum.ACT.getCode());
 		return DBUtil.getInstance().queryByPojo(ScPropValue.class,params);

@@ -2,6 +2,7 @@ package com.sunchin.shop.admin.property.service.impl;
 
 import java.util.Date;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Map;
 import java.util.UUID;
 
@@ -31,6 +32,8 @@ public class PropertyServiceImpl implements PropertyService {
 		int total = propertyDAO.queryPropertyCount(pageBean);
 		pageBean.setTotal(total);
 		List<Map<String, Object>> pageData = propertyDAO.queryPropertyPagination(pageBean);
+=======
+>>>>>>> refs/remotes/origin/yangchaowen
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}
