@@ -88,10 +88,7 @@ public class PropertyAction extends PageAction {
 	}
 
 	public void setProperty(ScProperty property) {
-<<<<<<< HEAD
 		this.property = property;
-=======
->>>>>>> refs/remotes/origin/yangchaowen
 	}
 
 }

@@ -49,8 +49,6 @@ public class ScAttachmentsDAO extends PageDAO {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(SELECT_SQL);
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
-<<<<<<< HEAD
-=======
 			String attachName = pageBean.getQueryParams().get("attachName");
 			if (StringUtils.isNotBlank(attachName)){
 				params.add("%"+attachName+"%");
@@ -60,7 +58,6 @@ public class ScAttachmentsDAO extends PageDAO {
 			if (StringUtils.isNotBlank(remark)){
 				params.add("%"+remark+"%");
 				sql.append(" and t.remark like ? ");
->>>>>>> refs/remotes/origin/yangchaowen
 			}
 		}
 		sql.append(" order by t.create_time desc ");
