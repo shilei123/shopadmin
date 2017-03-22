@@ -107,7 +107,7 @@
 			  				</td>
 			  			</tr>
 			  			<tr>
-			        		<td>活动开始时间：</td>
+			        		<td>广告开始时间：</td>
 					   		<td valign="top">
 							    <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
 								   <input type="text" name="advertise.startTime" id="starttime" class="am-form-field" style="width: 120px">
@@ -116,7 +116,7 @@
 								</span>
 								</div>
 							</td>
-							<td>活动结束时间：</td>
+							<td>广告结束时间：</td>
 							<td>
 								<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
 							       <input type="text" name="advertise.endTime" id="endtime" class="am-form-field" style="width: 120px">

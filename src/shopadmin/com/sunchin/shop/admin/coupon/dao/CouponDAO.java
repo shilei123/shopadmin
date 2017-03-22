@@ -54,7 +54,7 @@ public class CouponDAO extends PageDAO{
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String couponName = pageBean.getQueryParams().get("couponName");
 			if (StringUtils.isNotBlank(couponName)){
-				params.add("%"+couponName+"%");
+				params.add(couponName+"%");
 				sql.append(" and t1.coupon_name like ? ");
 			}
 			String expiryDate = pageBean.getQueryParams().get("expiryDate");

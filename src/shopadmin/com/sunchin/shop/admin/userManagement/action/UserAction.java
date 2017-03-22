@@ -93,6 +93,21 @@ public class UserAction extends PageAction{
 		return Action.SUCCESS;
 	}
 	
+	/**
+	 * 查询会员钱包余额
+	 */
+	public String queryUserWallet(){
+		try {
+			PageBean resultData = userService.queryUserWalletList(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return Action.SUCCESS;
+	}
 	
 	/**
 	 * 自动认证

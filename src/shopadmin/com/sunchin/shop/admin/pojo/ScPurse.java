@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 /**
- * ScCoupon entity. @author MyEclipse Persistence Tools
+ * ScPurse entity. @author MyEclipse Persistence Tools
  */
 
 public class ScPurse  implements java.io.Serializable {
@@ -27,6 +27,7 @@ public class ScPurse  implements java.io.Serializable {
      private String optionAdminid;
      private String optionAdminname;
      private String optionRemark;
+     private String belong;
      
 
     public ScPurse() {
@@ -202,4 +203,15 @@ public class ScPurse  implements java.io.Serializable {
 		this.optionRemark = optionRemark;
 	}
 
+
+	public String getBelong() {
+		return belong;
+	}
+
+
+	public void setBelong(String belong) {
+		this.belong = belong;
+	}
+
+	
 }

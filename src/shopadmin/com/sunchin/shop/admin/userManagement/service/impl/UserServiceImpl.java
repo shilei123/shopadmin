@@ -14,6 +14,7 @@ import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScIdentity;
 import com.sunchin.shop.admin.pojo.ScPurse;
 import com.sunchin.shop.admin.pojo.ScUser;
+import com.sunchin.shop.admin.pojo.ScWallet;
 import com.sunchin.shop.admin.userManagement.dao.UserDAO;
 import com.sunchin.shop.admin.userManagement.service.IUserService;
 
@@ -88,6 +89,18 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	/**
+	 * 查询会员钱包余额
+	 */
+	@Override
+	public PageBean queryUserWalletList(PageBean pageBean) throws Exception {
+		int total = userDAO.queryUserWalletCount(pageBean);
+		pageBean.setTotal(total);
+		List<ScWallet> pageData = userDAO.queryUserWalletPagination(pageBean);
+		pageBean.setPageData(pageData);
+		return pageBean;
+	}
+	
+	/**
 	 * 认证成功
 	 */
 	@Override
@@ -124,4 +137,5 @@ public class UserServiceImpl implements IUserService{
 		 vo.setFailureReason(identity.getFailureReason());
 		 DBUtil.getInstance().update(vo);
 	}
+	
 }

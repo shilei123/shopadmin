@@ -22,4 +22,6 @@ public interface IUserService {
 
 	void saveFailurereason(ScIdentity identity) throws Exception;
 
+	PageBean queryUserWalletList(PageBean pageBean) throws Exception;;
+
 }

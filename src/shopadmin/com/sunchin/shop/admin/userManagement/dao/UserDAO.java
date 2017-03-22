@@ -16,6 +16,7 @@ import com.sunchin.shop.admin.pojo.ScBcuser;
 import com.sunchin.shop.admin.pojo.ScIdentity;
 import com.sunchin.shop.admin.pojo.ScPurse;
 import com.sunchin.shop.admin.pojo.ScUser;
+import com.sunchin.shop.admin.pojo.ScWallet;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
@@ -41,14 +42,15 @@ public class UserDAO extends PageDAO{
 	
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
-		StringBuffer sql = new StringBuffer("   select t1.id,t1.user_id,t1.user_name,t1.true_name,t1.user_phone,t1.user_mail,t2.name user_sex from sc_bcuser t1 ");
+		StringBuffer sql = new StringBuffer("   select t1.id,t1.user_id,t3.user_name,t1.true_name,t1.user_phone,t1.user_mail,t2.name user_sex from sc_bcuser t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.user_sex ");
+		sql.append(" left join sc_user t3 on t3.id=t1.user_id");
 		sql.append(" where t2.type=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String userName = pageBean.getQueryParams().get("userName");
 			if (StringUtils.isNotBlank(userName)){
-				params.add("%"+userName+"%");
-				sql.append(" and t1.user_name like ? ");
+				params.add(userName+"%");
+				sql.append(" and t3.user_name like ? ");
 			}
 			String trueName = pageBean.getQueryParams().get("trueName");
 			if (StringUtils.isNotBlank(trueName)){
@@ -97,12 +99,12 @@ public class UserDAO extends PageDAO{
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String userName = pageBean.getQueryParams().get("userName");
 			if (StringUtils.isNotBlank(userName)){
-				params.add("%"+userName+"%");
+				params.add(userName+"%");
 				sql.append(" and t1.user_name like ? ");
 			}
 			String nickName = pageBean.getQueryParams().get("nickName");
 			if (StringUtils.isNotBlank(nickName)){
-				params.add("%"+nickName+"%");
+				params.add(nickName+"%");
 				sql.append(" and t1.nick_name like ? ");
 			}
 			String userStatus = pageBean.getQueryParams().get("userStatus");
@@ -170,7 +172,7 @@ public class UserDAO extends PageDAO{
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String userName = pageBean.getQueryParams().get("userName");
 			if (StringUtils.isNotBlank(userName)){
-				params.add("%"+userName+"%");
+				params.add(userName+"%");
 				sql.append(" and t2.user_name like ? ");
 			}
 			String tradeState = pageBean.getQueryParams().get("tradeState");
@@ -224,20 +226,21 @@ public class UserDAO extends PageDAO{
 	
 	private String userIdentityWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
-		StringBuffer sql = new StringBuffer(" select t1.id,t1.user_name,t1.identity_card,t2.name identity_status,t1.identity_frontal,t1.identity_back,t1.identity_hold_frontal, ");
+		StringBuffer sql = new StringBuffer(" select t1.id,t3.user_name,t1.identity_card,t2.name identity_status,t1.identity_frontal,t1.identity_back,t1.identity_hold_frontal, ");
 		sql.append(" to_char(t1.application_time,'yyyy-MM-dd hh24:mi:ss') application_time,t1.applicant,t1.failure_reason ");
 		sql.append(" from sc_identity t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.identity_status ");
+		sql.append(" left join sc_user t3 on t3.id=t1.user_id");
 		sql.append(" where t2.type=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String userName = pageBean.getQueryParams().get("userName");
 			if (StringUtils.isNotBlank(userName)){
-				params.add("%"+userName+"%");
-				sql.append(" and t1.user_name like ? ");
+				params.add(userName+"%");
+				sql.append(" and t3.user_name like ? ");
 			}
 			String identityCard = pageBean.getQueryParams().get("identityCard");
 			if (StringUtils.isNotBlank(identityCard)){
-				params.add("%"+identityCard+"%");
+				params.add(identityCard+"%");
 				sql.append(" and t1.identity_card like ? ");
 			}
 			String identityStatus = pageBean.getQueryParams().get("identityStatus");
@@ -259,6 +262,48 @@ public class UserDAO extends PageDAO{
 		return sql.toString();
 	}
 
+	public int queryUserWalletCount(PageBean pageBean) {
+		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.PURSE_TYPE.getType());
+		params.add(DictionaryTypeEnum.UNIT.getType());
+		String sql = this.userWalletWhereSql(pageBean, params);
+		return DBUtil.getInstance().queryCountBySQL(sql, params);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ScWallet> queryUserWalletPagination(PageBean pageBean) {
+		List<String> params = new ArrayList<String>();
+		params.add(DictionaryTypeEnum.PURSE_TYPE.getType());
+		params.add(DictionaryTypeEnum.UNIT.getType());
+		String sql = this.userWalletWhereSql(pageBean, params);
+		return this.query(sql, params, DBUtil.getInstance(), pageBean);
+	}
+	
+	private String userWalletWhereSql(PageBean pageBean, List<String> params) {
+		// 拼接查询条件
+		StringBuffer sql = new StringBuffer(" select  t1.id,t2.name purse_type,t4.user_name,t1.remark,t1.user_money,t3.name unit ");
+		sql.append(" from sc_wallet t1 ");
+		sql.append(" left join sc_dictionary t2 on t2.code=t1.purse_type ");
+		sql.append(" left join sc_dictionary t3 on t3.code=t1.unit ");
+		sql.append(" left join sc_user t4 on t4.id=t1.user_id ");
+		sql.append(" where t2.type=? ");
+		sql.append(" and t3.type=? ");
+		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
+			String userName = pageBean.getQueryParams().get("userName");
+			if (StringUtils.isNotBlank(userName)){
+				params.add(userName+"%");
+				sql.append(" and t4.user_name like ? ");
+			}
+			String purseType = pageBean.getQueryParams().get("purseType");
+			if (StringUtils.isNotBlank(purseType) && !"-1".equals(purseType)){
+				params.add(purseType);
+				sql.append(" and t1.purse_type=? ");
+			}
+		}
+		return sql.toString();
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public ScUser queryUserById(String id) {
 		Map<String, Object> params = new HashMap<String,Object>();
@@ -269,4 +314,6 @@ public class UserDAO extends PageDAO{
 		}
 		return null;
 	}
+
+	
 }

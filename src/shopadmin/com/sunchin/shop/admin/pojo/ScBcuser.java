@@ -5,14 +5,13 @@ import java.util.Date;
 
 
 /**
- * ScCoupon entity. @author MyEclipse Persistence Tools
+ * ScBcuser entity. @author MyEclipse Persistence Tools
  */
 
 public class ScBcuser  implements java.io.Serializable {
 
      private String id;
      private String userId;
-     private String userName;
      private String trueName;
      private String userPhone;
      private String userMail;
@@ -40,16 +39,6 @@ public class ScBcuser  implements java.io.Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-
-	public String getUserName() {
-		return userName;
-	}
-
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 

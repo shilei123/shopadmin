@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 /**
- * ScCoupon entity. @author MyEclipse Persistence Tools
+ * ScAdvertise entity. @author MyEclipse Persistence Tools
  */
 
 public class ScAdvertise  implements java.io.Serializable {
@@ -24,6 +24,7 @@ public class ScAdvertise  implements java.io.Serializable {
      private Date createTime;
      private Date updateTime;
      private String flag;
+     private String belong;
 
     public ScAdvertise() {
     }
@@ -139,5 +140,15 @@ public class ScAdvertise  implements java.io.Serializable {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public String getBelong() {
+		return belong;
+	}
+
+	public void setBelong(String belong) {
+		this.belong = belong;
+	}
+	
+	
 	
 }

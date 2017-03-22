@@ -5,14 +5,13 @@ import java.util.Date;
 
 
 /**
- * ScCoupon entity. @author MyEclipse Persistence Tools
+ * ScIdentity entity. @author MyEclipse Persistence Tools
  */
 
 public class ScIdentity  implements java.io.Serializable {
 
      private String id;
      private String userId;
-     private String userName;
      private String identityCard;
      private Date identityCardValidity;
      private String identityIssuing;
@@ -25,6 +24,7 @@ public class ScIdentity  implements java.io.Serializable {
      private Date authenticationTime;
      private String authenticator;
      private String failureReason;
+     private String belong;
 
     public ScIdentity() {
     }
@@ -43,14 +43,6 @@ public class ScIdentity  implements java.io.Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getIdentityCard() {
@@ -148,5 +140,15 @@ public class ScIdentity  implements java.io.Serializable {
 	public void setFailureReason(String failureReason) {
 		this.failureReason = failureReason;
 	}
+
+	public String getBelong() {
+		return belong;
+	}
+
+	public void setBelong(String belong) {
+		this.belong = belong;
+	}
+
+	
 
 }

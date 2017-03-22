@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 /**
- * ScCoupon entity. @author MyEclipse Persistence Tools
+ * ScEventsinfo entity. @author MyEclipse Persistence Tools
  */
 
 public class ScEventsinfo  implements java.io.Serializable {
@@ -15,9 +15,10 @@ public class ScEventsinfo  implements java.io.Serializable {
      private String memo;
      private Date starttime;
      private Date endtime;
-     private Date createtime;
-     private Date updatetime;
+     private Date createTime;
+     private Date updateTime;
      private String flag;
+     private String belong;
 
     public ScEventsinfo() {
     }
@@ -70,20 +71,20 @@ public class ScEventsinfo  implements java.io.Serializable {
 		this.endtime = endtime;
 	}
 
-	public Date getCreatetime() {
-		return createtime;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
-	public Date getUpdatetime() {
-		return updatetime;
+	public Date getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setUpdatetime(Date updatetime) {
-		this.updatetime = updatetime;
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public String getFlag() {
@@ -93,5 +94,15 @@ public class ScEventsinfo  implements java.io.Serializable {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public String getBelong() {
+		return belong;
+	}
+
+	public void setBelong(String belong) {
+		this.belong = belong;
+	}
+	
+	
 
 }

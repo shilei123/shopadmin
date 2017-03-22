@@ -24,7 +24,9 @@ public enum DictionaryTypeEnum {
 	
 	COUPON_STATUSS("COUPON_STATUSS"),//优惠券是否有效
 	
-	IDENTITY_STATUS("IDENTITY_STATUS");//身份证状态
+	IDENTITY_STATUS("IDENTITY_STATUS"),//身份证状态
+	
+	UNIT("UNIT"); //单位
 	
 	
 	

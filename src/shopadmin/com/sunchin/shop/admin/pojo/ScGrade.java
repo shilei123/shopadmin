@@ -5,14 +5,14 @@ import java.util.Date;
 
 
 /**
- * ScCoupon entity. @author MyEclipse Persistence Tools
+ * ScGrade entity. @author MyEclipse Persistence Tools
  */
 
 public class ScGrade  implements java.io.Serializable {
 
      private String id;
      private String userName;
-
+     private String belong;
 
     public ScGrade() {
     }
@@ -38,5 +38,16 @@ public class ScGrade  implements java.io.Serializable {
 	}
 
 
+	public String getBelong() {
+		return belong;
+	}
+
+
+	public void setBelong(String belong) {
+		this.belong = belong;
+	}
+
+	
+	
 
 }

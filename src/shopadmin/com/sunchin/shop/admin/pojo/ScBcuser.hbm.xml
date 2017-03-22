@@ -13,11 +13,6 @@
                 <comment>会员id</comment>
             </column>
         </property>
-        <property name="userName" type="java.lang.String">
-             <column name="USER_NAME" length="50">
-                <comment>用户名</comment>
-            </column>
-        </property>
         <property name="trueName" type="java.lang.String">
             <column name="TRUE_NAME" length="50">
                 <comment>会员姓名</comment>

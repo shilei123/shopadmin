@@ -87,7 +87,7 @@ public class EventsinfoServiceImpl implements IEventsinfoService{
 		if (StringUtils.isBlank(eventsinfo.getId())) {
 			String id = UUID.randomUUID().toString();
 			eventsinfo.setId(id);
-			eventsinfo.setCreatetime(new Date());
+			eventsinfo.setCreateTime(new Date());
 			eventsinfo.setFlag(FlagEnum.ACT.getCode());
 			db.insert(eventsinfo);
 			//添加商品待写
@@ -98,7 +98,7 @@ public class EventsinfoServiceImpl implements IEventsinfoService{
 			vo.setMemo(eventsinfo.getMemo());
 			vo.setStarttime(eventsinfo.getStarttime());
 			vo.setEndtime(eventsinfo.getEndtime());
-			vo.setUpdatetime(new Date());
+			vo.setUpdateTime(new Date());
 			db.update(vo);
 		}
 		

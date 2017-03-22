@@ -54,7 +54,7 @@ public class AdvertiseDAO extends PageDAO{
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String name = pageBean.getQueryParams().get("name");
 			if (StringUtils.isNotBlank(name)){
-				params.add("%"+name+"%");
+				params.add(name+"%");
 				sql.append(" and t1.name like ? ");
 			}
 			String linkkind = pageBean.getQueryParams().get("linkkind");

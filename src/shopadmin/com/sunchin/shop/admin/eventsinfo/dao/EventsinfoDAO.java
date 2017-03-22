@@ -38,7 +38,7 @@ public class EventsinfoDAO extends PageDAO{
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t2.name isuse, ");
-		sql.append(" to_char(t1.starttime,'yyyy-mm-dd') starttime,to_char(t1.endtime,'yyyy-mm-dd') endtime,t1.createtime ");
+		sql.append(" to_char(t1.starttime,'yyyy-mm-dd') starttime,to_char(t1.endtime,'yyyy-mm-dd') endtime,t1.create_time ");
 		sql.append(" from sc_eventsinfo t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.isuse ");
 		sql.append(" where t1.flag=? ");
@@ -46,7 +46,7 @@ public class EventsinfoDAO extends PageDAO{
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String name = pageBean.getQueryParams().get("name");
 			if (StringUtils.isNotBlank(name)){
-				params.add("%"+name+"%");
+				params.add(name+"%");
 				sql.append(" and t1.name like ? ");
 			}
 			String startTime = pageBean.getQueryParams().get("startRegTime");
@@ -60,7 +60,7 @@ public class EventsinfoDAO extends PageDAO{
 				sql.append(" and t1.endtime <= to_date(?,'yyyy-MM-dd hh24:mi:ss')");
 			}
 		}
-		sql.append(" order by t1.createtime desc ");
+		sql.append(" order by t1.create_time desc ");
 		return sql.toString();
 	}
 	
