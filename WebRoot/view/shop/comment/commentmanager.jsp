@@ -44,13 +44,15 @@
 				</div>
 				<hr>
 				<div class="am-g">
-					<div class="am-u-sm-12">   
+					<div class="am-u-sm-12">
 						<div class="am-panel am-panel-primary">
 							<div class="am-panel-bd am-collapse am-in frame-search-panel"id="collapse-panel-1">
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
 										<td style="width:100px;">评论类型：</td>
-										<td style="width:200px;"><input name="queryParams.type" class="am-form-field"/></td>
+										<td style="width:200px;">
+											<select name="queryParams.type" id="commentType" style="height:32px; width:157px;"></select>
+										</td>
 										<td style="width:100px;">评论内容：</td>
 										<td style="width:200px;"><input name="queryParams.content" class="am-form-field"/></td>
 										<td style="width:100px;">评论时间：</td>
@@ -71,11 +73,11 @@
 					        		</td>
 									</tr>
 										<td style="width:100px;">评论人：</td>
-										<td style="width:200px;"><input name="queryParams.commentPeople" class="am-form-field"/></td>
-										<td style="width:100px;">用户评分>：</td>
+										<td style="width:200px;"><input name="queryParams.commentPeople" class="am-form-field" placeholder="暂未关联用户信息"/></td>
+										<td style="width:100px;">用户评分：</td>
 										<td style="width:200px;">
 											<div>
-												<input name="queryParams.score" class="am-form-field"/>
+												<input name="queryParams.score" class="am-form-field" placeholder="用户评分大于等于"/>
 											</div>
 										</td>
 										<td>
@@ -93,8 +95,9 @@
 								<tr>
 									<th width="2%" field="index"></th>
 									<th width="10%" field="type">评论类型</th>
-									<th width="48%" field="content">评论内容</th>
+									<th width="30%" field="content">评论内容（20字）</th>
 									<th width="10%" field="score">评分</th>
+									<th width="15%" field="createTime">评论时间</th>
 									<th width="10%" field="contentPeople">评论人</th>
 									<th width="20%" formatter="formatterAction">操作</th>
 								</tr>
@@ -116,37 +119,34 @@
 	    	</div>
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
-	    		
-	    		<!-- <form class="am-form" id="ue-form"> -->
 		        <div align="center">
-		        	<input name="bankInfo.id" id="bankId" type="hidden"/>
 		        	<table class="frame-modal-table" border="0" bordercolor="black">
 			        	<tr>
-			        		<td width="100" class="table_title">银行名称：</td>
-			        		<td><input name="bankInfo.bankName" id="bankName" placeholder="银行名称" class="am-form-field" style="width:90%" minlength="3" required/></td>
+			        		<td width="100" class="table_title">评论类型：</td>
+			        		<td>
+			        			<select id="commentType2" disabled="disabled"></select>
+			        		</td>
 			        	</tr>
 			        	<tr>
-			        		<td class="table_title">电话：</td>
-			        		<td><input name="bankInfo.tel" id="tel" placeholder="电话" class="am-form-field" style="width:90%" required/></td>
+			        		<td class="table_title">评分：</td>
+			        		<td><input id="score2" class="am-form-field" style="width:90%" disabled="disabled"/></td>
 			        	</tr>
 			        	<tr>
-			        		<td class="table_title">网址：</td>
-			        		<td><input name="bankInfo.url" id="url" placeholder="网址" class="am-form-field" style="width:90%"/></td>
+			        		<td class="table_title">评论人：</td>
+			        		<td><input id="commentPeople2" class="am-form-field" style="width:90%" disabled="disabled" placeholder="暂未关联用户数据"/></td>
 			        	</tr>
 			        	<tr>
-			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">银行描述：</div></td>
+			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">评论内容：</div></td>
 			        		<td valign="top"> 
-			        			<textarea rows="" cols="" name="bankInfo.bankDesc" id="bankDesc" placeholder="银行描述" style="width:90%;height:100px;margin-top: 5px;" class="am-form-field"></textarea> 
+			        			<textarea rows="" cols="" id="content2" style="width:90%;height:100px;margin-top: 5px;" class="am-form-field" disabled="disabled"></textarea> 
 			        		</td>
 			        	</tr>
 		       	 	</table>
-		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
+		       	 	<br>
 		       	 	<div align="center">
-						<button type="button" class="am-btn am-btn-success" id="saveBtn"><span class="am-icon-save"></span> 保存</button>
-						<button type="button" class="am-btn am-btn-default" id="closeBtn"><span class="am-icon-undo"></span> 取消</button>
+						<button type="button" class="am-btn am-btn-default" id="closeBtn"><span class="am-icon-undo"></span>关闭</button>
 					</div>
 	           	</div>
-	           	<!-- </form> -->
 	    	</div>
 		</div>
 	</div>

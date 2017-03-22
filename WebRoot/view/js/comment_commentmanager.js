@@ -1,10 +1,32 @@
 $(function() {
+	initCommentType();
 	query();
 });
 
-var openBankInfoWin = function(title) {
+var initCommentType = function() {
+	var data = {"dict.type":"COMMENT_TYPE"};
+	$.ajax({
+		type : "POST",
+		url : path_ + "/view/shop/admin/dict!queryDictByType.action",
+		data : data,
+		dataType : "json",
+		success : function(data) {
+			var html = "<option value=''>-请选择-</option>";
+			var dicts = data.dicts;
+			console.log(dicts);
+			for(x in dicts){
+				html += "<option value='" + dicts[x].code + "'>" + dicts[x].name + "</option>"
+			}
+			$("#commentType").html(html);
+		},
+		error : function(e) {
+		}
+	});
+}
+
+var openCommentInfoWin = function(title) {
 	$("#title").text(title);
-	showModal("doc-modal-2",500,400);
+	showModal("doc-modal-2",500,350);
 };
 
 $("#closeBtn").click(function() {
@@ -24,91 +46,46 @@ var query = function() {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='showEditBankWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span>查看</a>";
-	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
+	html += "<a href='javascript:void(0)' onclick='showEditCommentWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span>查看详情</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='delComment(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
 	html += "</div>";
 	return html;
 };
 
-//表单验证
-var checkBankSumbit = function() {
-	var bankName = $("#bankName").val();
-	if(bankName.length==0) {
-		$("#errorMsg").html("银行名称不能为空！");
-		$("#bankName").focus();
-		return false;
+var setCommentInfo = function(data) {
+	var type = "";
+	if(data.comment.type=="1"){
+		type="评论";
+	}else if(data.comment.type=="2"){
+		type="追评";
 	}
-	$("#errorMsg").html("&nbsp;");
-	return true;
+	var html = "<option>" + type + "</option>";
+	$("#commentType2").html(html);
+	$("#score2").val(data.comment.score);
+	$("#commentPeople2").val(data.comment.commentPeople);
+	$("#content2").val(data.comment.content);
 };
 
-//保存
-$("#saveBtn").click(function() {
-	if(!checkBankSumbit()) {
-		return;
-	}
-
-	var bankid = $("#bankId").val();
-	var bankName = $("#bankName").val();
-	var url = $("#url").val();
-	var tel = $("#tel").val();
-	var bankDesc = $("#bankDesc").val();
-	var data = { "bankInfo.id" : bankid, "bankInfo.bankName" : bankName, "bankInfo.url" : url, "bankInfo.tel" : tel, "bankInfo.bankDesc" : bankDesc };
+var showEditCommentWin = function(id) {
+	var data = {"comment.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/bank/bankQuery!saveAgency.action",
-		data : data,
-		dataType : "json",
-		success : function(json) {
-			query();
-			closeModal("doc-modal-2");
-			showAlert("操作成功");
-		},
-		error : function(e) {
-			showAlert("操作失败！");
-		}
-	});
-});
-
-var clearBankInfo = function() {
-	$("#bankName").val('');
-	$("#tel").val('');
-	$("#url").val('');
-	$("#bankDesc").val('');
-	$("#bankId").val('');
-	$("#errorMsg").html('&nbsp;');
-};
-
-var setBankInfo = function(data) {
-	$("#bankName").val(data.bankInfo.bankName);
-	$("#tel").val(data.bankInfo.tel);
-	$("#url").val(data.bankInfo.url);
-	$("#bankDesc").val(data.bankInfo.bankDesc);
-	$("#bankId").val(data.bankInfo.id);
-	$("#errorMsg").html("&nbsp;");
-};
-
-var showEditBankWin = function(id) {
-	clearBankInfo();
-	var data = {"bankInfo.id" : id};
-	$.ajax({
-		type : "POST",
-		url : path_ + "/view/bank/bankQuery!queryBankInfo.action",
+		url : path_ + "/view/comment/comment!queryCommentById.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
-			setBankInfo(data);
-			openBankInfoWin("查看银行");
+			setCommentInfo(data);
+			openCommentInfoWin("查看评论");
 		}
 	});
 };
 
-var deleteBank = function(id) {
+var delComment = function(id) {
 	showConfirm("确认删除？", function() {
-		var data = {"bankInfo.id" : id};
+		var data = {"comment.id" : id};
 		$.ajax({
 			type : "POST",
-			url : path_ + "/view/bank/bankQuery!delete.action",
+			url : path_ + "/view/comment/comment!delComment.action",
 			data : data,
 			dataType : "json",
 			success : function(json) {
