@@ -45,7 +45,6 @@
 				<hr>
 				<div class="am-g">
 					<div class="am-u-sm-12">
-<<<<<<< HEAD
 						<div class="am-panel am-panel-primary">
 							<!-- <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">查询条件<span class="am-icon-chevron-down am-fr"></span></div> -->
 							<div class="am-panel-bd am-collapse am-in frame-search-panel"id="collapse-panel-1">
@@ -128,6 +127,3 @@
 </body>
 <script type="text/javascript" src="${path }/view/js/propValue_propValue.js"></script>
 </html>
-=======
-						
->>>>>>> refs/remotes/origin/yangchaowen

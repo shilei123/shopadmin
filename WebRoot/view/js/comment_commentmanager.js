@@ -1,7 +1,15 @@
 $(function() {
 	initCommentType();
 	query();
+	/*$("#233").change(changea);*/
 });
+
+/*var changea = function(){
+	$("#commentType").focus();
+	$("#commentType").slideDown('fast').promise().done(function () {
+        //js 操作
+    });
+};*/
 
 var initCommentType = function() {
 	var data = {"dict.type":"COMMENT_TYPE"};

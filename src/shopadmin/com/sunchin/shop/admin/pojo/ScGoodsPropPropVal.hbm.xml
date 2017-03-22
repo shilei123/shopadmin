@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScGoodsPropPropVal" table="SC_GOODS_PROP_PROPVAL">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="goodsId" type="java.lang.String">
+            <column name="GOODS_ID" length="36">
+                <comment>商品id</comment>
+            </column>
+        </property>
+        <property name="catePropPropvalId" type="java.lang.String">
+            <column name="CATE_PROP_PROPVAL_ID" length="36">
+                <comment>类别-属性属性值id</comment>
+            </column>
+        </property>
+        <property name="type" type="java.lang.String">
+            <column name="TYPE" length="1">
+                <comment>spu 不会影响到库存和价格的属性,又叫关键属性/sku 会影响到库存和价格的属性, 又叫销售属性</comment>
+            </column>
+        </property>
+        <property name="orders" type="java.lang.String">
+            <column name="ORDERS" length="2">
+                <comment>排序</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1">
+                <comment>状态</comment>
+            </column>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="createPeople" type="java.lang.String">
+            <column name="CREATE_PEOPLE" length="36">
+                <comment>创建人</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

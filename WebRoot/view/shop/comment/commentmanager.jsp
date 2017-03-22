@@ -54,7 +54,7 @@
 											<select name="queryParams.type" id="commentType" style="height:32px; width:157px;"></select>
 										</td>
 										<td style="width:100px;">评论内容：</td>
-										<td style="width:200px;"><input name="queryParams.content" class="am-form-field"/></td>
+										<td style="width:200px;"><input name="queryParams.content" id="233" class="am-form-field"/></td>
 										<td style="width:100px;">评论时间：</td>
 										<td>
 					        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
@@ -95,7 +95,7 @@
 								<tr>
 									<th width="2%" field="index"></th>
 									<th width="10%" field="type">评论类型</th>
-									<th width="30%" field="content">评论内容（20字）</th>
+									<th width="30%" field="content">评论内容</th>
 									<th width="10%" field="score">评分</th>
 									<th width="15%" field="createTime">评论时间</th>
 									<th width="10%" field="contentPeople">评论人</th>
