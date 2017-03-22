@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScUserFreight" table="SC_USER_FREIGHT" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="freightId" type="java.lang.String">
+             <column name="FREIGHT_ID" length="36">
+                <comment>运费id</comment>
+            </column>
+        </property>
+        <property name="TransportMode" type="java.lang.String">
+             <column name="TRANSPORT_MODE" length="1">
+                <comment>运送方式/平邮 0 快递 1 EMS 2</comment>
+            </column>
+        </property>
+        <property name="TransportRange" type="java.lang.String">
+             <column name="TRANSPORT_RANGE" length="1000">
+                <comment>运送范围</comment>
+            </column>
+        </property>
+         <property name="TransportId" type="java.lang.String">
+             <column name="TRANSPORT_ID" length="36">
+                <comment>运送id</comment>
+            </column>
+        </property>
+        <property name="initialInt" type="java.lang.Double">
+            <column name="INITIAL_INT">
+                <comment>初始数量</comment>
+            </column>
+        </property> 
+         <property name="initialPrice" type="java.lang.Double">
+            <column name="INITIAL_PRICE" precision="10">
+                <comment>初始价格</comment>
+            </column>
+        </property> 
+         <property name="stackInt" type="java.lang.Double">
+            <column name="STACK_INT">
+                <comment>叠加数量</comment>
+            </column>
+        </property> 
+         <property name="stackPrice" type="java.lang.Double">
+            <column name="STACK_PRICE" precision="10">
+                <comment>叠加价格</comment>
+            </column>
+        </property> 
+      <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+         <property name="optionTime" type="java.util.Date">
+               <column name="OPTION_TIME">
+                <comment>修改时间</comment>
+            </column>
+        </property>
+         <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1">
+                <comment>数据有效性/默认0，0有效，1无效</comment>
+            </column>
+        </property>
+        <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="50">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
