@@ -1,5 +1,6 @@
 package com.sunchin.shop.admin.coupon.action;
 
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -87,6 +88,7 @@ public class UserCouponAction extends PageAction{
 
 	public void setDictionaryList(List<ScDictionary> dictionaryList) {
 		this.dictionaryList = dictionaryList;
+
 	}
 	
 	

@@ -140,4 +140,3 @@
 </body>
 <script type="text/javascript" src="${path }/view/js/coupon.js"></script>
 </html>
-

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
+
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.StatusEnum;
 import com.sunchin.shop.admin.pojo.ScUserCoupon;

@@ -182,4 +182,3 @@ var deleteDict = function(id) {
 		});
 	});
 };
-

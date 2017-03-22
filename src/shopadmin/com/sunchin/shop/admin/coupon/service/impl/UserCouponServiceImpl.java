@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.sunchin.shop.admin.coupon.dao.UserCouponDAO;

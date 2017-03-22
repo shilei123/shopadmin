@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 
 import demo.bankManager.dao.BankInfoDAO;
 import demo.bankManager.pojo.TBankInfo;
-import demo.bankManager.servise.IBankService;
+import demo.bankManager.servise.BankService;
 
 import framework.bean.PageBean;
 import framework.config.SysDict;
 import framework.db.DBUtil;
 
 @Service("bankService")
-public class BankServiceImpl implements IBankService {
+public class BankServiceImpl implements BankService {
 	@Resource(name = "bankInfoDAO")
 	private BankInfoDAO bankInfoDAO;
 
@@ -46,9 +46,6 @@ public class BankServiceImpl implements IBankService {
 		}
 	}
 
-	/**
-	 * 修改
-	 */
 	public TBankInfo getBankInfo(String id) {
 		Object obj = DBUtil.getInstance().get(TBankInfo.class, id);
 		if(obj != null) {

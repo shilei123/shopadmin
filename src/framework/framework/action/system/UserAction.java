@@ -45,7 +45,7 @@ public class UserAction extends FenyeBase {
 										   .append(" left join t_xt_org o on o.id=e.org_id")
 										   .append(" left join t_xt_position p on p.position_id=e.position_id where 1=1").toString();
 	
-	private static final String SQL_ROLE_USER = new StringBuffer("select u.u_id, u.u_name, u.lr_sj, ru.role_id, o.org_name")
+	private static final String SQL_ROLE_USER = new StringBuffer("select u.u_id, u.u_name, u.create_time, ru.role_id, o.org_name")
 												/*.append(", replace(o.org_path,'").append(SysDict.ORG_NAME).append("/') org_path")（*/
 												.append(", p.position_name")
 												.append(" from t_xt_user u left join t_xt_role_user ru on u.u_id=ru.u_id")

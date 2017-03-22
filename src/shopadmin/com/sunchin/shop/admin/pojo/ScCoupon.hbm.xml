@@ -68,6 +68,7 @@
                 <comment>操作时间</comment>
             </column>
         </property>
+
          <property name="belong" type="java.lang.String">
                <column name="BELONG" length="50">
                 <comment>所属</comment>
