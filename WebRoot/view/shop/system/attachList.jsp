@@ -26,8 +26,6 @@
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
 										<td style="width:100px;">附件名称：</td>
-<<<<<<< HEAD
-=======
 										<td style="width:200px;"><input name="queryParams.attachName" id="attachName" class="am-form-field"/></td>
 										<td style="width:100px;">&nbsp;附件描述：</td>
 										<td style="width:200px;"><input name="queryParams.remark" id="remark" class="am-form-field"/></td>
@@ -129,7 +127,6 @@ var formatterAttachSize = function(value, row) {
 
 var formatterAction = function(value, row) {
 	//console.log(row.attachName);
->>>>>>> refs/remotes/origin/yangchaowen
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
 	html += "<a href='"+(attachServer_ + "/"+row["attachPath"]+"/"+row["fileName"])+"' target='_bank' download='"+row.attachName+"'><span class='am-icon-download'></span>下载</a>";
 	html += "</div>";
