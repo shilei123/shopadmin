@@ -150,7 +150,6 @@ $("#delCategoryBtn").click(function() {
 			} 
 		});
 	});
-<<<<<<< HEAD
 });
 
 $("#openCategoryParamsBtn").click(function() {
@@ -196,5 +195,3 @@ var getCategoryInfo = function(node){
 	}
 	return obj;
 }
-=======
->>>>>>> refs/remotes/origin/yangchaowen
