@@ -46,11 +46,11 @@
 							<thead>
 								<tr>
 									<th width="2%" field="index"></th>
-									<th width="15%" field="attachName">附件名称</th>
+									<th width="20%" field="attachName">附件名称</th>
 									<th width="15%" field="attachSize" formatter="formatterAttachSize">附件大小</th>
 									<th width="18%" field="kindName">附件类型</th>
 									<th width="18%" field="createTime">上传时间</th>
-									<th width="15%" formatter="formatterAction">操作</th>
+									<th width="10%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>
 						</table>
@@ -64,26 +64,6 @@
 		</div>
 	</div>
 	<!-- content end -->
-	
-	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
-		<div class="am-modal-dialog">
-		 	<div class="am-modal-hd"><span id="title">查看缩略图</span>
-		    	<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-		    </div>
-	    	<hr>
-	    	<div class="am-modal-bd frame-am-modal-bd">
-		        <div align="center">
-		        	<img id="nofull-img" alt="" src="" width="100%" height="300">
-	           	</div>
-	    	</div>
-		</div>
-	</div>
-	<img id="full-img" alt="" src="" width="100%" height="100%" style="display: none;">
-	
-	<!-- 附件上传组件引用 -->
-	<%-- <jsp:include page="/view/shop/system/attachUpload.jsp">
-		<jsp:param value="false" name="showSelectTab"/>
-	</jsp:include> --%>
 </body>
 <script type="text/javascript">
 //打开图片上传窗口

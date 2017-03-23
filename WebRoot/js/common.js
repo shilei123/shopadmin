@@ -48,10 +48,11 @@ var closeLoading = function() {
 	layer.closeAll('loading');
 };
 
-var showLayerModal = function(url, w, h) {
+var showLayerModal = function(title, url, w, h) {
 	//iframe层-父子操作
 	layer.open({
 	  type: 2,
+	  title: title,
 	  area: [w+'px', h+'px'],
 	  fixed: true, //不固定
 	  maxmin: false,
@@ -86,6 +87,7 @@ var showAttachUploadModal = function(params) {
 		params = {showSelectTab:true,uploadAfterClose:false}; //默认显示查询tab
 	}
 	var url = path_+'/view/shop/system/attachUpload4layer.jsp?showSelectTab='+params.showSelectTab;
+<<<<<<< HEAD
 	showLayerModal(url, 750, 450);
 }
 
@@ -95,4 +97,15 @@ var showImgUploadModal = function(params) {
 	}
 	var url = path_+'/view/shop/system/imageUpload4layer.jsp?showSelectTab='+params.showSelectTab;
 	showLayerModal(url, 700, 450);
+=======
+	showLayerModal('附件上传',url, 750, 450);
+}
+
+var showImgUploadModal = function(params) {
+	if(params==undefined) {
+		params = {showSelectTab:true,uploadAfterClose:false};//默认显示查询tab
+	}
+	var url = path_+'/view/shop/system/imageUpload4layer.jsp?showSelectTab='+params.showSelectTab;
+	showLayerModal('图片上传',url, 700, 450);
+>>>>>>> refs/remotes/origin/yangchaowen
 }

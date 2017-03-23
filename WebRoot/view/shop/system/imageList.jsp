@@ -26,8 +26,6 @@
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
 										<td style="width:100px;">图片名称：</td>
-<<<<<<< HEAD
-=======
 										<td style="width:200px;"><input name="queryParams.imgName" id="imgName" class="am-form-field"/></td>
 										<td style="width:100px;">&nbsp;图片描述：</td>
 										<td style="width:200px;"><input name="queryParams.remark" id="remark" class="am-form-field"/></td>
@@ -103,7 +101,6 @@ var selectImg = function(imgId, imgSrc) {
 //上传按钮调用完成之后回调函数
 var uploadAfter = function() {
 	console.log("调用扩展");
->>>>>>> refs/remotes/origin/yangchaowen
 	query();
 };
 

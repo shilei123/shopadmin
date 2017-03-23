@@ -1,5 +1,7 @@
 package com.sunchin.shop.admin.system.service;
 
+import java.util.List;
+
 import com.sunchin.shop.admin.pojo.ScDictionary;
 
 import framework.bean.PageBean;
@@ -7,32 +9,39 @@ import framework.bean.PageBean;
 public interface DictService {
 	
 	/**
-	 * 查询
+	 * 鏌ヨ
 	 * @param pageBean
 	 * @return
 	 * @throws Exception
 	 */
-	public PageBean queryDictList(PageBean pageBean) throws Exception; 
+	PageBean queryDictList(PageBean pageBean) throws Exception; 
 	
 	/**
-	 * 查询单条记录
+	 * 鏌ヨ鍗曟潯璁板綍
 	 * @param id
 	 * @return
 	 */
-	public ScDictionary getDict(String id) throws Exception;
+	List<ScDictionary> getDictByType(String type) throws Exception;
 	
 	/**
-	 * 保存
+	 * 鏌ヨ鍗曟潯璁板綍
+	 * @param id
+	 * @return
+	 */
+	ScDictionary getDict(String id) throws Exception;
+	
+	/**
+	 * 淇濆瓨
 	 * @param dict
 	 * @return 
 	 * @throws Exception
 	 */
-	public void saveDict(ScDictionary dict) throws Exception;
+	void saveDict(ScDictionary dict) throws Exception;
 	
 	/**
-	 * 删除
+	 * 鍒犻櫎
 	 * @param id
 	 * @throws Exception
 	 */
-	public void deleteDict(String id) throws Exception;
+	void deleteDict(String id) throws Exception;
 }
