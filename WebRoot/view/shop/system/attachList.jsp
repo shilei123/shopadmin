@@ -26,6 +26,7 @@
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
 										<td style="width:100px;">附件名称：</td>
+
 										<td style="width:200px;"><input name="queryParams.attachName" id="attachName" class="am-form-field"/></td>
 										<td style="width:100px;">&nbsp;附件描述：</td>
 										<td style="width:200px;"><input name="queryParams.remark" id="remark" class="am-form-field"/></td>

@@ -44,6 +44,6 @@ var attachServer_ = "${attachServer}";
 <!-- jQuery validate -->
 <script type="text/javascript" src="${path }/js/validation/jquery.validate.js"></script>
 <script type="text/javascript" src="${path }/js/validation/messages_zh.js"></script>
+
 <!-- jQuery ajaxfileupload -->
 <script type="text/javascript" src="${path }/js/ajaxfileupload.js"></script>
-

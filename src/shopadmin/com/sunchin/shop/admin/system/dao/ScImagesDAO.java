@@ -42,6 +42,7 @@ public class ScImagesDAO extends PageDAO {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(SELECT_SQL);
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
+
 			String imgName = pageBean.getQueryParams().get("imgName");
 			if (StringUtils.isNotBlank(imgName)){
 				params.add("%"+imgName+"%");
@@ -52,6 +53,7 @@ public class ScImagesDAO extends PageDAO {
 				params.add("%"+bankDesc+"%");
 				sql.append(" and t.bank_desc like ? ");
 			}*/
+
 		}
 		sql.append(" order by t.create_time desc ");
 		return sql.toString();

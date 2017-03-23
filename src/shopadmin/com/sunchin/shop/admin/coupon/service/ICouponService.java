@@ -11,14 +11,14 @@ import framework.bean.PageBean;
 
 public interface ICouponService {
 
-	PageBean queryCouponList(PageBean pageBean);
 
-	ScCoupon getCoupon(String id);
+	PageBean queryCouponList(PageBean pageBean) throws Exception;
 
-	void saveCoupon(ScCoupon coupon);
+	ScCoupon getCoupon(String id) throws Exception;
 
-	void deleteCoupon(String id);
+	void saveCoupon(ScCoupon coupon) throws Exception;
 
-	List<ScDictionary> findCouponType(String type) throws Exception;
+	void deleteCoupon(String id) throws Exception;
+
 
 }

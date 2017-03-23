@@ -20,6 +20,7 @@
 		      	<div class="am-u-sm-12">
 					<div class="am-btn-toolbar frame-div-paddbottom20">
 			            <div class="am-btn-group am-btn-group-sm">
+
 			              <button type="button" class="am-btn am-btn-primary" id="addCategoryBtn"><span class="am-icon-plus"></span> 新增</button>
 			              <button type="button" class="am-btn am-btn-success" id="editCategoryBtn"><span class="am-icon-edit"></span> 编辑</button>
 			              <button type="button" class="am-btn am-btn-danger" id="delCategoryBtn"><span class="am-icon-trash-o"></span> 删除</button> 
@@ -255,3 +256,4 @@
 </div>
 </body>
 </html>
+

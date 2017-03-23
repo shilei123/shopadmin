@@ -23,6 +23,7 @@ public class ScCoupon  implements java.io.Serializable {
      private Date createTime;
      private String optionAdminid;
      private Date optionTime;
+     private String belong;
 
 
     public ScCoupon() {
@@ -157,5 +158,18 @@ public class ScCoupon  implements java.io.Serializable {
 	public void setOptionTime(Date optionTime) {
 		this.optionTime = optionTime;
 	}
+
+
+	public String getBelong() {
+		return belong;
+	}
+
+
+	public void setBelong(String belong) {
+		this.belong = belong;
+	}
+	
+	
+
 
 }

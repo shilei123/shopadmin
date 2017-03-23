@@ -4,17 +4,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+
 import org.springframework.stereotype.Repository;
-
-
-
-
-
-
-
+import org.springframework.transaction.annotation.Transactional;
 import com.sunchin.shop.admin.coupon.dao.UserCouponDAO;
 import com.sunchin.shop.admin.coupon.service.IUserCouponService;
-import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScUserCoupon;
 
 import framework.bean.PageBean;
@@ -54,6 +48,7 @@ public class UserCouponServiceImpl implements IUserCouponService{
 	 * 保存
 	 */
 	@Override
+	@Transactional
 	public void saveUserCoupon(ScUserCoupon userCoupon) {
 		if(userCoupon == null){
 			return;

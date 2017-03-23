@@ -43,5 +43,7 @@ public interface DictService {
 	 * @param id
 	 * @throws Exception
 	 */
+
 	void deleteDict(String id) throws Exception;
+
 }

@@ -1,7 +1,7 @@
 var couponTypeHtml="";
 $(function() {
 	queryUserCoupon();
-	queryCouponType();
+	queryUserCouponType();
 });
 
 var queryUserCoupon = function() {
@@ -10,18 +10,28 @@ var queryUserCoupon = function() {
 	pageData(url, "userCouponListTable", data); 
 };
 
-var queryCouponType = function() {
+var queryUserCouponType = function() {
 	var status = $("#status");
 	var sts = $("#sts");
 	status.empty();
 	sts.empty();
-	var html = "<option value='-1'>-请选择-</option>";
-	html += "<option value='0'> 未使用  </option>";
-	html += "<option value='1'> 已使用  </option>";
-	html += "<option value='2'> 作废  </option>";
-	couponTypeHtml = html;
-	status.append(html);
-	sts.append(html);
+	$.ajax({
+		url :path_ + "/view/shop/coupon/userCoupon!queryUserCouponType.action",
+		type : 'POST',
+		data : null,
+		dataType: "json",
+		success : function(data) {
+			console.log(data);
+			var html = "<option value='-1'>-请选择-</option>";
+			$(data.dictionaryList).each(function(index) {
+				var userCouponType = data.dictionaryList[index];
+				html += "<option value='" + userCouponType.code + "'>" + userCouponType.name + "</option>";
+			});
+			couponTypeHtml = html;
+			status.append(html);
+			sts.append(html);
+		}
+	});
 };
 
 //绑定搜索按钮的分页

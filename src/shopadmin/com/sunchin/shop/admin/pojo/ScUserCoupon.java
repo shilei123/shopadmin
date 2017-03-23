@@ -6,7 +6,6 @@ public class ScUserCoupon  implements java.io.Serializable {
 
      private String id;
      private String userId;
-     private String userName;
      private String couponId;
      private String couponName;
      private Double couponBlance;
@@ -42,17 +41,6 @@ public class ScUserCoupon  implements java.io.Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-
-	public String getUserName() {
-		return userName;
-	}
-
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 
 	public String getCouponId() {
 		return couponId;

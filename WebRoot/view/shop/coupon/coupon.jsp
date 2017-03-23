@@ -29,7 +29,7 @@
 										<td><input name="queryParams.couponName" class="am-form-field"/></td>
 										<td class="query_title" >有效天数：</td>
 										<td><input name="queryParams.expiryDate" class="am-form-field"/></td>
-										<td>创建时间：</td>
+										<td class="query_title">创建时间：</td>
 					        			<td valign="top">
 					        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
 										  <input type="text" name="queryParams.startRegTime" id="startRegTime" class="am-form-field">
@@ -47,7 +47,7 @@
 					        			</td>
 									</tr>
 									<tr>
-									<td class="query_title" style="width:50px;">优惠券类型：</td>
+										<td class="query_title" style="width:50px;">优惠券类型：</td>
 										<td>
 										<select id="couponType" name="queryParams.couponType" data-am-selected="{btnWidth: '164px'}">
 										</select>
@@ -67,13 +67,13 @@
 						<table class="am-table am-table-bordered am-table-striped am-table-hover" id="couponListTable">
 							<thead>
 								<tr>
-									<th width="2%" field="index"></th>
+									<th width="2%"  field="index"></th>
 									<th width="10%" field="couponName">优惠券名称</th>
 									<th width="10%" field="name">优惠券使用类型</th>
-									<th width="8%" field="couponZsBalance">满额赠送</th>
-									<th width="8%" field="couponBlance">优惠券金额</th>
+									<th width="8%"  field="couponZsBalance">满额赠送</th>
+									<th width="8%"  field="couponBlance">优惠券金额</th>
 									<th width="10%" field="couponXfBalance">满足金额使用</th>
-									<th width="8%" field="couponExpiryDate">有效期天数</th>
+									<th width="8%"  field="couponExpiryDate">有效期天数</th>
 									<th width="8%"  field="couponStatus">状态</th>
 									<th width="10%" field="couponRemark">备注</th>
 									<th width="12%" field="createTime">创建时间</th>
