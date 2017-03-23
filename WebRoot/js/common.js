@@ -84,28 +84,16 @@ var formatterFlag = function(value, row){
 
 var showAttachUploadModal = function(params) {
 	if(params==undefined) {
-		params = {showSelectTab:true,uploadAfterClose:false}; //默认显示查询tab
+		params = {showSelectTab:true,uploadAfterClose:false}; //默认显示查询tab,uploadAfterClose暂时不用留作扩展
 	}
 	var url = path_+'/view/shop/system/attachUpload4layer.jsp?showSelectTab='+params.showSelectTab;
-<<<<<<< HEAD
-	showLayerModal(url, 750, 450);
-}
-
-var showImgUploadModal = function(params) {
-	if(params==undefined) {
-		params = {showSelectTab:true,uploadAfterClose:false};//默认显示查询tab
-	}
-	var url = path_+'/view/shop/system/imageUpload4layer.jsp?showSelectTab='+params.showSelectTab;
-	showLayerModal(url, 700, 450);
-=======
 	showLayerModal('附件上传',url, 750, 450);
 }
 
 var showImgUploadModal = function(params) {
 	if(params==undefined) {
-		params = {showSelectTab:true,uploadAfterClose:false};//默认显示查询tab
+		params = {showSelectTab:true,uploadAfterClose:false};//默认显示查询tab,uploadAfterClose暂时不用留作扩展
 	}
 	var url = path_+'/view/shop/system/imageUpload4layer.jsp?showSelectTab='+params.showSelectTab;
 	showLayerModal('图片上传',url, 700, 450);
->>>>>>> refs/remotes/origin/yangchaowen
 }
