@@ -97,8 +97,8 @@ public class AdvertiseAction extends PageAction{
 	
 	public String AdvertiseType(){
 		try {
-			dictionaryList = dictService.findDictionaryType(DictionaryTypeEnum.ADVERTISE_LINKKIND.getType());
-			isuseList = dictService.findDictionaryType(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
+			dictionaryList = dictService.getDictByType(DictionaryTypeEnum.ADVERTISE_LINKKIND.getType());
+			isuseList = dictService.getDictByType(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

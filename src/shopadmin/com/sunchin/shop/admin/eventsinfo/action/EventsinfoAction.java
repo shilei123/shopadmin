@@ -80,7 +80,7 @@ public class EventsinfoAction extends PageAction{
 
 	public String queryEventsinfoType(){
 		try {
-			dictionaryList = dictService.findDictionaryType(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
+			dictionaryList = dictService.getDictByType(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

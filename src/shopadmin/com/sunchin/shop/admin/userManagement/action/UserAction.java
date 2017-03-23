@@ -171,13 +171,18 @@ public class UserAction extends PageAction{
 	 * @return
 	 */
 	public String queryType(){
-		tradeTypeList  = dictService.findDictionaryType(DictionaryTypeEnum.TRADE_TYPE.getType());
-		tradeStateList = dictService.findDictionaryType(DictionaryTypeEnum.TRADE_STATE.getType());
-		optionTypeList = dictService.findDictionaryType(DictionaryTypeEnum.OPTION_TYPE.getType());
-		purseTypeList  = dictService.findDictionaryType(DictionaryTypeEnum.PURSE_TYPE.getType());
-		userStatusList = dictService.findDictionaryType(DictionaryTypeEnum.USER_STATUS.getType());
-		identityStatus  = dictService.findDictionaryType(DictionaryTypeEnum.IDENTITY_STATUS.getType());
-		userSexList  = dictService.findDictionaryType(DictionaryTypeEnum.USER_SEX.getType());
+		try {
+			tradeTypeList  = dictService.getDictByType(DictionaryTypeEnum.TRADE_TYPE.getType());
+			tradeStateList = dictService.getDictByType(DictionaryTypeEnum.TRADE_STATE.getType());
+			optionTypeList = dictService.getDictByType(DictionaryTypeEnum.OPTION_TYPE.getType());
+			purseTypeList  = dictService.getDictByType(DictionaryTypeEnum.PURSE_TYPE.getType());
+			userStatusList = dictService.getDictByType(DictionaryTypeEnum.USER_STATUS.getType());
+			identityStatus  = dictService.getDictByType(DictionaryTypeEnum.IDENTITY_STATUS.getType());
+			userSexList  = dictService.getDictByType(DictionaryTypeEnum.USER_SEX.getType());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	

@@ -74,7 +74,7 @@ public class CouponAction extends PageAction{
 	 */
 	public String couponType(){
 		try {
-			dictionaryList = dictService.findDictionaryType(DictionaryTypeEnum.COUPON_TYPE.getType());
+			dictionaryList = dictService.getDictByType(DictionaryTypeEnum.COUPON_TYPE.getType());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
