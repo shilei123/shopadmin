@@ -92,10 +92,9 @@ $("#openImageUploadBtn").click(function() {
 });
 
 //选择图片的回调函数
-var selectImg = function(imgId, imgSrc) {
-	console.log("点击了自定义的："+imgId+","+imgSrc);
-	$('#imgName').val(imgId);
-	$('#remark').val(imgSrc);
+var selectImg = function(obj) {
+	$('#imgName').val(obj.id);
+	$('#remark').val(obj.src);
 };
 
 //上传按钮调用完成之后回调函数

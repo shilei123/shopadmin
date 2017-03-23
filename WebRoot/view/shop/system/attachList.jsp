@@ -70,14 +70,13 @@
 //打开图片上传窗口
 $("#openAttachUploadBtn").click(function() {
 	//打开附件上传的窗口
-	showAttachUploadModal({showSelectTab:false});
+	showAttachUploadModal({showSelectTab:true});
 });
 
 //选择附件的回调函数
-var selectAttach = function(attachId, attachSrc) {
-	console.log("点击了自定义的："+attachId+","+attachSrc);
-	$('#attachName').val(attachId);
-	$('#remark').val(attachSrc);
+var selectAttach = function(obj) {
+	$('#attachName').val(obj.id);
+	$('#remark').val(obj.src);
 };
 
 //上传按钮调用完成之后回调函数

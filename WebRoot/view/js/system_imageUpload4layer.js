@@ -25,14 +25,15 @@ var queryImages = function() {
 	}
 };
 
-var uploadAfter = function() {
+var uploadAfter_ = function() {
 	if(parent.uploadAfter!=undefined) {
 		parent.uploadAfter();
 	}
 };
-var selectImg = function(imgId, imgSrc) {
+var selectImg_ = function(id, src) {
 	if(parent.selectImg!=undefined) {
-		parent.selectImg(imgId, imgSrc);
+		var obj = {id:id, src:src};
+		parent.selectImg(obj);
 		parent.layer.close(index);
 	}
 };
@@ -85,7 +86,7 @@ var createImageTable = function(data, targetId) {
 		var row = data.rows[index];
 		var imgSrc = imageServer_ + "/"+row["imgPath"]+"/"+row["fileName"];
 		
-		html += "<td style=\"width: "+imageUploadTdHeight+"px;cursor:pointer;\" onclick=\"selectImg('"+row["id"]+"','"+imgSrc+"')\">";
+		html += "<td style=\"width: "+imageUploadTdHeight+"px;cursor:pointer;\" onclick=\"selectImg_('"+row["id"]+"','"+imgSrc+"')\">";
 		html += "	<img alt=\""+row["imgName"]+"\" title=\""+row["imgName"]+"\" id=\""+row["id"]+"\" src=\""+imgSrc+"\" " +
 				"width=\""+imageUploadShowWidth+"\" height=\""+imageUploadShowHeight+"\">";
 		html += "</td>";
@@ -124,7 +125,7 @@ var fileUpload = function() {
  		success: function (data, status) { //服务器成功响应处理函数
        		//alert(data.imgResult.id);
  			queryImages();
- 			uploadAfter();
+ 			uploadAfter_();
  			if(uploadAfterClose) {
  				showMsg("上传成功！");
  				parent.layer.close(index);

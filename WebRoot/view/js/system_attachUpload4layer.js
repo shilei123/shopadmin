@@ -53,22 +53,22 @@ var formatterAttachSize = function(value, row) {
 var formatterAttachAction = function(value, row) {
 	var attachSrc = attachServer_ + "/"+row["attachPath"]+"/"+row["fileName"];
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='selectAttach(\""+ row.id + "\",\""+attachSrc+"\")'><span class='am-icon-search'></span>选择</a>";
+	html += "<a href='javascript:void(0)' onclick='selectAttach_(\""+ row.id + "\",\""+attachSrc+"\")'><span class='am-icon-search'></span>选择</a>";
 	html += "</div>";
 	return html;
 };
 
-var uploadAfter = function() {
+var uploadAfter_ = function() {
 	//console.log(parent.uploadAfter);
 	if(parent.uploadAfter!=undefined) {
 		parent.uploadAfter();
 	}
 };
 
-var selectAttach = function(attachId, attachSrc) {
-	//console.log(attachId+":"+attachSrc);
+var selectAttach_ = function(id, src) {
 	if(parent.selectAttach!=undefined) {
-		parent.selectAttach(attachId, attachSrc);
+		var obj = {id:id,src:src};
+		parent.selectAttach(obj);
 		parent.layer.close(index);
 	}
 };
@@ -104,7 +104,7 @@ var fileUpload = function() {
  		success: function (data, status) { //服务器成功响应处理函数
        		//alert(data.imgResult.id);
  			queryAttachs();
- 			uploadAfter();
+ 			uploadAfter_();
  			if(uploadAfterClose) {
  				showMsg("上传成功！");
  				parent.layer.close(index);
