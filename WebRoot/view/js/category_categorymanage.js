@@ -149,7 +149,6 @@ $("#delCategoryBtn").click(function() {
 				showAlert("删除失败，请检查该类别是否有子类别！");
 			} 
 		});
-<<<<<<< HEAD
 	});
 });
 
@@ -196,47 +195,3 @@ var getCategoryInfo = function(node){
 	}
 	return obj;
 }
-=======
-	});
-});
-
-/*$("#openCategoryParamsBtn").click(function() {
-	var node = $("#ul_category_tree").tree("getSelected");
-	if(node==null){
-		showAlert("请选择一个分类！");
-		return;
-	}
-	var msg = getCategoryInfo(node);
-	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/goodsmanage/categoryParamCfg.jsp?categoryId='+msg.categoryId);
-	showModal("doc-modal-1", 600, 450);
-});*/
-
-var closeParamsModal = function(id) {
-	$('#'+id).modal('close');
-};
-
-var checkForm = function() {
-	var valid = $('#form1').validate();
-	return true;
-};
-
-var getCategoryInfo = function(node){
-	var obj = new Object();
-	obj.categoryId = node.pkId;
-	obj.categoryName = node.text;
-	obj.parentId = node.parentId;
-	obj.levels = node.levels;
-	if(node.attributes!=null){
-		obj.memo = node.attributes.memo;
-		obj.cateOrder = node.attributes.cateOrder;
-		obj.logo = node.attributes.logo;
-		obj.url = node.attributes.url;
-		obj.isuse = node.attributes.isuse;
-	}
-	var pnode = $('#ul_category_tree').tree('getParent',node.target);
-	if(pnode!=null){
-		obj.parentId = pnode.pkId;
-	}
-	return obj;
-}
->>>>>>> refs/remotes/origin/shilei
