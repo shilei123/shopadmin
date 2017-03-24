@@ -82,6 +82,11 @@ body table {
 	width: 100px;
 }
 
+.frame-required>span {
+	color: red;
+	font-weight: bolder;
+}
+
 .table_error_info {
 	width: 200px;
 }
