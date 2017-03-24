@@ -17,8 +17,8 @@
                 <comment>评论内容</comment>
             </column>
         </property>
-        <property name="contentTime" type="java.util.Date">
-            <column name="CONTENT_TIME" length="7">
+        <property name="commentTime" type="java.util.Date">
+            <column name="COMMENT_TIME" length="7">
                 <comment>评论时间</comment>
             </column>
         </property>
@@ -37,8 +37,8 @@
                 <comment>父评论id</comment>
             </column>
         </property>
-        <property name="contentPeople" type="java.lang.String">
-            <column name="CONTENT_PEOPLE" length="36">
+        <property name="commentPeople" type="java.lang.String">
+            <column name="COMMENT_PEOPLE" length="36">
                 <comment>评论人id</comment>
             </column>
         </property>

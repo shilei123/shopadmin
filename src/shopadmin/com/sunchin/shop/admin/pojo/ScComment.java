@@ -11,11 +11,11 @@ public class ScComment implements java.io.Serializable {
 	private String id;
 	private String type;
 	private String content;
-	private Date contentTime;
+	private Date commentTime;
 	private Double score;
 	private String ishidden;
 	private String parentId;
-	private String contentPeople;
+	private String commentPeople;
 	private String flag;
 
 	public String getId() {
@@ -42,12 +42,12 @@ public class ScComment implements java.io.Serializable {
 		this.content = content;
 	}
 
-	public Date getContentTime() {
-		return this.contentTime;
+	public Date getCommentTime() {
+		return this.commentTime;
 	}
 
-	public void setContentTime(Date contentTime) {
-		this.contentTime = contentTime;
+	public void setCommentTime(Date commentTime) {
+		this.commentTime = commentTime;
 	}
 
 	public Double getScore() {
@@ -74,12 +74,12 @@ public class ScComment implements java.io.Serializable {
 		this.parentId = parentId;
 	}
 
-	public String getContentPeople() {
-		return this.contentPeople;
+	public String getCommentPeople() {
+		return this.commentPeople;
 	}
 
-	public void setContentPeople(String contentPeople) {
-		this.contentPeople = contentPeople;
+	public void setCommentPeople(String commentPeople) {
+		this.commentPeople = commentPeople;
 	}
 
 	public String getFlag() {
