@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.sunchin.shop.admin.pojo.ScGoodsPropPropVal" table="SC_GOODS_PROP_PROPVAL">
+    <class name="com.sunchin.shop.admin.pojo.ScGoodsCatePropPropVal" table="SC_GOODS_CATE_PROP_PROPVAL">
         <id name="id" type="java.lang.String">
             <column name="ID" length="36" />
             <generator class="assigned"></generator>

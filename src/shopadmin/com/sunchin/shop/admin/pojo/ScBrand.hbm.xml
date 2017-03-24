@@ -22,6 +22,11 @@
                 <comment>品牌logo</comment>
             </column>
         </property>
+        <property name="brandCode" type="java.lang.String">
+            <column name="BRAND_CODE" length="36">
+                <comment>品牌code</comment>
+            </column>
+        </property>
         <property name="flag" type="java.lang.String">
             <column name="FLAG" length="1">
                 <comment>状态</comment>

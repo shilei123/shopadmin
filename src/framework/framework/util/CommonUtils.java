@@ -7,7 +7,7 @@ public class CommonUtils {
 		if(obj != null) {
 			return obj.toString();
 		}
-		return null;
+		return "";
 	}
 	
 	public static Double getDouble(Object obj) {
