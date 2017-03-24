@@ -2,7 +2,7 @@ package com.sunchin.shop.admin.pojo;
 
 import java.util.Date;
 
-public class ScGoodsPropPropVal implements java.io.Serializable {
+public class ScGoodsCatePropPropVal implements java.io.Serializable {
 
 	/**
 	 * 
