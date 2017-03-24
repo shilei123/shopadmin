@@ -62,6 +62,25 @@ var showLayerModal = function(title, url, w, h) {
 	});
 };
 
+var showTopTips = function(msg,targetId) {
+	layer.tips(msg, '#'+targetId, {
+		  tips: [1, '#F39B12']
+	});
+};
+var showRightTips = function(msg,targetId) {
+	layer.tips(msg, '#'+targetId);
+};
+var showLeftTips = function(msg,targetId) {
+	layer.tips(msg, '#'+targetId, {
+		tips: [4, '#F39B12']
+	});
+};
+var showDownTips = function(msg,targetId) {
+	layer.tips(msg, '#'+targetId, {
+		tips: [3, '#F39B12']
+	});
+};
+
 var showModal = function(id, w, h) {
 	var $confirm = $('#'+id);
     var confirm = $confirm.data('amui.modal');
