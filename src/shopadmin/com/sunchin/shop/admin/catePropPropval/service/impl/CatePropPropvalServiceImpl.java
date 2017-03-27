@@ -16,6 +16,7 @@ import com.sunchin.shop.admin.catePropPropval.service.CatePropPropvalService;
 import com.sunchin.shop.admin.pojo.ScCatePropPropVal;
 
 import framework.db.DBUtil;
+import framework.util.CommonUtils;
 import framework.util.ComparatorCategoryVO;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -28,7 +29,7 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 	private DBUtil db;
 	
 	public List<Map> queryCategoryTree() throws Exception{
-		List<Map> list = catePropPropvalDAO.queryBySQL();
+		List<Map> list = catePropPropvalDAO.queryTreeBySQL();
 		Map root = null;
 		Map<String,Map> temp = new TreeMap();
 		for (Map pojo : list) {
@@ -84,15 +85,70 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 		return trees;
 	}
 	
-	
 	/**
-	 * 查询类别对应的属性和属性对应的属性值信息
+	 * 该类别的所有属性和属性值
 	 * @param cateId
 	 */
-	public void queryList(String cateId){
-		
+	public Map queryMapByCateId(String cateId){
+		List<Map> list = catePropPropvalDAO.queryMapByCateId(cateId);
+		Map map = this.generateData(list);
+		return map;
 	}
 	
+	private Map generateData(List<Map> list) {
+		Map<String, Object> map = new HashMap();
+		for (int i = 0; i < list.size(); i++) {
+			Map row = list.get(i);
+			String propName = CommonUtils.getString(row.get("propName"));
+			String valName = CommonUtils.getString(row.get("valName"));
+			String propId = CommonUtils.getString(row.get("propid"));
+			String valId = CommonUtils.getString(row.get("valid"));
+			Object tempMap = map.get(propName);
+			if(tempMap!=null) {
+				Map childMap = (HashMap)tempMap;
+				childMap.put("propName", propName);
+				childMap.put("propId", propId);
+				Object tempValName = childMap.get("valNames");
+				List tempValIdList = (ArrayList)childMap.get("valIds");
+				if(tempValName!=null/* && tempValIdList!=null*/){
+					List<String> valList = (ArrayList)tempValName;
+					valList.add(valName);
+					List<String> idList = (ArrayList)tempValIdList;
+					idList.add(valId);
+				}else{
+					List<String> valList = new ArrayList<String>();
+					valList.add(valName);
+					childMap.put("valNames", valList);
+					List<String> idList = new ArrayList<String>();
+					idList.add(valId);
+					childMap.put("valIds", idList);
+				}
+			} else {
+				Map childMap = new HashMap();
+				childMap.put("propId", propId);
+				childMap.put("propName", propName);
+				map.put(propName, childMap);
+				List tempValNameList = (ArrayList)childMap.get("valNames");
+				List tempValIdList = (ArrayList)childMap.get("valIds");
+				if(tempValNameList!=null && tempValIdList!=null){
+					List<String> valList = (ArrayList)tempValNameList;
+					valList.add(valName);
+					List<String> idList = (ArrayList)tempValIdList;
+					idList.add(valId);
+				}else{
+					List<String> valList = new ArrayList<String>();
+					valList.add(valName);
+					childMap.put("valNames", valList);
+					List<String> idList = new ArrayList<String>();
+					idList.add(valId);
+					childMap.put("valIds", idList);
+				}
+			}
+		}
+		System.out.println(map);
+		return map;
+	}
+
 	public void saveCatePropPropVal(ScCatePropPropVal catePropPropVal) throws Exception {
 		/*String cateOrder = CommonUtils.getString(category.getCateOrder());
 		if(cateOrder.length()==1){

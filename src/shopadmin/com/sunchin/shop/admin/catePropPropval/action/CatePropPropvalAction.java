@@ -11,13 +11,18 @@ import com.sunchin.shop.admin.pojo.ScCatePropPropVal;
 
 @SuppressWarnings("rawtypes")
 public class CatePropPropvalAction {
-	
-	@Resource(name="catePropPropvalService")
-	private CatePropPropvalService catePropPropvalService; 
+
+	@Resource(name = "catePropPropvalService")
+	private CatePropPropvalService catePropPropvalService;
 	private List<Map> trees;
+	private Map map;
 	private ScCatePropPropVal catePropPropVal;
 	private String cateId;
-	
+
+	/**
+	 * 查询类别树
+	 * @return
+	 */
 	public String queryCategoryTree() {
 		try {
 			trees = catePropPropvalService.queryCategoryTree();
@@ -26,17 +31,25 @@ public class CatePropPropvalAction {
 		}
 		return Action.SUCCESS;
 	}
-	
-	public String queryList(){
+
+	/**
+	 * 该类别的所有属性和属性值
+	 * @return
+	 */
+	public String queryMapByCateId() {
 		try {
-			catePropPropvalService.queryList(cateId);
+			map = catePropPropvalService.queryMapByCateId(cateId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}
-	
-	public String saveCatePropPropVal(){
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String saveCatePropPropVal() {
 		try {
 			catePropPropvalService.saveCatePropPropVal(catePropPropVal);
 		} catch (Exception e) {
@@ -44,7 +57,7 @@ public class CatePropPropvalAction {
 		}
 		return Action.SUCCESS;
 	}
-	
+
 	public List<Map> getTrees() {
 		return trees;
 	}
@@ -67,6 +80,14 @@ public class CatePropPropvalAction {
 
 	public void setCateId(String cateId) {
 		this.cateId = cateId;
+	}
+
+	public Map getMap() {
+		return map;
+	}
+
+	public void setMap(Map map) {
+		this.map = map;
 	}
 
 }

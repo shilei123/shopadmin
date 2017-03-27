@@ -22,5 +22,11 @@ public interface CatePropPropvalService {
 	 */
 	public List<Map> queryCategoryTree() throws Exception;
 	
-	public void queryList(String cateId) throws Exception;
+	/**
+	 * 查询该类别下的所有属性和属性值
+	 * @param cateId
+	 * @return
+	 * @throws Exception
+	 */
+	public Map queryMapByCateId(String cateId) throws Exception;
 }
