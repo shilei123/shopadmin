@@ -15,7 +15,7 @@ public class CatePropPropvalAction {
 	@Resource(name = "catePropPropvalService")
 	private CatePropPropvalService catePropPropvalService;
 	private List<Map> trees;
-	private List map;
+	private List list;
 	private ScCatePropPropVal catePropPropVal;
 	private String cateId;
 
@@ -36,9 +36,9 @@ public class CatePropPropvalAction {
 	 * 该类别的所有属性和属性值
 	 * @return
 	 */
-	public String queryMapByCateId() {
+	public String queryListByCateId() {
 		try {
-			map = catePropPropvalService.queryMapByCateId(cateId);
+			list = catePropPropvalService.queryListByCateId(cateId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,7 +46,7 @@ public class CatePropPropvalAction {
 	}
 
 	/**
-	 * 
+	 * 保存类别-属性属性值
 	 * @return
 	 */
 	public String saveCatePropPropVal() {
@@ -82,12 +82,12 @@ public class CatePropPropvalAction {
 		this.cateId = cateId;
 	}
 
-	public List getMap() {
-		return map;
+	public List getList() {
+		return list;
 	}
 
-	public void setMap(List map) {
-		this.map = map;
+	public void setList(List list) {
+		this.list = list;
 	}
 
 }

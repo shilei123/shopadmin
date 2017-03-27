@@ -23,7 +23,7 @@ public class CatePropPropvalDAO {
 		return DBUtil.getInstance().queryBySQL(sql, FlagEnum.ACT.getCode());
 	}
 	
-	/**
+	/**类别-属性属性值管理修改
 	 * 查询该类别的所有属性和属性值
 	 * @param cateId
 	 * @return
@@ -31,7 +31,7 @@ public class CatePropPropvalDAO {
 	public List<Map> queryMapByCateId(String cateId){
 		//需要查出类别下的所有属性，暂不加上t4.flag=1 and t5.flag=1
 		StringBuffer sql = new StringBuffer();
-		sql.append(" select t1.cate_name,t3.id as propId,t3.prop_name,t5.id as valId,t5.val_name from sc_category t1 ");
+		sql.append(" select t1.cate_name,t3.id as prop_id,t3.prop_name,t4.id as prop_propval_id,t5.id as val_id,t5.val_name from sc_category t1 ");
 		sql.append(" left join sc_property_category t2 on t2.cate_id=t1.id ");
 		sql.append(" left join sc_property t3 on t3.id=t2.prop_id ");
 		sql.append(" left join sc_property_propvalue t4 on t4.prop_id=t2.prop_id ");
@@ -47,4 +47,16 @@ public class CatePropPropvalDAO {
 		params.add(FlagEnum.ACT.getCode());
 		return DBUtil.getInstance().queryBySQL(sql.toString(), params);
 	}
+	
+	/*public ScCatePropPropVal findPojo(String cateId, String proppropvalId){
+		Map params = new HashMap<String, String>();
+		params.put("flag", FlagEnum.ACT.getCode());
+		params.put("cateId", cateId);
+		params.put("proppropvalId", proppropvalId);
+		List<ScCatePropPropVal> list = DBUtil.getInstance().queryByPojo(ScCatePropPropVal.class, params);
+		if(list!=null && !list.isEmpty()){
+			return list.get(0);
+		}
+		return null;
+	}*/
 }

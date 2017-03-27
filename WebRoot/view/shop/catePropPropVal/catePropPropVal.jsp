@@ -29,25 +29,11 @@
 								</div>
 							</td>
 							<td>&nbsp;</td>
-							<td>
+							<td style="vertical-align:top;">
 								<div class="am-panel am-panel-default">
 							  		<div class="am-panel-hd">属性和属性值信息</div>
 							  		<div class="am-panel-bd frame-no-padding">
-							  			<table class="frame-query-table">
-											<tr>
-												<td width="150">
-													<div class="frame-div-padd10">
-								        				<label for="inp_categoryName" class="am-form-label">类别名称：</label>
-								        			</div>
-												</td>
-												<td>
-													<div class="frame-div-padd10">
-								        				<input type="text" id="inp_categoryName" style="width: 300px;" disabled="disabled">
-								        				<input type="hidden" id="inp_categoryId" style="width: 300px;" disabled="disabled">
-								        				<input type="hidden" id="inp_levels" style="width: 300px;" disabled="disabled">
-								        			</div>
-												</td>
-											</tr>
+							  			<table class="frame-query-table" id="propPropValTable">
 										</table>
 							  		</div>
 								</div>
@@ -58,7 +44,7 @@
       		</div>
     	</div>
   	</div>
-  	<script type="text/javascript" src="${path }/view/js/category_categorymanage.js"></script>
+  	<script type="text/javascript" src="${path }/view/js/catePropPropVal.js"></script>
 </div>
 </body>
 </html>

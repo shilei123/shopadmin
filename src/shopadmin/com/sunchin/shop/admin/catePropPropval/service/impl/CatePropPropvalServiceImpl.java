@@ -2,16 +2,20 @@ package com.sunchin.shop.admin.catePropPropval.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
+
+import com.sunchin.shop.admin.dict.FlagEnum;
 
 import com.sunchin.shop.admin.catePropPropval.dao.CatePropPropvalDAO;
 import com.sunchin.shop.admin.catePropPropval.service.CatePropPropvalService;
@@ -91,7 +95,7 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 	 * 该类别的所有属性和属性值
 	 * @param cateId
 	 */
-	public List queryMapByCateId(String cateId){
+	public List queryListByCateId(String cateId){
 		List<Map> list = catePropPropvalDAO.queryMapByCateId(cateId);
 		List map = this.generateData(list);
 		return map;
@@ -101,9 +105,9 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 		Map<String, Object> map = new HashMap();
 		for (int i = 0; i < list.size(); i++) {
 			Map row = list.get(i);
-			String propId = CommonUtils.getString(row.get("propid"));
+			String propId = CommonUtils.getString(row.get("propId"));
 			String propName = CommonUtils.getString(row.get("propName"));
-			String valId = CommonUtils.getString(row.get("valid"));
+			String propPropvalId = CommonUtils.getString(row.get("propPropvalId"));
 			String valName = CommonUtils.getString(row.get("valName"));
 			String propInfo = propId+"_"+propName;
 			
@@ -115,7 +119,7 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 			} else {
 				valList = new ArrayList();
 				//如果没有属性值的则不添加进去
-				if(StringUtils.isNotBlank(valId) && StringUtils.isNotBlank(valName)) {
+				if(StringUtils.isNotBlank(propPropvalId) && StringUtils.isNotBlank(valName)) {
 					valList.add(row);
 				}
 				map.put(propInfo, valList);
@@ -136,7 +140,7 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 			List vals = (ArrayList) map.get(key);
 			for(int i = 0; i < vals.size();i++) {
 				Map row = (Map) vals.get(i);
-				row.remove("propid");
+				row.remove("propId");
 				row.remove("propName");
 				row.remove("cateName");
 			}
@@ -149,15 +153,10 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 	}
 
 	public void saveCatePropPropVal(ScCatePropPropVal catePropPropVal) throws Exception {
-		/*String cateOrder = CommonUtils.getString(category.getCateOrder());
-		if(cateOrder.length()==1){
-			cateOrder = "0" + cateOrder;
-		}
-		category.setCateOrder(cateOrder);
-		category.setId(UUID.randomUUID().toString());
-		category.setFlag(FlagEnum.ACT.getCode());
-		category.setCreateTime(new Date());
-		db.insert(category);*/
+		catePropPropVal.setId(UUID.randomUUID().toString());
+		catePropPropVal.setCreateTime(new Date());
+		catePropPropVal.setFlag(FlagEnum.ACT.getCode());
+		db.insert(catePropPropVal);
 	}
 
 }

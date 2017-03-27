@@ -21,27 +21,57 @@ function initCategoryTree() {
 
 var categoryClick = function(node) {
 	//不是最后一级
-	if(node.children!=null){
+	if(node.children!=null && node.children!=undefined){
 		showAlert("请选择一个子类别！");
 		return;
 	}
 	//是最后一级，拼html
 	$.ajax({
 		type : "POST",
-		//url : path_ + "/view/catePropPropval/catePropPropval!queryList.action",
+		url : path_ + "/view/catePropPropval/catePropPropval!queryListByCateId.action",
 		dataType : "json",
-		data: {"category.id": node.pkId},
+		data: {"cateId": node.pkId},
 		success : function(json){
+			console.log(json);
+			$("#propPropValTable").html("");
 			var html = "";
-			html += "<tr><td></td></tr>";
-			/*if(json.msg==null || json.msg=="null") {
-				$("#category_detail_table input").each(function(i,n){n.value = "";});
-				initCategoryTree();//初始化菜单
-				showAlert("删除成功");
-			} else {
-				showAlert(json.msg);
-			}*/
-			
+			for(x in json.map){
+				/*html += "<tr><td>" + json.map[x].propName + "</td><td>";
+				var valIds = json.map[x].valIds;
+				var valNames = json.map[x].valNames;
+				if(valIds!=null && valNames!=null){
+					
+				}*/
+				console.log(json.map[x].valNames);
+				/*if(x<json.list.length-1 && json.list[x].propName!=json.list[x+1].propName){
+					//控制行
+					html += "<tr><td>";
+					html += json.list[x].propName + "</td><td>";
+					//控制列
+					if(json.list[x].propName==json.list[x+1].propName){
+						//属性多属性值
+						html += "<input name='chooseVal' type='checkbox'/>" + json.list[x].valName;
+					}else{
+						if(json.list[x].valName!=null && json.list[x].valName!=undefined){
+							//属性单属性值
+							html += "<input name='chooseVal' type='checkbox'/>" + json.list[x].valName;
+						}else{
+							//属性无属性值
+							html += "<input name='chooseVal' type='checkbox'/>" + json.list[x].valName;
+						}
+					}
+					html += "</td></tr>";
+				}*/
+				/*if(x<json.list.length-1){
+					//控制行
+					if(json.list[x].propName!=json.list[x+1].propName){
+						html += json.list[x].propName + "</td><td>";
+					}else{
+						html += 
+					}
+				}*/
+			}
+			$("#propPropValTable").append(html);
 		},
 		error: function(e){
 			showAlert("请检查该类别是否有子类别！");
