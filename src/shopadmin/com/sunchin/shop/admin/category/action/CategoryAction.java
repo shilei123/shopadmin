@@ -25,6 +25,7 @@ public class CategoryAction {
 	private List<Map> trees;
 	private String msg;
 	private ScCategory category;
+	private List<ScCategory> categorys;
 	
 	private static final String CATEGORY_SQL = " select o.id,o.cate_name,o.memo,o.cate_order,o.levels,o.logo,o.url,o.isuse,o.parent_id from sc_category o where o.flag=? ";
 	
@@ -124,7 +125,16 @@ public class CategoryAction {
 		}
 		return Action.SUCCESS;
 	}
-
+	
+	public String queryGategory() {
+		try {
+			this.categorys = this.categoryService.queryCategory(category.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
 	public List<Map> getTrees() {
 		return trees;
 	}
@@ -141,6 +151,10 @@ public class CategoryAction {
 		this.msg = msg;
 	}
 
+	public List<ScCategory> getCategorys() {
+		return categorys;
+	}
+	
 	public ScCategory getCategory() {
 		return category;
 	}
