@@ -28,7 +28,11 @@ var attachServer_ = "${attachServer}";
 <script type="text/javascript" src="${path }/js/jquery-1.8.0.min.js"></script>
 <!-- laypage -->
 <script type="text/javascript" src="${path }/js/laypage-v1.3/laypage/laypage.js"></script>
+<!-- layer -->
 <script type="text/javascript" src="${path }/js/layer-v3.0.3/layer/layer.js"></script>
+<!-- layui 此处集成进来主要是为了用laydate组件，因为单独引入laydate组件和amazeui的css有冲突-->
+<script type="text/javascript" charset="utf-8" src="${path }/js/layui-v1.0.9_rls/layui/layui.js"></script>
+<link rel="stylesheet" href="${path }/js/layui-v1.0.9_rls/layui/css/layui.css"  media="all">
 <!-- easyui1.4 -->
 <link rel="stylesheet" type="text/css" href="${path }/js/jquery-easyui-1.4/themes/gray/easyui.css">
 <link rel="stylesheet" type="text/css" href="${path }/js/jquery-easyui-1.4/themes/icon.css">
@@ -44,6 +48,5 @@ var attachServer_ = "${attachServer}";
 <!-- jQuery validate -->
 <script type="text/javascript" src="${path }/js/validation/jquery.validate.js"></script>
 <script type="text/javascript" src="${path }/js/validation/messages_zh.js"></script>
-
 <!-- jQuery ajaxfileupload -->
 <script type="text/javascript" src="${path }/js/ajaxfileupload.js"></script>
