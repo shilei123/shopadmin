@@ -3,12 +3,14 @@ package com.sunchin.shop.admin.catePropPropval.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.catePropPropval.dao.CatePropPropvalDAO;
@@ -89,64 +91,61 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 	 * 该类别的所有属性和属性值
 	 * @param cateId
 	 */
-	public Map queryMapByCateId(String cateId){
+	public List queryMapByCateId(String cateId){
 		List<Map> list = catePropPropvalDAO.queryMapByCateId(cateId);
-		Map map = this.generateData(list);
+		List map = this.generateData(list);
 		return map;
 	}
 	
-	private Map generateData(List<Map> list) {
+	private List generateData(List<Map> list) {
 		Map<String, Object> map = new HashMap();
 		for (int i = 0; i < list.size(); i++) {
 			Map row = list.get(i);
-			String propName = CommonUtils.getString(row.get("propName"));
-			String valName = CommonUtils.getString(row.get("valName"));
 			String propId = CommonUtils.getString(row.get("propid"));
+			String propName = CommonUtils.getString(row.get("propName"));
 			String valId = CommonUtils.getString(row.get("valid"));
-			Object tempMap = map.get(propName);
-			if(tempMap!=null) {
-				Map childMap = (HashMap)tempMap;
-				childMap.put("propName", propName);
-				childMap.put("propId", propId);
-				Object tempValName = childMap.get("valNames");
-				List tempValIdList = (ArrayList)childMap.get("valIds");
-				if(tempValName!=null/* && tempValIdList!=null*/){
-					List<String> valList = (ArrayList)tempValName;
-					valList.add(valName);
-					List<String> idList = (ArrayList)tempValIdList;
-					idList.add(valId);
-				}else{
-					List<String> valList = new ArrayList<String>();
-					valList.add(valName);
-					childMap.put("valNames", valList);
-					List<String> idList = new ArrayList<String>();
-					idList.add(valId);
-					childMap.put("valIds", idList);
-				}
+			String valName = CommonUtils.getString(row.get("valName"));
+			String propInfo = propId+"_"+propName;
+			
+			Object vals = map.get(propInfo);
+			List valList = null;
+			if(vals != null) {
+				valList = (ArrayList) vals;
+				valList.add(row);
 			} else {
-				Map childMap = new HashMap();
-				childMap.put("propId", propId);
-				childMap.put("propName", propName);
-				map.put(propName, childMap);
-				List tempValNameList = (ArrayList)childMap.get("valNames");
-				List tempValIdList = (ArrayList)childMap.get("valIds");
-				if(tempValNameList!=null && tempValIdList!=null){
-					List<String> valList = (ArrayList)tempValNameList;
-					valList.add(valName);
-					List<String> idList = (ArrayList)tempValIdList;
-					idList.add(valId);
-				}else{
-					List<String> valList = new ArrayList<String>();
-					valList.add(valName);
-					childMap.put("valNames", valList);
-					List<String> idList = new ArrayList<String>();
-					idList.add(valId);
-					childMap.put("valIds", idList);
+				valList = new ArrayList();
+				//如果没有属性值的则不添加进去
+				if(StringUtils.isNotBlank(valId) && StringUtils.isNotBlank(valName)) {
+					valList.add(row);
 				}
+				map.put(propInfo, valList);
 			}
 		}
-		System.out.println(map);
-		return map;
+		
+		//转换成json格式数据
+		List nodes = new ArrayList(map.size());
+		Iterator iter = map.keySet().iterator();
+		while(iter.hasNext()) {
+			Map node = new HashMap(3);
+			String key = iter.next().toString();
+			String[] keys = key.split("_");
+			node.put("propId", keys[0]);
+			node.put("propName", keys[1]);
+			
+			//去掉无关信息 
+			List vals = (ArrayList) map.get(key);
+			for(int i = 0; i < vals.size();i++) {
+				Map row = (Map) vals.get(i);
+				row.remove("propid");
+				row.remove("propName");
+				row.remove("cateName");
+			}
+			
+			node.put("vals", vals);
+			nodes.add(node);
+		}
+		
+		return nodes;
 	}
 
 	public void saveCatePropPropVal(ScCatePropPropVal catePropPropVal) throws Exception {

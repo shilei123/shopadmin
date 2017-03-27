@@ -28,5 +28,5 @@ public interface CatePropPropvalService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Map queryMapByCateId(String cateId) throws Exception;
+	public List queryMapByCateId(String cateId) throws Exception;
 }
