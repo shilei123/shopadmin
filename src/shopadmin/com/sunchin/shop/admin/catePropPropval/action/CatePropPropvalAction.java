@@ -15,7 +15,7 @@ public class CatePropPropvalAction {
 	@Resource(name = "catePropPropvalService")
 	private CatePropPropvalService catePropPropvalService;
 	private List<Map> trees;
-	private Map map;
+	private List map;
 	private ScCatePropPropVal catePropPropVal;
 	private String cateId;
 
@@ -82,11 +82,11 @@ public class CatePropPropvalAction {
 		this.cateId = cateId;
 	}
 
-	public Map getMap() {
+	public List getMap() {
 		return map;
 	}
 
-	public void setMap(Map map) {
+	public void setMap(List map) {
 		this.map = map;
 	}
 
