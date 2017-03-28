@@ -10,6 +10,7 @@ public class ScGoodsCatePropPropVal implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String goodsId;
+	private String goodsChildId;
 	private String catePropPropvalId;
 	private String type;
 	private String orders;
@@ -81,4 +82,11 @@ public class ScGoodsCatePropPropVal implements java.io.Serializable {
 		this.createPeople = createPeople;
 	}
 
+	public String getGoodsChildId() {
+		return goodsChildId;
+	}
+	
+	public void setGoodsChildId(String goodsChildId) {
+		this.goodsChildId = goodsChildId;
+	}
 }
