@@ -15,6 +15,7 @@ import com.sunchin.shop.admin.pojo.ScCategory;
 
 import framework.config.SysDict;
 import framework.db.DBUtil;
+import framework.util.CommonUtils;
 
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
@@ -32,7 +33,15 @@ public class CategoryServiceImpl implements CategoryService {
 			cateOrder = "0" + cateOrder;
 		}
 		category.setCateOrder(cateOrder);*/
+		String parentId = CommonUtils.getString(category.getParentId());
+		if(parentId.equals(""))	return;
+		List<ScCategory> list = categoryDAO.queryCategory("id", parentId);
+		if(list==null || list.isEmpty()) return;
+		String levels = list.get(0).getLevels();
+		if(levels==null || levels.isEmpty()) return;
+		Integer level = Integer.parseInt(levels) + 1;
 		category.setId(UUID.randomUUID().toString());
+		category.setLevels(level.toString());
 		category.setFlag(FlagEnum.ACT.getCode());
 		category.setCreateTime(new Date());
 		db.insert(category);
@@ -45,8 +54,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<ScCategory> queryCategory(String parentId) throws Exception {
-		List<ScCategory> list = categoryDAO.queryCategoryByParentId(parentId);
+	public List<ScCategory> queryCategory(String id) throws Exception {
+		List<ScCategory> list = categoryDAO.queryCategory("parentId", id);
 		return list;
 	}
 

@@ -15,9 +15,9 @@ import framework.db.DBUtil;
 @Repository("categoryDAO")
 public class CategoryDAO {
 
-	public List<ScCategory> queryCategoryByParentId(String parentId) {
+	public List<ScCategory> queryCategory(String param, String id) {
 		Map params = new HashMap<>(2);
-		params.put("parentId", parentId);
+		params.put(param, id);
 		params.put("flag", FlagEnum.ACT.getCode());
 		List<ScCategory> list = DBUtil.getInstance().queryByPojo(ScCategory.class, params);
 		return list;

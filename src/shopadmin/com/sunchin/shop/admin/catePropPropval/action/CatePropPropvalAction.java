@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.catePropPropval.service.CatePropPropvalService;
-import com.sunchin.shop.admin.pojo.ScCatePropPropVal;
 
 @SuppressWarnings("rawtypes")
 public class CatePropPropvalAction {
@@ -15,9 +14,11 @@ public class CatePropPropvalAction {
 	@Resource(name = "catePropPropvalService")
 	private CatePropPropvalService catePropPropvalService;
 	private List<Map> trees;
-	private List list;
-	private ScCatePropPropVal catePropPropVal;
+	private List list;		//该类别所有属性和属性值
+	private List listCheck;	//该类别已经选中的属性属性值
 	private String cateId;
+	private String cateIds;
+	private String propPropValIds;
 
 	/**
 	 * 查询类别树
@@ -39,6 +40,7 @@ public class CatePropPropvalAction {
 	public String queryListByCateId() {
 		try {
 			list = catePropPropvalService.queryListByCateId(cateId);
+			listCheck = catePropPropvalService.queryListCheck(cateId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,7 +53,7 @@ public class CatePropPropvalAction {
 	 */
 	public String saveCatePropPropVal() {
 		try {
-			catePropPropvalService.saveCatePropPropVal(catePropPropVal);
+			catePropPropvalService.saveCatePropPropVal(cateId, propPropValIds);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -66,12 +68,16 @@ public class CatePropPropvalAction {
 		this.trees = trees;
 	}
 
-	public ScCatePropPropVal getCatePropPropVal() {
-		return catePropPropVal;
+	public String getCateIds() {
+		return cateIds;
 	}
 
-	public void setCatePropPropVal(ScCatePropPropVal catePropPropVal) {
-		this.catePropPropVal = catePropPropVal;
+	public void setCateIds(String cateIds) {
+		this.cateIds = cateIds;
+	}
+
+	public void setPropPropValIds(String propPropValIds) {
+		this.propPropValIds = propPropValIds;
 	}
 
 	public String getCateId() {
@@ -88,6 +94,14 @@ public class CatePropPropvalAction {
 
 	public void setList(List list) {
 		this.list = list;
+	}
+
+	public List getListCheck() {
+		return listCheck;
+	}
+
+	public void setListCheck(List listCheck) {
+		this.listCheck = listCheck;
 	}
 
 }

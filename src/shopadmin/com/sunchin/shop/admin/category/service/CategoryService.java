@@ -28,10 +28,10 @@ public interface CategoryService {
 	public void delCategory(String categoryId) throws Exception;
 	
 	/**
-	 * 查询类别
-	 * @param parentId
+	 * 查询该类别是否有子类
+	 * @param id
 	 * @throws Exception
 	 */
-	public List<ScCategory> queryCategory(String parentId) throws Exception;
+	public List<ScCategory> queryCategory(String id) throws Exception;
 	
 }

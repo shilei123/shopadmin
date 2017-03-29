@@ -32,45 +32,25 @@ var categoryClick = function(node) {
 		dataType : "json",
 		data: {"cateId": node.pkId},
 		success : function(json){
-			console.log(json);
+			//console.log(json.list);
+			//console.log(json.listCheck);
 			$("#propPropValTable").html("");
 			var html = "";
-			for(x in json.map){
-				/*html += "<tr><td>" + json.map[x].propName + "</td><td>";
-				var valIds = json.map[x].valIds;
-				var valNames = json.map[x].valNames;
-				if(valIds!=null && valNames!=null){
-					
-				}*/
-				console.log(json.map[x].valNames);
-				/*if(x<json.list.length-1 && json.list[x].propName!=json.list[x+1].propName){
-					//控制行
-					html += "<tr><td>";
-					html += json.list[x].propName + "</td><td>";
-					//控制列
-					if(json.list[x].propName==json.list[x+1].propName){
-						//属性多属性值
-						html += "<input name='chooseVal' type='checkbox'/>" + json.list[x].valName;
-					}else{
-						if(json.list[x].valName!=null && json.list[x].valName!=undefined){
-							//属性单属性值
-							html += "<input name='chooseVal' type='checkbox'/>" + json.list[x].valName;
+			for(x in json.list){
+				html += "<tr><td width='10%'  style=\"padding: 5px;\">" + json.list[x].propName + "</td><td style='padding='5px';'>";
+				var vals = json.list[x].vals;
+				for(y in vals){
+					if(vals[y].valName!=null && vals[y].valName!=undefined && vals[y].valName!=""){
+						if(checkPropPropVal(json.listCheck, vals[y].propPropvalId)){
+							html += "<input name='chooseVal' class='" + vals[y].propPropvalId + "' type='checkbox' style=\"vertical-align: middle;margin: 0px\" checked='checked'/>" + vals[y].valName + "&nbsp;&nbsp;&nbsp;&nbsp;";
 						}else{
-							//属性无属性值
-							html += "<input name='chooseVal' type='checkbox'/>" + json.list[x].valName;
+							html += "<input name='chooseVal' class='" + vals[y].propPropvalId + "' type='checkbox' style=\"vertical-align: middle;margin: 0px\"/>" + vals[y].valName + "&nbsp;&nbsp;&nbsp;&nbsp;";
 						}
 					}
-					html += "</td></tr>";
-				}*/
-				/*if(x<json.list.length-1){
-					//控制行
-					if(json.list[x].propName!=json.list[x+1].propName){
-						html += json.list[x].propName + "</td><td>";
-					}else{
-						html += 
-					}
-				}*/
+				}
+				html += "</td>";
 			}
+			html += "<tr><td colspan='2' style=\"text-align: center;\"><button onclick='saveIt(\"" + node.pkId + "\");' class='am-btn am-btn-success'>保存</button></td></tr>"
 			$("#propPropValTable").append(html);
 		},
 		error: function(e){
@@ -79,60 +59,68 @@ var categoryClick = function(node) {
 	});
 };
 
-/*var getCategoryInfo = function(node){
-	var obj = new Object();
-	obj.categoryId = node.pkId;
-	obj.categoryName = node.text;
-	obj.parentId = node.parentId;
-	obj.levels = node.levels;
-	if(node.attributes!=null){
-		obj.memo = node.attributes.memo;
-		obj.cateOrder = node.attributes.cateOrder;
-		obj.logo = node.attributes.logo;
-		obj.url = node.attributes.url;
-		obj.isuse = node.attributes.isuse;
-	}
-	var pnode = $('#ul_category_tree').tree('getParent',node.target);
-	if(pnode!=null){
-		obj.parentId = pnode.pkId;
-	}
-	return obj;
-}*/
+var checkPropPropVal = function(listCheck, propPropvalId){
+	for(x in listCheck){
+		if(listCheck[x].proppropvalId==propPropvalId){
+			return true;
+		}
+	};
+	return false;
+};
 
+//数据库查到的propPropValId写到hidden
+/*var writeHidden = function(listCheck){
+	$("#propPropValIds").val("");
+	var checkIds = "";
+	for(i in listCheck){
+		checkIds += listCheck[i].proppropvalId;
+		checkIds += ",";
+	};
+	$("#propPropValIds").val(checkIds);
+};*/
 
-$("#delCategoryBtn").click(function() {
-	var node = $("#ul_category_tree").tree("getSelected");
-	if(node==null){
-		showAlert("请选择一个类别！");
-		return;
+//check或者uncheck在修改hidden
+/*var checkIt = function(propPropValId){
+	var checkIds = $("#propPropValIds").val();
+	var arr = checkIds.split(",");
+	var checkIdsNew = "";
+	var isCheck = $("#"+propPropValId).attr('checked');
+	if(isCheck=="checked"){
+		checkIdsNew += propValueId;
+		checkIdsNew += ",";
 	}
-	var msg = getCategoryInfo(node);
-	if(msg.categoryLevel=="0") {
-		showAlert("该目录不允许删除！");
-		return;
-	}
-	showConfirm("确认删除？",function() {
-		$.ajax( {
-			type : "POST",
-			url : path_ + "/view/category/category!delCategory.action",
-			dataType : "json",
-			data: {"category.id": $("#inp_categoryId").val()},
-			success : function(json) {
-				if(json.msg==null || json.msg=="null") {
-					$("#category_detail_table input").each(function(i,n){n.value = "";});
-					initCategoryTree();//初始化菜单
-					showAlert("删除成功");
-				} else {
-					showAlert(json.msg);
-				}
-			},
-			error: function(e) {
-				showAlert("删除失败，请检查该类别是否有子类别！");
-			} 
-		});
+	with no chang
+	for(x in arr){
+		if(arr[x]!="" && arr[x]!=null && arr[x]!=propValueId){
+			checkPropValueIdsNew += arr[x];
+			checkPropValueIdsNew += ",";
+		}
+	};
+	$("#propPropValIds").val(checkPropValueIdsNew);
+};*/
+
+var saveIt = function(cateId) {
+	var temp = "";
+	$('input:checkbox[name=chooseVal]:checked').each(function(i){
+		if(0==i){
+			temp = $(this).attr("class");
+		}else{
+			temp += (","+$(this).attr("class"));
+	   	}
 	});
-});
-
-var closeParamsModal = function(id) {
-	$('#'+id).modal('close');
+	/*$("#propPropValIds").val(temp);*/
+	
+	var data = {"propPropValIds": temp, "cateId": cateId};
+	$.ajax({
+		type : "POST",
+		url : path_ + "/view/catePropPropval/catePropPropval!saveCatePropPropVal.action",
+		data : data,
+		dataType : "json",
+		success : function(json) {
+			showAlert("操作成功");
+		},
+		error : function(e) {
+			showAlert("操作失败");
+		}
+	});
 };

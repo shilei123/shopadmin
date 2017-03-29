@@ -16,7 +16,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
-
 import com.sunchin.shop.admin.catePropPropval.dao.CatePropPropvalDAO;
 import com.sunchin.shop.admin.catePropPropval.service.CatePropPropvalService;
 import com.sunchin.shop.admin.pojo.ScCatePropPropVal;
@@ -92,7 +91,7 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 	}
 	
 	/**
-	 * 该类别的所有属性和属性值
+	 * 该类别的所有属性属性值关系
 	 * @param cateId
 	 */
 	public List queryListByCateId(String cateId){
@@ -152,11 +151,89 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 		return nodes;
 	}
 
-	public void saveCatePropPropVal(ScCatePropPropVal catePropPropVal) throws Exception {
+	/**
+	 *	@param propPropValIds	所有选中的属性属性值关系
+	 */
+	public void saveCatePropPropVal(String cateId, String propPropValIds) throws Exception {
+		List<Map> list = catePropPropvalDAO.queryCatePropPropValByCateId(cateId);//该类别对应的所有 类别-属性属性值关系
+		//数据传入异常、传入和数据库都为空
+		if(cateId==null || propPropValIds==null
+				|| ("".equals(propPropValIds) && (list==null || list.isEmpty())) ) return;
+		
+		//如果分类-属性属性值关系有被引用就逻辑删除(商品录入可能会用到)
+		
+		//传入为空，全删
+		if(propPropValIds.isEmpty()){
+			this.delAllCatePropPropValue(cateId);
+			return;
+		}
+		String[] arr = propPropValIds.split(",");
+		//数据库为空，全增
+		if(list==null || list.isEmpty()){
+			for (int i = 0; i < arr.length; i++) {
+				this.addCatePropPropValue(cateId, arr[i]);
+			}
+			return;
+		}
+		
+		//传入和数据库都不为空（传入有，数据库无，增）
+		for (int i = 0; i < arr.length; i++) {
+			if(arr[i].isEmpty() || arr[i]==null) continue;
+			boolean addFlag = true;
+			for (int j = 0; j < list.size(); j++) {
+				String proppropvalId = CommonUtils.getString(list.get(j).get("propPropvalId"));
+				if(arr[i].equals(proppropvalId)){
+					addFlag = false;
+					break;
+				}
+			}
+			if(addFlag){
+				this.addCatePropPropValue(cateId, arr[i]);
+			}
+		}
+		//传入无，数据库有，删
+		for (int i = 0; i < list.size(); i++) {
+			boolean delFlag = true;
+			String proppropvalId = CommonUtils.getString(list.get(i).get("propPropvalId"));
+			for (int j = 0; j < arr.length; j++) {
+				if(proppropvalId.equals(arr[j])){
+					delFlag = false;
+					break;
+				}
+			}
+			if(delFlag){
+				this.delCatePropPropValue(cateId, proppropvalId);
+			}
+		}
+	}
+	
+	private void delAllCatePropPropValue(String cateId ){
+		String hql = " update ScCatePropPropVal set flag=? where cateId=? ";
+		db.executeHql(hql, FlagEnum.HIS.getCode(), cateId);
+	}
+	
+	private void delCatePropPropValue(String cateId, String proppropvalId){
+		if(!proppropvalId.isEmpty() || proppropvalId!=null){
+			String hql = " update ScCatePropPropVal set flag=? where cateId=? and proppropvalId=? ";
+			db.executeHql(hql, FlagEnum.HIS.getCode(), cateId, proppropvalId);
+		}
+	}
+	
+	private void addCatePropPropValue(String cateId, String propPropValId){
+		ScCatePropPropVal catePropPropVal = new ScCatePropPropVal();
 		catePropPropVal.setId(UUID.randomUUID().toString());
 		catePropPropVal.setCreateTime(new Date());
 		catePropPropVal.setFlag(FlagEnum.ACT.getCode());
+		catePropPropVal.setCateId(cateId);
+		catePropPropVal.setProppropvalId(propPropValId);
+		//catePropPropVal.setOrders(i);
 		db.insert(catePropPropVal);
+	}
+
+	@Override
+	public List queryListCheck(String cateId) throws Exception {
+		List<ScCatePropPropVal> list = catePropPropvalDAO.findPojo(cateId);
+		return list;
 	}
 
 }
