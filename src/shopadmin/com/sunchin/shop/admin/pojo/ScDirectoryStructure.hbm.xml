@@ -3,29 +3,39 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.sunchin.shop.admin.pojo.ScFreight" table="SC_FREIGHT" >
+    <class name="com.sunchin.shop.admin.pojo.ScDirectoryStructure" table="SC_DIRECTORY_STRUCTURE" >
         <id name="id" type="java.lang.String">
             <column name="ID" length="36" />
             <generator class="assigned"></generator>
         </id>
-        <property name="templateName" type="java.lang.String">
-             <column name="TEMPLATE_NAME" length="50">
-                <comment>模板名称</comment>
+        <property name="directoryName" type="java.lang.String">
+             <column name="DIRECTORY_NAME" length="50">
+                <comment>栏目名称</comment>
             </column>
         </property>
-        <property name="valuation" type="java.lang.String">
-             <column name="VALUATION" length="1">
-                <comment>计价方式/件数 0 重量 1 体积 2</comment>
+        <property name="parentDirectoryId" type="java.lang.String">
+             <column name="PARENT_DIRECTORY_ID" length="36">
+                <comment>上级栏目</comment>
             </column>
         </property>
-        <property name="unit" type="java.lang.String">
-             <column name="UNIT" length="1">
-                <comment>单位/件 0 kg 1  m3 2</comment>
+        <property name="cateOrder" type="java.lang.String">
+             <column name="CATE_ORDER" length="2">
+                <comment>顺序</comment>
+            </column>
+        </property>
+        <property name="levels" type="java.lang.String">
+            <column name="LEVELS" length="1">
+                <comment>所属级别/0根节点，1一级类别，2二级类别，3三级类别</comment>
+            </column>
+        </property>
+         <property name="directoryPath" type="java.lang.String">
+            <column name="DIRECTORY_PATH" length="200">
+                <comment>栏目路径</comment>
             </column>
         </property>
         <property name="isuse" type="java.lang.String">
             <column name="ISUSE" length="1">
-                <comment>是否默认/默认1，1有效，0无效</comment>
+                <comment>是否启用/默认1，1启用，0关闭</comment>
             </column>
         </property>
       <property name="createTime" type="java.util.Date">

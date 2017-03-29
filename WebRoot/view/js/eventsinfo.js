@@ -208,7 +208,6 @@ var showEditWin = function(id) {
 		data : data,
 		dataType : "json",
 		success : function(data) {
-			console.log(data);
 			openWin("编辑");
 			var isuse = $("#isuse");
 			isuse.empty();
