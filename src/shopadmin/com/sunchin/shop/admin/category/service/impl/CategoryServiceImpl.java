@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.category.dao.CategoryDAO;
@@ -55,7 +56,12 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public List<ScCategory> queryCategory(String id) throws Exception {
-		List<ScCategory> list = categoryDAO.queryCategory("parentId", id);
+		List<ScCategory> list = null;
+		if(StringUtils.isNotBlank(id)) {
+			list = categoryDAO.queryCategory("parentId", id);
+		} else {
+			list = categoryDAO.queryFirstCategory();
+		}
 		return list;
 	}
 

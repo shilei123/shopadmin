@@ -23,4 +23,15 @@ public class CategoryDAO {
 		return list;
 	}
 	
+	/**
+	 * 查询一级分类
+	 * @return
+	 * @author yangchaowen add by 201703-23
+	 */
+	public List<ScCategory> queryFirstCategory() {
+		Map params = new HashMap<>(2);
+		params.put("levels", "1");
+		params.put("flag", FlagEnum.ACT.getCode());
+		return DBUtil.getInstance().queryByPojo(ScCategory.class, params, " cateOrder ");
+	}
 }
