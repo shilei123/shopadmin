@@ -37,7 +37,7 @@ var categoryClick = function(node) {
 			$("#propPropValTable").html("");
 			var html = "";
 			for(x in json.list){
-				html += "<tr><td width='10%'  style=\"padding: 5px;\">" + json.list[x].propName + "</td><td style='padding='5px';'>";
+				html += "<tr><td width='10%'  style=\"padding: 5px;\">" + json.list[x].propName + ":</td><td style='padding='5px';'>";
 				var vals = json.list[x].vals;
 				for(y in vals){
 					if(vals[y].valName!=null && vals[y].valName!=undefined && vals[y].valName!=""){
@@ -50,7 +50,9 @@ var categoryClick = function(node) {
 				}
 				html += "</td>";
 			}
-			html += "<tr><td colspan='2' style=\"text-align: center;\"><button onclick='saveIt(\"" + node.pkId + "\");' class='am-btn am-btn-success'>保存</button></td></tr>"
+			if(json.list.length>0){
+				html += "<tr><td colspan='2' style=\"text-align: center;\"><button onclick='saveIt(\"" + node.pkId + "\");' class='am-btn am-btn-success'>保存</button></td></tr>"
+			}
 			$("#propPropValTable").append(html);
 		},
 		error: function(e){

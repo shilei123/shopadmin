@@ -15,9 +15,26 @@ import framework.db.DBUtil;
 @Repository("categoryDAO")
 public class CategoryDAO {
 
-	public List<ScCategory> queryCategory(String param, String id) {
+	/**
+	 * 查询该id是否有子类别
+	 * @param id
+	 * @return
+	 */
+	public List<ScCategory> querySonCategory(String id) {
 		Map params = new HashMap<>(2);
-		params.put(param, id);
+		params.put("parentId", id);
+		params.put("flag", FlagEnum.ACT.getCode());
+		List<ScCategory> list = DBUtil.getInstance().queryByPojo(ScCategory.class, params);
+		return list;
+	}
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	public List<ScCategory> queryPojoById(String id) {
+		Map params = new HashMap<>(2);
+		params.put("id", id);
 		params.put("flag", FlagEnum.ACT.getCode());
 		List<ScCategory> list = DBUtil.getInstance().queryByPojo(ScCategory.class, params);
 		return list;

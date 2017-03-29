@@ -34,15 +34,18 @@ public class CategoryServiceImpl implements CategoryService {
 			cateOrder = "0" + cateOrder;
 		}
 		category.setCateOrder(cateOrder);*/
-		String parentId = CommonUtils.getString(category.getParentId());
-		if(parentId.equals(""))	return;
-		List<ScCategory> list = categoryDAO.queryCategory("id", parentId);
+		
+		//根据父id的levels确定新类别的层级levels
+		String id = CommonUtils.getString(category.getParentId());
+		if(id.equals(""))	return;
+		List<ScCategory> list = categoryDAO.queryPojoById(id);
 		if(list==null || list.isEmpty()) return;
 		String levels = list.get(0).getLevels();
 		if(levels==null || levels.isEmpty()) return;
 		Integer level = Integer.parseInt(levels) + 1;
-		category.setId(UUID.randomUUID().toString());
 		category.setLevels(level.toString());
+		
+		category.setId(UUID.randomUUID().toString());
 		category.setFlag(FlagEnum.ACT.getCode());
 		category.setCreateTime(new Date());
 		db.insert(category);
@@ -58,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<ScCategory> queryCategory(String id) throws Exception {
 		List<ScCategory> list = null;
 		if(StringUtils.isNotBlank(id)) {
-			list = categoryDAO.queryCategory("parentId", id);
+			list = categoryDAO.querySonCategory(id);
 		} else {
 			list = categoryDAO.queryFirstCategory();
 		}

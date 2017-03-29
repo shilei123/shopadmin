@@ -32,7 +32,7 @@
 							<td style="vertical-align:top;">
 								<div class="am-panel am-panel-default">
 							  		<div class="am-panel-hd">属性和属性值信息</div>
-								  	<input type="text" id="propPropValIds" value="123"/>
+								  	<input type="hidden" id="propPropValIds" value="123"/>
 							  		<div class="am-panel-bd frame-no-padding">
 							  			<table class="frame-query-table" id="propPropValTable">
 										</table>
