@@ -46,6 +46,20 @@ public class CatePropPropvalAction {
 		}
 		return Action.SUCCESS;
 	}
+	
+	/**
+	 * 根据类别查询类别-属性-属性值关系 add by yangchaowen
+	 * @return
+	 * @date 2017-03-30
+	 */
+	public String queryByCateId() {
+		try {
+			list = catePropPropvalService.queryByCateId(cateId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
 
 	/**
 	 * 保存类别-属性属性值
