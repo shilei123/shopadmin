@@ -116,3 +116,32 @@ var showImgUploadModal = function(params) {
 	var url = path_+'/view/shop/system/imageUpload4layer.jsp?showSelectTab='+params.showSelectTab;
 	showLayerModal('图片上传',url, 700, 450);
 }
+
+var pushString = function(arr, val) {
+	if(arr == undefined || arr==null)
+		return;
+	var exists = false;
+	for(var i = 0; i < arr.length; i++) {
+		if(arr[i]==val) {
+			exists = true;
+			break;
+		}
+	}
+	if(!exists)
+		arr.push(val);
+};
+
+var pushJson = function(arr, key, val, jsonobj) {
+	if(arr == undefined || arr==null)
+		return;
+	var exists = false;
+	for(var i = 0; i < arr.length; i++) {
+		var obj = arr[i];
+		if(obj[key]==val) {
+			exists = true;
+			break;
+		}
+	}
+	if(!exists)
+		arr.push(jsonobj);
+};
