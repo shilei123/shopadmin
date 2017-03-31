@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
 <hibernate-mapping>
-    <class name="com.sunchin.shop.admin.pojo.ScCateProp" table="SC_CATE_PROP">
+    <class name="com.sunchin.shop.admin.pojo.ScPropPropval" table="SC_PROP_PROPVAL">
         <id name="id" type="java.lang.String">
             <column name="ID" length="36" />
             <generator class="assigned"></generator>
@@ -13,19 +12,19 @@
                 <comment>属性id</comment>
             </column>
         </property>
-        <property name="cateId" type="java.lang.String">
-            <column name="CATE_ID" length="36">
-                <comment>类别id</comment>
-            </column>
-        </property>
-        <property name="order" type="java.lang.Integer">
-            <column name="ORDER_">
-                <comment>排序</comment>
+        <property name="valId" type="java.lang.String">
+            <column name="VAL_ID" length="36">
+                <comment>属性值id</comment>
             </column>
         </property>
         <property name="flag" type="java.lang.String">
             <column name="FLAG" length="1">
                 <comment>状态</comment>
+            </column>
+        </property>
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_">
+                <comment>排序</comment>
             </column>
         </property>
         <property name="createTime" type="java.util.Date">

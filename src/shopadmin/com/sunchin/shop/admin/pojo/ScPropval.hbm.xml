@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
 <hibernate-mapping>
-    <class name="com.sunchin.shop.admin.pojo.ScPropertyPropValue" table="SC_PROPERTY_PROPVALUE">
+    <class name="com.sunchin.shop.admin.pojo.ScPropval" table="SC_PROPVAL">
         <id name="id" type="java.lang.String">
             <column name="ID" length="36" />
             <generator class="assigned"></generator>
         </id>
-        <property name="propId" type="java.lang.String">
-            <column name="PROP_ID" length="36">
-                <comment>属性id</comment>
+        <property name="valCode" type="java.lang.String">
+            <column name="VAL_CODE" length="36">
+                <comment>属性值code</comment>
             </column>
         </property>
-        <property name="valId" type="java.lang.String">
-            <column name="VAL_ID" length="36">
-                <comment>属性值id</comment>
+        <property name="valName" type="java.lang.String">
+            <column name="VAL_NAME" length="36">
+                <comment>属性值name</comment>
+            </column>
+        </property>
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_">
+                <comment>排序</comment>
             </column>
         </property>
         <property name="flag" type="java.lang.String">
@@ -23,18 +27,13 @@
                 <comment>状态</comment>
             </column>
         </property>
-        <property name="orders" type="java.lang.Integer">
-            <column name="ORDERS">
-                <comment>排序</comment>
-            </column>
-        </property>
         <property name="createTime" type="java.util.Date">
             <column name="CREATE_TIME" length="7">
-                <comment>创建时间</comment>
+                <comment>创建日期</comment>
             </column>
         </property>
-        <property name="createPeople" type="java.lang.String">
-            <column name="CREATE_PEOPLE" length="36">
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36">
                 <comment>创建人</comment>
             </column>
         </property>

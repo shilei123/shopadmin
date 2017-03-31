@@ -32,8 +32,8 @@
                 <comment>创建时间</comment>
             </column>
         </property>
-        <property name="createPeople" type="java.lang.String">
-            <column name="CREATE_PEOPLE" length="36">
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36">
                 <comment>创建人</comment>
             </column>
         </property>

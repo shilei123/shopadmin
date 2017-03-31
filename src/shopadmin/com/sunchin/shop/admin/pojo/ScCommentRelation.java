@@ -14,7 +14,7 @@ public class ScCommentRelation implements java.io.Serializable {
 	private String goodsId;
 	private String commentsId;
 	private Date createTime;
-	private String createPeople;
+	private String createUserId;
 	private String flag;
 
 	public String getId() {
@@ -65,12 +65,12 @@ public class ScCommentRelation implements java.io.Serializable {
 		this.createTime = createTime;
 	}
 
-	public String getCreatePeople() {
-		return this.createPeople;
+	public String getCreateUserId() {
+		return createUserId;
 	}
 
-	public void setCreatePeople(String createPeople) {
-		this.createPeople = createPeople;
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
 	}
 
 	public String getFlag() {

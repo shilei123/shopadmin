@@ -8,13 +8,14 @@ public class ScFaq implements java.io.Serializable {
 	private String id;
 	private String faqTitle;
 	private String faqContent;
+	private String faqType;
 	private String faqTypeId;
-	private String type;
+	private String category;
 	private String parentId;
 	private String hotQuestion;
-	private int faqOrder;
+	private Integer order;
 	private Date createTime;
-	private String createPeople;
+	private String createUserId;
 	private String flag;
 	private String belong;
 
@@ -50,16 +51,24 @@ public class ScFaq implements java.io.Serializable {
 		this.faqTypeId = faqTypeId;
 	}
 
-	public String getType() {
-		return this.type;
+	public String getFaqType() {
+		return faqType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setFaqType(String faqType) {
+		this.faqType = faqType;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getParentId() {
-		return this.parentId;
+		return parentId;
 	}
 
 	public void setParentId(String parentId) {
@@ -67,39 +76,39 @@ public class ScFaq implements java.io.Serializable {
 	}
 
 	public String getHotQuestion() {
-		return this.hotQuestion;
+		return hotQuestion;
 	}
 
 	public void setHotQuestion(String hotQuestion) {
 		this.hotQuestion = hotQuestion;
 	}
 
-	public int getFaqOrder() {
-		return this.faqOrder;
+	public Integer getOrder() {
+		return order;
 	}
 
-	public void setFaqOrder(int faqOrder) {
-		this.faqOrder = faqOrder;
+	public void setOrder(Integer order) {
+		this.order = order;
 	}
 
 	public Date getCreateTime() {
-		return this.createTime;
+		return createTime;
 	}
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public String getCreatePeople() {
-		return this.createPeople;
+	public String getCreateUserId() {
+		return createUserId;
 	}
 
-	public void setCreatePeople(String createPeople) {
-		this.createPeople = createPeople;
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
 	}
 
 	public String getFlag() {
-		return this.flag;
+		return flag;
 	}
 
 	public void setFlag(String flag) {
@@ -107,7 +116,7 @@ public class ScFaq implements java.io.Serializable {
 	}
 
 	public String getBelong() {
-		return this.belong;
+		return belong;
 	}
 
 	public void setBelong(String belong) {

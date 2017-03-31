@@ -97,7 +97,7 @@ public class FaqTypeServiceImpl implements FaqTypeService {
 	public void updateFaqType(ScFaqType faqType) throws Exception {
 		ScFaqType temp = (ScFaqType) db.get(ScFaqType.class, faqType.getId());
 		temp.setTypeName(faqType.getTypeName());
-		temp.setTypeOrder(faqType.getTypeOrder());
+		temp.setOrder(faqType.getOrder());
 		temp.setTypeDesc(faqType.getTypeDesc());
 		temp.setTypeCode(faqType.getTypeCode());
 		db.update(temp);

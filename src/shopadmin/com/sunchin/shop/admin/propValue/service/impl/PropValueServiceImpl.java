@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.pojo.ScPropValue;
+import com.sunchin.shop.admin.pojo.ScPropval;
 import com.sunchin.shop.admin.propValue.dao.PropValueDAO;
 import com.sunchin.shop.admin.propValue.service.PropValueService;
 
@@ -28,25 +28,25 @@ public class PropValueServiceImpl implements PropValueService {
 	public PageBean queryPropValueList(PageBean pageBean) throws Exception {
 		int total = propValueDAO.queryPropValueCount(pageBean);
 		pageBean.setTotal(total);
-		List<ScPropValue> pageData = propValueDAO.queryPropValuePagination(pageBean);
+		List<ScPropval> pageData = propValueDAO.queryPropValuePagination(pageBean);
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}
 	
 	@Override
 	public void delPropValue(String id) throws Exception {
-		List<ScPropValue> list = propValueDAO.getPropValue(id);
+		List<ScPropval> list = propValueDAO.getPropValue(id);
 		if(list!=null && !list.isEmpty()){
 			propValueDAO.delPropValue(id);
 		}
 	}
 	
 	@Override
-	public void updatePropValue(ScPropValue propValue) throws Exception {
-		ScPropValue val = (ScPropValue) db.get(ScPropValue.class, propValue.getId());
+	public void updatePropValue(ScPropval propValue) throws Exception {
+		ScPropval val = (ScPropval) db.get(ScPropval.class, propValue.getId());
 		val.setValName(propValue.getValName());
 		val.setValCode(propValue.getValCode());
-		val.setValOrder(propValue.getValOrder());
+		val.setOrder(propValue.getOrder());
 		val.setFlag(propValue.getFlag());
 		db.update(val);
 	}
@@ -55,7 +55,7 @@ public class PropValueServiceImpl implements PropValueService {
 	 * 新增
 	 */
 	@Override
-	public void addPropValue(ScPropValue propValue) throws Exception {
+	public void addPropValue(ScPropval propValue) throws Exception {
 		propValue.setId(UUID.randomUUID().toString());
 		propValue.setCreateTime(new Date());
 		propValue.setFlag(FlagEnum.ACT.getCode());
@@ -63,10 +63,10 @@ public class PropValueServiceImpl implements PropValueService {
 	}
 
 	@Override
-	public ScPropValue queryPropValue(String id) throws Exception {
-		Object obj = db.get(ScPropValue.class, id);
+	public ScPropval queryPropValue(String id) throws Exception {
+		Object obj = db.get(ScPropval.class, id);
 		if(obj != null) {
-			return (ScPropValue) obj;
+			return (ScPropval) obj;
 		}
 		return null;
 	}

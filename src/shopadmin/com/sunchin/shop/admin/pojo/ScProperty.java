@@ -2,19 +2,16 @@ package com.sunchin.shop.admin.pojo;
 
 import java.util.Date;
 
+@SuppressWarnings("serial")
 public class ScProperty implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String id;
 	private String propCode;
 	private String propName;
-	private int propOrder;
+	private Integer order;
 	private String flag;
 	private Date createTime;
-	private String createPeople;
+	private String createUserId;
 
 	public String getId() {
 		return this.id;
@@ -40,14 +37,6 @@ public class ScProperty implements java.io.Serializable {
 		this.propName = propName;
 	}
 
-	public int getPropOrder() {
-		return this.propOrder;
-	}
-
-	public void setPropOrder(int propOrder) {
-		this.propOrder = propOrder;
-	}
-
 	public String getFlag() {
 		return this.flag;
 	}
@@ -64,12 +53,20 @@ public class ScProperty implements java.io.Serializable {
 		this.createTime = createTime;
 	}
 
-	public String getCreatePeople() {
-		return this.createPeople;
+	public Integer getOrder() {
+		return order;
 	}
 
-	public void setCreatePeople(String createPeople) {
-		this.createPeople = createPeople;
+	public void setOrder(Integer order) {
+		this.order = order;
+	}
+
+	public String getCreateUserId() {
+		return createUserId;
+	}
+
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
 	}
 
 }

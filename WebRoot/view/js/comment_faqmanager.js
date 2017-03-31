@@ -1,37 +1,30 @@
 $(function() {
-	initCommentType();
+	initFaqType();
 	query();
 });
 
-/*var changea = function(){
-	$("#commentType").focus();
-	$("#commentType").slideDown('fast').promise().done(function () {
-        //js 操作
-    });
-};*/
-
-var initCommentType = function() {
-	/*var data = {"dict.type":"COMMENT_TYPE"};
+var initFaqType = function() {
+	var data = {"dict.type":"FAQ_CATEGORY"};
 	$.ajax({
 		type : "POST",
 		url : path_ + "/view/shop/admin/dict!queryDictByType.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
-			var html = "<option value=''>-请选择-</option>";
+			/*var html = "<option value=''>-请选择-</option>";
 			var dicts = data.dicts;
 			console.log(dicts);
 			for(x in dicts){
 				html += "<option value='" + dicts[x].code + "'>" + dicts[x].name + "</option>"
 			}
-			$("#commentType").html(html);
+			$("#commentType").html(html);*/
 		},
 		error : function(e) {
 		}
-	});*/
+	});
 }
 
-var openCommentInfoWin = function(title) {
+var openFaqInfoWin = function(title) {
 	$("#title").text(title);
 	showModal("doc-modal-2",500,350);
 };
@@ -53,14 +46,14 @@ var query = function() {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='showEditCommentWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span>查看详情</a>";
-	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='delComment(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
+	html += "<a href='javascript:void(0)' onclick='queryFaqInfoWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span>查看详情</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='delFaq(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
 	html += "</div>";
 	return html;
 };
 
-var setCommentInfo = function(data) {
-	var type = "";
+var setFaqInfo = function(data) {
+	/*var type = "";
 	if(data.comment.type=="1"){
 		type="评论";
 	}else if(data.comment.type=="2"){
@@ -70,25 +63,25 @@ var setCommentInfo = function(data) {
 	$("#commentType2").html(html);
 	$("#score2").val(data.comment.score);
 	$("#commentPeople2").val(data.comment.commentPeople);
-	$("#content2").val(data.comment.content);
+	$("#content2").val(data.comment.content);*/
 };
 
-var showEditCommentWin = function(id) {
-	var data = {"comment.id" : id};
+var queryFaqInfoWin = function(id) {
+	/*var data = {"comment.id" : id};
 	$.ajax({
 		type : "POST",
 		url : path_ + "/view/comment/comment!queryCommentById.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
-			setCommentInfo(data);
-			openCommentInfoWin("查看评论");
+			setFaqInfo(data);
+			openFaqInfoWin("查看问题");
 		}
-	});
+	});*/
 };
 
-var delComment = function(id) {
-	showConfirm("确认删除？", function() {
+var delFaq = function(id) {
+	/*showConfirm("确认删除？", function() {
 		var data = {"comment.id" : id};
 		$.ajax({
 			type : "POST",
@@ -103,6 +96,6 @@ var delComment = function(id) {
 				showAlert("操作失败");
 			}
 		});
-	});
+	});*/
 };
 

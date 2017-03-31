@@ -14,7 +14,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.pojo.ScPropertyPropValue;
+import com.sunchin.shop.admin.pojo.ScPropPropval;
 import com.sunchin.shop.admin.propValue.dao.PropValueDAO;
 import com.sunchin.shop.admin.property.dao.PropPropValueDAO;
 import com.sunchin.shop.admin.property.service.PropPropValueService;
@@ -95,7 +95,7 @@ public class PropPropValueServiceImpl implements PropPropValueService {
 	
 	private void addPropPropValue(String propId, String valId){
 		if(!valId.isEmpty() && valId!=null){
-			ScPropertyPropValue propPropValue = new ScPropertyPropValue();
+			ScPropPropval propPropValue = new ScPropPropval();
 			propPropValue.setId(UUID.randomUUID().toString());
 			propPropValue.setPropId(propId);
 			propPropValue.setValId(valId);

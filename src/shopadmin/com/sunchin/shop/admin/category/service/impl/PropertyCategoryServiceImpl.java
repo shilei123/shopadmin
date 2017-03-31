@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.sunchin.shop.admin.category.dao.PropertyCategoryDAO;
 import com.sunchin.shop.admin.category.service.PropertyCategoryService;
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.pojo.ScPropertyCategory;
+import com.sunchin.shop.admin.pojo.ScCateProp;
 import com.sunchin.shop.admin.property.dao.PropertyDAO;
 
 import framework.bean.PageBean;
@@ -88,7 +88,7 @@ public class PropertyCategoryServiceImpl implements PropertyCategoryService {
 	}
 	
 	private void addPropCate(String cateId, String propId){
-		ScPropertyCategory propCate = new ScPropertyCategory();
+		ScCateProp propCate = new ScCateProp();
 		propCate.setId(UUID.randomUUID().toString());
 		propCate.setCateId(cateId);
 		propCate.setPropId(propId);

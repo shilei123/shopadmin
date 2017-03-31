@@ -17,13 +17,18 @@
                 <comment>内容</comment>
             </column>
         </property>
-        <property name="faqTypeId" type="java.lang.String">
-            <column name="FAQ_TYPE_ID" length="36">
-                <comment>分类</comment>
+        <property name="faqType" type="java.lang.String">
+            <column name="FAQ_TYPE" length="1">
+                <comment>商品、常见问题分类</comment>
             </column>
         </property>
-        <property name="type" type="java.lang.String">
-            <column name="TYPE" length="1">
+        <property name="faqTypeId" type="java.lang.String">
+            <column name="FAQ_TYPE_ID" length="36">
+                <comment>外联id（关联到的商品或者分类id）</comment>
+            </column>
+        </property>
+        <property name="category" type="java.lang.String">
+            <column name="CATEGORY" length="1">
                 <comment>类型</comment>
             </column>
         </property>
@@ -37,8 +42,8 @@
                 <comment>是否热点问题</comment>
             </column>
         </property>
-        <property name="faqOrder" type="java.lang.Integer">
-            <column name="FAQ_ORDER">
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_">
                 <comment>顺序</comment>
             </column>
         </property>
@@ -47,8 +52,8 @@
                 <comment>创建时间</comment>
             </column>
         </property>
-        <property name="createPeople" type="java.lang.String">
-            <column name="CREATE_PEOPLE" length="36">
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36">
                 <comment>创建人</comment>
             </column>
         </property>

@@ -9,8 +9,8 @@ public class ScFaqType implements java.io.Serializable {
 	private String typeName;
 	private String typeDesc;
 	private String typeCode;
-	private int typeOrder;
-	private String typeLevel;
+	private Integer order;
+	private String level;
 	private String parentTypeId;
 	private Date createTime;
 	private String flag;
@@ -48,20 +48,20 @@ public class ScFaqType implements java.io.Serializable {
 		this.typeCode = typeCode;
 	}
 
-	public int getTypeOrder() {
-		return this.typeOrder;
+	public Integer getOrder() {
+		return order;
 	}
 
-	public void setTypeOrder(int typeOrder) {
-		this.typeOrder = typeOrder;
+	public void setOrder(Integer order) {
+		this.order = order;
 	}
 
-	public String getTypeLevel() {
-		return this.typeLevel;
+	public String getLevel() {
+		return level;
 	}
 
-	public void setTypeLevel(String typeLevel) {
-		this.typeLevel = typeLevel;
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 	public String getParentTypeId() {

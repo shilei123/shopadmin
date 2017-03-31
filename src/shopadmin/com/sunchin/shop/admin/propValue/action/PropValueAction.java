@@ -3,7 +3,7 @@ package com.sunchin.shop.admin.propValue.action;
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
-import com.sunchin.shop.admin.pojo.ScPropValue;
+import com.sunchin.shop.admin.pojo.ScPropval;
 import com.sunchin.shop.admin.propValue.service.PropValueService;
 
 import framework.action.PageAction;
@@ -14,7 +14,7 @@ public class PropValueAction extends PageAction {
 	@Resource(name="propValueService")
 	private PropValueService propValueService; 
 	
-	private ScPropValue propValue;
+	private ScPropval propValue;
 	
 	/**
 	 * 查询
@@ -83,11 +83,11 @@ public class PropValueAction extends PageAction {
 		return Action.SUCCESS;
 	}
 
-	public ScPropValue getPropValue() {
+	public ScPropval getPropValue() {
 		return propValue;
 	}
 
-	public void setPropValue(ScPropValue propValue) {
+	public void setPropValue(ScPropval propValue) {
 		this.propValue = propValue;
 	}
 

@@ -22,13 +22,13 @@
                 <comment>分类代码</comment>
             </column>
         </property>
-        <property name="typeOrder" type="java.lang.Integer">
-            <column name="TYPE_ORDER">
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_">
                 <comment>分类排序</comment>
             </column>
         </property>
-        <property name="typeLevel" type="java.lang.String">
-            <column name="TYPE_LEVEL" length="1">
+        <property name="level" type="java.lang.String">
+            <column name="LEVEL_" length="1">
                 <comment>所属级别</comment>
             </column>
         </property>

@@ -13,7 +13,7 @@ import com.sunchin.shop.admin.catePropPropval.dao.CatePropPropvalDAO;
 import com.sunchin.shop.admin.catePropPropval.service.CatePropPropvalService;
 import com.sunchin.shop.admin.category.dao.CategoryDAO;
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.pojo.ScCatePropPropVal;
+import com.sunchin.shop.admin.pojo.ScCatePropPropval;
 import com.sunchin.shop.admin.property.dao.PropPropValueDAO;
 
 import framework.db.DBUtil;
@@ -95,20 +95,20 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 		}
 	}
 	
-	private void addCatePropPropValue(String cateId, String propPropValId){
-		ScCatePropPropVal catePropPropVal = new ScCatePropPropVal();
+	private void addCatePropPropValue(String cateId, String ppvId){
+		ScCatePropPropval catePropPropVal = new ScCatePropPropval();
 		catePropPropVal.setId(UUID.randomUUID().toString());
 		catePropPropVal.setCreateTime(new Date());
 		catePropPropVal.setFlag(FlagEnum.ACT.getCode());
 		catePropPropVal.setCateId(cateId);
-		catePropPropVal.setProppropvalId(propPropValId);
+		catePropPropVal.setPpvId(ppvId);
 		//catePropPropVal.setOrders(i);
 		DBUtil.getInstance().insert(catePropPropVal);
 	}
 
 	@Override
 	public List queryListCheck(String cateId) throws Exception {
-		List<ScCatePropPropVal> list = catePropPropvalDAO.findPojo(cateId);
+		List<ScCatePropPropval> list = catePropPropvalDAO.findPojo(cateId);
 		return list;
 	}
 

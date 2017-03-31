@@ -15,7 +15,7 @@ public class ScBrand implements java.io.Serializable {
 	private String brandCode;
 	private String flag;
 	private Date createTime;
-	private String createPeople;
+	private String createUserId;
 
 	public String getId() {
 		return this.id;
@@ -65,12 +65,12 @@ public class ScBrand implements java.io.Serializable {
 		this.createTime = createTime;
 	}
 
-	public String getCreatePeople() {
-		return this.createPeople;
+	public String getCreateUserId() {
+		return createUserId;
 	}
 
-	public void setCreatePeople(String createPeople) {
-		this.createPeople = createPeople;
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
 	}
 
 	public String getBrandCode() {

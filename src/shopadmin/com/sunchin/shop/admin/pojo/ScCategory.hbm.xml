@@ -13,18 +13,18 @@
                 <comment>类别名称</comment>
             </column>
         </property>
-        <property name="memo" type="java.lang.String">
-            <column name="MEMO" length="100">
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" length="100">
                 <comment>类别描述</comment>
             </column>
         </property>
-        <property name="cateOrder" type="java.lang.Integer">
-            <column name="CATE_ORDER">
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_">
                 <comment>排序</comment>
             </column>
         </property>
-        <property name="levels" type="java.lang.String">
-            <column name="LEVELS" length="1">
+        <property name="level" type="java.lang.String">
+            <column name="LEVEL_" length="1">
                 <comment>所属级别.0根节点，1一级类别，2二级类别，3三级类别</comment>
             </column>
         </property>

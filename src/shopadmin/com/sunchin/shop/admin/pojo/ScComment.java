@@ -15,7 +15,7 @@ public class ScComment implements java.io.Serializable {
 	private Double score;
 	private String ishidden;
 	private String parentId;
-	private String commentPeople;
+	private String createUserId;
 	private String flag;
 
 	public String getId() {
@@ -74,12 +74,12 @@ public class ScComment implements java.io.Serializable {
 		this.parentId = parentId;
 	}
 
-	public String getCommentPeople() {
-		return this.commentPeople;
+	public String getCreateUserId() {
+		return createUserId;
 	}
 
-	public void setCommentPeople(String commentPeople) {
-		this.commentPeople = commentPeople;
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
 	}
 
 	public String getFlag() {

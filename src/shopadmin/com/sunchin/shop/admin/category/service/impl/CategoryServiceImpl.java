@@ -75,8 +75,8 @@ public class CategoryServiceImpl implements CategoryService {
 	public void updateCategory(ScCategory category) throws Exception {
 		ScCategory cate = (ScCategory) db.get(ScCategory.class, category.getId());
 		cate.setCateName(category.getCateName());
-		cate.setCateOrder(category.getCateOrder());
-		cate.setMemo(category.getMemo());
+		cate.setOrder(category.getOrder());
+		cate.setRemark(category.getRemark());
 		cate.setLogo(category.getLogo());
 		cate.setUrl(category.getUrl());
 		cate.setCateCode(category.getCateCode());

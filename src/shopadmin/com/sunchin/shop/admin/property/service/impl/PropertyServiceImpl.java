@@ -48,7 +48,7 @@ public class PropertyServiceImpl implements PropertyService {
 		ScProperty prop = (ScProperty) db.get(ScProperty.class, property.getId());
 		prop.setPropName(property.getPropName());
 		prop.setPropCode(property.getPropCode());
-		prop.setPropOrder(property.getPropOrder());
+		prop.setOrder(property.getOrder());
 		prop.setFlag(property.getFlag());
 		db.update(prop);
 	}

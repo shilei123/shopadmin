@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.pojo.ScPropValue;
+import com.sunchin.shop.admin.pojo.ScPropval;
 
 import framework.bean.PageBean;
 import framework.config.SysDict;
@@ -29,11 +29,11 @@ public class PropValueDAO extends PageDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ScPropValue> queryPropValuePagination(PageBean pageBean) {
+	public List<ScPropval> queryPropValuePagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>(2);
 		params.add(FlagEnum.ACT.getCode());
 		String sql = this.buildWhereSql(pageBean, params);
-		List<ScPropValue> pageData = this.query(sql, params, DBUtil.getInstance(), pageBean);
+		List<ScPropval> pageData = this.query(sql, params, DBUtil.getInstance(), pageBean);
 		return pageData;
 	}
 
@@ -60,10 +60,10 @@ public class PropValueDAO extends PageDAO{
 	 *	获得属性值信息
 	 */
 	@SuppressWarnings("unchecked")
-	public List<ScPropValue> getPropValue(String id) {
+	public List<ScPropval> getPropValue(String id) {
 		Map<String, Object> params = new HashMap<String, Object>(1);
 		params.put("flag", FlagEnum.ACT.getCode());
-		return DBUtil.getInstance().queryByPojo(ScPropValue.class,params);
+		return DBUtil.getInstance().queryByPojo(ScPropval.class,params);
 	}
 	
 	public void delPropValue(String id){

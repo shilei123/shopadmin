@@ -3,16 +3,16 @@ package com.sunchin.shop.admin.pojo;
 import java.util.Date;
 
 public class ScCategory implements java.io.Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String cateName;
-	private String memo;
-	private int cateOrder;
-	private String levels;
+	private String remark;
+	private Integer order;
+	private String level;
 	private String logo;
 	private String url;
 	private String isuse;
@@ -38,28 +38,28 @@ public class ScCategory implements java.io.Serializable {
 		this.cateName = cateName;
 	}
 
-	public String getMemo() {
-		return this.memo;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setMemo(String memo) {
-		this.memo = memo;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
-	public int getCateOrder() {
-		return this.cateOrder;
+	public Integer getOrder() {
+		return order;
 	}
 
-	public void setCateOrder(int cateOrder) {
-		this.cateOrder = cateOrder;
+	public void setOrder(Integer order) {
+		this.order = order;
 	}
 
-	public String getLevels() {
-		return this.levels;
+	public String getLevel() {
+		return level;
 	}
 
-	public void setLevels(String levels) {
-		this.levels = levels;
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 	public String getLogo() {

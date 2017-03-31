@@ -37,9 +37,9 @@
                 <comment>父评论id</comment>
             </column>
         </property>
-        <property name="commentPeople" type="java.lang.String">
-            <column name="COMMENT_PEOPLE" length="36">
-                <comment>评论人id</comment>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36">
+                <comment>创建人</comment>
             </column>
         </property>
         <property name="flag" type="java.lang.String">

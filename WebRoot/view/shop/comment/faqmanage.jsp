@@ -98,11 +98,11 @@
 							<thead>
 								<tr>
 									<th width="2%" field="index"></th>
-									<th width="10%" field="type">评论类型</th>
-									<th width="30%" field="content">评论内容</th>
-									<th width="10%" field="score">评分</th>
-									<th width="15%" field="createTime">评论时间</th>
-									<th width="10%" field="contentPeople">评论人</th>
+									<th width="10%" field="">问题标题</th>
+									<th width="30%" field="">问题内容</th>
+									<th width="10%" field="">问题分类</th>
+									<th width="15%" field="">问题类型</th>
+									<th width="10%" field="">是否热点问题</th>
 									<th width="20%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>

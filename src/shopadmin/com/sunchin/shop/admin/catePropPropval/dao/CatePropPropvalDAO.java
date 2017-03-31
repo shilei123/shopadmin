@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.sunchin.shop.admin.pojo.ScCatePropPropVal;
+import com.sunchin.shop.admin.pojo.ScCatePropPropval;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
 
@@ -50,11 +50,11 @@ public class CatePropPropvalDAO {
 	 * @param cateId
 	 * @return
 	 */
-	public List<ScCatePropPropVal> findPojo(String cateId){
+	public List<ScCatePropPropval> findPojo(String cateId){
 		Map params = new HashMap<String, String>();
 		params.put("flag", FlagEnum.ACT.getCode());
 		params.put("cateId", cateId);
-		List<ScCatePropPropVal> list = DBUtil.getInstance().queryByPojo(ScCatePropPropVal.class, params);
+		List<ScCatePropPropval> list = DBUtil.getInstance().queryByPojo(ScCatePropPropval.class, params);
 		return list;
 	}
 	

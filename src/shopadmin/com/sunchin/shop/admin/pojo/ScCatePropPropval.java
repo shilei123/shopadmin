@@ -2,7 +2,7 @@ package com.sunchin.shop.admin.pojo;
 
 import java.util.Date;
 
-public class ScCatePropPropVal implements java.io.Serializable {
+public class ScCatePropPropval implements java.io.Serializable {
 
 	/**
 	 * 
@@ -10,11 +10,11 @@ public class ScCatePropPropVal implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String cateId;
-	private String proppropvalId;
-	private Integer orders;
+	private String ppvId;
+	private Integer order;
 	private String flag;
 	private Date createTime;
-	private String createPeople;
+	private String createUserId;
 
 	public String getId() {
 		return this.id;
@@ -32,20 +32,12 @@ public class ScCatePropPropVal implements java.io.Serializable {
 		this.cateId = cateId;
 	}
 
-	public String getProppropvalId() {
-		return this.proppropvalId;
+	public String getPpvId() {
+		return ppvId;
 	}
 
-	public void setProppropvalId(String proppropvalId) {
-		this.proppropvalId = proppropvalId;
-	}
-
-	public Integer getOrders() {
-		return this.orders;
-	}
-
-	public void setOrders(Integer orders) {
-		this.orders = orders;
+	public void setPpvId(String ppvId) {
+		this.ppvId = ppvId;
 	}
 
 	public String getFlag() {
@@ -64,12 +56,20 @@ public class ScCatePropPropVal implements java.io.Serializable {
 		this.createTime = createTime;
 	}
 
-	public String getCreatePeople() {
-		return this.createPeople;
+	public Integer getOrder() {
+		return order;
 	}
 
-	public void setCreatePeople(String createPeople) {
-		this.createPeople = createPeople;
+	public void setOrder(Integer order) {
+		this.order = order;
+	}
+
+	public String getCreateUserId() {
+		return createUserId;
+	}
+
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
 	}
 
 }

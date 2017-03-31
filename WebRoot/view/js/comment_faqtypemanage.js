@@ -114,7 +114,7 @@ $('#editCategoryBtn').click(function() {
 	$("#inp2-typeOrder").val(obj.typeOrder);
 	$("#inp2-parentTypeId").val(obj.pkId);
 	$("#inp2-typeLevel").val(parseInt(obj.typeLevel)+1);
-	showModal("doc-modal-add", 600, 400);
+	showModal("doc-modal-add", 500, 300);
 });
 
 $("#delCategoryBtn").click(function() {
