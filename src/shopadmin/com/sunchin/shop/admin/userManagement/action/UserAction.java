@@ -37,9 +37,9 @@ public class UserAction extends PageAction{
 	/**
 	 * 查询会员基础信息
 	 */
-	public String queryUserBcuser(){
+	public String queryUserBase(){
 		try {
-			PageBean resultData = userService.queryUserBcuserList(this.getPageBean());
+			PageBean resultData = userService.queryUserBaseList(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {

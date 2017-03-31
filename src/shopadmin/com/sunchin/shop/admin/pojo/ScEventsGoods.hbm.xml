@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScEventsGoods" table="SC_EVENTS_GOODS" >
+        <id name="Id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="eventsId" type="java.lang.String">
+             <column name="EVENTS_ID" length="36">
+                <comment>活动id</comment>
+            </column>
+        </property>
+        <property name="goodsId" type="java.lang.String">
+            <column name="GOODS_ID" length="36">
+                <comment>商品id</comment>
+            </column>
+        </property>
+        <property name="goodsChildId" type="java.lang.String">
+             <column name="GOODS_CHILD_ID" length="36">
+                <comment>商品子表id</comment>
+            </column>
+        </property>
+        <property name="eventsMoney" type="java.lang.Double">
+               <column name="EVENTS_MONEY" precision="10">
+                <comment>商品活动价格</comment>
+            </column>
+        </property>
+        <property name="scope" type="java.lang.String">
+               <column name="SCOPE" length="1">
+                <comment>生效范围</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

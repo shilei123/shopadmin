@@ -7,10 +7,10 @@ public class ScFreight implements java.io.Serializable {
 	private String id;
 	private String templateName;
 	private String valuation;
-	private String company;
+	private String unit;
 	private String isuse;
 	private Date createTime;
-	private Date optionTime;
+	private Date updateTime;
 	private String flag;
 	private String belong;
 
@@ -41,12 +41,12 @@ public class ScFreight implements java.io.Serializable {
 		this.valuation = valuation;
 	}
 
-	public String getCompany() {
-		return company;
+	public String getUnit() {
+		return unit;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	public String getIsuse() {
@@ -65,12 +65,12 @@ public class ScFreight implements java.io.Serializable {
 		this.createTime = createTime;
 	}
 
-	public Date getOptionTime() {
-		return optionTime;
+	public Date getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setOptionTime(Date optionTime) {
-		this.optionTime = optionTime;
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public String getFlag() {

@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.eventsinfo.dao;
+package com.sunchin.shop.admin.events.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,16 +10,16 @@ import org.springframework.stereotype.Repository;
 
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.pojo.ScEventsinfo;
+import com.sunchin.shop.admin.pojo.ScEvents;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
-@Repository("eventsinfoDAO")
-public class EventsinfoDAO extends PageDAO{
+@Repository("eventsDAO")
+public class EventsDAO extends PageDAO{
 
-	public int queryEventsinfoCount(PageBean pageBean) {
+	public int queryEventsCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.COUPON_STATUSS.getType());
@@ -28,18 +28,18 @@ public class EventsinfoDAO extends PageDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ScEventsinfo> queryEventsinfoPagination(PageBean pageBean) {
+	public List<ScEvents> queryEventsPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
-		params.add(DictionaryTypeEnum.COUPON_STATUSS.getType());
+		params.add(DictionaryTypeEnum.ISUSE.getType());
 		String sql = this.buildWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t2.name isuse, ");
-		sql.append(" to_char(t1.starttime,'yyyy-mm-dd') starttime,to_char(t1.endtime,'yyyy-mm-dd') endtime,t1.create_time ");
-		sql.append(" from sc_eventsinfo t1 ");
+		sql.append(" to_char(t1.starttime,'yyyy-mm-dd') start_time,to_char(t1.endtime,'yyyy-mm-dd') end_time,t1.create_time ");
+		sql.append(" from sc_events t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.isuse ");
 		sql.append(" where t1.flag=? ");
 		sql.append(" and t2.type=?");
@@ -65,11 +65,11 @@ public class EventsinfoDAO extends PageDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ScEventsinfo findScEventsinfoById(String id){
+	public ScEvents findScEventsinfoById(String id){
 		Map<String, String> params = new HashMap<String, String>(2);
 		params.put("id", id);
 		params.put("flag", FlagEnum.ACT.getCode());
-		List<ScEventsinfo> lists = DBUtil.getInstance().queryByPojo(ScEventsinfo.class, params);
+		List<ScEvents> lists = DBUtil.getInstance().queryByPojo(ScEvents.class, params);
 		if(lists != null && !lists.isEmpty())	{
 			return lists.get(0);
 		}

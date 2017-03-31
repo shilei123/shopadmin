@@ -6,7 +6,7 @@ import framework.bean.PageBean;
 
 public interface IUserService {
 
-	PageBean queryUserBcuserList(PageBean pageBean) throws Exception;
+	PageBean queryUserBaseList(PageBean pageBean) throws Exception;
 
 	PageBean queryUserList(PageBean pageBean) throws Exception;
 

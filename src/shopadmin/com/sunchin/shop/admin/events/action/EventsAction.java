@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.eventsinfo.action;
+package com.sunchin.shop.admin.events.action;
 
 import java.util.List;
 
@@ -6,22 +6,22 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
-import com.sunchin.shop.admin.eventsinfo.service.IEventsinfoService;
+import com.sunchin.shop.admin.events.service.IEventsService;
 import com.sunchin.shop.admin.pojo.ScDictionary;
-import com.sunchin.shop.admin.pojo.ScEventsinfo;
+import com.sunchin.shop.admin.pojo.ScEvents;
 import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
 
-public class EventsinfoAction extends PageAction{
+public class EventsAction extends PageAction{
 
-	@Resource(name="eventsinfoService")
-	private IEventsinfoService eventsinfoService;
+	@Resource(name="eventsService")
+	private IEventsService eventsService;
 	@Resource(name = "dictService")
 	private DictService dictService;
 	
-	private ScEventsinfo eventsinfo;
+	private ScEvents events;
 	private List<ScDictionary> dictionaryList;
 	
 	/**
@@ -30,7 +30,7 @@ public class EventsinfoAction extends PageAction{
 	 */
 	public String query() {
 		try {
-			PageBean resultData = eventsinfoService.queryEventsinfoList(this.getPageBean());
+			PageBean resultData = eventsService.queryEventsList(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
@@ -42,9 +42,9 @@ public class EventsinfoAction extends PageAction{
 	/**
 	 * 查看单条记录
 	 */
-	public String queryEventsinfo(){
+	public String queryEvents(){
 		try {
-			eventsinfo = eventsinfoService.queryEventsinfo(eventsinfo.getId());
+			events = eventsService.queryEvents(events.getId());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class EventsinfoAction extends PageAction{
 	 */
 	public String save(){
 		try {
-			eventsinfoService.saveEventsinfo(eventsinfo);
+			eventsService.saveEvents(events);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class EventsinfoAction extends PageAction{
 	 */
 	public String delete() {
 		try {
-			eventsinfoService.deleteEventsinfo(eventsinfo.getId());
+			eventsService.deleteEvents(events.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -87,12 +87,12 @@ public class EventsinfoAction extends PageAction{
 		return Action.SUCCESS;
 	}
 	
-	public ScEventsinfo getEventsinfo() {
-		return eventsinfo;
+	public ScEvents getEventsinfo() {
+		return events;
 	}
 
-	public void setEventsinfo(ScEventsinfo eventsinfo) {
-		this.eventsinfo = eventsinfo;
+	public void setEventsinfo(ScEvents events) {
+		this.events = events;
 	}
 
 	public List<ScDictionary> getDictionaryList() {

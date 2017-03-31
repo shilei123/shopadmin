@@ -23,13 +23,13 @@
                 <comment>活动介绍</comment>
             </column>
         </property>
-        <property name="starttime" type="java.util.Date">
-               <column name="STARTTIME">
+        <property name="start_Time" type="java.util.Date">
+               <column name="START_TIME">
                 <comment>活动开始时间</comment>
             </column>
         </property>
-         <property name="endtime" type="java.util.Date">
-               <column name="ENDTIME">
+         <property name="end_Time" type="java.util.Date">
+               <column name="END_TIME">
                 <comment>活动结束时间</comment>
             </column>
         </property>

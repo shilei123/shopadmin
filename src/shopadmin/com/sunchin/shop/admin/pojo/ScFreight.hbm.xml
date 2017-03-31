@@ -18,8 +18,8 @@
                 <comment>计价方式/件数 0 重量 1 体积 2</comment>
             </column>
         </property>
-        <property name="company" type="java.lang.String">
-             <column name="COMPANY" length="1">
+        <property name="unit" type="java.lang.String">
+             <column name="UNIT" length="1">
                 <comment>单位/件 0 kg 1  m3 2</comment>
             </column>
         </property>
@@ -33,8 +33,8 @@
                 <comment>创建时间</comment>
             </column>
         </property>
-         <property name="optionTime" type="java.util.Date">
-               <column name="OPTION_TIME">
+         <property name="updateTime" type="java.util.Date">
+               <column name="UPDATE_TIME">
                 <comment>修改时间</comment>
             </column>
         </property>

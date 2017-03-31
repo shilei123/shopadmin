@@ -28,6 +28,7 @@ public class ScPurse  implements java.io.Serializable {
      private String optionAdminname;
      private String optionRemark;
      private String belong;
+     private String flag;
      
 
     public ScPurse() {
@@ -213,5 +214,16 @@ public class ScPurse  implements java.io.Serializable {
 		this.belong = belong;
 	}
 
+
+	public String getFlag() {
+		return flag;
+	}
+
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	
 	
 }

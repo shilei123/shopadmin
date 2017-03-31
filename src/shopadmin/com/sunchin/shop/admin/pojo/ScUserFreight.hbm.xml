@@ -53,8 +53,8 @@
                 <comment>创建时间</comment>
             </column>
         </property>
-         <property name="optionTime" type="java.util.Date">
-               <column name="OPTION_TIME">
+         <property name="updateTime" type="java.util.Date">
+               <column name="UPDATE_TIME">
                 <comment>修改时间</comment>
             </column>
         </property>

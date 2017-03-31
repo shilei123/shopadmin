@@ -7,7 +7,7 @@ $(function() {
 
 var queryEventsinfo = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/shop/eventsinfo/eventsinfo!query.action";
+	var url = path_ + "/view/shop/events/events!query.action";
 	pageData(url, "eventsinfoListTable", data); 
 };
 
@@ -15,7 +15,7 @@ var queryEventsinfoType = function() {
 	var isuse = $("#isuse");
 	isuse.empty();
 		$.ajax({
-			url :path_ + "/view/shop/eventsinfo/eventsinfo!queryEventsinfoType.action",
+			url :path_ + "/view/shop/events/events!queryEventsType.action",
 			type : 'POST',
 			data : null,
 			dataType: "json",
@@ -141,7 +141,7 @@ $("#saveBtn").click(function() {
 	var data = formGet("edit_eventsinfo_table");
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/eventsinfo/eventsinfo!save.action",
+		url : path_ + "/view/shop/events/events!save.action",
 		data : data,
 		dataType : "json",
 		success : function(json) {
@@ -201,14 +201,13 @@ var showEditWin = function(id) {
 	//clearForm();
 	//$("#couponTypeModal").trigger('changed.selected.amui');
 	clearForm();
-	var data = {"eventsinfo.id" : id};
+	var data = {"events.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/eventsinfo/eventsinfo!queryEventsinfo.action",
+		url : path_ + "/view/shop/events/events!queryEvents.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
-			console.log(data);
 			openWin("编辑");
 			var isuse = $("#isuse");
 			isuse.empty();
@@ -222,10 +221,10 @@ var showEditWin = function(id) {
 //删除
 var deleteDict = function(id) {
 	showConfirm("确认删除？", function() {
-		var data = {"eventsinfo.id" : id};
+		var data = {"events.id" : id};
 		$.ajax({
 			type : "POST",
-			url : path_ + "/view/shop/eventsinfo/eventsinfo!delete.action",
+			url : path_ + "/view/shop/events/events!delete.action",
 			data : data,
 			dataType : "json",
 			success : function(json) {
