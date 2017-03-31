@@ -11,36 +11,14 @@
 <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
 <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
 <script type="text/javascript" charset="utf-8" src="${path }/ueditor/lang/zh-cn/zh-cn.js"></script>
+<link rel="stylesheet" href="goodsAdd.css" />
 <%
 	String selectValue = request.getParameter("selectValue");
 	String selectText = new String(request.getParameter("selectText").getBytes("ISO-8859-1"),"UTF-8");
 %>
-<style type="text/css">
-.img {
-	width: 100px;
-	height: 100px; 
-	border:0px solid #D1DEEA;
-	background-image: url('${path}/images/add.png')
-}
-.closediv {
-	position: absolute;
-	bottom: 0;	
-	right: 0;
-	left: 0;
-	display: none;
-	background-color: #606060;
-	width:100%;
-	margin-left: 0px;
-	margin-bottom: 1px;
-	text-align: left;
-}
-.closediv>span {
-	color: white;
-}
-.closediv:first-child {
-	padding-left: 3px;
-}
-</style>
+<script type="text/javascript">
+	var cateId = "<%=selectValue %>";
+</script>
 </head>
 <body>
 	<!-- content start -->
@@ -61,7 +39,7 @@
 									<td class="table_title frame-required"><span>*</span>商品分类：</td>
 									<td valign="bottom">
 										<%=selectText %>&nbsp;<button class="am-btn am-btn-warning am-btn-xs am-round" onclick="window.location.href='${path}/view/shop/goods/goodsTypeSelect.jsp'">编辑</button>
-										</input type="hidden" value="<%=selectValue %>"/>
+										</input type="hidden" id="cateId" value="<%=selectValue %>"/>
 									</td>
 								</tr>
 								<tr>
@@ -76,6 +54,71 @@
 									<td class="table_title">商品副标题：</td>
 									<td><input name="bankInfo.bankName" id="goodsName1" placeholder="商品副标题" class="am-form-field" style="width:600px;"/></td>
 								</tr>
+								<tr>
+									<td class="table_title">商品属性：</td>
+									<td><div id="propertyDiv"></div></td>
+								</tr>
+								<tr>
+									<td class="table_title"></td>
+									<td>
+										<table style="margin-bottom: 5px;">
+											<tr>
+												<td valign="middle">
+													<div id="propertyEditDiv" style="border: 0px;border-color: red;display: inline-block;">
+														<table border="1" bordercolor="#CCCCCC" id="propertyEditTable">
+															<thead>
+																<tr style="height: 25px;background-color: #F5F5F5;">
+																</tr>
+															</thead>
+															<tbody>
+																<tr style="height: 30px;">
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</td>
+												<td valign="middle">
+													<div id="addProperty" style="border: 1px solid #CCCCCC;width:52px;height:52px;position:relative;cursor:pointer;margin-left: 1px;">
+														<img src="${path}/images/add2.png" style="position: absolute;left:0; right:0; top:0; bottom:0;margin: auto;"/>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td class="table_title" valign="top">库存配置：</td>
+									<td>
+										<div id="goodsChildDiv">
+											<table border="1" bordercolor="#CCCCCC" id="goodsChildTable">
+												<thead>
+													<tr style="height: 25px;background-color: #F5F5F5;">
+														<th>子商品</th>
+														<th>价格</th>
+														<th>市场价</th>
+														<th>成本价</th>
+														<th>库存</th>
+														<th>商品货号</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<!-- <tr>
+														<td>&nbsp;&nbsp;</td>
+														<td>&nbsp;<input style="width:80px;"/>&nbsp;</td>
+														<td>&nbsp;<input style="width:80px;"/>&nbsp;</td>
+														<td>&nbsp;<input style="width:80px;"/>&nbsp;</td>
+														<td>&nbsp;<input style="width:80px;"/>&nbsp;</td>
+														<td>&nbsp;<input style="width:80px;"/>&nbsp;</td>
+														<td>&nbsp;删除&nbsp;</td>
+													</tr> -->
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
+							</table>
+							<table class="frame-modal-table" border="0" id="propListTable">
 								<!-- <tr>
 									<td class="table_title">颜色：</td>
 									<td>
@@ -89,6 +132,8 @@
 									<td class="table_title">食品含量：</td>
 									<td><input name="bankInfo.bankName" id="bankName" placeholder="食品含量" class="am-form-field" style="width:100%"/></td>
 								</tr> -->
+							</table>
+							<table class="frame-modal-table" border="0">
 								<tr>
 									<td class="table_title frame-required"><span>*</span>商品价格：</td>
 									<td><input name="bankInfo.bankName" id="bankName" placeholder="商品价格" class="am-form-field" style="width:auto;"/></td>
@@ -110,7 +155,10 @@
 									<td><input name="bankInfo.bankName" id="bankName" placeholder="商品货号" class="am-form-field" style="width:auto;"/></td>
 								</tr>
 								<tr>
-									<td class="table_title frame-required" valign="top"><span>*</span>商品图片：</td>
+									<td class="table_title frame-required" valign="top">
+										<input id="imgPosition" style="width: 1px;height: 0px;border: none;"/>
+										<span>*</span>商品图片：
+									</td>
 									<td>
 										<div class="imgDiv" style="display: inline-block;cursor: pointer;position: relative;">
 											<div id="close1" class="closediv">
@@ -119,7 +167,7 @@
 												<span class='am-icon-close' style="width: auto;"></span>
 											</div>
 											<img id="img1" alt="" src="" class="img">
-											<input type="hidden" name="imgIdHidden"/>										
+											<input type="hidden" name="imgIdHidden"/>
 										</div>
 										<div class="imgDiv" style="display: inline-block;cursor: pointer;position: relative;">
 											<div id="close2" class="closediv">
@@ -160,33 +208,13 @@
 									</td>
 								</tr>
 								<tr>
-									<td class="table_title" valign="top"><div style="margin-top: 13px;">商品属性：</div></td>
+									<td class="table_title" valign="top"><div style="margin-top: 13px;">商品参数：</div></td>
 									<td>
-										<div style="margin-top: 10px;">
+										<div style="margin-top: 10px;" id="shuxingDiv">
 											<div style="padding: 1px;">
-												属性名：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												属性值：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												<a>清空</a>&nbsp;&nbsp;<a>添加</a>
-											</div>
-											<div style="padding: 1px;">
-												属性名：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												属性值：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												<a>清空</a>&nbsp;&nbsp;<a>添加</a>
-											</div>
-											<div style="padding: 1px;">
-												属性名：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												属性值：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												<a>清空</a>&nbsp;&nbsp;<a>添加</a>
-											</div>
-											<div style="padding: 1px;">
-												属性名：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												属性值：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												<a>清空</a>&nbsp;&nbsp;<a>添加</a>
-											</div>
-											<div style="padding: 1px;">
-												属性名：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												属性值：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
-												<a>清空</a>&nbsp;&nbsp;<a>添加</a>
+												参数名：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;
+												参数值：<input class="am-form-field" style="width:150px;display: inline;"/>&nbsp;&nbsp;<a 
+												class="addGoodsAttr" href="javascript:void(0);"><span class='am-icon-plus-square' style="width: auto;color: green;font-size: 18px;" title="添加"></span></a>
 											</div>
 										</div>
 									</td>
@@ -216,21 +244,22 @@
 									</td>
 								</tr>
 								<tr>
-									<td class="table_title" valign="top"><div style="margin-top: 10px;">运费：</div></td>
+									<td class="table_title" valign="top"><div style="margin-top: 9px;">运费：</div></td>
 									<td>
-										<div style="margin-top: 10px;">
-											<div style="margin-bottom: 5px;"><input type="radio" name="aa" id="ra1"/><label for="ra1" style="font-weight: normal;">卖家承担运费</label></div>
-											<input type="radio" name="aa" id="ra2"/><label for="ra2" style="font-weight: normal;">买家承担运费</label></div>
+										<div>
+											<label class="am-radio am-success"><input type="radio" name="aa" id="ra1" data-am-ucheck/>卖家承担运费</label>
+											<label class="am-radio am-success"><input type="radio" name="aa" id="ra2" data-am-ucheck/>买家承担运费</label>
 										</div>
 									</td>
 								</tr>
 								<tr>
-									<td class="table_title" valign="top"><div style="margin-top: 10px;">商品发布：</div></td>
+									<td class="table_title" valign="top"><div style="margin-top: 9px;">商品发布：</div></td>
 									<td>
-										<div style="margin-top: 10px;">
-											<div style="margin-bottom: 5px;"><input type="radio" name="a" id="r3"/><label for="r3" style="font-weight: normal;">放入仓库</label></div>
-											<div style="margin-bottom: 5px;"><input type="radio" name="a" id="r1"/><label for="r1" style="font-weight: normal;">立即发布</label></div>
-											<div><input type="radio" name="a" id="r2"/><label for="r2" style="font-weight: normal;">发布时间</label>&nbsp;<input type="text" /></div>
+										<div>
+											<label class="am-radio am-success"><input type="radio" name="a" id="r3" data-am-ucheck/>放入仓库</label>
+											<label class="am-radio am-success"><input type="radio" name="a" id="r1" data-am-ucheck/>立即发布</label>
+											<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="a" id="r2" data-am-ucheck/>发布时间</label>
+											<input class="am-form-field" style="display: inline-block;width: 150px;margin-top: -15px;" id="publishTime"></div>
 										</div>
 									</td>
 								</tr>
@@ -247,147 +276,6 @@
 	</div>
 	<!-- content end -->
 </body>
-<script type="text/javascript">
-    //实例化编辑器
-    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-    var ue = UE.getEditor('pceditor');
-    //重置编辑器
-    var resetEditor = function() {
-        if(ue){
-            ue.setContent("");
-            ue.reset();
-            clearLocalData();
-        }
-    };
-	//清空编辑器草稿箱
-    var clearLocalData = function() {
-        UE.getEditor('editor').execCommand("clearlocaldata");
-    };
-    //判断编辑器是否有内容
-    var hasContent = function() {
-        return UE.getEditor('editor').hasContents();
-    };
-</script>
-<script type="text/javascript">
-$(function() {
-	//查询类别下的品牌
-	
-	//查询类型下的属性
-	
-	//查询类别下的属性值
-	
-	/*如果有属性，隐藏价格和库存输入框
-	      如果没有属性，显示价格和库存输入框
-	*/
-});
-
-//查询品牌
-var queryPinpai = function() {
-	
-};
-
-var currentImgId = null;
-$(".img").click(function() {
-	currentImgId  = this.id;
-	if($('#'+this.id).attr("src").length==0) {
-		showImgUploadModal();
-	} else {
-		//预览图片
-		//。。。。。。。。。。。。
-	}
-});
-
-//选择图片的回调函数
-var selectImg = function(obj) {
-	if(currentImgId != null) {
-		if($("#imgId"+obj.id).length==0) {
-			var imgObj = $('#'+currentImgId);
-			imgObj.attr("src", obj.src);
-			currentImgId = null;
-			//给隐藏域赋值
-			imgObj.parent().children("input:eq(0)").val(obj.id);
-		}
-	}
-};
-
-$(".imgDiv").mouseover(function(){
-	var src = $(this).children("img:eq(0)").attr("src");
-	if(src!=undefined && src.length>0) {
-		$(this).children("div:eq(0)").show();
-	}
-}).mouseout(function(){
-	$(this).children("div:eq(0)").hide();
-});
-
-//删除
-$(".am-icon-close").click(function(){
-	//alert($(this).parent().parent().children("img:eq(0)").attr("src"));
-	$(this).parent().next().attr("src","");
-	$(this).parent().next().next().val("");
-	$(this).hide();
-});
-//右移
-$(".am-icon-arrow-right").click(function(){
-	var self = $(this).parent().next();
-	var next = $(this).parent().parent().next().children("img:eq(0)");
-	var selfsrc = self.attr("src");
-	var nextsrc = next.attr("src");
-	
-	//左右都不为空的情况才进行src的交换和imgId的交换
-	if(selfsrc!=undefined && selfsrc!="" && nextsrc!=undefined && nextsrc!="") {
-		//交换src
-		self.attr("src",nextsrc);
-		next.attr("src",selfsrc); 
-		
-		//交换imgId
-		var selfHidden = $(this).parent().parent().children("input:eq(0)");
-		var nextHidden = $(this).parent().parent().next().children("input:eq(0)");
-		var selfHiddenVal = selfHidden.val();
-		var nextHiddenVal = nextHidden.val();
-		selfHidden.val(nextHiddenVal);
-		nextHidden.val(selfHiddenVal);
-	}
-});
-//左移
-$(".am-icon-arrow-left").click(function(){
-	var self = $(this).parent().next();
-	var prev = $(this).parent().parent().prev().children("img:eq(0)");
-	var selfsrc = self.attr("src");
-	var prevsrc = prev.attr("src");
-
-	//左右都不为空的情况才进行src的交换和imgId的交换
-	if(selfsrc!=undefined && selfsrc!="" && prevsrc!=undefined && prevsrc!="") {
-		//交换src
-		self.attr("src",prevsrc);
-		prev.attr("src",selfsrc); 
-		
-		//交换imgId
-		var selfHidden = $(this).parent().parent().children("input:eq(0)");
-		var prevHidden = $(this).parent().parent().prev().children("input:eq(0)");
-		var selfHiddenVal = selfHidden.val();
-		var prevHiddenVal = prevHidden.val();
-		selfHidden.val(prevHiddenVal);
-		prevHidden.val(selfHiddenVal);
-	}
-});
-
-$("#saveBtn").click(function() {
-	if(!checkRequiredField("goodsName")) {
-		return;
-	};
-});
-
-var checkRequiredField = function(fieldId,msg) {
-	if(!msg) {
-		msg = $("#"+fieldId).attr("placeholder")+"必填";
-	}
-	var fieldValue = $("#"+fieldId).val();
-	if(fieldValue.length==0) {
-		layer.msg(msg, {offset: 't'});
-		$("#"+fieldId).focus();
-		return false;
-	};
-	return true;
-};
-</script>
+<script type="text/javascript" src="${path }/view/js/goods_goodsAdd.js"></script>
+<script type="text/javascript" src="${path }/view/js/goods_goodsAdd_img.js"></script>
 </html>

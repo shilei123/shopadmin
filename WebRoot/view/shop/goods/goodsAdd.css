@@ -1,0 +1,36 @@
+.img {
+	width: 100px;
+	height: 100px; 
+	border:0px solid #D1DEEA;
+	background-image: url('../../../images/add.png')
+}
+
+.closediv {
+	position: absolute;
+	bottom: 0;	
+	right: 0;
+	left: 0;
+	display: none;
+	background-color: #606060;
+	width:100%;
+	margin-left: 0px;
+	margin-bottom: 1px;
+	text-align: left;
+}
+
+.closediv>span {
+	color: white;
+}
+
+.closediv:first-child {
+	padding-left: 3px;
+}
+
+.am-ucheck-icons {
+	top: 2;
+}
+
+th {
+	text-align:center;
+	width:80px;
+}
