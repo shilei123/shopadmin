@@ -18,7 +18,7 @@ import com.sunchin.shop.admin.directoryStructure.dao.DirectoryStructureDAO;
 import com.sunchin.shop.admin.freight.dao.FreightDAO;
 import com.sunchin.shop.admin.pojo.ScArticle;
 import com.sunchin.shop.admin.pojo.ScDirectoryStructure;
-import com.sunchin.shop.admin.pojo.ScEventsinfo;
+import com.sunchin.shop.admin.pojo.ScEvents;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;

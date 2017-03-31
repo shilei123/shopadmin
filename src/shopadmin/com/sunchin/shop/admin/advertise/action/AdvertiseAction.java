@@ -26,6 +26,7 @@ public class AdvertiseAction extends PageAction{
 	private List<ScDictionary> dictionaryList; //广告类型
 	private List<ScDictionary> isuseList; //是否启用
 	private Map<String, Object> map;
+	
 	/**
 	 * 查询
 	 * @return
@@ -40,6 +41,22 @@ public class AdvertiseAction extends PageAction{
 		}
 		return Action.SUCCESS;
 	}
+	
+	/**
+	 * 查询商品
+	 * @return
+	 */
+	public String queryGoods(){
+		try {
+			PageBean resultData = advertiseService.queryGoodsList(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
 	
 	/**
 	 * 查询单条记录

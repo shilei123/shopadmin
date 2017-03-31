@@ -15,28 +15,28 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.StatusEnum;
-import com.sunchin.shop.admin.eventsinfo.dao.EventsinfoDAO;
-import com.sunchin.shop.admin.eventsinfo.service.IEventsinfoService;
+import com.sunchin.shop.admin.eventsinfo.dao.EventsDAO;
+import com.sunchin.shop.admin.eventsinfo.service.IEventsService;
 import com.sunchin.shop.admin.pojo.ScCoupon;
-import com.sunchin.shop.admin.pojo.ScEventsinfo;
+import com.sunchin.shop.admin.pojo.ScEvents;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
 
-@Repository("eventsinfoService")
-public class EventsinfoServiceImpl implements IEventsinfoService{
+@Repository("eventsService")
+public class EventsServiceImpl implements IEventsService{
 
-	@Resource(name="eventsinfoDAO")
-	private EventsinfoDAO eventsinfoDAO;
+	@Resource(name="eventsDAO")
+	private EventsDAO eventsDAO;
 
 	/**
 	 * 查询
 	 */
 	@Override
-	public PageBean queryEventsinfoList(PageBean pageBean) {
-		int total = eventsinfoDAO.queryEventsinfoCount(pageBean);
+	public PageBean queryEventsList(PageBean pageBean) {
+		int total = eventsDAO.queryEventsCount(pageBean);
 		pageBean.setTotal(total);
-		List<ScEventsinfo> pageData = eventsinfoDAO.queryEventsinfoPagination(pageBean);
+		List<ScEvents> pageData = eventsDAO.queryEventsPagination(pageBean);
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}
@@ -46,11 +46,11 @@ public class EventsinfoServiceImpl implements IEventsinfoService{
 	 */
 	@Override
 	@Transactional
-	public void deleteEventsinfo(String id) {
+	public void deleteEvents(String id) {
 		DBUtil db = DBUtil.getInstance();
-		ScEventsinfo eventsinfo = eventsinfoDAO.findScEventsinfoById(id);
+		ScEvents eventsinfo = eventsDAO.findScEventsinfoById(id);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String startTime = format.format(eventsinfo.getStarttime());
+		String startTime = format.format(eventsinfo.getStart_time());
 		String currentTime = format.format(new Date());
 		int i = startTime.compareTo(currentTime);
 		if(i > 0){
@@ -65,10 +65,10 @@ public class EventsinfoServiceImpl implements IEventsinfoService{
 	 * 查询单条记录
 	 */
 	@Override
-	public ScEventsinfo queryEventsinfo(String id) {
-		Object obj = DBUtil.getInstance().get(ScEventsinfo.class, id);
+	public ScEvents queryEvents(String id) {
+		Object obj = DBUtil.getInstance().get(ScEvents.class, id);
 		if(obj != null) {
-			return (ScEventsinfo) obj;
+			return (ScEvents) obj;
 		}
 		return null;
 	}
@@ -78,7 +78,7 @@ public class EventsinfoServiceImpl implements IEventsinfoService{
 	 */
 	@Override
 	@Transactional
-	public void saveEventsinfo(ScEventsinfo eventsinfo) {
+	public void saveEvents(ScEvents eventsinfo) {
 		if (eventsinfo == null) {
 			return;
 		}
@@ -92,12 +92,12 @@ public class EventsinfoServiceImpl implements IEventsinfoService{
 			db.insert(eventsinfo);
 			//添加商品待写
 		} else { // 修改
-			ScEventsinfo vo = (ScEventsinfo) db.get(ScEventsinfo.class, eventsinfo.getId());
+			ScEvents vo = (ScEvents) db.get(ScEvents.class, eventsinfo.getId());
 			vo.setName(eventsinfo.getName());
 			vo.setIsuse(eventsinfo.getIsuse());
 			vo.setMemo(eventsinfo.getMemo());
-			vo.setStarttime(eventsinfo.getStarttime());
-			vo.setEndtime(eventsinfo.getEndtime());
+			vo.setStart_time(eventsinfo.getStart_time());
+			vo.setEnd_time(eventsinfo.getEnd_time());
 			vo.setUpdateTime(new Date());
 			db.update(vo);
 		}

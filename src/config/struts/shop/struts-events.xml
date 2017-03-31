@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<package name="eventsinfo" extends="json-default" namespace="/view/shop/eventsinfo">
-		<action name="eventsinfo" class="com.sunchin.shop.admin.eventsinfo.action.EventsinfoAction">
+	<package name="events" extends="json-default" namespace="/view/shop/events">
+		<action name="events" class="com.sunchin.shop.admin.events.action.EventsAction">
 			<result type="json"><param name="ignoreHierarchy">false</param></result>
 		</action>
 	</package>

@@ -78,6 +78,10 @@ public class FreightAction extends PageAction{
 		return Action.SUCCESS;
 	}
 	
+	/**
+	 * 删除
+	 * @return
+	 */
 	public String delete(){
 		try {
 			freightService.deleteFreight(fre.getId());

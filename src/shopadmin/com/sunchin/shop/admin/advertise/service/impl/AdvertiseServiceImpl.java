@@ -17,7 +17,9 @@ import com.sunchin.shop.admin.advertise.service.IAdvertiseService;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
 import com.sunchin.shop.admin.pojo.ScBcuser;
-import com.sunchin.shop.admin.pojo.ScEventsinfo;
+import com.sunchin.shop.admin.pojo.ScBrand;
+import com.sunchin.shop.admin.pojo.ScEvents;
+import com.sunchin.shop.admin.pojo.ScGoods;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
@@ -116,5 +118,17 @@ public class AdvertiseServiceImpl implements IAdvertiseService{
 			return null;
 		}
 		return map;
+	}
+
+	/**
+	 * 查询商品列表
+	 */
+	@Override
+	public PageBean queryGoodsList(PageBean pageBean) throws Exception {
+		int total = advertiseDAO.queryGoodsCount(pageBean);
+		pageBean.setTotal(total);
+		List<ScGoods> pageData = advertiseDAO.queryGoodsPagination(pageBean);
+		pageBean.setPageData(pageData);
+		return pageBean;
 	}
 }

@@ -7,7 +7,7 @@ public class ScDirectoryStructure implements java.io.Serializable {
 	private String id;
 	private String directoryName;
 	private String parentDirectoryId;
-	private String cateOrder;
+	private Double cateOrder;
 	private String levels;
 	private String directoryPath;
 	private String isuse;
@@ -43,11 +43,11 @@ public class ScDirectoryStructure implements java.io.Serializable {
 		this.parentDirectoryId = parentDirectoryId;
 	}
 
-	public String getCateOrder() {
+	public Double getCateOrder() {
 		return cateOrder;
 	}
 
-	public void setCateOrder(String cateOrder) {
+	public void setCateOrder(Double cateOrder) {
 		this.cateOrder = cateOrder;
 	}
 

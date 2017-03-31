@@ -15,6 +15,10 @@ $(function() {
 
 	//保存按钮
 	$("#saveDirectoryBtn").click(function() {
+		//表单验证
+		if(!checkBankSumbit()) {
+			return;
+		}
 		var node = $("#ul_directory_tree").tree("getSelected");
 		if(node==null){ return; }
 		$("#inp2_parentName").removeAttr('disabled');
@@ -37,6 +41,38 @@ $(function() {
 		$("#form1").submit();
 	});
 });
+
+//表单验证
+var checkBankSumbit = function() {
+	var inp2_directoryName = $("#inp2_directoryName").val();
+	var inp2_parentName = $("#inp2_parentName").val();
+	var inp2_cateOrder = $("#inp2_cateOrder").val();
+	var inp2_isuse = $("#inp2_isuse").val();
+	
+	if(inp2_directoryName == null || inp2_directoryName=="") {
+		$("#errorMsg").html("栏目名称不能为空！");
+		$("#inp2_directoryName").focus();
+		return false;
+	}
+	
+	if(inp2_parentName==null || inp2_parentName == "-1"){
+		$("#errorMsg").html("上级栏目不能为空！");
+		$("#inp2_parentName").focus();
+		return false;
+	}
+	if(inp2_cateOrder == null || inp2_cateOrder=="" ) {
+		$("#errorMsg").html("排序序号不能为空！");
+		$("#inp2_cateOrder").focus();
+		return false;
+	}
+	if(inp2_isuse==null || inp2_isuse == "-1"){
+		$("#errorMsg").html("是否有效不能为空！");
+		$("#inp2_isuse").focus();
+		return false;
+	}
+	$("#errorMsg").html("&nbsp;");
+	return true;
+};
 
 var findDirectoryType = function() {
 	var inp2_parentName = $("#inp2_parentName");
@@ -61,7 +97,7 @@ var findDirectoryType = function() {
 var findIsuseType = function() {
 	var inp2_isuse = $("#inp2_isuse");
 	inp2_isuse.empty();
-	var html = "<option value=''>-请选择-</option>";
+	var html = "<option value='-1'>-请选择-</option>";
 		html += "<option value='1'>有效</option>";
 		html += "<option value='0'>无效</option>";
 		IsuseHtml = html;

@@ -18,4 +18,6 @@ public interface IAdvertiseService {
 
 	Map<String, Object> findAdvertise(String id)throws Exception;
 
+	PageBean queryGoodsList(PageBean pageBean) throws Exception;
+
 }

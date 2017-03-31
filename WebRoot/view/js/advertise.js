@@ -38,7 +38,7 @@ var findAdvertiseIsuse = function() {
 			dataType: "json",
 			success : function(data) {
 				console.log(data);
-				var html = "<option value=''>-请选择-</option>";
+				var html = "<option value='-1'>-请选择-</option>";
 				$(data.isuseList).each(function(index) {
 					var isuseinfoType = data.isuseList[index];
 					html += "<option value='" + isuseinfoType.code + "'>" + isuseinfoType.name + "</option>";
@@ -46,7 +46,7 @@ var findAdvertiseIsuse = function() {
 				AdvertiseIsuseHtml = html;
 				isuse.append(html);
 				
-				var html = "<option value='-1'>-请选择-</option>";
+				var html = "<option value=''>-请选择-</option>";
 				$(data.dictionaryList).each(function(index) {
 					var advertiseType = data.dictionaryList[index];
 					html += "<option value='" + advertiseType.code + "'>" + advertiseType.name + "</option>";
@@ -155,12 +155,12 @@ var checkSumbit = function() {
 		return false;
 	}
 	
-	/*var isuse = $("#isuse").val();
+	var isuse = $("#isuse").val();
 	if(isuse == "-1"){
 		$("#errorMsg").html("是否启用不能为空！");
 		$("#isuse").focus();
 		return false;
-	}*/
+	}
 	$("#errorMsg").html("&nbsp;");
 	return true;
 };
@@ -171,7 +171,6 @@ $("#saveBtn").click(function() {
 	if(!checkSumbit()) {
 		return;
 	}
-	
 	var data = formGet("edit_adv_table");
 	$.ajax({
 		type : "POST",
@@ -214,31 +213,60 @@ var setAdvertiseForm = function(data) {
 	$("#advType").val(data.map.type);
 	$("#isuse").val(data.map.isuse);
 	$("#kind").val(data.map.kind);
-	var objId = data.map.imglink
+	var objId = data.map.linkkind
+	if(objId =="0"){
+		$("#imglinkLabel").val(data.map.goodsName);
+	}
+	if(objId =="1"){
+		$("#imglinkLabel").val(data.map.eventsName);
+	}
 	if(objId =="2"){
 		$("#imglinkLabel").val(data.map.imglink);
 	}
-	if(objId =="1"){
-		$("#imglinkLabel").val(data.map.infoname);
+	if(objId =="3"){
+		$("#imglinkLabel").val(data.map.cateName);
 	}
 	$("#errorMsg").html("&nbsp;");
 };
 
+//选择商品
 var showQueryGoodsWin = function(){
-	
-	
-	
+	//打开商品列表窗口
+	var url=path_ +"/view/shop/advertise/queryGoods.jsp";
+	showLayerModal("选择商品",url,700,450);
 }
 
+//选择商品的回调函数
+var selectGoods = function(obj) {
+	$('#imglink').val(obj.goodsId);
+	$('#imglinkLabel').val(obj.goodsName);
+};
+
+//选择活动
 var showQueryEventsWin = function(){
-	
-	
+	//打开活动列表窗口
+	var url=path_ +"/view/shop/advertise/queryEvents.jsp";
+	showLayerModal("选择商品",url,700,450);
 }
 
+//选择活动的回调函数
+var selectEvents = function(obj) {
+	$('#imglink').val(obj.eventsId);
+	$('#imglinkLabel').val(obj.name);
+};
+
+//选择分类
 var showQueryCateInfoWin = function(){
-	
-	
+	//打开活动列表窗口
+	var url=path_ +"/view/shop/advertise/queryCategory.jsp";
+	showLayerModal("选择分类",url,700,450);
 }
+
+//选择分类的回调函数
+var selectCategocy = function(obj) {
+	$('#imglink').val(obj.CategocyId);
+	$('#imglinkLabel').val(obj.name);
+};
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";

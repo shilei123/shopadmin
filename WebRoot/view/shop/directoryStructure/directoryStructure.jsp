@@ -132,7 +132,7 @@
 							<div class="frame-div-padd10">
 		        				<input type="hidden"  id="inp2_id" name="directory.id" style="width:300px;"/>
 		        				<input type="hidden"  id="inp2_levels" name="directory.levels" style="width:300px;"/>
-		        				<input type="text"  name="directory.directoryName" id="inp2_directoryName" style="width:300px;" placeholder="请输入类别名称"/>
+		        				<input type="text"  name="directory.directoryName" id="inp2_directoryName" style="width:300px;" placeholder="请输入栏目名称"/>
 		        			</div>
 						</td>
 					</tr>
@@ -173,13 +173,12 @@
 		        			</div>
 						</td>
 					</tr>
-					<tr>
-						<td colspan="2" align="center">
-							<button type="button" class="am-btn am-btn-success" id="saveDirectoryBtn"><span class="am-icon-save"></span> 保存</button>
-							<button type="button" class="am-btn am-btn-default" id="cancelBtn"><span class="am-icon-close"></span> 取消</button>
-						</td>
-					</tr>
 	    		</table>
+	    		<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
+	    		<div align="center">
+						<button type="button" class="am-btn am-btn-success" id="saveDirectoryBtn"><span class="am-icon-save"></span> 保存</button>
+						<button type="button" class="am-btn am-btn-default" id="cancelBtn"><span class="am-icon-close"></span> 取消</button>
+				</div>
 	    		</form>
 	    	</div>
 		</div>

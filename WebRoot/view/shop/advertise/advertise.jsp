@@ -150,12 +150,11 @@
 			  					<input id="imglinkLabel" readonly="readonly" style="width: 97%;" class="am-form-field" required="true"/> 
 			  				</td>
 			  				<td>
-			  					<a href="#" class="easyui-linkbutton" onclick="showQueryGoodsWin();return false;" id="goodsBtn">选择商品</a>
+			  					<a href="#" class="easyui-linkbutton" onclick="showQueryGoodsWin();return false;" style="display: none;" id="goodsBtn">选择商品</a>
 			  					<a href="#" class="easyui-linkbutton" onclick="showQueryEventsWin();return false;" style="display: none;" id="eventBtn">选择活动</a>
 			  					<a href="#" class="easyui-linkbutton" onclick="showQueryCateInfoWin();return false;" style="display: none;" id="cateBtn">选择分类</a>
 			  				</td>
 			  			</tr>
-			  			
 			  			<tr>
 			  				<td class="table_title">显示顺序:</td>
 			  				<td colspan="1"><input name="advertise.ordernumb" id="ordernumb" class="am-form-field" data-options="increment:1" required="true" /> </td>

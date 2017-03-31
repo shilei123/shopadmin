@@ -4,23 +4,23 @@ import java.util.Date;
 
 
 /**
- * ScEventsinfo entity. @author MyEclipse Persistence Tools
+ * ScEvents entity. @author MyEclipse Persistence Tools
  */
 
-public class ScEventsinfo  implements java.io.Serializable {
+public class ScEvents  implements java.io.Serializable {
 
      private String Id;
      private String name;
      private String isuse;
      private String memo;
-     private Date starttime;
-     private Date endtime;
+     private Date start_time;
+     private Date end_time;
      private Date createTime;
      private Date updateTime;
      private String flag;
      private String belong;
 
-    public ScEventsinfo() {
+    public ScEvents() {
     }
 
 	public String getId() {
@@ -55,20 +55,20 @@ public class ScEventsinfo  implements java.io.Serializable {
 		this.memo = memo;
 	}
 
-	public Date getStarttime() {
-		return starttime;
+	public Date getStart_time() {
+		return start_time;
 	}
 
-	public void setStarttime(Date starttime) {
-		this.starttime = starttime;
+	public void setStart_time(Date start_time) {
+		this.start_time = start_time;
 	}
 
-	public Date getEndtime() {
-		return endtime;
+	public Date getEnd_time() {
+		return end_time;
 	}
 
-	public void setEndtime(Date endtime) {
-		this.endtime = endtime;
+	public void setEnd_time(Date end_time) {
+		this.end_time = end_time;
 	}
 
 	public Date getCreateTime() {
