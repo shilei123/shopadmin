@@ -62,6 +62,10 @@ var showLayerModal = function(title, url, w, h) {
 	});
 };
 
+var showLayerMsg = function(msg) {
+	layer.msg(msg, {offset: 't'});
+};
+
 var showTopTips = function(msg,targetId) {
 	layer.tips(msg, '#'+targetId, {
 		  tips: [1, '#F39B12']
