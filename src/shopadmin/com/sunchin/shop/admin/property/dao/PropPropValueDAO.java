@@ -11,34 +11,40 @@ import com.sunchin.shop.admin.dict.FlagEnum;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 @Repository("propPropValueDAO")
 public class PropPropValueDAO extends PageDAO{
-	
-	//public final String SELECT_SQL = " select t.id,t.PROP_ID,t.CATE_ID from SC_PROPERTY_CATEGORY t where t.flag=? ";
-	/*
-	*//**
-	 * 查询所有属性值
-	 * @param pageBean
-	 * @return
-	 *//*
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> queryPropCate(String cateId, String[] propIds) {
-		StringBuffer sql = new StringBuffer(SELECT_SQL);
-		
-		List<String> params = new ArrayList<String>();
-		params.add(FlagEnum.ACT.getCode());
-		DBUtil.bind(sql, params, " and t.cate_id=? ", cateId);
-		DBUtil.bindIn(sql, params, " and t.prop_id ", propIds);
-		
-		return DBUtil.getInstance().queryBySQL(sql.toString(), params);
-	}*/
 
+	/**
+	 * 查询该类别的所有属性对应的属性属性值关系
+	 * @param cateId
+	 * @return
+	 */
+	public List<Map> queryPropPropValByCateId(String cateId){
+		//需要查出类别下的所有属性，暂不加上t4.flag=1 and t5.flag=1
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select t1.cate_name,t3.id as prop_id,t3.prop_name,t4.id as prop_propval_id,t5.id as val_id,t5.val_name from sc_category t1 ");
+		sql.append(" left join sc_property_category t2 on t2.cate_id=t1.id ");
+		sql.append(" left join sc_property t3 on t3.id=t2.prop_id ");
+		sql.append(" left join sc_property_propvalue t4 on t4.prop_id=t2.prop_id ");
+		sql.append(" left join sc_propvalue t5 on t5.id=t4.val_id ");
+		sql.append(" where t1.id=? ");
+		sql.append(" and t1.flag=? ");
+		sql.append(" and t2.flag=? ");
+		sql.append(" and t3.flag=? order by t3.prop_name ");
+		List params = new ArrayList(4);
+		params.add(cateId);
+		params.add(FlagEnum.ACT.getCode());
+		params.add(FlagEnum.ACT.getCode());
+		params.add(FlagEnum.ACT.getCode());
+		return DBUtil.getInstance().queryBySQL(sql.toString(), params);
+	}
+	
 	/**
 	 * 查询该属性的属性-属性值关系
 	 * @param cateId
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> queryPropPropValueByPropId(String propId) {
 		StringBuffer sql = new StringBuffer(" select t.* from SC_PROPERTY_PROPVALUE t where t.flag=? and t.prop_id=? ");
 		List<String> params = new ArrayList<String>(2);
@@ -46,5 +52,14 @@ public class PropPropValueDAO extends PageDAO{
 		params.add(propId);
 		return DBUtil.getInstance().queryBySQL(sql.toString(), params);
 	}
+	
+	public void delAllPropPropValue(String propId){
+		String hql = " update ScPropertyPropValue set flag=? where propId=? ";
+		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), propId);
+	}
 
+	public void delPropPropValue(String propId, String valId){
+		String hql = " update ScPropertyPropValue set flag=? where propId=? and valId=? ";
+		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), propId, valId);
+	}
 }

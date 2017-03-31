@@ -12,6 +12,7 @@ import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScPropValue;
 
 import framework.bean.PageBean;
+import framework.config.SysDict;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
@@ -59,11 +60,14 @@ public class PropValueDAO extends PageDAO{
 	 *	获得属性值信息
 	 */
 	@SuppressWarnings("unchecked")
-
 	public List<ScPropValue> getPropValue(String id) {
-
 		Map<String, Object> params = new HashMap<String, Object>(1);
 		params.put("flag", FlagEnum.ACT.getCode());
 		return DBUtil.getInstance().queryByPojo(ScPropValue.class,params);
+	}
+	
+	public void delPropValue(String id){
+		String hql = " update ScPropValue set flag=? where id=? ";
+		DBUtil.getInstance().executeHql(hql, SysDict.FLAG_HIS, id);
 	}
 }

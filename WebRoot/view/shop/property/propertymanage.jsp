@@ -244,6 +244,6 @@
 -->
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/property_propertymanager.js"></script>
+<script type="text/javascript" src="${path }/view/js/property_propertymanage.js"></script>
 </html>
 

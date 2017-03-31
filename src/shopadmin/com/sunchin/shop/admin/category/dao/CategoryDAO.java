@@ -9,12 +9,22 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScCategory;
 
+import framework.config.SysDict;
 import framework.db.DBUtil;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 @Repository("categoryDAO")
 public class CategoryDAO {
 
+	/**
+	 * 查询树结构
+	 * @return
+	 */
+	public List<Map> queryTreeBySQL(){
+		String sql = " select o.id,o.cate_name,o.memo,o.cate_order,o.levels,o.logo,o.url,o.isuse,o.parent_id from sc_category o where o.flag=? ";
+		return DBUtil.getInstance().queryBySQL(sql, FlagEnum.ACT.getCode());
+	}
+	
 	/**
 	 * 查询该id是否有子类别
 	 * @param id
@@ -50,5 +60,10 @@ public class CategoryDAO {
 		params.put("levels", "1");
 		params.put("flag", FlagEnum.ACT.getCode());
 		return DBUtil.getInstance().queryByPojo(ScCategory.class, params, " cateOrder ");
+	}
+	
+	public void delCategory(String id) {
+		String hql = " update ScCategory set flag=? where id=? ";
+		DBUtil.getInstance().executeHql(hql, SysDict.FLAG_HIS, id);
 	}
 }

@@ -1,11 +1,20 @@
 package com.sunchin.shop.admin.category.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sunchin.shop.admin.pojo.ScCategory;
 
+@SuppressWarnings("rawtypes")
 public interface CategoryService {
-
+	
+	/**
+	 * 查询类别树
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Map> queryCategoryTree() throws Exception;
+	
 	/**
 	 * 新增类别
 	 * @param category

@@ -14,7 +14,6 @@ import com.sunchin.shop.admin.propValue.dao.PropValueDAO;
 import com.sunchin.shop.admin.propValue.service.PropValueService;
 
 import framework.bean.PageBean;
-import framework.config.SysDict;
 import framework.db.DBUtil;
 
 @Service("propValueService")
@@ -36,12 +35,9 @@ public class PropValueServiceImpl implements PropValueService {
 	
 	@Override
 	public void delPropValue(String id) throws Exception {
-
 		List<ScPropValue> list = propValueDAO.getPropValue(id);
-
 		if(list!=null && !list.isEmpty()){
-			String hql = " update ScPropValue set flag=? where id=? ";
-			db.executeHql(hql, SysDict.FLAG_HIS, id);
+			propValueDAO.delPropValue(id);
 		}
 	}
 	

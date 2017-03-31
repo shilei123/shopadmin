@@ -17,19 +17,17 @@ public class PropertyCategoryDAO extends PageDAO{
 	public final String SELECT_SQL = " select t.id,t.PROP_ID,t.CATE_ID from SC_PROPERTY_CATEGORY t where t.flag=? ";
 	
 	/**
-	 * 查询当前页且和类别相关的属性
+	 * 查询类别对应的属性
 	 * @param pageBean
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> queryPropCate(String cateId, String[] propIds) {
 		StringBuffer sql = new StringBuffer(SELECT_SQL);
-		
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
 		DBUtil.bind(sql, params, " and t.cate_id=? ", cateId);
 		DBUtil.bindIn(sql, params, " and t.prop_id ", propIds);
-		
 		return DBUtil.getInstance().queryBySQL(sql.toString(), params);
 	}
 
@@ -45,6 +43,11 @@ public class PropertyCategoryDAO extends PageDAO{
 		params.add(FlagEnum.ACT.getCode());
 		params.add(cateId);
 		return DBUtil.getInstance().queryBySQL(sql.toString(), params);
+	}
+	
+	public void delPropCate(String cateId, String propId){
+		String hql = " update ScPropertyCategory set flag=? where cateId=? and propId=? ";
+		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), cateId, propId);
 	}
 
 }

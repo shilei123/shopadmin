@@ -47,6 +47,10 @@ public class PropertyCategoryAction extends PageAction{
 		return Action.SUCCESS;
 	}
 	
+	/**
+	 * 查询选中的类别属性关系
+	 * @return
+	 */
 	public String queryPropCateCheck(){
 		try {
 			listCheck = propCateService.queryPropCateCheck(this.getPageBean());

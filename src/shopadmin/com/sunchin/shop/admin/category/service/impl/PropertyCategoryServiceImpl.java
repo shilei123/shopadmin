@@ -98,8 +98,7 @@ public class PropertyCategoryServiceImpl implements PropertyCategoryService {
 	}
 	
 	private void delPropCate(String cateId, String propId){
-		String hql = " update ScPropertyCategory set flag=? where cateId=? and propId=? ";
-		db.executeHql(hql, FlagEnum.HIS.getCode(), cateId, propId);
+		propCateDAO.delPropCate(cateId, propId);
 	}
 
 	/**

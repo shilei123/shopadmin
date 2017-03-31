@@ -1,12 +1,16 @@
 package com.sunchin.shop.admin.property.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
@@ -19,6 +23,7 @@ import framework.bean.PageBean;
 import framework.db.DBUtil;
 import framework.util.CommonUtils;
 
+@SuppressWarnings("rawtypes")
 @Service("propPropValueService")
 public class PropPropValueServiceImpl implements PropPropValueService {
 
@@ -101,16 +106,72 @@ public class PropPropValueServiceImpl implements PropPropValueService {
 	}
 	
 	private void delAllPropPropValue(String propId){
-		String hql = " update ScPropertyPropValue set flag=? where propId=? ";
-		db.executeHql(hql, FlagEnum.HIS.getCode(), propId);
+		propPropValueDAO.delAllPropPropValue(propId);
 	}
 	
 	private void delPropPropValue(String propId, String valId){
-		String hql = " update ScPropertyPropValue set flag=? where propId=? and valId=? ";
-		db.executeHql(hql, FlagEnum.HIS.getCode(), propId, valId);
+		propPropValueDAO.delPropPropValue(propId, valId);
+	}
+	
+	/**
+	 * 该类别的所有属性属性值关系
+	 * @param cateId
+	 */
+	public List queryPropPropValByCateId(String cateId){
+		List<Map> list = propPropValueDAO.queryPropPropValByCateId(cateId);
+		List map = this.generateData(list);
+		return map;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List generateData(List<Map> list) {
+		Map<String, Object> map = new HashMap();
+		for (int i = 0; i < list.size(); i++) {
+			Map row = list.get(i);
+			String propId = CommonUtils.getString(row.get("propId"));
+			String propName = CommonUtils.getString(row.get("propName"));
+			String propPropvalId = CommonUtils.getString(row.get("propPropvalId"));
+			String valName = CommonUtils.getString(row.get("valName"));
+			String propInfo = propId+"_"+propName;
+			Object vals = map.get(propInfo);
+			List valList = null;
+			if(vals != null) {
+				valList = (ArrayList) vals;
+				valList.add(row);
+			} else {
+				valList = new ArrayList();
+				//如果没有属性值的则不添加进去
+				if(StringUtils.isNotBlank(propPropvalId) && StringUtils.isNotBlank(valName)) {
+					valList.add(row);
+				}
+				map.put(propInfo, valList);
+			}
+		}
+		
+		//转换成json格式数据
+		List nodes = new ArrayList(map.size());
+		Iterator iter = map.keySet().iterator();
+		while(iter.hasNext()) {
+			Map node = new HashMap(3);
+			String key = iter.next().toString();
+			String[] keys = key.split("_");
+			node.put("propId", keys[0]);
+			node.put("propName", keys[1]);
+			
+			//去掉无关信息 
+			List vals = (ArrayList) map.get(key);
+			for(int i = 0; i < vals.size();i++) {
+				Map row = (Map) vals.get(i);
+				row.remove("propId");
+				row.remove("propName");
+				row.remove("cateName");
+			}
+			node.put("vals", vals);
+			nodes.add(node);
+		}
+		return nodes;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public PageBean queryPropPropValue(PageBean pageBean) throws Exception {
 		int total = propValueDAO.queryPropValueCount(pageBean);

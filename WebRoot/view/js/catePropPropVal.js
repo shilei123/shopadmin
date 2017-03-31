@@ -41,11 +41,13 @@ var categoryClick = function(node) {
 				var vals = json.list[x].vals;
 				for(y in vals){
 					if(vals[y].valName!=null && vals[y].valName!=undefined && vals[y].valName!=""){
+						html += "<span style=\"width:100px;display:inline-block;\">";
 						if(checkPropPropVal(json.listCheck, vals[y].propPropvalId)){
-							html += "<input name='chooseVal' class='" + vals[y].propPropvalId + "' type='checkbox' style=\"vertical-align: middle;margin: 0px\" checked='checked'/>" + vals[y].valName + "&nbsp;&nbsp;&nbsp;&nbsp;";
+							html += "<input name='chooseVal' class='" + vals[y].propPropvalId + "' type='checkbox' style=\"vertical-align: middle;margin: 0px\" checked='checked'/>" + vals[y].valName ;
 						}else{
-							html += "<input name='chooseVal' class='" + vals[y].propPropvalId + "' type='checkbox' style=\"vertical-align: middle;margin: 0px\"/>" + vals[y].valName + "&nbsp;&nbsp;&nbsp;&nbsp;";
+							html += "<input name='chooseVal' class='" + vals[y].propPropvalId + "' type='checkbox' style=\"vertical-align: middle;margin: 0px\"/>" + vals[y].valName;
 						}
+						html += "</span>";
 					}
 				}
 				html += "</td>";
@@ -111,7 +113,6 @@ var saveIt = function(cateId) {
 	   	}
 	});
 	/*$("#propPropValIds").val(temp);*/
-	
 	var data = {"propPropValIds": temp, "cateId": cateId};
 	$.ajax({
 		type : "POST",

@@ -151,5 +151,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/comment_commentmanager.js"></script>
+<script type="text/javascript" src="${path }/view/js/comment_commentmanage.js"></script>
 </html>

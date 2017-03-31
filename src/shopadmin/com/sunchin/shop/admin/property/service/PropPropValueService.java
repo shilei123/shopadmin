@@ -30,4 +30,12 @@ public interface PropPropValueService {
 	 */
 	public List<Map<String, Object>> queryPropPropValueCheck(PageBean pageBean) throws Exception;
 	
+	/**
+	 * 查询该类别下的所有属性和属性值
+	 * @param cateId
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("rawtypes")
+	public List queryPropPropValByCateId(String cateId) throws Exception;
 }

@@ -12,6 +12,7 @@ import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScProperty;
 
 import framework.bean.PageBean;
+import framework.config.SysDict;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
@@ -66,5 +67,10 @@ public class PropertyDAO extends PageDAO{
 		params.put("flag", FlagEnum.ACT.getCode());
 		params.put("id", id);
 		return DBUtil.getInstance().queryByPojo(ScProperty.class,params);
+	}
+	
+	public void delProp(String id) {
+		String hql = " update ScProperty set flag=? where id=? ";
+		DBUtil.getInstance().executeHql(hql, SysDict.FLAG_HIS, id);
 	}
 }

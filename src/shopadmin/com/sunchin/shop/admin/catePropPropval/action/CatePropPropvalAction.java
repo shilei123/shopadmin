@@ -7,12 +7,18 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.catePropPropval.service.CatePropPropvalService;
+import com.sunchin.shop.admin.category.service.CategoryService;
+import com.sunchin.shop.admin.property.service.PropPropValueService;
 
 @SuppressWarnings("rawtypes")
 public class CatePropPropvalAction {
 
 	@Resource(name = "catePropPropvalService")
 	private CatePropPropvalService catePropPropvalService;
+	@Resource(name = "categoryService")
+	private CategoryService categoryService;
+	@Resource(name = "propPropValueService")
+	private PropPropValueService propPropValueService;
 	private List<Map> trees;
 	private List list;		//该类别所有属性和属性值
 	private List listCheck;	//该类别已经选中的属性属性值
@@ -26,7 +32,7 @@ public class CatePropPropvalAction {
 	 */
 	public String queryCategoryTree() {
 		try {
-			trees = catePropPropvalService.queryCategoryTree();
+			trees = categoryService.queryCategoryTree();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,7 +45,7 @@ public class CatePropPropvalAction {
 	 */
 	public String queryListByCateId() {
 		try {
-			list = catePropPropvalService.queryListByCateId(cateId);
+			list = propPropValueService.queryPropPropValByCateId(cateId);
 			listCheck = catePropPropvalService.queryListCheck(cateId);
 		} catch (Exception e) {
 			e.printStackTrace();

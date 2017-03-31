@@ -2,7 +2,6 @@ package com.sunchin.shop.admin.property.service.impl;
 
 import java.util.Date;
 import java.util.List;
-
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,7 +15,6 @@ import com.sunchin.shop.admin.property.dao.PropertyDAO;
 import com.sunchin.shop.admin.property.service.PropertyService;
 
 import framework.bean.PageBean;
-import framework.config.SysDict;
 import framework.db.DBUtil;
 
 @Service("propertyService")
@@ -41,8 +39,7 @@ public class PropertyServiceImpl implements PropertyService {
 	public void delProperty(String id) throws Exception {
 		List<ScProperty> list = propertyDAO.getProp(id);
 		if(list!=null && !list.isEmpty()){
-			String hql = " update ScProperty set flag=? where id=? ";
-			db.executeHql(hql, SysDict.FLAG_HIS, id);
+			propertyDAO.delProp(id);
 		}
 	}
 	
