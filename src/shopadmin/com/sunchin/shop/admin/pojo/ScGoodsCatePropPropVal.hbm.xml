@@ -27,8 +27,8 @@
                 <comment>spu 不会影响到库存和价格的属性,又叫关键属性/sku 会影响到库存和价格的属性, 又叫销售属性</comment>
             </column>
         </property>
-        <property name="orders" type="java.lang.String">
-            <column name="ORDERS" length="2">
+        <property name="orders" type="java.lang.Integer">
+            <column name="ORDERS">
                 <comment>排序</comment>
             </column>
         </property>

@@ -11,7 +11,7 @@ public class ScCategory implements java.io.Serializable {
 	private String id;
 	private String cateName;
 	private String memo;
-	private String cateOrder;
+	private int cateOrder;
 	private String levels;
 	private String logo;
 	private String url;
@@ -46,11 +46,11 @@ public class ScCategory implements java.io.Serializable {
 		this.memo = memo;
 	}
 
-	public String getCateOrder() {
+	public int getCateOrder() {
 		return this.cateOrder;
 	}
 
-	public void setCateOrder(String cateOrder) {
+	public void setCateOrder(int cateOrder) {
 		this.cateOrder = cateOrder;
 	}
 

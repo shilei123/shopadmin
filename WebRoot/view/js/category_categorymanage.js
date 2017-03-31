@@ -92,8 +92,9 @@ $('#addCategoryBtn').click(function() {
 	$('#saveCategoryBtn').attr('style','display:inline');
 	var obj = getCategoryInfo(node);
 	$("#category_detail_table input").each(function(i,n){n.value = "";});
+	$("#inp2-isuse").val("");
 	$("#inp2-parentId").val(obj.categoryId);
-	$("inp2-levels").val(parseInt(obj.levels)+1);
+	$("#inp2-levels").val(parseInt(obj.levels)+1);
 	showModal("doc-modal-add", 600, 400);
 });
 

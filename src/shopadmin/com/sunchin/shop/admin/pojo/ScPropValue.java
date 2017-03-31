@@ -11,7 +11,7 @@ public class ScPropValue implements java.io.Serializable {
 	private String id;
 	private String valCode;
 	private String valName;
-	private String valOrder;
+	private int valOrder;
 	private String flag;
 	private Date createTime;
 	private String createPeople;
@@ -42,11 +42,11 @@ public class ScPropValue implements java.io.Serializable {
 		this.valName = valName;
 	}
 
-	public String getValOrder() {
+	public int getValOrder() {
 		return this.valOrder;
 	}
 
-	public void setValOrder(String valOrder) {
+	public void setValOrder(int valOrder) {
 		this.valOrder = valOrder;
 	}
 
