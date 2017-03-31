@@ -16,7 +16,7 @@ import com.sunchin.shop.admin.advertise.dao.AdvertiseDAO;
 import com.sunchin.shop.admin.advertise.service.IAdvertiseService;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
-import com.sunchin.shop.admin.pojo.ScBcuser;
+import com.sunchin.shop.admin.pojo.ScUserBase;
 import com.sunchin.shop.admin.pojo.ScBrand;
 import com.sunchin.shop.admin.pojo.ScEvents;
 import com.sunchin.shop.admin.pojo.ScGoods;
@@ -37,7 +37,7 @@ public class AdvertiseServiceImpl implements IAdvertiseService{
 	public PageBean queryAdvertiseList(PageBean pageBean) {
 		int total = advertiseDAO.queryAdvertiseCount(pageBean);
 		pageBean.setTotal(total);
-		List<ScBcuser> pageData = advertiseDAO.queryAdvertisefoPagination(pageBean);
+		List<ScUserBase> pageData = advertiseDAO.queryAdvertisefoPagination(pageBean);
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}

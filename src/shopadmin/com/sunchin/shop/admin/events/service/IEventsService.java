@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.eventsinfo.service;
+package com.sunchin.shop.admin.events.service;
 
 import com.sunchin.shop.admin.pojo.ScEvents;
 

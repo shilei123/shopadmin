@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.directoryStructure.action;
+package com.sunchin.shop.admin.dirStructure.action;
 
 import java.util.List;
 import java.util.Map;
@@ -6,28 +6,28 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
-import com.sunchin.shop.admin.directoryStructure.service.IDirectoryStructureService;
-import com.sunchin.shop.admin.pojo.ScDirectoryStructure;
+import com.sunchin.shop.admin.dirStructure.service.IDirStructureService;
+import com.sunchin.shop.admin.pojo.ScDirStructure;
 
 import framework.action.PageAction;
 
-public class DirectoryStructureAction extends PageAction{
+public class DirStructureAction extends PageAction{
 
-	@Resource(name="directoryStructureService")
-	private IDirectoryStructureService directoryStructureService;
+	@Resource(name="dirStructureService")
+	private IDirStructureService dirStructureService;
 	
 	private List<Map<String,Object>> directoryList;
-	private ScDirectoryStructure directory;
-	private List<ScDirectoryStructure> directoryTypeList;
+	private ScDirStructure directory;
+	private List<ScDirStructure> directoryTypeList;
 	private String msg;
 	
 	/**
 	 * 查询
 	 * @return
 	 */
-	public String queryDirectoryStructure(){
+	public String queryDirStructure(){
 		try {
-			directoryList = directoryStructureService.queryDirectoryStructure();
+			directoryList = dirStructureService.queryDirectoryStructure();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class DirectoryStructureAction extends PageAction{
 	 */
 	public String save(){
 		try {
-			directoryStructureService.save(directory);
+			dirStructureService.save(directory);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,11 +55,11 @@ public class DirectoryStructureAction extends PageAction{
 	 */
 	public String delete(){
 		try {
-			List<ScDirectoryStructure> list = directoryStructureService.queryDirectoryParent(directory.getId());
+			List<ScDirStructure> list = dirStructureService.queryDirectoryParent(directory.getId());
 			if(list!=null && !list.isEmpty()){
 				this.msg = "该类别下已有子类别，无法删除！";
 			}else{
-				directoryStructureService.delDirectory(directory.getId());
+				dirStructureService.delDirectory(directory.getId());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -72,9 +72,9 @@ public class DirectoryStructureAction extends PageAction{
 	 * 查询目录
 	 * @return
 	 */
-	public String queryDirectoryType(){
+	public String queryDirType(){
 		try {
-			directoryTypeList = directoryStructureService.queryDirectoryType();
+			directoryTypeList = dirStructureService.queryDirectoryType();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,11 +91,11 @@ public class DirectoryStructureAction extends PageAction{
 		this.directoryList = directoryList;
 	}
 
-	public ScDirectoryStructure getDirectory() {
+	public ScDirStructure getDirectory() {
 		return directory;
 	}
 
-	public void setDirectory(ScDirectoryStructure directory) {
+	public void setDirectory(ScDirStructure directory) {
 		this.directory = directory;
 	}
 
@@ -107,11 +107,11 @@ public class DirectoryStructureAction extends PageAction{
 		this.msg = msg;
 	}
 
-	public List<ScDirectoryStructure> getDirectoryTypeList() {
+	public List<ScDirStructure> getDirectoryTypeList() {
 		return directoryTypeList;
 	}
 
-	public void setDirectoryTypeList(List<ScDirectoryStructure> directoryTypeList) {
+	public void setDirectoryTypeList(List<ScDirStructure> directoryTypeList) {
 		this.directoryTypeList = directoryTypeList;
 	}
 	

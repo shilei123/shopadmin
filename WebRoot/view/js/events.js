@@ -201,7 +201,7 @@ var showEditWin = function(id) {
 	//clearForm();
 	//$("#couponTypeModal").trigger('changed.selected.amui');
 	clearForm();
-	var data = {"eventsinfo.id" : id};
+	var data = {"events.id" : id};
 	$.ajax({
 		type : "POST",
 		url : path_ + "/view/shop/events/events!queryEvents.action",
@@ -221,7 +221,7 @@ var showEditWin = function(id) {
 //删除
 var deleteDict = function(id) {
 	showConfirm("确认删除？", function() {
-		var data = {"eventsinfo.id" : id};
+		var data = {"events.id" : id};
 		$.ajax({
 			type : "POST",
 			url : path_ + "/view/shop/events/events!delete.action",

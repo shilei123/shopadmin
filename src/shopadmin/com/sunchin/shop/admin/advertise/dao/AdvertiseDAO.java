@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
-import com.sunchin.shop.admin.pojo.ScBcuser;
+import com.sunchin.shop.admin.pojo.ScUserBase;
 import com.sunchin.shop.admin.pojo.ScEvents;
 import com.sunchin.shop.admin.pojo.ScGoods;
 
@@ -32,7 +32,7 @@ public class AdvertiseDAO extends PageDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ScBcuser> queryAdvertisefoPagination(PageBean pageBean) {
+	public List<ScUserBase> queryAdvertisefoPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.ADVERTISE_LINKKIND.getType());

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
-import com.sunchin.shop.admin.pojo.ScBcuser;
+import com.sunchin.shop.admin.pojo.ScUserBase;
 import com.sunchin.shop.admin.pojo.ScIdentity;
 import com.sunchin.shop.admin.pojo.ScPurse;
 import com.sunchin.shop.admin.pojo.ScUser;
@@ -25,7 +25,7 @@ import framework.db.PageDAO;
 @Repository("userDAO")
 public class UserDAO extends PageDAO{
 
-	public int queryUserBcuserCount(PageBean pageBean) {
+	public int queryUserBaseCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(DictionaryTypeEnum.USER_SEX.getType());
 		String sql = this.buildWhereSql(pageBean, params);
@@ -33,7 +33,7 @@ public class UserDAO extends PageDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ScBcuser> queryUserBcuserPagination(PageBean pageBean) {
+	public List<ScUserBase> queryUserBasePagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(DictionaryTypeEnum.USER_SEX.getType());
 		String sql = this.buildWhereSql(pageBean, params);

@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.eventsinfo.dao;
+package com.sunchin.shop.admin.events.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;

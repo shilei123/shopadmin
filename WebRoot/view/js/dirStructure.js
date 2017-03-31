@@ -25,7 +25,7 @@ $(function() {
 		$("#form1").validate({
 	        submitHandler:function(form){
 	            $('#form1').form('submit', {
-		    		url:  path_ + "/view/shop/directoryStructure/directoryStructure!save.action",
+		    		url:  path_ + "/view/shop/dirStructure/dirStructure!save.action",
 		    		onSubmit: function() {
 		    			return checkForm();
 		    		},
@@ -78,7 +78,7 @@ var findDirectoryType = function() {
 	var inp2_parentName = $("#inp2_parentName");
 	inp2_parentName.empty();
 		$.ajax({
-			url :path_ + "/view/shop/directoryStructure/directoryStructure!queryDirectoryType.action",
+			url :path_ + "/view/shop/dirStructure/dirStructure!queryDirType.action",
 			type : 'POST',
 			data : null,
 			dataType: "json",
@@ -119,7 +119,7 @@ var setIsuseType = function(){
 function initDirectoryTree() {
 	$.ajax( {
 		type : "POST",
-		url : path_ + "/view/shop/directoryStructure/directoryStructure!queryDirectoryStructure.action",
+		url : path_ + "/view/shop/dirStructure/dirStructure!queryDirStructure.action",
 		dataType : "json",
 		success : function(json) {
 			var root = json.directoryList[0];
@@ -193,7 +193,7 @@ $("#delDirectoryBtn").click(function() {
 	showConfirm("确认删除？",function() {
 		$.ajax( {
 			type : "POST",
-			url : path_ + "/view/shop/directoryStructure/directoryStructure!delete.action",
+			url : path_ + "/view/shop/dirStructure/dirStructure!delete.action",
 			dataType : "json",
 			data: {"directory.id": $("#inp_directoryId").val()},
 			success : function(json) {

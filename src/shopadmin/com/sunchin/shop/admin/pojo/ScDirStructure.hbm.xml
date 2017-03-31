@@ -3,33 +3,33 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.sunchin.shop.admin.pojo.ScDirectoryStructure" table="SC_DIRECTORY_STRUCTURE" >
+    <class name="com.sunchin.shop.admin.pojo.ScDirStructure" table="SC_DIR_STRUCTURE" >
         <id name="id" type="java.lang.String">
             <column name="ID" length="36" />
             <generator class="assigned"></generator>
         </id>
-        <property name="directoryName" type="java.lang.String">
-             <column name="DIRECTORY_NAME" length="50">
+        <property name="dirName" type="java.lang.String">
+             <column name="DIR_NAME" length="50">
                 <comment>栏目名称</comment>
             </column>
         </property>
-        <property name="parentDirectoryId" type="java.lang.String">
-             <column name="PARENT_DIRECTORY_ID" length="36">
+        <property name="parentDirId" type="java.lang.String">
+             <column name="PARENT_DIRE_ID" length="36">
                 <comment>上级栏目</comment>
             </column>
         </property>
-        <property name="cateOrder" type="java.lang.Double">
-             <column name="CATE_ORDER" >
+        <property name="order" type="java.lang.Double">
+             <column name="ORDER_" >
                 <comment>顺序</comment>
             </column>
         </property>
-        <property name="levels" type="java.lang.String">
-            <column name="LEVELS" length="1">
+        <property name="level" type="java.lang.String">
+            <column name="LEVEL_" length="1">
                 <comment>所属级别/0根节点，1一级类别，2二级类别，3三级类别</comment>
             </column>
         </property>
-         <property name="directoryPath" type="java.lang.String">
-            <column name="DIRECTORY_PATH" length="200">
+         <property name="dirPath" type="java.lang.String">
+            <column name="DIR_PATH" length="200">
                 <comment>栏目路径</comment>
             </column>
         </property>

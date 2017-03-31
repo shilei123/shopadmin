@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.eventsinfo.service.impl;
+package com.sunchin.shop.admin.events.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.StatusEnum;
-import com.sunchin.shop.admin.eventsinfo.dao.EventsDAO;
-import com.sunchin.shop.admin.eventsinfo.service.IEventsService;
+import com.sunchin.shop.admin.events.dao.EventsDAO;
+import com.sunchin.shop.admin.events.service.IEventsService;
 import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScEvents;
 

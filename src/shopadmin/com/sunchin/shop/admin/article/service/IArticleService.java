@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sunchin.shop.admin.pojo.ScArticle;
-import com.sunchin.shop.admin.pojo.ScDirectoryStructure;
+import com.sunchin.shop.admin.pojo.ScDirStructure;
 
 import framework.bean.PageBean;
 
@@ -16,7 +16,7 @@ public interface IArticleService {
 
 	ScArticle queryArticle(String id) throws Exception;
 
-	List<ScDirectoryStructure> queryDirectoryType() throws Exception;
+	List<ScDirStructure> queryDirectoryType() throws Exception;
 
 	void saveArticle(ScArticle article) throws Exception;
 

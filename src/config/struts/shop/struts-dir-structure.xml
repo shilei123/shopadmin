@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<package name="directoryStructure" extends="json-default" namespace="/view/shop/directoryStructure">
-		<action name="directoryStructure" class="com.sunchin.shop.admin.directoryStructure.action.DirectoryStructureAction">
+	<package name="dirStructure" extends="json-default" namespace="/view/shop/dirStructure">
+		<action name="dirStructure" class="com.sunchin.shop.admin.dirStructure.action.DirStructureAction">
 			<result type="json"><param name="ignoreHierarchy">false</param></result>
 		</action>
 	</package>

@@ -10,7 +10,7 @@ import com.sunchin.shop.admin.article.service.IArticleService;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.pojo.ScArticle;
 import com.sunchin.shop.admin.pojo.ScDictionary;
-import com.sunchin.shop.admin.pojo.ScDirectoryStructure;
+import com.sunchin.shop.admin.pojo.ScDirStructure;
 import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.action.PageAction;
@@ -26,7 +26,7 @@ public class ArticleAction extends PageAction{
 	private List<ScDictionary> articleTypeList;
 	private ScArticle article;
 	private List<Map<String, Object>> articleList;
-	private List<ScDirectoryStructure> directoryTypeList;
+	private List<ScDirStructure> directoryTypeList;
 	
 	/**
 	 * 查询
@@ -138,11 +138,11 @@ public class ArticleAction extends PageAction{
 		this.articleList = articleList;
 	}
 
-	public List<ScDirectoryStructure> getDirectoryTypeList() {
+	public List<ScDirStructure> getDirectoryTypeList() {
 		return directoryTypeList;
 	}
 
-	public void setDirectoryTypeList(List<ScDirectoryStructure> directoryTypeList) {
+	public void setDirectoryTypeList(List<ScDirStructure> directoryTypeList) {
 		this.directoryTypeList = directoryTypeList;
 	}
 	

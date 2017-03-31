@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.directoryStructure.service.impl;
+package com.sunchin.shop.admin.dirStructure.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,24 +16,24 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.directoryStructure.dao.DirectoryStructureDAO;
-import com.sunchin.shop.admin.directoryStructure.service.IDirectoryStructureService;
-import com.sunchin.shop.admin.pojo.ScDirectoryStructure;
+import com.sunchin.shop.admin.dirStructure.dao.DirStructureDAO;
+import com.sunchin.shop.admin.dirStructure.service.IDirStructureService;
+import com.sunchin.shop.admin.pojo.ScDirStructure;
 
 import framework.db.DBUtil;
 import framework.util.ComparatorCategoryVO;
 
-@Repository("directoryStructureService")
-public class DirectoryStructureServiceImpl implements IDirectoryStructureService{
+@Repository("dirStructureService")
+public class DirStructureServiceImpl implements IDirStructureService{
 
-	@Resource(name="directoryStructureDAO")
-	private DirectoryStructureDAO directoryStructureDAO;
+	@Resource(name="dirStructureDAO")
+	private DirStructureDAO dirStructureDAO;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<Map<String, Object>> queryDirectoryStructure() throws Exception {
 		
-	List<Map<String,Object>> directoryList = directoryStructureDAO.findDirectoryStructure();
+	List<Map<String,Object>> directoryList = dirStructureDAO.findDirectoryStructure();
 	if(directoryList == null || directoryList.isEmpty()){
 		return null;
 	}
@@ -101,8 +101,8 @@ public class DirectoryStructureServiceImpl implements IDirectoryStructureService
 	 * 查看该栏目有否有子栏目
 	 */
 	@Override
-	public List<ScDirectoryStructure> queryDirectoryParent(String parent)throws Exception {
-		List<ScDirectoryStructure>  directoryList =	directoryStructureDAO.queryDirectoryParent(parent);
+	public List<ScDirStructure> queryDirectoryParent(String parent)throws Exception {
+		List<ScDirStructure>  directoryList =	dirStructureDAO.queryDirectoryParent(parent);
 		return directoryList;
 	}
 
@@ -113,7 +113,7 @@ public class DirectoryStructureServiceImpl implements IDirectoryStructureService
 	@Transactional
 	public void delDirectory(String id) throws Exception {
 		DBUtil db = DBUtil.getInstance();
-		ScDirectoryStructure vo = (ScDirectoryStructure) db.get(ScDirectoryStructure.class, id);
+		ScDirStructure vo = (ScDirStructure) db.get(ScDirStructure.class, id);
 		vo.setFlag(FlagEnum.HIS.getCode());
 		db.update(vo);
 	}
@@ -123,7 +123,7 @@ public class DirectoryStructureServiceImpl implements IDirectoryStructureService
 	 */
 	@SuppressWarnings("unused")
 	@Override
-	public void save(ScDirectoryStructure directory) throws Exception {
+	public void save(ScDirStructure directory) throws Exception {
 		if (directory == null) {
 			return;
 		}
@@ -135,10 +135,10 @@ public class DirectoryStructureServiceImpl implements IDirectoryStructureService
 			directory.setCreateTime(new Date());
 			DBUtil.getInstance().insert(directory);
 		} else { // 修改
-			ScDirectoryStructure vo = (ScDirectoryStructure) DBUtil.getInstance().get(ScDirectoryStructure.class, directory.getId());
-			vo.setDirectoryName(directory.getDirectoryName());
-			vo.setParentDirectoryId(directory.getParentDirectoryId());
-			vo.setCateOrder(directory.getCateOrder());
+			ScDirStructure vo = (ScDirStructure) DBUtil.getInstance().get(ScDirStructure.class, directory.getId());
+			vo.setDirName(directory.getDirName());
+			vo.setDirPath(directory.getDirPath());
+			vo.setOrder(directory.getOrder());
 			vo.setIsuse(directory.getIsuse());
 			vo.setUpdateTime(new Date());
 			DBUtil.getInstance().update(vo);
@@ -149,8 +149,8 @@ public class DirectoryStructureServiceImpl implements IDirectoryStructureService
 	 * 查询目录
 	 */
 	@Override
-	public List<ScDirectoryStructure> queryDirectoryType() throws Exception {
-		List<ScDirectoryStructure> directory = directoryStructureDAO.queryDirectory();
+	public List<ScDirStructure> queryDirectoryType() throws Exception {
+		List<ScDirStructure> directory = dirStructureDAO.queryDirectory();
 		return directory;
 	}
 }

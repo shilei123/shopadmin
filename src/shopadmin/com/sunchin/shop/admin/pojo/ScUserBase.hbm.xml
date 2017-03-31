@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.sunchin.shop.admin.pojo.ScBcuser" table="SC_BCUSER" >
+    <class name="com.sunchin.shop.admin.pojo.ScUserBase" table="SC_USER_BASE" >
         <id name="id" type="java.lang.String">
             <column name="ID" length="36" />
             <generator class="assigned"></generator>
@@ -13,23 +13,23 @@
                 <comment>会员id</comment>
             </column>
         </property>
-        <property name="trueName" type="java.lang.String">
-            <column name="TRUE_NAME" length="50">
+        <property name="userName" type="java.lang.String">
+            <column name="USER_NAME" length="50">
                 <comment>会员姓名</comment>
             </column>
         </property>
-        <property name="userPhone" type="java.lang.String">
-            <column name="USER_PHONE" length="50">
+        <property name="phone" type="java.lang.String">
+            <column name="PHONE" length="50">
                 <comment>电话</comment>
             </column>
         </property>
-        <property name="userMail" type="java.lang.String">
-            <column name="USER_MAIL" length="50">
+        <property name="mail" type="java.lang.String">
+            <column name="MAIL" length="50">
                 <comment>邮箱</comment>
             </column>
         </property>
-        <property name="userSex" type="java.lang.String">
-             <column name="USER_SEX" length="1">
+        <property name="sex" type="java.lang.String">
+             <column name="SEX" length="1">
                 <comment>性别/0 男 1 女</comment>
             </column>
         </property>

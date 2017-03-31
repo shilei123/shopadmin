@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.directoryStructure.dao;
+package com.sunchin.shop.admin.dirStructure.dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,19 +7,19 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.pojo.ScDirectoryStructure;
+import com.sunchin.shop.admin.pojo.ScDirStructure;
 
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
-@Repository("directoryStructureDAO")
-public class DirectoryStructureDAO extends PageDAO{
+@Repository("dirStructureDAO")
+public class DirStructureDAO extends PageDAO{
 
 	@SuppressWarnings("unchecked")
-	public List<ScDirectoryStructure> queryDirectory() {
+	public List<ScDirStructure> queryDirectory() {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("flag",FlagEnum.ACT.getCode());
-		List<ScDirectoryStructure> directoryList = DBUtil.getInstance().queryByPojo(ScDirectoryStructure.class, params);
+		List<ScDirStructure> directoryList = DBUtil.getInstance().queryByPojo(ScDirStructure.class, params);
 		if(directoryList != null && !directoryList.isEmpty()){
 			return directoryList;
 		}
@@ -40,11 +40,11 @@ public class DirectoryStructureDAO extends PageDAO{
 
 	
 	@SuppressWarnings("unchecked")
-	public List<ScDirectoryStructure> queryDirectoryParent(String parent) {
+	public List<ScDirStructure> queryDirectoryParent(String parent) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("flag",FlagEnum.ACT.getCode());
 		params.put("parentDirectoryId", parent);
-		List<ScDirectoryStructure> directoryList = DBUtil.getInstance().queryByPojo(ScDirectoryStructure.class, params);
+		List<ScDirStructure> directoryList = DBUtil.getInstance().queryByPojo(ScDirStructure.class, params);
 		if(directoryList != null && !directoryList.isEmpty()){
 			return directoryList;
 		}
