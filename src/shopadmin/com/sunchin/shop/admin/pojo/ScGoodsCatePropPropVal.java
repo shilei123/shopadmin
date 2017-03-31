@@ -13,7 +13,7 @@ public class ScGoodsCatePropPropVal implements java.io.Serializable {
 	private String goodsChildId;
 	private String catePropPropvalId;
 	private String type;
-	private String orders;
+	private int orders;
 	private String flag;
 	private Date createTime;
 	private String createPeople;
@@ -50,11 +50,11 @@ public class ScGoodsCatePropPropVal implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public String getOrders() {
+	public int getOrders() {
 		return this.orders;
 	}
 
-	public void setOrders(String orders) {
+	public void setOrders(int orders) {
 		this.orders = orders;
 	}
 

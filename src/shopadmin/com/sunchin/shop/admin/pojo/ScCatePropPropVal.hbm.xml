@@ -17,8 +17,8 @@
                 <comment>属性.属性值id</comment>
             </column>
         </property>
-        <property name="orders" type="java.lang.String">
-            <column name="ORDERS" length="2">
+        <property name="orders" type="java.lang.Integer">
+            <column name="ORDERS">
                 <comment>排序</comment>
             </column>
         </property>

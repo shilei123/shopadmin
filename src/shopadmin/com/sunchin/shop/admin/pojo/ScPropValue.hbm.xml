@@ -18,8 +18,8 @@
                 <comment>属性值name</comment>
             </column>
         </property>
-        <property name="valOrder" type="java.lang.String">
-            <column name="VAL_ORDER" length="2">
+        <property name="valOrder" type="java.lang.Integer">
+            <column name="VAL_ORDER">
                 <comment>排序</comment>
             </column>
         </property>

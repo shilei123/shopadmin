@@ -11,7 +11,7 @@ public class ScCatePropPropVal implements java.io.Serializable {
 	private String id;
 	private String cateId;
 	private String proppropvalId;
-	private String orders;
+	private int orders;
 	private String flag;
 	private Date createTime;
 	private String createPeople;
@@ -40,11 +40,11 @@ public class ScCatePropPropVal implements java.io.Serializable {
 		this.proppropvalId = proppropvalId;
 	}
 
-	public String getOrders() {
+	public int getOrders() {
 		return this.orders;
 	}
 
-	public void setOrders(String orders) {
+	public void setOrders(int orders) {
 		this.orders = orders;
 	}
 

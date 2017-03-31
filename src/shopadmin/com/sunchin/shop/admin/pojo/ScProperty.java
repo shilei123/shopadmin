@@ -11,7 +11,7 @@ public class ScProperty implements java.io.Serializable {
 	private String id;
 	private String propCode;
 	private String propName;
-	private String propOrder;
+	private int propOrder;
 	private String flag;
 	private Date createTime;
 	private String createPeople;
@@ -40,11 +40,11 @@ public class ScProperty implements java.io.Serializable {
 		this.propName = propName;
 	}
 
-	public String getPropOrder() {
+	public int getPropOrder() {
 		return this.propOrder;
 	}
 
-	public void setPropOrder(String propOrder) {
+	public void setPropOrder(int propOrder) {
 		this.propOrder = propOrder;
 	}
 

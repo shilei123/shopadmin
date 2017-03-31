@@ -18,8 +18,8 @@
                 <comment>类别描述</comment>
             </column>
         </property>
-        <property name="cateOrder" type="java.lang.String">
-            <column name="CATE_ORDER" length="2">
+        <property name="cateOrder" type="java.lang.Integer">
+            <column name="CATE_ORDER">
                 <comment>排序</comment>
             </column>
         </property>

@@ -16,7 +16,6 @@ import com.sunchin.shop.admin.pojo.ScCategory;
 
 import framework.config.SysDict;
 import framework.db.DBUtil;
-import framework.util.CommonUtils;
 
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
@@ -28,22 +27,21 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	public void saveCategory(ScCategory category) throws Exception {
-		DBUtil db = DBUtil.getInstance();
 		/*String cateOrder = CommonUtils.getString(category.getCateOrder());
 		if(cateOrder.length()==1){
 			cateOrder = "0" + cateOrder;
 		}
 		category.setCateOrder(cateOrder);*/
 		
-		//根据父id的levels确定新类别的层级levels
-		String id = CommonUtils.getString(category.getParentId());
+		//根据父id的levels确定新类别的层级levels	前台已经处理
+		/*String id = CommonUtils.getString(category.getParentId());
 		if(id.equals(""))	return;
 		List<ScCategory> list = categoryDAO.queryPojoById(id);
 		if(list==null || list.isEmpty()) return;
 		String levels = list.get(0).getLevels();
 		if(levels==null || levels.isEmpty()) return;
 		Integer level = Integer.parseInt(levels) + 1;
-		category.setLevels(level.toString());
+		category.setLevels(level.toString());*/
 		
 		category.setId(UUID.randomUUID().toString());
 		category.setFlag(FlagEnum.ACT.getCode());
