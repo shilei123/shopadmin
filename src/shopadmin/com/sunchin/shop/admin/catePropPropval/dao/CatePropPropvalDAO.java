@@ -92,4 +92,34 @@ public class CatePropPropvalDAO {
 		List<ScCatePropPropVal> list = DBUtil.getInstance().queryByPojo(ScCatePropPropVal.class, params);
 		return list;
 	}
+	
+	/**
+	 * 根据类别查询类别-属性-属性值关系 add by yangchaowen
+	 * @param cateId
+	 * @return
+	 * @date 2017-03-30
+	 */
+	public List queryByCateId(String cateId) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" SELECT cpp.id cpp_id, ");
+		sql.append(" 		c.id cate_id, ");
+		sql.append(" 		c.cate_name, ");
+		sql.append(" 		c.cate_order, ");
+		sql.append(" 		p.id prop_id, ");
+		sql.append(" 		p.prop_name, ");
+		sql.append(" 		p.prop_code, ");
+		sql.append(" 		p.prop_order, ");
+		sql.append(" 		pv.id val_id, ");
+		sql.append(" 		pv.val_name, ");
+		sql.append(" 		pv.val_code, ");
+		sql.append(" 		pv.val_order ");
+		sql.append(" FROM sc_cate_prop_propval cpp ");
+		sql.append(" LEFT JOIN sc_category c ON cpp.cate_id=c.id ");
+		sql.append(" LEFT JOIN sc_property_propvalue pp ON cpp.proppropval_id=pp.id ");
+		sql.append(" LEFT JOIN sc_property p ON pp.prop_id=p.id ");
+		sql.append(" LEFT JOIN sc_propvalue pv ON pv.id=pp.val_id ");
+		sql.append(" WHERE cpp.cate_id=? ");
+		sql.append(" AND   cpp.flag=? ");
+		return DBUtil.getInstance().queryBySQL(sql.toString(), cateId, FlagEnum.ACT.getCode());
+	}
 }

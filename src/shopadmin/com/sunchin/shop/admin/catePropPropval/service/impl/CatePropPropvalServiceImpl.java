@@ -236,4 +236,15 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 		return list;
 	}
 
+	/**
+	 * 根据类别查询类别-属性-属性值关系 add by yangchaowen
+	 * @param cateId
+	 * @return
+	 * @date 2017-03-30
+	 */
+	@Override
+	public List queryByCateId(String cateId) throws Exception {
+		return catePropPropvalDAO.queryByCateId(cateId);
+	}
+
 }
