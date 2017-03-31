@@ -26,6 +26,7 @@ $("#publishTime").click(function() {
 
 $(function() {
 	//查询类别下的品牌
+	
 	//查询类别属性属性值
 	queryCatePropPropVal();
 });
@@ -34,6 +35,7 @@ $(function() {
 var propInfo = new Array(); //属性列表
 var valInfo = new Array(); //属性值列表
 var cppInfo = new Array(); //类别-属性-属性值关系列表
+
 //查询类别属性属性值
 var queryCatePropPropVal = function() {
 	$.ajax({
@@ -41,102 +43,149 @@ var queryCatePropPropVal = function() {
 		url : path_ + "/view/catePropPropval/catePropPropval!queryByCateId.action",
 		dataType : "json",
 		data: "cateId="+cateId,
-		success : function(json){
-			$(json.list).each(function(index) {
-				var row = json.list[index];
-				//pushJson(cateInfo, "cateId", row.cateId, {"cateId":row.cateId,"cateName":row.cateName,"cateOrder":row.cateOrder});
-				pushJson(propInfo, "propId", row.propId, {"cateId":row.cateId,"propId":row.propId,"propName":row.propName,"propCode":row.propCode,"propOrder":row.propOrder});
-				pushJson(valInfo, "valId", row.valId, {"cateId":row.cateId,"propId":row.propId,"valId":row.valId,"valName":row.valName,"valCode":row.valCode,"valOrder":row.valOrder});
-				cppInfo.push({"cppId":row.cppId,"cateId":row.cateId,"propId":row.propId,"valId":row.valId});
-			});
-			
+		success : function(json) {
+			//填充数组
+			pushAllArray(json.list);
 			//渲染商品属性
-			$(propInfo).each(function(index) {
-				var property = propInfo[index];
-				$("<div style='display: inline-block;margin-right:10px;'><input type='checkbox' name='propertyCheck' onclick='buildGoodsChildTable(this);' " +
-						"value='"+property.propName+"_"+property.propId+"'/>&nbsp;"+property.propName+"</div>").appendTo("#propertyDiv");
-			});
+			buildPropertyDiv();
 		},
 		error: function(e){
-			//showAlert("请检查该类别是否有子类别！");
+			console.log("查询类别属性属性值异常");
 		} 
 	});
 };
 
-$("#addProperty").click(function() {
+//填充数组
+var pushAllArray = function(list) {
+	$(list).each(function(index) {
+		var row = list[index];
+		//pushJson(cateInfo, "cateId", row.cateId, {"cateId":row.cateId,"cateName":row.cateName,"cateOrder":row.cateOrder});
+		pushJson(propInfo, "propId", row.propId, {"cateId":row.cateId,"propId":row.propId,"propName":row.propName,"propCode":row.propCode,"propOrder":row.propOrder});
+		pushJson(valInfo, "valId", row.valId, {"cateId":row.cateId,"propId":row.propId,"valId":row.valId,"valName":row.valName,"valCode":row.valCode,"valOrder":row.valOrder});
+		cppInfo.push({"cppId":row.cppId,"cateId":row.cateId,"propId":row.propId,"valId":row.valId});
+	});
+};
+
+//渲染商品属性
+var buildPropertyDiv = function() {
+	var divHtml = "";
+	$(propInfo).each(function(index) {
+		var property = propInfo[index];
+		
+		divHtml = "<div style='display: inline-block;margin-right:10px;'>";
+		divHtml += "<input type='checkbox' name='propertyCheck' onclick='buildPropertyValTable(this);' value='"+property.propName+"_"+property.propId+"'/>";
+		divHtml += "&nbsp;" + property.propName;
+		divHtml += "</div>";
+		
+		$(divHtml).appendTo("#propertyDiv");
+	});
+};
+
+$("#addPropertyDiv").click(function() {
 	//查询类别属性属性值
 	var selectList = $("select[name='select_']");
-	var selectValue = "";
-	var selectId = "";
-	var selectLabel = "";
-	var m = "";
-	var br = "<br/>";
-	for (var i = 0; i < selectList.length; i++) {
+	var selectLength = selectList.length;
+	if(selectLength==0) {
+		showLayerMsg("请选择商品属性！");
+		return;
+	}
+	
+	var childGoodsValue = "";
+	var existsGoodsKey = "";
+	var childGoodsLabel = "";
+	
+	var br = "";
+	var split = "";
+	for (var i = 0; i < selectLength; i++) {
 		var sel = selectList[i];
 		var cppId = sel.value;
 		var valName = sel.options[sel.selectedIndex].text;
 		var propName = $("#propertyEditTable thead tr th").eq(i).text();
 		
-		selectId += cppId+"_";
-		selectLabel += "<strong>"+propName+"</strong>："+valName+br;
-		selectValue += m + cppId+"_"+valName+"_"+propName;
+		existsGoodsKey += split + cppId;
+		childGoodsLabel += br + "&nbsp;<strong>" + propName + "</strong>：" + valName + "&nbsp;";
+		childGoodsValue += split + cppId + ":" + propName + ":" + valName;
 		
-		m = ",";
-		if(i==selectList.length-2) {
-			br = "";
-		}
+		br = "<br/>";
+		split = "_";
 	}
 	
-	if($("#"+selectId).length==0) {
-		var trHtml = "<tr>";
-		trHtml += "<td style='text-align:left;'><input type='hidden' name='goodsChilds' id='"+selectId+"' value='"+selectValue+"'/><div style='margin-top:5px;margin-bottom:5px;'>"+selectLabel+"</div></td>";
-		trHtml += "<td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "<td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "<td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "<td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "<td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "<td>&nbsp;删除&nbsp;</td>";
+	//根据标识检测是否填过相同的子商品
+	if($("#"+existsGoodsKey).length==0) {
+		var trHtml = "";
+		trHtml += "<tr>";
+		trHtml += "    <td style='text-align:left;'><input type='hidden' name='goodsChilds' id='"+existsGoodsKey+"' value='"+childGoodsValue+"'/><div style='margin-top:5px;margin-bottom:5px;'>"+childGoodsLabel+"</div></td>";
+		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteGoodChilds(\""+existsGoodsKey+"\")'><span class='am-icon-remove'></i>删除</a>&nbsp;</td>";
 		trHtml += "</tr>";
 		$("#goodsChildTable tbody").prepend(trHtml);
+	} else {
+		showLayerMsg("该商品已经添加！");
 	}
+	//隐藏和显示商品价格、库存、货号信息
+	showOrHideGoodsPriceTable();
 });
 
-var buildGoodsChildTable = function(thisobj) {
+//删除所选子商品
+var deleteGoodChilds = function(existsGoodsKey) {
+	if($("#"+existsGoodsKey).length > 0) {
+		$("#"+existsGoodsKey).parent().parent().remove();
+	}
+	//隐藏和显示商品价格、库存、货号信息
+	showOrHideGoodsPriceTable();
+};
+
+//隐藏和显示商品价格、库存、货号信息
+var showOrHideGoodsPriceTable = function() {
+	var goodsChildCount = $("#goodsChildTable tbody tr").length; //子商品数量
+	if(goodsChildCount > 0) {
+		$("#goodsPriceTable").hide();
+		$("#kcpzSpan").parent().parent().show();
+	} else {
+		$("#goodsPriceTable").show();
+		$("#kcpzSpan").parent().parent().hide();
+	}
+};
+
+//根据选择的商品属性，构建商品属性值选择table
+var buildPropertyValTable = function(thisobj) {
+	//清空商品属性值选择table
 	$("#propertyEditTable thead tr").empty();
 	$("#propertyEditTable tbody tr").empty();
+	
 	var objs = $("input[name='propertyCheck']");
-	for(var i=0; i<objs.length; i++) {
+	for(var i = 0; i < objs.length; i++) {
 		var obj = $(objs[i]);
+		
 		var checked = obj.is(":checked");
+		
 		var vals = obj.val().split("_");
 		var propName = vals[0];
 		var propId = vals[1];
+		
 		if(checked) {
-			if($("#select_"+propId).length==0) {
+			if($("#select_"+propId).length == 0) {
 				$("#propertyEditTable thead tr").append("<th style='text-align:center;'><input type='hidden' id='th_"+propId+"'/>"+propName+"</th>");
 				$("#propertyEditTable tbody tr").append("<td align=\"center\">&nbsp;"+buildPropvalSelect(propId)+"&nbsp;</td>");
 			}
-		} else {
-			if($("#"+propId).length>0) {
-				$("#"+propId).parent().remove();
-				$("#th_"+propId).parent().remove();
-			}
 		}
 	}
-	/*var obj = $(thisobj);
-	var checked = obj.is(":checked");
-	var vals = obj.val().split("_");
-	if(checked) {
-		if($("#"+vals[1]).length==0) {
-			$("#propertyEditTable thead tr").append("<th style='text-align:center;'><input type='hidden' id='th_"+vals[1]+"'/>"+vals[0]+"</th>");
-			$("#propertyEditTable tbody tr").append("<td align=\"center\">&nbsp;<select id='"+vals[1]+"' style=\"width:60px;\"><option>AAA</option></select>&nbsp;</td>");
-		}
+	//隐藏和显示商品属性值表格
+	showOrHidePropertyEditTable();
+};
+
+//隐藏和显示商品属性值表格
+var showOrHidePropertyEditTable = function() {
+	var propValSelectCount = $("#propertyEditTable tbody tr td").length; 
+	if(propValSelectCount > 0) {
+		$("#propValSpan").parent().parent().show();
 	} else {
-		if($("#"+vals[1]).length>0) {
-			$("#"+vals[1]).parent().remove();
-			$("#th_"+vals[1]).parent().remove();
-		}
-	}*/
+		$("#propValSpan").parent().parent().hide();
+	}
 };
 
 //查询属性值并构建select下拉框
@@ -149,7 +198,7 @@ var buildPropvalSelect = function(propId) {
 			options += "<option value='"+queryCpp(v.cateId, v.propId, v.valId)+"'>"+v.valName+"</option>";
 		}
 	});
-	return "<select name='select_' id='select_"+propId+"' style=\"width:auto;\" onchange='console.log(this.value);'>"+options+"</select>"
+	return "<select name='select_' id='select_"+propId+"' style=\"width:auto;\">"+options+"</select>"
 }
 
 //查询类别-属性-属性值的关系ID
@@ -176,7 +225,7 @@ $("#saveBtn").click(function() {
 		}
 	}); 
 	if(imgSrcCount==$(".img").length) {
-		layer.msg("请选择商品图片", {offset: 't'});
+		showLayerMsg("请选择商品图片");
 		$("#imgPosition").focus();
 		$("#imgPosition").blur();
 		return;
@@ -189,7 +238,7 @@ var checkRequiredField = function(fieldId,msg) {
 	}
 	var fieldValue = $("#"+fieldId).val();
 	if(fieldValue.length==0) {
-		layer.msg(msg, {offset: 't'});
+		showLayerMsg(msg);
 		$("#"+fieldId).focus();
 		return false;
 	};
@@ -201,9 +250,10 @@ $(".addGoodsAttr").click(function() {
 });
 
 var addGoodsAttribute = function() {
-	$('<div style="padding: 1px;">属性名：<input class="am-form-field" name="attrName" style="width:150px;display: inline-block;"/>&nbsp;&nbsp;属性值：<input class="am-form-field" name="attrValue" style="width:150px;display: inline-block;"/>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="javascript:removeGoodsAttribute(this);"><span class="am-icon-minus-square" style="width: auto;color:red;font-size: 18px;" title="删除"></span></a><!--&nbsp;&nbsp;<a href="javascript:void(0);" onclick="javascript:addGoodsAttribute();">添加</a>--></div>').appendTo("#shuxingDiv");
+	$('<div style="padding: 1px;">参数名：<input class="am-form-field" name="attrName" style="width:150px;display: inline-block;"/>&nbsp;&nbsp;参数值：<input class="am-form-field" name="attrValue" style="width:150px;display: inline-block;"/>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="javascript:removeGoodsAttribute(this);"><span class="am-icon-minus-square" style="width: auto;color:red;font-size: 18px;" title="删除"></span></a><!--&nbsp;&nbsp;<a href="javascript:void(0);" onclick="javascript:addGoodsAttribute();">添加</a>--></div>').appendTo("#shuxingDiv");
 }
 
+//删除商品参数
 var removeGoodsAttribute = function(but) {
 	var elem = but.parentNode;
 	var elemParent = elem.parentNode
