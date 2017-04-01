@@ -62,8 +62,9 @@ public class PropertyDAO extends PageDAO{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ScProperty> getProp(String id) {
-		Map<String, Object> params = new HashMap<String, Object>(1);
+		Map<String, Object> params = new HashMap<String, Object>(2);
 		params.put("flag", FlagEnum.ACT.getCode());
+		params.put("id", id);
 		return DBUtil.getInstance().queryByPojo(ScProperty.class,params);
 	}
 }

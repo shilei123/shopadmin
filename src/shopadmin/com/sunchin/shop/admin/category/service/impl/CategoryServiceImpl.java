@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.category.dao.CategoryDAO;
@@ -26,12 +27,22 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	public void saveCategory(ScCategory category) throws Exception {
-		DBUtil db = DBUtil.getInstance();
 		/*String cateOrder = CommonUtils.getString(category.getCateOrder());
 		if(cateOrder.length()==1){
 			cateOrder = "0" + cateOrder;
 		}
 		category.setCateOrder(cateOrder);*/
+		
+		//根据父id的levels确定新类别的层级levels	前台已经处理
+		/*String id = CommonUtils.getString(category.getParentId());
+		if(id.equals(""))	return;
+		List<ScCategory> list = categoryDAO.queryPojoById(id);
+		if(list==null || list.isEmpty()) return;
+		String levels = list.get(0).getLevels();
+		if(levels==null || levels.isEmpty()) return;
+		Integer level = Integer.parseInt(levels) + 1;
+		category.setLevels(level.toString());*/
+		
 		category.setId(UUID.randomUUID().toString());
 		category.setFlag(FlagEnum.ACT.getCode());
 		category.setCreateTime(new Date());
@@ -45,8 +56,13 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<ScCategory> queryCategory(String parentId) throws Exception {
-		List<ScCategory> list = categoryDAO.queryCategoryByParentId(parentId);
+	public List<ScCategory> queryCategory(String id) throws Exception {
+		List<ScCategory> list = null;
+		if(StringUtils.isNotBlank(id)) {
+			list = categoryDAO.querySonCategory(id);
+		} else {
+			list = categoryDAO.queryFirstCategory();
+		}
 		return list;
 	}
 

@@ -1,8 +1,8 @@
 $(function() {
 	$("#ul_category_tree").tree({
-		onClick: categoryClick
+		onClick: faqTypeClick 
 	});
-	initCategoryTree();
+	initFaqTypeTree();
 	
 	//新增窗口的取消按钮
 	$("#cancelBtn").click(function() {
@@ -16,14 +16,14 @@ $(function() {
 		$("#form1").validate({
 	        submitHandler:function(form){
 	            $('#form1').form('submit', {
-		    		url:  path_ + "/view/category/category!saveCategory.action",
+		    		url:  path_ + "/view/faqType/faqType!saveFaqType.action",
 		    		onSubmit: function() {
 		    			return checkForm();
 		    		},
 		    		success:function(data) {
 		    			showAlert("操作成功！");
-		    			initCategoryTree();
-		    			$("#category_detail_table input").each(function(i,n){n.value = "";});
+		    			initFaqTypeTree();
+		    			$("#faqType_detail_table input").each(function(i,n){n.value = "";});
 		    			closeParamsModal("doc-modal-add");
 		    		}
 		    	});
@@ -39,14 +39,14 @@ $(function() {
 		$("#form1").validate({
 			submitHandler:function(form){
 				$('#form1').form('submit', {
-					url:  path_ + "/view/category/category!updateCategory.action",
+					url:  path_ + "/view/faqType/faqType!updateFaqType.action",
 					onSubmit: function() {
 						return checkForm();
 					},
 					success:function(data) {
 						showAlert("操作成功！");
-						initCategoryTree();
-						$("#category_detail_table input").each(function(i,n){n.value = "";});
+						initFaqTypeTree();
+						$("#faqType_detail_table input").each(function(i,n){n.value = "";});
 						closeParamsModal("doc-modal-add");
 					}
 				});
@@ -56,13 +56,13 @@ $(function() {
 	});
 });
 
-function initCategoryTree() {
+function initFaqTypeTree() {
 	$.ajax( {
 		type : "POST",
-		url : path_ + "/view/category/category!categoryTree.action",
+		url : path_ + "/view/faqType/faqType!initFaqTypeTree.action",
 		dataType : "json",
 		success : function(json) {
-			console.log(json);
+			//console.log(json);
 			var root = json.trees[0];
 			root.state = "open";
 			$("#ul_category_tree").tree("loadData", json.trees);
@@ -70,9 +70,9 @@ function initCategoryTree() {
 	});
 }
 
-var categoryClick = function(node) {
-	$("#category_detail_table input").each(function(i,n){n.value = "";});
-	var obj = getCategoryInfo(node);
+var faqTypeClick  = function(node) {
+	$("#faqType_detail_table input").each(function(i,n){n.value = "";});
+	var obj = getFaqTypeInfo(node);
 	for(var key in obj){
 		var inp = document.getElementById("inp_"+key);
 		if(inp != null){
@@ -90,12 +90,11 @@ $('#addCategoryBtn').click(function() {
 	$('#modalTitle-add').text('新增类别');
 	$('#editSaveCategoryBtn').attr('style','display:none');
 	$('#saveCategoryBtn').attr('style','display:inline');
-	var obj = getCategoryInfo(node);
-	$("#category_detail_table input").each(function(i,n){n.value = "";});
-	$("#inp2-isuse").val("");
-	$("#inp2-parentId").val(obj.categoryId);
-	$("#inp2-levels").val(parseInt(obj.levels)+1);
-	showModal("doc-modal-add", 600, 400);
+	var obj = getFaqTypeInfo(node);
+	$("#faqType_detail_table input").each(function(i,n){n.value = "";});
+	$("#inp2-parentTypeId").val(obj.pkId);
+	$("#inp2-typeLevel").val(parseInt(obj.typeLevel)+1);
+	showModal("doc-modal-add", 500, 300);
 });
 
 $('#editCategoryBtn').click(function() {
@@ -107,16 +106,14 @@ $('#editCategoryBtn').click(function() {
 	$('#modalTitle-add').text('编辑类别');
 	$('#editSaveCategoryBtn').attr('style','display:inline');
 	$('#saveCategoryBtn').attr('style','display:none');
-	var obj = getCategoryInfo(node);
-	$("#inp2-id").val(obj.categoryId);
-	$("#inp2-cateName").val(obj.categoryName);
-	$("#inp2-cateOrder").val(obj.cateOrder);
-	$("#inp2-memo").val(obj.memo);
-	$("#inp2-levels").val(obj.levels);
-	$("#inp2-parentId").val(obj.parentId);
-	$("#inp2-logo").val(obj.logo);
-	$("#inp2-url").val(obj.url);
-	$("#inp2-isuse").val(obj.isuse);
+	var obj = getFaqTypeInfo(node);
+	$("#inp2-id").val(obj.pkId);
+	$("#inp2-typeName").val(obj.typeName);
+	$("#inp2-typeDesc").val(obj.typeDesc);
+	$("#inp2-typeCode").val(obj.typeCode);
+	$("#inp2-typeOrder").val(obj.typeOrder);
+	$("#inp2-parentTypeId").val(obj.pkId);
+	$("#inp2-typeLevel").val(parseInt(obj.typeLevel)+1);
 	showModal("doc-modal-add", 600, 400);
 });
 
@@ -126,21 +123,22 @@ $("#delCategoryBtn").click(function() {
 		showAlert("请选择一个类别！");
 		return;
 	}
-	var msg = getCategoryInfo(node);
-	if(msg.categoryLevel=="0") {
+	JSON.stringify(node);
+	var obj = getFaqTypeInfo(node);
+	if(obj.categoryLevel=="0") {
 		showAlert("该目录不允许删除！");
 		return;
 	}
 	showConfirm("确认删除？",function() {
 		$.ajax( {
 			type : "POST",
-			url : path_ + "/view/category/category!delCategory.action",
+			url : path_ + "/view/faqType/faqType!delFaqType.action",
 			dataType : "json",
-			data: {"category.id": $("#inp_categoryId").val()},
+			data: {"faqType.id": node.pkId},
 			success : function(json) {
-				if(json.msg==null || json.msg=="null") {
-					$("#category_detail_table input").each(function(i,n){n.value = "";});
-					initCategoryTree();//初始化菜单
+				if(json.msg==null || json.msg=="null" || json.msg=="") {
+					$("#faqType_detail_table input").each(function(i,n){n.value = "";});
+					initFaqTypeTree();
 					showAlert("删除成功");
 				} else {
 					showAlert(json.msg);
@@ -153,21 +151,6 @@ $("#delCategoryBtn").click(function() {
 	});
 });
 
-$("#openCategoryParamsBtn").click(function() {
-	var node = $("#ul_category_tree").tree("getSelected");
-	if(node==null){
-		showAlert("请选择一个类别！");
-		return;
-	}
-	if(node.children!=null){
-		showAlert("请选择一个具体的商品！");
-		return;
-	}
-	var obj = getCategoryInfo(node);
-	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/category/category_property.jsp?categoryId='+obj.categoryId);
-	showModal("doc-modal-1", 600, 450);
-});
-
 var closeParamsModal = function(id) {
 	$('#'+id).modal('close');
 };
@@ -177,22 +160,20 @@ var checkForm = function() {
 	return true;
 };
 
-var getCategoryInfo = function(node){
+var getFaqTypeInfo = function(node){
 	var obj = new Object();
-	obj.categoryId = node.pkId;
-	obj.categoryName = node.text;
+	obj.pkId = node.pkId;
+	obj.typeName = node.text;
+	obj.typeDesc = node.typeDesc;
+	obj.typeCode = node.typeCode;
 	obj.parentId = node.parentId;
-	obj.levels = node.levels;
+	obj.typeLevel = node.typeLevel;
 	if(node.attributes!=null){
-		obj.memo = node.attributes.memo;
-		obj.cateOrder = node.attributes.cateOrder;
-		obj.logo = node.attributes.logo;
-		obj.url = node.attributes.url;
-		obj.isuse = node.attributes.isuse;
+		obj.typeOrder = node.attributes.typeOrder;
 	}
-	var pnode = $('#ul_category_tree').tree('getParent',node.target);
+	/*var pnode = $('#ul_category_tree').tree('getParent',node.target);
 	if(pnode!=null){
 		obj.parentId = pnode.pkId;
-	}
+	}*/
 	return obj;
 }

@@ -12,7 +12,7 @@ public class ScPropertyPropValue implements java.io.Serializable {
 	private String propId;
 	private String valId;
 	private String flag;
-	private String orders;
+	private int orders;
 	private Date createTime;
 	private String createPeople;
 
@@ -48,11 +48,11 @@ public class ScPropertyPropValue implements java.io.Serializable {
 		this.flag = flag;
 	}
 
-	public String getOrders() {
+	public int getOrders() {
 		return this.orders;
 	}
 
-	public void setOrders(String orders) {
+	public void setOrders(int orders) {
 		this.orders = orders;
 	}
 

@@ -74,7 +74,7 @@ $("#nextBtn").click(function() {
 	}
 	$("#selectValue").val(first);
 	
-	var second = $("#secondCategory option:selected").val();
+	/* var second = $("#secondCategory option:selected").val();
 	if(second==undefined || second.length==0) {
 		showTopTips('请选择分类', 'secondCategory');
 		$("#secondCategory").focus();
@@ -93,7 +93,7 @@ $("#nextBtn").click(function() {
 	var four = $("#fourCategory option:selected").val();
 	if(four!=undefined && four.length>0) {
 		$("#selectValue").val(four);
-	}
+	} */
 	
 	window.location.href = path_ + "/view/shop/goods/goodsAdd.jsp?selectValue=" + $("#selectValue").val() + "&selectText=" + $("#selectText").text();
 });

@@ -44,10 +44,11 @@ public class PropPropValueServiceImpl implements PropPropValueService {
 		
 		//传入为空，全删
 		if("".equals(checkPropValueIds)){
-			for (int i = 0; i < list.size(); i++) {
+			/*for (int i = 0; i < list.size(); i++) {
 				String valId = CommonUtils.getString(list.get(i).get("valId"));
 				this.delPropPropValue(propertyId, valId);
-			}
+			}*/
+			this.delAllPropPropValue(propertyId);
 			return;
 		}
 		//结果集为空，全加
@@ -88,13 +89,20 @@ public class PropPropValueServiceImpl implements PropPropValueService {
 	}
 	
 	private void addPropPropValue(String propId, String valId){
-		ScPropertyPropValue propPropValue = new ScPropertyPropValue();
-		propPropValue.setId(UUID.randomUUID().toString());
-		propPropValue.setPropId(propId);
-		propPropValue.setValId(valId);
-		propPropValue.setCreateTime(new Date());
-		propPropValue.setFlag(FlagEnum.ACT.getCode());
-		db.insert(propPropValue);
+		if(!valId.isEmpty() && valId!=null){
+			ScPropertyPropValue propPropValue = new ScPropertyPropValue();
+			propPropValue.setId(UUID.randomUUID().toString());
+			propPropValue.setPropId(propId);
+			propPropValue.setValId(valId);
+			propPropValue.setCreateTime(new Date());
+			propPropValue.setFlag(FlagEnum.ACT.getCode());
+			db.insert(propPropValue);
+		}
+	}
+	
+	private void delAllPropPropValue(String propId){
+		String hql = " update ScPropertyPropValue set flag=? where propId=? ";
+		db.executeHql(hql, FlagEnum.HIS.getCode(), propId);
 	}
 	
 	private void delPropPropValue(String propId, String valId){

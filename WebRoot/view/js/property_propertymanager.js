@@ -147,7 +147,6 @@ var deleteProp = function(id) {
 /*---------------------------------------------------属性属性值配置分割线------------------------------------------------------------*/
 //属性属性值配置
 var showConfigModel = function(id) {
-	//alert("待补充功能" + id);
 	$("#propertyId").val(id);
 	//var data = {"property.id" : id};
 	//$('#categoryParamsFrame').attr('src', path_ + '/view/shop/category/category_property.jsp.jsp?categoryId='+obj.categoryId);
