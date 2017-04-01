@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.sunchin.shop.admin.pojo.ScDirStructure" table="SC_DIR_STRUCTURE" >
+    <class name="com.sunchin.shop.admin.pojo.ScDirStruct" table="SC_DIR_STRUCT" >
         <id name="id" type="java.lang.String">
             <column name="ID" length="36" />
             <generator class="assigned"></generator>
@@ -14,7 +14,7 @@
             </column>
         </property>
         <property name="parentDirId" type="java.lang.String">
-             <column name="PARENT_DIRE_ID" length="36">
+             <column name="PARENT_DIR_ID" length="36">
                 <comment>上级栏目</comment>
             </column>
         </property>

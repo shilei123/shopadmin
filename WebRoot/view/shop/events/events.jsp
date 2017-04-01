@@ -62,8 +62,8 @@
 								<tr>
 									<th width="2%"  field="index"></th>
 									<th width="18%" field="name">活动名称</th>
-									<th width="10%" field="starttime">活动开始时间</th>
-									<th width="10%" field="endtime">活动结束时间</th>
+									<th width="10%" field="startTime">活动开始时间</th>
+									<th width="10%" field="endTime">活动结束时间</th>
 									<th width="10%" field="isuse">活动状态</th>
 									<th width="10%" formatter="formatterAction">操作</th>
 								</tr>
@@ -139,7 +139,7 @@
 			        		<td>活动开始时间：</td>
 					   		<td valign="top">
 							    <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-								   <input type="text" name="eventsinfo.starttime" id="starttime" class="am-form-field">
+								   <input type="text" name="eventsinfo.starttime" id="startTime" class="am-form-field">
 							       <span class="am-input-group-btn am-datepicker-add-on">
 								   <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
 								</span>
@@ -148,7 +148,7 @@
 							<td>活动结束时间：</td>
 							<td>
 								<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-							       <input type="text" name="eventsinfo.endtime" id="endtime" class="am-form-field">
+							       <input type="text" name="eventsinfo.endtime" id="endTime" class="am-form-field">
 								   <span class="am-input-group-btn am-datepicker-add-on">
 								   <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
 								</span>
@@ -182,5 +182,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/eventsinfo.js"></script>
+<script type="text/javascript" src="${path }/view/js/events.js"></script>
 </html>

@@ -159,18 +159,18 @@ var clearForm = function() {
 	$("#vId").val('');
 	$("#name").val('');
 	$("#memo").val('');
-	$("#starttime").val('');
-	$("#endtime").val('');
+	$("#startTime").val('');
+	$("#endTime").val('');
 	$("#errorMsg").html('&nbsp;');
 };
 
 var setEventsinfoForm = function(data) {
-	$("#vId").val(data.eventsinfo.id);
-	$("#name").val(data.eventsinfo.name);
-	$("#isuse").val(data.eventsinfo.isuse);
-	$("#memo").val(data.eventsinfo.memo);
-	$("#starttime").val(data.eventsinfo.starttime);
-	$("#endtime").val(data.eventsinfo.endtime);
+	$("#vId").val(data.events.id);
+	$("#name").val(data.events.name);
+	$("#isuse").val(data.events.isuse);
+	$("#memo").val(data.events.memo);
+	$("#startTime").val(data.events.startTime);
+	$("#endTime").val(data.events.endTime);
 	//商品添加待写
 	$("#errorMsg").html("&nbsp;");
 };

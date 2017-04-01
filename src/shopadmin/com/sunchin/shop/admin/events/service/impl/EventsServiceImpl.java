@@ -48,7 +48,7 @@ public class EventsServiceImpl implements IEventsService{
 	@Transactional
 	public void deleteEvents(String id) {
 		DBUtil db = DBUtil.getInstance();
-		ScEvents eventsinfo = eventsDAO.findScEventsinfoById(id);
+		ScEvents eventsinfo = eventsDAO.findScEventsById(id);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String startTime = format.format(eventsinfo.getStartTime());
 		String currentTime = format.format(new Date());

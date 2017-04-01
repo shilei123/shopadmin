@@ -47,15 +47,15 @@
 				</div>
 				<div class="am-g">
 					<div class="am-u-sm-12 page-table-main">
-						<table class="am-table am-table-bordered am-table-striped am-table-hover" id="userBcuserListTable">
+						<table class="am-table am-table-bordered am-table-striped am-table-hover" id="userBaseListTable">
 							<thead>
 								<tr>
 									<th width="2%"  field="index"></th>
 									<th width="10%" field="userName">用户名</th>
 									<th width="10%" field="trueName">姓名</th>
-									<th width="10%" field="userSex">性别</th>
-									<th width="20%" field="userPhone">电话</th>
-									<th width="20%" field="userMail">邮箱</th>
+									<th width="10%" field="sex">性别</th>
+									<th width="20%" field="phone">电话</th>
+									<th width="20%" field="mail">邮箱</th>
 								</tr>
 							</thead>
 						</table>
@@ -69,5 +69,5 @@
 	</div>
 	<!-- content end -->
 </body>
-<script type="text/javascript" src="${path }/view/js/userBasics.js"></script>
+<script type="text/javascript" src="${path }/view/js/userBase.js"></script>
 </html>

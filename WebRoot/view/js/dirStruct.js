@@ -25,7 +25,7 @@ $(function() {
 		$("#form1").validate({
 	        submitHandler:function(form){
 	            $('#form1').form('submit', {
-		    		url:  path_ + "/view/shop/dirStructure/dirStructure!save.action",
+		    		url:  path_ + "/view/shop/dirStruct/dirStruct!save.action",
 		    		onSubmit: function() {
 		    			return checkForm();
 		    		},
@@ -78,7 +78,7 @@ var findDirectoryType = function() {
 	var inp2_parentName = $("#inp2_parentName");
 	inp2_parentName.empty();
 		$.ajax({
-			url :path_ + "/view/shop/dirStructure/dirStructure!queryDirType.action",
+			url :path_ + "/view/shop/dirStruct/dirStruct!queryDirType.action",
 			type : 'POST',
 			data : null,
 			dataType: "json",
@@ -86,7 +86,7 @@ var findDirectoryType = function() {
 				var html = "<option value='-1'>-请选择-</option>";
 				$(data.directoryTypeList).each(function(index) {
 					var dirType = data.directoryTypeList[index];
-					html += "<option value='" + dirType.id + "'>" + dirType.directoryName + "</option>";
+					html += "<option value='" + dirType.id + "'>" + dirType.dirName + "</option>";
 				});
 				panentNameHtml = html;
 				inp2_parentName.append(html);
@@ -119,7 +119,7 @@ var setIsuseType = function(){
 function initDirectoryTree() {
 	$.ajax( {
 		type : "POST",
-		url : path_ + "/view/shop/dirStructure/dirStructure!queryDirStructure.action",
+		url : path_ + "/view/shop/dirStruct/dirStruct!queryDirStruct.action",
 		dataType : "json",
 		success : function(json) {
 			var root = json.directoryList[0];
@@ -152,10 +152,10 @@ $('#addDirectoryBtn').click(function() {
 	setIsuseType();
 	$("#inp2_isuse").val('1');
 	$("#inp2_parentName").attr('disabled','disabled');
-	$("#inp2_parentName").val(obj.directoryId);
+	$("#inp2_parentName").val(obj.dirId);
 	var a = $("#inp2_parentName").val();
 	$("#directory_detail_table input").each(function(i,n){n.value = "";});
-	$("#inp2_levels").val(parseInt(obj.levels)+1);
+	$("#inp2_levels").val(parseInt(obj.level)+1);
 	showModal("doc-modal-add", 500, 320);
 });
 
@@ -171,10 +171,10 @@ $('#editDirectoryBtn').click(function() {
 	setIsuseType();
 	$("#inp2_parentName").removeAttr('disabled');
 	$("#inp2_parentName").val(obj.parentId);
-	$("#inp2_id").val(obj.directoryId);
-	$("#inp2_directoryName").val(obj.directoryName);
-	$("#inp2_cateOrder").val(obj.cateOrder);
-	$("#inp2_levels").val(obj.levels);
+	$("#inp2_id").val(obj.dirId);
+	$("#inp2_directoryName").val(obj.dirName);
+	$("#inp2_cateOrder").val(obj.order);
+	$("#inp2_levels").val(obj.level);
 	$("#inp2_isuse").val(obj.isuse);
 	showModal("doc-modal-add", 500, 320);
 });
@@ -186,16 +186,16 @@ $("#delDirectoryBtn").click(function() {
 		return;
 	}
 	var msg = getDirectoryInfo(node);
-	if(msg.levels=="0") {
+	if(msg.level=="0") {
 		showAlert("该目录不允许删除！");
 		return;
 	}
 	showConfirm("确认删除？",function() {
 		$.ajax( {
 			type : "POST",
-			url : path_ + "/view/shop/dirStructure/dirStructure!delete.action",
+			url : path_ + "/view/shop/dirStruct/dirStruct!delete.action",
 			dataType : "json",
-			data: {"directory.id": $("#inp_directoryId").val()},
+			data: {"directory.id": $("#inp_dirId").val()},
 			success : function(json) {
 				if(json.msg==null || json.msg=="null") {
 					$("#directory_detail_table input").each(function(i,n){n.value = "";});
@@ -223,13 +223,13 @@ var checkForm = function() {
 
 var getDirectoryInfo = function(node){
 	var obj = new Object();
-	obj.directoryId = node.PkId;
-	obj.directoryName = node.text;
-	obj.parentId = node.parentDirectoryId;
+	obj.dirId = node.PkId;
+	obj.dirName = node.text;
+	obj.parentId = node.parentDirId;
 	obj.parentName = node.parentName;
-	obj.levels = node.levels;
+	obj.level = node.level;
 	if(node.attributes!=null){
-		obj.cateOrder = node.attributes.cateOrder;
+		obj.order = node.attributes.order;
 		obj.isuse = node.attributes.isuse;
 	}
 	var pnode = $('#ul_directory_tree').tree('getParent',node.target);

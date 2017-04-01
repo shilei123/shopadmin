@@ -87,11 +87,11 @@ public class EventsAction extends PageAction{
 		return Action.SUCCESS;
 	}
 	
-	public ScEvents getEventsinfo() {
+	public ScEvents getEvents() {
 		return events;
 	}
 
-	public void setEventsinfo(ScEvents events) {
+	public void setEvents(ScEvents events) {
 		this.events = events;
 	}
 

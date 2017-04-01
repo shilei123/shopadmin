@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.dirStructure.action;
+package com.sunchin.shop.admin.dirStruct.action;
 
 import java.util.List;
 import java.util.Map;
@@ -6,28 +6,28 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
-import com.sunchin.shop.admin.dirStructure.service.IDirStructureService;
-import com.sunchin.shop.admin.pojo.ScDirStructure;
+import com.sunchin.shop.admin.dirStruct.service.IDirStructService;
+import com.sunchin.shop.admin.pojo.ScDirStruct;
 
 import framework.action.PageAction;
 
-public class DirStructureAction extends PageAction{
+public class DirStructAction extends PageAction{
 
-	@Resource(name="dirStructureService")
-	private IDirStructureService dirStructureService;
+	@Resource(name="dirStructService")
+	private IDirStructService dirStructService;
 	
 	private List<Map<String,Object>> directoryList;
-	private ScDirStructure directory;
-	private List<ScDirStructure> directoryTypeList;
+	private ScDirStruct directory;
+	private List<ScDirStruct> directoryTypeList;
 	private String msg;
 	
 	/**
 	 * 查询
 	 * @return
 	 */
-	public String queryDirStructure(){
+	public String queryDirStruct(){
 		try {
-			directoryList = dirStructureService.queryDirStructure();
+			directoryList = dirStructService.queryDirStruct();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class DirStructureAction extends PageAction{
 	 */
 	public String save(){
 		try {
-			dirStructureService.save(directory);
+			dirStructService.save(directory);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,11 +55,11 @@ public class DirStructureAction extends PageAction{
 	 */
 	public String delete(){
 		try {
-			List<ScDirStructure> list = dirStructureService.queryDirParent(directory.getId());
+			List<ScDirStruct> list = dirStructService.queryDirParent(directory.getId());
 			if(list!=null && !list.isEmpty()){
 				this.msg = "该类别下已有子类别，无法删除！";
 			}else{
-				dirStructureService.delDirectory(directory.getId());
+				dirStructService.delDirectory(directory.getId());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -74,7 +74,7 @@ public class DirStructureAction extends PageAction{
 	 */
 	public String queryDirType(){
 		try {
-			directoryTypeList = dirStructureService.queryDirType();
+			directoryTypeList = dirStructService.queryDirType();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,11 +91,11 @@ public class DirStructureAction extends PageAction{
 		this.directoryList = directoryList;
 	}
 
-	public ScDirStructure getDirectory() {
+	public ScDirStruct getDirectory() {
 		return directory;
 	}
 
-	public void setDirectory(ScDirStructure directory) {
+	public void setDirectory(ScDirStruct directory) {
 		this.directory = directory;
 	}
 
@@ -107,11 +107,11 @@ public class DirStructureAction extends PageAction{
 		this.msg = msg;
 	}
 
-	public List<ScDirStructure> getDirectoryTypeList() {
+	public List<ScDirStruct> getDirectoryTypeList() {
 		return directoryTypeList;
 	}
 
-	public void setDirectoryTypeList(List<ScDirStructure> directoryTypeList) {
+	public void setDirectoryTypeList(List<ScDirStruct> directoryTypeList) {
 		this.directoryTypeList = directoryTypeList;
 	}
 	

@@ -6,7 +6,7 @@ $(function() {
 var queryUserBcuser = function() {
 	var data = formGet("from_query");
 	var url = path_ + "/view/shop/userManagement/user!queryUserBase.action";
-	pageData(url, "userBcuserListTable", data); 
+	pageData(url, "userBaseListTable", data); 
 };
 
 var queryUserSex = function() {

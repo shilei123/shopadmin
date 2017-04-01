@@ -2,7 +2,7 @@ package com.sunchin.shop.admin.pojo;
 
 import java.util.Date;
 
-public class ScDirStructure implements java.io.Serializable {
+public class ScDirStruct implements java.io.Serializable {
 
 	private String id;
 	private String dirName;
@@ -16,7 +16,7 @@ public class ScDirStructure implements java.io.Serializable {
 	private String flag;
 	private String belong;
 
-	public ScDirStructure() {
+	public ScDirStruct() {
 	}
 
 	public String getId() {
@@ -106,6 +106,5 @@ public class ScDirStructure implements java.io.Serializable {
 	public void setBelong(String belong) {
 		this.belong = belong;
 	}
-	
 	
 }

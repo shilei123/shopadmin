@@ -53,9 +53,9 @@
 												</td>
 												<td>
 													<div class="frame-div-padd10">
-								        				<input type="text"  id="inp_directoryName" style="width: 300px;" disabled="disabled">
-								        				<input type="hidden"  id="inp_directoryId" style="width: 300px;" disabled="disabled">
-								        				<input type="hidden"  id="inp_levels" style="width: 300px;" disabled="disabled">
+								        				<input type="text"  id="inp_dirName" style="width: 300px;" disabled="disabled">
+								        				<input type="hidden"  id="inp_dirId" style="width: 300px;" disabled="disabled">
+								        				<input type="hidden"  id="inp_level" style="width: 300px;" disabled="disabled">
 								        			</div>
 												</td>
 											</tr>
@@ -74,12 +74,12 @@
 											<tr>
 												<td>
 													<div class="frame-div-padd10">
-								        				<label for="inp_cateOrder" class="am-form-label">排序序号：</label>
+								        				<label for="inp_order" class="am-form-label">排序序号：</label>
 								        			</div>
 												</td>
 												<td>
 													<div class="frame-div-padd10">
-								        				<input type="text"  id="inp_cateOrder" style="width: 300px;" disabled="disabled">
+								        				<input type="text"  id="inp_order" style="width: 300px;" disabled="disabled">
 								        			</div>
 												</td>
 											</tr>
@@ -92,7 +92,7 @@
 												<td>
 													<div class="frame-div-padd10">
 								        				<!-- <input type="text" id="inp_isuse" style="width: 120px;" disabled="disabled"/> -->
-								        				<select name="directory.isuse" id="inp_isuse" disabled="disabled" >
+								        				<select name="directory.isuse" id="inp_isuse_" disabled="disabled" >
 								        					<option value="-1">--请选择--</option>
 								        					<option value="1">有效</option>
 								        					<option value="0">无效</option>
@@ -111,7 +111,7 @@
     	</div>
   	</div>
   	
-  	<script type="text/javascript" src="${path }/view/js/directoryStructure.js"></script>
+  	<script type="text/javascript" src="${path }/view/js/dirStruct.js"></script>
   	
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-add">
 		<div class="am-modal-dialog">
