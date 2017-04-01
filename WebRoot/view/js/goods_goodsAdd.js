@@ -216,7 +216,7 @@ var queryCpp = function(cateId, propId, valId) {
 $("#saveBtn").click(function() {
 	var marketPrices = $("#goodsChild.marketPrice");
 	$(marketPrices).each(function(index) {
-		console.log(#(marketPrices[index]).val());
+		//console.log(#(marketPrices[index]).val());
 	}); 
 	return;
 	/* if(!checkRequiredField("goodsName")) {

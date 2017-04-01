@@ -57,9 +57,9 @@ public class CategoryDAO {
 	 */
 	public List<ScCategory> queryFirstCategory() {
 		Map params = new HashMap<>(2);
-		params.put("levels", "1");
+		params.put("level", "1");
 		params.put("flag", FlagEnum.ACT.getCode());
-		return DBUtil.getInstance().queryByPojo(ScCategory.class, params, " cateOrder ");
+		return DBUtil.getInstance().queryByPojo(ScCategory.class, params, " order ");
 	}
 	
 	public void delCategory(String id) {

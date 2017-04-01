@@ -36,5 +36,13 @@ public class GoodsInfoAction {
 	public void setGoodsChild(ScChildGoods goodsChild) {
 		this.goodsChild = goodsChild;
 	}
+
+	public ScGoodsCatePropPropVal getGcpp() {
+		return gcpp;
+	}
+
+	public void setGcpp(ScGoodsCatePropPropVal gcpp) {
+		this.gcpp = gcpp;
+	}
 	
 }
