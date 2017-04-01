@@ -114,12 +114,13 @@ $("#addPropertyDiv").click(function() {
 	if($("#"+existsGoodsKey).length==0) {
 		var trHtml = "";
 		trHtml += "<tr>";
-		trHtml += "    <td style='text-align:left;'><input type='hidden' name='goodsChilds' id='"+existsGoodsKey+"' value='"+childGoodsValue+"'/><div style='margin-top:5px;margin-bottom:5px;'>"+childGoodsLabel+"</div></td>";
+		trHtml += "    <td style='text-align:left;'><input type='hidden' name='gcpp.catePropPropvalId' id='"+existsGoodsKey+"' value='"+childGoodsValue+"'/><div style='margin-top:5px;margin-bottom:5px;'>"+childGoodsLabel+"</div></td>";
+		trHtml += "    <td>&nbsp;<input name='goodsChild.purchasePrice' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='goodsChild.marketPrice' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='goodsChild.salePrice' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='goodsChild.promotionPrice' style=\"width:80px;\"/>&nbsp;</td>";
 		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='goodsChild.childNo' style=\"width:80px;\"/>&nbsp;</td>";
 		trHtml += "    <td>&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteGoodChilds(\""+existsGoodsKey+"\")'><span class='am-icon-remove'></i>删除</a>&nbsp;</td>";
 		trHtml += "</tr>";
 		$("#goodsChildTable tbody").prepend(trHtml);
@@ -213,6 +214,11 @@ var queryCpp = function(cateId, propId, valId) {
 
 //保存按钮
 $("#saveBtn").click(function() {
+	var marketPrices = $("#goodsChild.marketPrice");
+	$(marketPrices).each(function(index) {
+		console.log(#(marketPrices[index]).val());
+	}); 
+	return;
 	/* if(!checkRequiredField("goodsName")) {
 		return;
 	}; */

@@ -39,20 +39,20 @@
 									<td class="table_title frame-required"><span>*</span>商品分类：</td>
 									<td valign="bottom">
 										<%=selectText %>&nbsp;<button class="am-btn am-btn-warning am-btn-xs am-round" onclick="window.location.href='${path}/view/shop/goods/goodsTypeSelect.jsp'">编辑</button>
-										</input type="hidden" id="cateId" value="<%=selectValue %>"/>
+										<input type="hidden" id="cateId" value="<%=selectValue %>"/>
 									</td>
 								</tr>
 								<tr>
 									<td class="table_title">商品品牌：</td>
-									<td>饰品配件</td>
+									<td><input type="hidden" name="goods.goodsBrandId" id="goodsBrandId" value=""/></td>
 								</tr>
 								<tr>
 									<td class="table_title frame-required"><span>*</span>商品名称：</td>
-									<td><input name="bankInfo.bankName" id="goodsName" placeholder="商品名称" class="am-form-field" style="width:500px;"/></td>
+									<td><input name="goods.title" id="title" placeholder="商品名称" class="am-form-field" style="width:500px;"/></td>
 								</tr>
 								<tr>
 									<td class="table_title">商品副标题：</td>
-									<td><input name="bankInfo.bankName" id="goodsName1" placeholder="商品副标题" class="am-form-field" style="width:600px;"/></td>
+									<td><input name="goods.subTitle" id="subTitle" placeholder="商品副标题" class="am-form-field" style="width:600px;"/></td>
 								</tr>
 								<tr>
 									<td class="table_title">商品属性：</td>
@@ -81,9 +81,10 @@
 												<thead>
 													<tr>
 														<th>商品属性</th>
-														<th><span style="color: red;">*</span>价格</th>
+														<th><span style="color: red;">*</span>采购价</th>
 														<th><span style="color: red;">*</span>市场价</th>
-														<th><span style="color: red;">*</span>成本价</th>
+														<th><span style="color: red;">*</span>销售价</th>
+														<th><span style="color: red;">*</span>促销价</th>
 														<th><span style="color: red;">*</span>库存</th>
 														<th>商品货号</th>
 														<th>操作</th>
@@ -124,7 +125,7 @@
 								</tr>
 								<tr>
 									<td class="table_title">商品货号：</td>
-									<td><input name="bankInfo.bankName" id="bankName" placeholder="商品货号" class="am-form-field" style="width:auto;"/></td>
+									<td><input name="goods.goodsCode" id="goodsCode" placeholder="商品货号" class="am-form-field" style="width:auto;"/></td>
 								</tr>
 							</table>
 							<table class="frame-modal-table" border="0" style="margin-top:5px;">
@@ -203,7 +204,7 @@
 											</ul>
 										  	<div class="am-tabs-bd">
 											    <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-											    	<script id="pceditor" name="goods.detail" type="text/plain" style="width:99%;height:300px;"></script>
+											    	<script id="pceditor" name="goods.goodsDetail" type="text/plain" style="width:99%;height:300px;"></script>
 											    </div>
 											    <div class="am-tab-panel am-fade" id="tab2">
 											    	<p>手机端详情</p>
