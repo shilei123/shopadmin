@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sunchin.shop.admin.dict.IdentityStatusEnum;
-import com.sunchin.shop.admin.pojo.ScBcuser;
+import com.sunchin.shop.admin.pojo.ScUserBase;
 import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScIdentity;
 import com.sunchin.shop.admin.pojo.ScPurse;
@@ -32,10 +32,10 @@ public class UserServiceImpl implements IUserService{
 	 * 查询会员基础信息
 	 */
 	@Override
-	public PageBean queryUserBcuserList(PageBean pageBean) {
-		int total = userDAO.queryUserBcuserCount(pageBean);
+	public PageBean queryUserBaseList(PageBean pageBean) {
+		int total = userDAO.queryUserBaseCount(pageBean);
 		pageBean.setTotal(total);
-		List<ScBcuser> pageData = userDAO.queryUserBcuserPagination(pageBean);
+		List<ScUserBase> pageData = userDAO.queryUserBasePagination(pageBean);
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}

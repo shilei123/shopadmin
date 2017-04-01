@@ -14,7 +14,7 @@ public class ScUserFreight implements java.io.Serializable {
 	private Double stackInt;
 	private Double stackPrice;
 	private Date createTime;
-	private Date optionTime;
+	private Date updateTime;
 	private String flag;
 	private String belong;
 
@@ -101,12 +101,12 @@ public class ScUserFreight implements java.io.Serializable {
 		this.createTime = createTime;
 	}
 
-	public Date getOptionTime() {
-		return optionTime;
+	public Date getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setOptionTime(Date optionTime) {
-		this.optionTime = optionTime;
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public String getFlag() {

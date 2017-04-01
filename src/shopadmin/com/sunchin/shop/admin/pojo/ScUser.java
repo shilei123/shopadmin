@@ -20,7 +20,7 @@ public class ScUser  implements java.io.Serializable {
      private Date createTime;
      private Date optionTime;
      private String userStatus;
-
+     private String flag;
 
     public ScUser() {
     }
@@ -125,7 +125,13 @@ public class ScUser  implements java.io.Serializable {
 		this.userStatus = userStatus;
 	}
 
+	public String getFlag() {
+		return flag;
+	}
 
-
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	
 
 }

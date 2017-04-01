@@ -26,9 +26,15 @@ public enum DictionaryTypeEnum {
 	
 	IDENTITY_STATUS("IDENTITY_STATUS"),//身份证状态
 	
-	UNIT("UNIT"); //单位
+	UNIT("UNIT"), //钱包单位  元   分
 	
+	TRANSPORT_MODE("TRANSPORT_MODE"), //运送方式
 	
+	UNITS("UNITS"),//运费单位 件 kg 
+	
+	ISUSE("ISUSE"), //是否默认
+	
+	ARTICLE_TYPE("ARTICLE_TYPE");//文章分类
 	
 	private String type;
 
