@@ -21,7 +21,7 @@ public class CategoryDAO {
 	 * @return
 	 */
 	public List<Map> queryTreeBySQL(){
-		String sql = " select o.id,o.cate_name,o.memo,o.order_,o.level_,o.logo,o.url,o.isuse,o.parent_id from sc_category o where o.flag=? ";
+		String sql = " select o.id,o.cate_name,o.remark,o.order_,o.level_,o.logo,o.url,o.isuse,o.parent_id from sc_category o where o.flag=? ";
 		return DBUtil.getInstance().queryBySQL(sql, FlagEnum.ACT.getCode());
 	}
 	

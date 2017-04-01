@@ -137,8 +137,6 @@
     	</div>
   	</div>
   	
-  	<script type="text/javascript" src="${path }/view/js/category_categorymanage.js"></script>
-  	
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-add">
 		<div class="am-modal-dialog">
 	    	<div class="am-modal-hd"><span id="modalTitle-add"></span>
@@ -158,7 +156,7 @@
 							<div class="frame-div-padd10">
 		        				<input type="hidden" id="inp2-id" name="category.id" style="width:300px;"/>
 		        				<input type="hidden" id="inp2-parentId" name="category.parentId" style="width:300px;"/>
-		        				<input type="hidden" id="inp2-levels" name="category.levels" style="width:300px;"/>
+		        				<input type="hidden" id="inp2-level" name="category.level" style="width:300px;"/>
 		        				<input type="text" name="category.cateName" id="inp2-cateName" style="width:300px;" placeholder="请输入类别名称"/>
 		        			</div>
 						</td>
@@ -166,24 +164,24 @@
 					<tr>
 						<td>
 							<div class="frame-div-padd10">
-		        				<label for="category.cateOrder" class="am-form-label">排序序号：</label>
+		        				<label for="category.order" class="am-form-label">排序序号：</label>
 		        			</div>
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" name="category.cateOrder" id="inp2-cateOrder" style="width: 300px;" placeholder="请输入排序序号">
+		        				<input type="text" name="category.order" id="inp2-cateOrder" style="width: 300px;" placeholder="请输入排序序号">
 		        			</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<div class="frame-div-padd10">
-		        				<label for="memo" class="am-form-label">类别描述：</label>
+		        				<label for="category.remark" class="am-form-label">类别描述：</label>
 		        			</div>
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" name="category.memo" id="inp2-memo" style="width: 300px;" placeholder="请输入类别描述"/>
+		        				<input type="text" name="category.remark" id="inp2-memo" style="width: 300px;" placeholder="请输入类别描述"/>
 		        				
 		        			</div>
 						</td>
@@ -254,6 +252,7 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="${path }/view/js/category_categorymanage.js"></script>
 </body>
 </html>
 

@@ -81,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService {
 		cate.setUrl(category.getUrl());
 		cate.setCateCode(category.getCateCode());
 		cate.setIsuse(category.getIsuse());
-		category.setUpdateTime(new Date());
+		cate.setUpdateTime(new Date());
 		db.update(cate);
 	}
 	
@@ -94,16 +94,16 @@ public class CategoryServiceImpl implements CategoryService {
 			node.put("pkId", pojo.get("id")); //类别主键
 			node.put("text", pojo.get("cateName")); //类别名称
 			node.put("parentId", pojo.get("parentId")); //上级类别编码
-			node.put("levels", pojo.get("levels")); //上级类别编码
+			node.put("levels", pojo.get("level_")); //上级类别编码
 			Map attributes = new HashMap(5);
-			attributes.put("memo", pojo.get("memo")); //类别描述
-			attributes.put("cateOrder", pojo.get("cateOrder")); //类别排序
+			attributes.put("memo", pojo.get("remark")); //类别描述
+			attributes.put("cateOrder", pojo.get("order_")); //类别排序
 			attributes.put("logo", pojo.get("logo")); //logo
 			attributes.put("url", pojo.get("url")); //类别url 
 			attributes.put("isuse", pojo.get("isuse")); //是否有效
 			node.put("attributes", attributes);
 			temp.put(pojo.get("id").toString(), node);
-			if("0".equals(pojo.get("levels"))) {
+			if("0".equals(pojo.get("level_"))) {
 				root = node;
 			}
 		}

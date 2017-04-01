@@ -73,6 +73,7 @@ function initCategoryTree() {
 var categoryClick = function(node) {
 	$("#category_detail_table input").each(function(i,n){n.value = "";});
 	var obj = getCategoryInfo(node);
+	console.log(obj);
 	for(var key in obj){
 		var inp = document.getElementById("inp_"+key);
 		if(inp != null){
@@ -94,7 +95,7 @@ $('#addCategoryBtn').click(function() {
 	$("#category_detail_table input").each(function(i,n){n.value = "";});
 	$("#inp2-isuse").val("");
 	$("#inp2-parentId").val(obj.categoryId);
-	$("#inp2-levels").val(parseInt(obj.levels)+1);
+	$("#inp2-level").val(parseInt(obj.levels)+1);
 	showModal("doc-modal-add", 600, 400);
 });
 
@@ -112,7 +113,7 @@ $('#editCategoryBtn').click(function() {
 	$("#inp2-cateName").val(obj.categoryName);
 	$("#inp2-cateOrder").val(obj.cateOrder);
 	$("#inp2-memo").val(obj.memo);
-	$("#inp2-levels").val(obj.levels);
+	$("#inp2-level").val(obj.levels);
 	$("#inp2-parentId").val(obj.parentId);
 	$("#inp2-logo").val(obj.logo);
 	$("#inp2-url").val(obj.url);

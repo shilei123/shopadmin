@@ -38,7 +38,7 @@ public class PropertyCategoryDAO extends PageDAO{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> queryPropCateByCateId(String cateId) {
-		StringBuffer sql = new StringBuffer(" select t.* from SC_PROPERTY_CATEGORY t where t.flag=? and t.cate_id=? ");
+		StringBuffer sql = new StringBuffer(" select t.* from SC_CATE_PROP t where t.flag=? and t.cate_id=? ");
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
 		params.add(cateId);
@@ -46,7 +46,7 @@ public class PropertyCategoryDAO extends PageDAO{
 	}
 	
 	public void delPropCate(String cateId, String propId){
-		String hql = " update ScPropertyCategory set flag=? where cateId=? and propId=? ";
+		String hql = " update ScCateProp set flag=? where cateId=? and propId=? ";
 		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), cateId, propId);
 	}
 

@@ -19,7 +19,7 @@ import framework.db.PageDAO;
 @Repository("propertyDAO")
 public class PropertyDAO extends PageDAO{
 	
-	public final String SELECT_SQL = " select t.id,t.prop_code,t.prop_name,t.prop_order,to_char(t.create_time,'yyyy-MM-dd hh24:mm:ss')as create_time from SC_PROPERTY t where flag=? ";
+	public final String SELECT_SQL = " select t.id,t.prop_code,t.prop_name,t.order_,to_char(t.create_time,'yyyy-MM-dd hh24:mm:ss')as create_time from SC_PROPERTY t where flag=? ";
 
 	public int queryPropertyCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
