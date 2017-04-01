@@ -28,8 +28,8 @@ public class ArticleServiceImpl implements IArticleService{
 
 	@Resource(name="acticleDAO")
 	private ArticleDAO acticleDAO;
-	@Resource(name="directoryStructureDAO")
-	private DirStructureDAO directoryStructureDAO;
+	@Resource(name="dirStructureDAO")
+	private DirStructureDAO dirStructureDAO;
 
 	/**
 	 * 查询
@@ -70,7 +70,7 @@ public class ArticleServiceImpl implements IArticleService{
 	 */
 	@Override
 	public List<ScDirStructure> queryDirectoryType() throws Exception {
-		List<ScDirStructure> directoryList = directoryStructureDAO.queryDirectory();
+		List<ScDirStructure> directoryList = dirStructureDAO.queryDirectory();
 		return directoryList;
 	}
 
