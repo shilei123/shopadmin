@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<package name="propertyCategory" extends="json-default" namespace="/view/propCate">
-		<action name="propCate" class="com.sunchin.shop.admin.category.action.PropertyCategoryAction">
+	<package name="catePropPropval" extends="json-default" namespace="/view/shop/admin/catePropPropval">
+		<action name="catePropPropval" class="com.sunchin.shop.admin.catePropPropval.action.CatePropPropvalAction">
 			<result type="json"><param name="ignoreHierarchy">false</param></result>
 		</action>
 	</package>

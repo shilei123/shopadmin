@@ -16,7 +16,7 @@ $(function() {
 		$("#form1").validate({
 	        submitHandler:function(form){
 	            $('#form1').form('submit', {
-		    		url:  path_ + "/view/category/category!saveCategory.action",
+		    		url:  path_ + "/view/shop/admin/category/category!saveCategory.action",
 		    		onSubmit: function() {
 		    			return checkForm();
 		    		},
@@ -39,7 +39,7 @@ $(function() {
 		$("#form1").validate({
 			submitHandler:function(form){
 				$('#form1').form('submit', {
-					url:  path_ + "/view/category/category!updateCategory.action",
+					url:  path_ + "/view/shop/admin/category/category!updateCategory.action",
 					onSubmit: function() {
 						return checkForm();
 					},
@@ -59,7 +59,7 @@ $(function() {
 function initCategoryTree() {
 	$.ajax( {
 		type : "POST",
-		url : path_ + "/view/category/category!categoryTree.action",
+		url : path_ + "/view/shop/admin/category/category!categoryTree.action",
 		dataType : "json",
 		success : function(json) {
 			console.log(json);
@@ -135,7 +135,7 @@ $("#delCategoryBtn").click(function() {
 	showConfirm("确认删除？",function() {
 		$.ajax( {
 			type : "POST",
-			url : path_ + "/view/category/category!delCategory.action",
+			url : path_ + "/view/shop/admin/category/category!delCategory.action",
 			dataType : "json",
 			data: {"category.id": $("#inp_categoryId").val()},
 			success : function(json) {

@@ -40,7 +40,7 @@ $('#queryBtn').click(function() {
 
 var query = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/comment/comment!queryCommentList.action";
+	var url = path_ + "/view/faq/faq!queryFaqList.action";
 	pageData(url, "contentListTable", data);
 };
 

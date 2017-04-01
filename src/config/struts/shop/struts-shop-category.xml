@@ -1,13 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<!-- <package name="bankInfo" extends="json-default" namespace="/view/bank">
-		<action name="bankQuery" class="demo.bankManager.action.BankAction">
-			<result type="json"><param name="ignoreHierarchy">false</param></result>
-		</action>
-	</package> -->
-	
-	<package name="category" extends="json-default" namespace="/view/category">
+	<package name="category" extends="json-default" namespace="/view/shop/admin/category">
 		<action name="category" class="com.sunchin.shop.admin.category.action.CategoryAction">
 			<result type="json"></result>
 		</action>

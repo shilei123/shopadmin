@@ -1,15 +1,7 @@
 $(function() {
 	initCommentType();
 	query();
-	/*$("#233").change(changea);*/
 });
-
-/*var changea = function(){
-	$("#commentType").focus();
-	$("#commentType").slideDown('fast').promise().done(function () {
-        //js 操作
-    });
-};*/
 
 var initCommentType = function() {
 	var data = {"dict.type":"COMMENT_TYPE"};
@@ -48,7 +40,7 @@ $('#queryBtn').click(function() {
 
 var query = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/comment/comment!queryCommentList.action";
+	var url = path_ + "/view/shop/admin/comment/comment!queryCommentList.action";
 	pageData(url, "contentListTable", data);
 };
 
@@ -78,7 +70,7 @@ var showEditCommentWin = function(id) {
 	var data = {"comment.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/comment/comment!queryCommentById.action",
+		url : path_ + "/view/shop/admin/comment/comment!queryCommentById.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
@@ -93,7 +85,7 @@ var delComment = function(id) {
 		var data = {"comment.id" : id};
 		$.ajax({
 			type : "POST",
-			url : path_ + "/view/comment/comment!delComment.action",
+			url : path_ + "/view/shop/admin/comment/comment!delComment.action",
 			data : data,
 			dataType : "json",
 			success : function(json) {
