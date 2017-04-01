@@ -77,7 +77,7 @@ public class CatePropPropvalDAO {
 		sql.append(" 		pv.id val_id, ");
 		sql.append(" 		pv.val_name, ");
 		sql.append(" 		pv.val_code, ");
-		sql.append(" 		pv.val_order ");
+		sql.append(" 		pv.order_ as val_order ");
 		sql.append(" FROM sc_cate_prop_propval cpp ");
 		sql.append(" LEFT JOIN sc_category c ON cpp.cate_id=c.id ");
 		sql.append(" LEFT JOIN sc_prop_propval pp ON cpp.ppv_id=pp.id ");

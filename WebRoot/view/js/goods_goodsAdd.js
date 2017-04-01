@@ -115,10 +115,10 @@ $("#addPropertyDiv").click(function() {
 		var trHtml = "";
 		trHtml += "<tr>";
 		trHtml += "    <td style='text-align:left;'><input type='hidden' name='gcpp.catePropPropvalId' id='"+existsGoodsKey+"' value='"+childGoodsValue+"'/><div style='margin-top:5px;margin-bottom:5px;'>"+childGoodsLabel+"</div></td>";
-		trHtml += "    <td>&nbsp;<input name='goodsChild.purchasePrice' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='goodsChild.marketPrice' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='goodsChild.salePrice' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='goodsChild.promotionPrice' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='goodsChild.purchasePrice' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='goodsChild.marketPrice' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='goodsChild.salePrice' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='goodsChild.promotionPrice' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
 		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
 		trHtml += "    <td>&nbsp;<input name='goodsChild.childNo' style=\"width:80px;\"/>&nbsp;</td>";
 		trHtml += "    <td>&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteGoodChilds(\""+existsGoodsKey+"\")'><span class='am-icon-remove'></i>删除</a>&nbsp;</td>";
@@ -212,17 +212,52 @@ var queryCpp = function(cateId, propId, valId) {
 	}
 };
 
+var checkChildGoods = function(fieldName) {
+	var fields = $("input[name='"+fieldName+"']");
+	var bool = true;
+	for(var i = 0; i < fields.length; i++) {
+		var field = $(fields[i]);
+		//var tdIndex = field.parent().index();
+		//var headText = field.parent().parent().parent().prev().children("tr:eq(0)").children("th:eq("+tdIndex+")").text().replace("*","");
+		if(field.val().length==0) {
+			bool = false;
+			field.addClass("inputerror");
+			//showLayerMsg("请输入" + headText);
+			//field.focus();
+		} else {
+			field.removeClass("inputerror");
+		}
+	}
+	return bool;
+}
+
 //保存按钮
+var checkChildGoodsFieldThis = function(obj) {
+	var $obj = $(obj);
+	if($obj.val().length>0) {
+		$obj.removeClass("inputerror");
+	} else {
+		$obj.addClass("inputerror");
+	}
+};
+
 $("#saveBtn").click(function() {
-	var marketPrices = $("#goodsChild.marketPrice");
-	$(marketPrices).each(function(index) {
-		//console.log(#(marketPrices[index]).val());
-	}); 
-	return;
-	/* if(!checkRequiredField("goodsName")) {
+	if(!checkRequiredField("title")) {
 		return;
-	}; */
+	}; 
 	
+	//同时验证子商品的价格信息，用css标红
+	var b1 = checkChildGoods("goodsChild.purchasePrice");
+	var b2 = checkChildGoods("goodsChild.marketPrice");
+	var b3 = checkChildGoods("goodsChild.salePrice");
+	var b4 = checkChildGoods("goodsChild.promotionPrice");
+	if(!b1 || !b2 || !b3 || !b4) {
+		showLayerMsg("请输入完整库存配置信息");
+		$(".inputerror:first").focus(); //
+		return;
+	}
+	console.log("验证通过！");
+	return;
 	//验证图片
 	var imgSrcCount = 0;
 	$(".img").each(function(index) {
@@ -239,13 +274,15 @@ $("#saveBtn").click(function() {
 });
 
 var checkRequiredField = function(fieldId,msg) {
+	var $field = $("#"+fieldId);
 	if(!msg) {
-		msg = $("#"+fieldId).attr("placeholder")+"必填";
+		msg = $field.attr("placeholder")+"必填";
 	}
 	var fieldValue = $("#"+fieldId).val();
 	if(fieldValue.length==0) {
 		showLayerMsg(msg);
-		$("#"+fieldId).focus();
+		//$field.addClass("inputerror");
+		$field.focus();
 		return false;
 	};
 	return true;

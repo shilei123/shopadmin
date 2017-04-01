@@ -67,7 +67,7 @@
 													<table id="propertyEditTable"><thead><tr></tr></thead><tbody><tr></tr></tbody></table>
 												</td>
 												<td valign="middle">
-													<div id="addPropertyDiv"><img src="${path}/images/add2.png"/></div>
+													<div id="addPropertyDiv"><img src="${path}/images/add2.png"/></div><!-- <a href="javascript:void(0);" id="testbtn">test</a> -->
 												</td>
 											</tr>
 										</table>

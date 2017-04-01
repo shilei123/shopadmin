@@ -97,3 +97,8 @@ th {
 .imgDiv {
 	display: inline-block;cursor: pointer;position: relative;
 }
+
+.inputerror {
+	border: 1px solid red; 
+	background-color: #FFF3F3;
+}
