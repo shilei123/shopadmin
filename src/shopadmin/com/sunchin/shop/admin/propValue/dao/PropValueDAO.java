@@ -19,7 +19,7 @@ import framework.db.PageDAO;
 @Repository("propValueDAO")
 public class PropValueDAO extends PageDAO{
 	
-	public final String SELECT_SQL = " select t.id,t.val_code,t.val_name,t.val_order,to_char(t.create_time,'yyyy-MM-dd hh24:mm:ss')as create_time from SC_PROPVALUE t where flag=? ";
+	public final String SELECT_SQL = " select t.id,t.val_code,t.val_name,t.order_,to_char(t.create_time,'yyyy-MM-dd hh24:mm:ss')as create_time from SC_PROPVAL t where flag=? ";
 
 	public int queryPropValueCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>(2);

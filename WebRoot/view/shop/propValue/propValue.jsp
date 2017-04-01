@@ -47,8 +47,6 @@
 
 					<div class="am-u-sm-12">
 						<div class="am-panel am-panel-primary">
-							<!-- <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}">查询条件<span class="am-icon-chevron-down am-fr"></span></div> -->
-
 							<div class="am-panel-bd am-collapse am-in frame-search-panel"id="collapse-panel-1">
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
@@ -74,7 +72,7 @@
 									<th width="2%" field="index"></th>
 									<th width="15%" field="valName">属性值名称</th>
 									<th width="10%" field="valCode">属性值编码</th>
-									<th width="10%" field="valOrder">属性值排序</th>
+									<th width="10%" field="order_">属性值排序</th>
 									<th width="15%" field="createTime">创建时间</th>
 									<th width="40%" formatter="formatterAction">操作</th>
 								</tr>

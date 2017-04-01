@@ -61,7 +61,7 @@ $("#saveBtn").click(function() {
 	}else{
 		url = path_ + "/view/property/property!addProperty.action"
 	}
-	var data = { "property.id" : propId, "property.flag" : propFlag, "property.propName" : propName, "property.propCode" : propCode, "property.propOrder" : propOrder };
+	var data = { "property.id" : propId, "property.flag" : propFlag, "property.propName" : propName, "property.propCode" : propCode, "property.order" : propOrder };
 	$.ajax({
 		type : "POST",
 		url : url,
@@ -116,7 +116,7 @@ var showEditPropWin = function(id) {
 var setPropertyInfo = function(data) {
 	$("#propName").val(data.property.propName);
 	$("#propCode").val(data.property.propCode);
-	$("#propOrder").val(data.property.propOrder);
+	$("#propOrder").val(data.property.order);
 	$("#propId").val(data.property.id);
 	$("#propFlag").val(data.property.flag);
 	$("#errorMsg").html("&nbsp;");
@@ -204,7 +204,7 @@ function pageDataCurrentJsp(url, targetId, params, currPageNum, rowCount, page) 
 		data : params,
 		dataType: "json",
 		success : function(data) {
-			console.log(data);
+			//console.log(data);
 			$('#'+targetId+' tbody').empty();
 			var html = createTrCurrentJsp(data, targetId);
 			$("#"+targetId).append(html);

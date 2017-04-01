@@ -45,7 +45,7 @@
       		</div>
     	</div>
   	</div>
-  	<script type="text/javascript" src="${path }/view/js/catePropPropVal.js"></script>
+  	<script type="text/javascript" src="${path }/view/js/catePropPropval_catePropPropvalManage.js"></script>
 </div>
 </body>
 </html>

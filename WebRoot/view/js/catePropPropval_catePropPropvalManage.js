@@ -32,8 +32,8 @@ var categoryClick = function(node) {
 		dataType : "json",
 		data: {"cateId": node.pkId},
 		success : function(json){
-			//console.log(json.list);
-			//console.log(json.listCheck);
+			console.log(json.list);
+			console.log(json.listCheck);
 			$("#propPropValTable").html("");
 			var html = "";
 			for(x in json.list){

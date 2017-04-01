@@ -117,7 +117,7 @@ var showEditPropWin = function(id) {
 var setPropValueInfo = function(data) {
 	$("#propValueName").val(data.propValue.valName);
 	$("#propValueCode").val(data.propValue.valCode);
-	$("#propValueOrder").val(data.propValue.valOrder);
+	$("#propValueOrder").val(data.propValue.order);
 	$("#propValueId").val(data.propValue.id);
 	$("#propValueFlag").val(data.propValue.flag);
 	$("#errorMsg").html("&nbsp;");
