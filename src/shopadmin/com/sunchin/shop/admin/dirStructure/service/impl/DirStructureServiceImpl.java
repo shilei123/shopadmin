@@ -29,10 +29,10 @@ public class DirStructureServiceImpl implements IDirStructureService{
 	@Resource(name="dirStructureDAO")
 	private DirStructureDAO dirStructureDAO;
 
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public List<Map<String, Object>> queryDirectoryStructure() throws Exception {
-		
+	public List<Map<String, Object>> queryDirStructure() throws Exception {
 	List<Map<String,Object>> directoryList = dirStructureDAO.findDirectoryStructure();
 	if(directoryList == null || directoryList.isEmpty()){
 		return null;
@@ -101,7 +101,7 @@ public class DirStructureServiceImpl implements IDirStructureService{
 	 * 查看该栏目有否有子栏目
 	 */
 	@Override
-	public List<ScDirStructure> queryDirectoryParent(String parent)throws Exception {
+	public List<ScDirStructure> queryDirParent(String parent)throws Exception {
 		List<ScDirStructure>  directoryList =	dirStructureDAO.queryDirectoryParent(parent);
 		return directoryList;
 	}
@@ -149,7 +149,7 @@ public class DirStructureServiceImpl implements IDirStructureService{
 	 * 查询目录
 	 */
 	@Override
-	public List<ScDirStructure> queryDirectoryType() throws Exception {
+	public List<ScDirStructure> queryDirType() throws Exception {
 		List<ScDirStructure> directory = dirStructureDAO.queryDirectory();
 		return directory;
 	}

@@ -9,12 +9,12 @@ import java.util.Date;
 
 public class ScEvents  implements java.io.Serializable {
 
-     private String Id;
+     private String id;
      private String name;
      private String isuse;
      private String memo;
-     private Date start_time;
-     private Date end_time;
+     private Date startTime;
+     private Date endTime;
      private Date createTime;
      private Date updateTime;
      private String flag;
@@ -22,13 +22,13 @@ public class ScEvents  implements java.io.Serializable {
 
     public ScEvents() {
     }
-
+    
 	public String getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(String id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -55,20 +55,20 @@ public class ScEvents  implements java.io.Serializable {
 		this.memo = memo;
 	}
 
-	public Date getStart_time() {
-		return start_time;
+	public Date getStartTime() {
+		return startTime;
 	}
 
-	public void setStart_time(Date start_time) {
-		this.start_time = start_time;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 
-	public Date getEnd_time() {
-		return end_time;
+	public Date getEndTime() {
+		return endTime;
 	}
 
-	public void setEnd_time(Date end_time) {
-		this.end_time = end_time;
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public Date getCreateTime() {

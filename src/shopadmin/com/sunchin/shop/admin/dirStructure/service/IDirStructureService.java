@@ -7,15 +7,15 @@ import com.sunchin.shop.admin.pojo.ScDirStructure;
 
 public interface IDirStructureService {
 
-	List<Map<String, Object>> queryDirectoryStructure() throws Exception;
+	List<Map<String, Object>> queryDirStructure() throws Exception;
 
-	List<ScDirStructure> queryDirectoryParent(String id) throws Exception;
+	List<ScDirStructure> queryDirParent(String id) throws Exception;
 
 	void delDirectory(String id) throws Exception;
 
 	void save(ScDirStructure directory) throws Exception;
 
-	List<ScDirStructure> queryDirectoryType() throws Exception;
+	List<ScDirStructure> queryDirType() throws Exception;
 
 	
 	

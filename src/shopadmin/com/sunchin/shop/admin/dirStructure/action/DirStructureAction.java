@@ -27,7 +27,7 @@ public class DirStructureAction extends PageAction{
 	 */
 	public String queryDirStructure(){
 		try {
-			directoryList = dirStructureService.queryDirectoryStructure();
+			directoryList = dirStructureService.queryDirStructure();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class DirStructureAction extends PageAction{
 	 */
 	public String delete(){
 		try {
-			List<ScDirStructure> list = dirStructureService.queryDirectoryParent(directory.getId());
+			List<ScDirStructure> list = dirStructureService.queryDirParent(directory.getId());
 			if(list!=null && !list.isEmpty()){
 				this.msg = "该类别下已有子类别，无法删除！";
 			}else{
@@ -74,7 +74,7 @@ public class DirStructureAction extends PageAction{
 	 */
 	public String queryDirType(){
 		try {
-			directoryTypeList = dirStructureService.queryDirectoryType();
+			directoryTypeList = dirStructureService.queryDirType();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

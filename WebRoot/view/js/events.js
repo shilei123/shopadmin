@@ -2,7 +2,7 @@ var eventsinfoTypeHtml = "";
 
 $(function() {
 	queryEventsinfo();
-	queryEventsinfoType();
+	queryEventsType();
 });
 
 var queryEventsinfo = function() {
@@ -11,7 +11,7 @@ var queryEventsinfo = function() {
 	pageData(url, "eventsinfoListTable", data); 
 };
 
-var queryEventsinfoType = function() {
+var queryEventsType = function() {
 	var isuse = $("#isuse");
 	isuse.empty();
 		$.ajax({
@@ -22,8 +22,8 @@ var queryEventsinfoType = function() {
 			success : function(data) {
 				var html = "<option value='-1'>-请选择-</option>";
 				$(data.dictionaryList).each(function(index) {
-					var eventsinfoType = data.dictionaryList[index];
-					html += "<option value='" + eventsinfoType.code + "'>" + eventsinfoType.name + "</option>";
+					var eventsType = data.dictionaryList[index];
+					html += "<option value='" + eventsType.code + "'>" + eventsType.name + "</option>";
 				});
 				eventsinfoTypeHtml = html;
 				isuse.append(html);
@@ -33,7 +33,7 @@ var queryEventsinfoType = function() {
 
 //绑定搜索按钮的分页
 $('#queryBtn').click(function() {
-	queryEventsinfo();
+	queryEventsType();
 });
 
 var openWin = function(title) {

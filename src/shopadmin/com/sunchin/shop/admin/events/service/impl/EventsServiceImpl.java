@@ -50,7 +50,7 @@ public class EventsServiceImpl implements IEventsService{
 		DBUtil db = DBUtil.getInstance();
 		ScEvents eventsinfo = eventsDAO.findScEventsinfoById(id);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String startTime = format.format(eventsinfo.getStart_time());
+		String startTime = format.format(eventsinfo.getStartTime());
 		String currentTime = format.format(new Date());
 		int i = startTime.compareTo(currentTime);
 		if(i > 0){
@@ -96,8 +96,8 @@ public class EventsServiceImpl implements IEventsService{
 			vo.setName(eventsinfo.getName());
 			vo.setIsuse(eventsinfo.getIsuse());
 			vo.setMemo(eventsinfo.getMemo());
-			vo.setStart_time(eventsinfo.getStart_time());
-			vo.setEnd_time(eventsinfo.getEnd_time());
+			vo.setStartTime(eventsinfo.getStartTime());
+			vo.setEndTime(eventsinfo.getEndTime());
 			vo.setUpdateTime(new Date());
 			db.update(vo);
 		}

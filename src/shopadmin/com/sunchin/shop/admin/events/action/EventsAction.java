@@ -78,7 +78,7 @@ public class EventsAction extends PageAction{
 		return Action.SUCCESS;
 	}
 
-	public String queryEventsinfoType(){
+	public String queryEventsType(){
 		try {
 			dictionaryList = dictService.getDictByType(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
 		} catch (Exception e) {
