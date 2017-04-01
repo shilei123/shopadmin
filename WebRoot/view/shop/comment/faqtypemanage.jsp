@@ -123,20 +123,8 @@
 							<div class="frame-div-padd10">
 		        				<input type="hidden" id="inp2-id" name="faqType.id" style="width:300px;"/>
 		        				<input type="hidden" id="inp2-parentTypeId" name="faqType.parentTypeId" style="width:300px;"/>
-		        				<input type="hidden" id="inp2-typeLevel" name="faqType.typeLevel" style="width:300px;"/>
+		        				<input type="hidden" id="inp2-typeLevel" name="faqType.level" style="width:300px;"/>
 		        				<input type="text" name="faqType.typeName" id="inp2-typeName" style="width:300px;" placeholder="请输入分类名称"/>
-		        			</div>
-						</td>
-					</tr>
-					<tr>
-						<td align="center">
-							<div class="frame-div-padd10">
-		        				<label for="inp2-typeOrder" class="am-form-label">排序序号：</label>
-		        			</div>
-						</td>
-						<td>
-							<div class="frame-div-padd10">
-		        				<input type="text" name="faqType.typeOrder" id="inp2-typeOrder" style="width: 300px;" placeholder="请输入排序序号">
 		        			</div>
 						</td>
 					</tr>
@@ -163,6 +151,18 @@
 							<div class="frame-div-padd10">
 		        				<input type="text" name="faqType.typeCode" id="inp2-typeCode" style="width: 300px;" placeholder="请输入分类编码"/>
 		        				
+		        			</div>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<div class="frame-div-padd10">
+		        				<label for="inp2-typeOrder" class="am-form-label">排序序号：</label>
+		        			</div>
+						</td>
+						<td>
+							<div class="frame-div-padd10">
+		        				<input type="text" name="faqType.order" id="inp2-typeOrder" style="width: 300px;" placeholder="请输入排序序号">
 		        			</div>
 						</td>
 					</tr>

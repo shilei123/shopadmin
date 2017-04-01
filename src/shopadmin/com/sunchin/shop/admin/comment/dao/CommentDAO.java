@@ -18,7 +18,7 @@ import framework.db.PageDAO;
 @Repository("commentDAO")
 public class CommentDAO extends PageDAO{
 
-	public final String SELECT_SQL = " select t.id,decode(t.type,'1','评论','2','追评') as type,t.content,t.score,to_char(t.comment_time,'yyyy-MM-dd hh24:mm:ss')as create_time from SC_COMMENT t where flag=? ";
+	public final String SELECT_SQL = " select t.id,decode(t.type,'1','评论','2','追评') as type,t.content,t.score,to_char(t.create_time,'yyyy-MM-dd hh24:mm:ss')as create_time from SC_COMMENT t where flag=? ";
 
 	public int queryCommentCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
@@ -52,17 +52,17 @@ public class CommentDAO extends PageDAO{
 			String startTime = pageBean.getQueryParams().get("startTime");
 			if (StringUtils.isNotBlank(startTime)){
 				params.add(startTime);
-				sql.append(" and t.comment_time >= to_date(?,'yyyy-MM-dd hh24:mi:ss')   ");
+				sql.append(" and t.create_time >= to_date(?,'yyyy-MM-dd hh24:mi:ss')   ");
 			}
 			String endTime = pageBean.getQueryParams().get("endTime");
 			if (StringUtils.isNotBlank(endTime)){
 				params.add(endTime+" 23:59:59");
-				sql.append(" and t.comment_time <= to_date(?,'yyyy-MM-dd hh24:mi:ss')  ");
+				sql.append(" and t.create_time <= to_date(?,'yyyy-MM-dd hh24:mi:ss')  ");
 			}
 			/*String commentPeople = pageBean.getQueryParams().get("commentPeople");
 			if (StringUtils.isNotBlank(commentPeople)){
 				params.add(commentPeople);
-				sql.append(" and t.commentPeople=? ");
+				sql.append(" and t.create_user_id=? ");
 			}*/
 			String score = pageBean.getQueryParams().get("score");
 			if (StringUtils.isNotBlank(score)){
@@ -70,7 +70,7 @@ public class CommentDAO extends PageDAO{
 				sql.append(" and t.score>=? ");
 			}
 		}
-		sql.append(" order by t.comment_time desc ");
+		sql.append(" order by t.create_time desc ");
 		return sql.toString();
 	}
 	

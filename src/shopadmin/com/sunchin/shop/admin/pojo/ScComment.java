@@ -11,7 +11,7 @@ public class ScComment implements java.io.Serializable {
 	private String id;
 	private String type;
 	private String content;
-	private Date commentTime;
+	private Date createTime;
 	private Double score;
 	private String ishidden;
 	private String parentId;
@@ -42,12 +42,12 @@ public class ScComment implements java.io.Serializable {
 		this.content = content;
 	}
 
-	public Date getCommentTime() {
-		return this.commentTime;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCommentTime(Date commentTime) {
-		this.commentTime = commentTime;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	public Double getScore() {

@@ -62,7 +62,7 @@ function initFaqTypeTree() {
 		url : path_ + "/view/faqType/faqType!initFaqTypeTree.action",
 		dataType : "json",
 		success : function(json) {
-			//console.log(json);
+			console.log(json.trees);
 			var root = json.trees[0];
 			root.state = "open";
 			$("#ul_category_tree").tree("loadData", json.trees);

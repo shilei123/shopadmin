@@ -41,12 +41,12 @@ public class FaqTypeServiceImpl implements FaqTypeService {
 			node.put("typeDesc", pojo.get("typeDesc")); //类别描述
 			node.put("typeCode", pojo.get("typeCode")); //类别编码
 			node.put("parentId", pojo.get("parentTypeId")); //上级类别id
-			node.put("typeLevel", pojo.get("typeLevel")); //上级类别层级
+			node.put("typeLevel", pojo.get("level_")); //上级类别层级
 			Map attributes = new HashMap();
-			attributes.put("typeOrder", pojo.get("typeOrder")); //类别当前层级顺序
+			attributes.put("typeOrder", pojo.get("order_")); //类别当前层级顺序
 			node.put("attributes", attributes);
 			temp.put(pojo.get("id").toString(), node);
-			if("0".equals(pojo.get("typeLevel"))) {
+			if("0".equals(pojo.get("level_"))) {
 				root = node;
 			}
 		}
