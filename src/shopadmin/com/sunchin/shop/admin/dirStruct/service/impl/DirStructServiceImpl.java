@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.dirStructure.service.impl;
+package com.sunchin.shop.admin.dirStruct.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,24 +16,25 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.dirStructure.dao.DirStructureDAO;
-import com.sunchin.shop.admin.dirStructure.service.IDirStructureService;
-import com.sunchin.shop.admin.pojo.ScDirStructure;
+import com.sunchin.shop.admin.dirStruct.dao.DirStructDAO;
+import com.sunchin.shop.admin.dirStruct.service.IDirStructService;
+import com.sunchin.shop.admin.dirStruct.util.ComparatorDirStructVO;
+import com.sunchin.shop.admin.pojo.ScDirStruct;
 
 import framework.db.DBUtil;
 import framework.util.ComparatorCategoryVO;
 
-@Repository("dirStructureService")
-public class DirStructureServiceImpl implements IDirStructureService{
+@Repository("dirStructService")
+public class DirStructServiceImpl implements IDirStructService{
 
-	@Resource(name="dirStructureDAO")
-	private DirStructureDAO dirStructureDAO;
+	@Resource(name="dirStructDAO")
+	private DirStructDAO dirStructDAO;
 
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public List<Map<String, Object>> queryDirStructure() throws Exception {
-	List<Map<String,Object>> directoryList = dirStructureDAO.findDirectoryStructure();
+	public List<Map<String, Object>> queryDirStruct() throws Exception {
+	List<Map<String,Object>> directoryList = dirStructDAO.findDirStruct();
 	if(directoryList == null || directoryList.isEmpty()){
 		return null;
 	}
@@ -42,17 +43,17 @@ public class DirStructureServiceImpl implements IDirStructureService{
 	for(Map pojo : directoryList){
 		Map node = new TreeMap();
 		node.put("PkId",pojo.get("id")); //主键
-		node.put("text",pojo.get("directoryName"));//栏目名称
-		node.put("parentDirectoryId", pojo.get("parentDirectoryId")); //上级栏目id
+		node.put("text",pojo.get("dirName"));//栏目名称
+		node.put("parentDirId", pojo.get("parentDirId")); //上级栏目id
 		node.put("parentName",pojo.get("parentName"));//上级栏目名称
-		node.put("levels", pojo.get("levels")); //所属级别
+		node.put("level", pojo.get("level_")); //所属级别
 		Map attributes = new HashMap(3);
-		attributes.put("cateOrder", pojo.get("cateOrder")); //排序
+		attributes.put("order", pojo.get("order_")); //排序
 		attributes.put("isuse", pojo.get("isuse")); //是否有效
 		node.put("attributes", attributes);
 		temp.put(pojo.get("id").toString(),node);
 		//找出根目录
-		if("0".equals(pojo.get("levels"))){
+		if("0".equals(pojo.get("level_"))){
 			root = node;
 		}
 	}
@@ -60,7 +61,7 @@ public class DirStructureServiceImpl implements IDirStructureService{
 	//循环找出层级关系
 	for(String key : temp.keySet()){
 		Map node = (Map) temp.get(key);
-		Object parentId = node.get("parentDirectoryId");
+		Object parentId = node.get("parentDirId");
 		if(parentId == null){
 			continue;
 		}
@@ -79,7 +80,7 @@ public class DirStructureServiceImpl implements IDirStructureService{
 		if(node.get("children") != null) {
 			List perforManceList = (ArrayList) node.get("children");
 			if(!perforManceList.isEmpty()) {
-				Collections.sort(perforManceList, new ComparatorCategoryVO());
+				Collections.sort(perforManceList, new ComparatorDirStructVO());
 				node.put("state", "closed"); //节点状态：关闭
 			}
 		} 
@@ -101,8 +102,8 @@ public class DirStructureServiceImpl implements IDirStructureService{
 	 * 查看该栏目有否有子栏目
 	 */
 	@Override
-	public List<ScDirStructure> queryDirParent(String parent)throws Exception {
-		List<ScDirStructure>  directoryList =	dirStructureDAO.queryDirectoryParent(parent);
+	public List<ScDirStruct> queryDirParent(String parent)throws Exception {
+		List<ScDirStruct>  directoryList =	dirStructDAO.queryDirectoryParent(parent);
 		return directoryList;
 	}
 
@@ -113,7 +114,7 @@ public class DirStructureServiceImpl implements IDirStructureService{
 	@Transactional
 	public void delDirectory(String id) throws Exception {
 		DBUtil db = DBUtil.getInstance();
-		ScDirStructure vo = (ScDirStructure) db.get(ScDirStructure.class, id);
+		ScDirStruct vo = (ScDirStruct) db.get(ScDirStruct.class, id);
 		vo.setFlag(FlagEnum.HIS.getCode());
 		db.update(vo);
 	}
@@ -123,7 +124,7 @@ public class DirStructureServiceImpl implements IDirStructureService{
 	 */
 	@SuppressWarnings("unused")
 	@Override
-	public void save(ScDirStructure directory) throws Exception {
+	public void save(ScDirStruct directory) throws Exception {
 		if (directory == null) {
 			return;
 		}
@@ -135,7 +136,7 @@ public class DirStructureServiceImpl implements IDirStructureService{
 			directory.setCreateTime(new Date());
 			DBUtil.getInstance().insert(directory);
 		} else { // 修改
-			ScDirStructure vo = (ScDirStructure) DBUtil.getInstance().get(ScDirStructure.class, directory.getId());
+			ScDirStruct vo = (ScDirStruct) DBUtil.getInstance().get(ScDirStruct.class, directory.getId());
 			vo.setDirName(directory.getDirName());
 			vo.setDirPath(directory.getDirPath());
 			vo.setOrder(directory.getOrder());
@@ -149,8 +150,8 @@ public class DirStructureServiceImpl implements IDirStructureService{
 	 * 查询目录
 	 */
 	@Override
-	public List<ScDirStructure> queryDirType() throws Exception {
-		List<ScDirStructure> directory = dirStructureDAO.queryDirectory();
+	public List<ScDirStruct> queryDirType() throws Exception {
+		List<ScDirStruct> directory = dirStructDAO.queryDirectory();
 		return directory;
 	}
 }

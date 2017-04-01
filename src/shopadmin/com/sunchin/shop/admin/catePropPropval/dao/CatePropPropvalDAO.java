@@ -26,9 +26,9 @@ public class CatePropPropvalDAO {
 		StringBuffer sql = new StringBuffer();
 		sql.append(" select t1.cate_name,t2.id as prop_propval_id,t3.prop_name,t4.val_name from sc_cate_prop_propval t ");
 		sql.append(" left join sc_category t1 on t1.id=t.cate_id ");
-		sql.append(" left join sc_property_propvalue t2 on t2.id=t.proppropval_id ");
+		sql.append(" left join sc_prop_propval t2 on t2.id=t.ppv_id ");
 		sql.append(" left join sc_property t3 on t3.id=t2.prop_id ");
-		sql.append(" left join sc_propvalue t4 on t4.id=t2.val_id ");
+		sql.append(" left join sc_propval t4 on t4.id=t2.val_id ");
 		sql.append(" where t1.id=? ");
 		sql.append(" and t.flag=? ");
 		sql.append(" and t1.flag=? ");

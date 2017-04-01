@@ -41,7 +41,7 @@
 									<th width="2%" field="index"></th>
 									<th width="40%" field="goodsName">商品名称</th>
 									<th width="10%" field="brandName">品牌</th>
-									<th width="10%" field="goodsIsuse">状态</th>
+									<th width="10%" field="isuse">状态</th>
 									<th width="10%" formatter="formatterAttachAction">操作</th>
 								</tr>
 							</thead>

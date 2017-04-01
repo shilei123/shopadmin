@@ -86,7 +86,7 @@ public class AdvertiseDAO extends PageDAO{
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> findAdvertiseList(String id) {
 		StringBuffer sql = new StringBuffer(" select t1.*,t2.name infoName from sc_advertise t1 ");
-		sql.append(" left join sc_eventsinfo t2 on t2.id=t1.imglink ");
+		sql.append(" left join sc_events t2 on t2.id=t1.imglink ");
 		sql.append(" where t1.flag=?");
 		sql.append(" and t1.id=?");
 		//待完善
@@ -129,11 +129,11 @@ public class AdvertiseDAO extends PageDAO{
 	
 	private String goodsWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
-		StringBuffer sql = new StringBuffer(" select t1.id,t1.goods_name,t3.name goods_isuse,t2.brand_name,t1.create_time ");
+		StringBuffer sql = new StringBuffer(" select t1.id,t1.goods_name,t3.name isuse,t2.brand_name,t1.create_time ");
 		sql.append(" from  sc_goods t1 ");
-		sql.append(" left join sc_brand t2 on t1.goods_brand_id=t2.id ");
-		sql.append(" left join sc_dictionary t3 on t3.code=t1.goods_isuse ");
-		sql.append(" where t1.goods_isuse=? ");
+		sql.append(" left join sc_brand t2 on t1.brand_id=t2.id ");
+		sql.append(" left join sc_dictionary t3 on t3.code=t1.isuse ");
+		sql.append(" where t1.isuse=? ");
 		sql.append(" and t3.type=? ");
 		
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {

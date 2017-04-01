@@ -40,8 +40,8 @@
 								<tr>
 									<th width="2%" field="index"></th>
 									<th width="20%" field="name">活动名称</th>
-									<th width="15%" field="starttime">活动开始时间</th>
-									<th width="15%" field="endtime">活动结束时间</th>
+									<th width="15%" field="startTime">活动开始时间</th>
+									<th width="15%" field="endTime">活动结束时间</th>
 									<th width="10%" field="isuse">状态</th>
 									<th width="10%" formatter="formatterAttachAction">操作</th>
 								</tr>

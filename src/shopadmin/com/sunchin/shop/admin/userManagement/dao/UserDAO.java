@@ -42,8 +42,8 @@ public class UserDAO extends PageDAO{
 	
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
-		StringBuffer sql = new StringBuffer("   select t1.id,t1.user_id,t3.user_name,t1.true_name,t1.user_phone,t1.user_mail,t2.name user_sex from sc_bcuser t1 ");
-		sql.append(" left join sc_dictionary t2 on t2.code=t1.user_sex ");
+		StringBuffer sql = new StringBuffer("   select t1.id,t1.user_id,t3.user_name,t1.user_name true_name,t1.phone,t1.mail,t2.name sex from sc_user_base t1 ");
+		sql.append(" left join sc_dictionary t2 on t2.code=t1.sex ");
 		sql.append(" left join sc_user t3 on t3.id=t1.user_id");
 		sql.append(" where t2.type=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
@@ -55,12 +55,12 @@ public class UserDAO extends PageDAO{
 			String trueName = pageBean.getQueryParams().get("trueName");
 			if (StringUtils.isNotBlank(trueName)){
 				params.add("%"+trueName+"%");
-				sql.append(" and t1.true_name like ? ");
+				sql.append(" and t1.user_name like ? ");
 			}
 			String userSex = pageBean.getQueryParams().get("userSex");
 			if (StringUtils.isNotBlank(userSex) && !"-1".equals(userSex)){
 				params.add(userSex);
-				sql.append(" and t1.user_sex=? ");
+				sql.append(" and t1.sex=? ");
 			}
 		}
 		return sql.toString();

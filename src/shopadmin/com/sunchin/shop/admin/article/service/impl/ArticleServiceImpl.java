@@ -14,10 +14,10 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.article.dao.ArticleDAO;
 import com.sunchin.shop.admin.article.service.IArticleService;
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.dirStructure.dao.DirStructureDAO;
+import com.sunchin.shop.admin.dirStruct.dao.DirStructDAO;
 import com.sunchin.shop.admin.freight.dao.FreightDAO;
 import com.sunchin.shop.admin.pojo.ScArticle;
-import com.sunchin.shop.admin.pojo.ScDirStructure;
+import com.sunchin.shop.admin.pojo.ScDirStruct;
 import com.sunchin.shop.admin.pojo.ScEvents;
 
 import framework.bean.PageBean;
@@ -28,8 +28,8 @@ public class ArticleServiceImpl implements IArticleService{
 
 	@Resource(name="acticleDAO")
 	private ArticleDAO acticleDAO;
-	@Resource(name="dirStructureDAO")
-	private DirStructureDAO dirStructureDAO;
+	@Resource(name="dirStructDAO")
+	private DirStructDAO dirStructDAO;
 
 	/**
 	 * 查询
@@ -69,8 +69,8 @@ public class ArticleServiceImpl implements IArticleService{
 	 * 查询文章目录
 	 */
 	@Override
-	public List<ScDirStructure> queryDirectoryType() throws Exception {
-		List<ScDirStructure> directoryList = dirStructureDAO.queryDirectory();
+	public List<ScDirStruct> queryDirectoryType() throws Exception {
+		List<ScDirStruct> directoryList = dirStructDAO.queryDirectory();
 		return directoryList;
 	}
 
