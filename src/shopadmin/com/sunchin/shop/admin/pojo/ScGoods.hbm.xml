@@ -3,10 +3,10 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.sunchin.shop.admin.pojo.ScGoods" table="SC_GOODS">
+    <class name="com.sunchin.shop.admin.pojo.ScGoods" table="SC_GOODS" schema="SUNCHINSHOP">
         <id name="id" type="java.lang.String">
             <column name="ID" length="36" />
-            <generator class="assigned"></generator>
+            <generator class="assigned" />
         </id>
         <property name="brandId" type="java.lang.String">
             <column name="BRAND_ID" length="36" />
@@ -58,6 +58,21 @@
         </property>
         <property name="goodsNo" type="java.lang.String">
             <column name="GOODS_NO" length="10" />
+        </property>
+        <property name="freightType" type="java.lang.String">
+            <column name="FREIGHT_TYPE" length="1" />
+        </property>
+        <property name="freightId" type="java.lang.String">
+            <column name="FREIGHT_ID" length="36" />
+        </property>
+        <property name="publishType" type="java.lang.String">
+            <column name="PUBLISH_TYPE" length="1" />
+        </property>
+        <property name="publishTime" type="java.util.Date">
+            <column name="PUBLISH_TIME" length="7" />
+        </property>
+        <property name="sts" type="java.lang.String">
+            <column name="STS" length="1" />
         </property>
         <property name="createTime" type="java.util.Date">
             <column name="CREATE_TIME" length="7" />
