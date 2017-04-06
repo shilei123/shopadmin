@@ -19,13 +19,13 @@
         <property name="childGoodsId" type="java.lang.String">
             <column name="CHILD_GOODS_ID" length="36" />
         </property>
-        <property name="count" type="java.math.Integer">
+        <property name="count" type="java.lang.Integer">
             <column name="COUNT" precision="22" scale="0" />
         </property>
-        <property name="unitPrice" type="java.math.Double">
+        <property name="unitPrice" type="java.lang.Double">
             <column name="UNIT_PRICE" precision="22" scale="0" />
         </property>
-        <property name="amount" type="java.math.Double">
+        <property name="amount" type="java.lang.Double">
             <column name="AMOUNT" precision="22" scale="0" />
         </property>
         <property name="createTime" type="java.util.Date">

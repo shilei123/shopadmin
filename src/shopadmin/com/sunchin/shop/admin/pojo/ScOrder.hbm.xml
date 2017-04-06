@@ -10,7 +10,7 @@
         <property name="orderCode" type="java.lang.String">
             <column name="ORDER_CODE" length="36" />
         </property>
-        <property name="num" type="java.math.Integer">
+        <property name="num" type="java.lang.Integer">
             <column name="NUM" precision="22" scale="0" />
         </property>
         <property name="deliveryMode" type="java.lang.String">
@@ -40,16 +40,16 @@
         <property name="payMode" type="java.lang.String">
             <column name="PAY_MODE" length="1" />
         </property>
-        <property name="commisionCharge" type="java.math.Doubel">
+        <property name="commisionCharge" type="java.lang.Double">
             <column name="COMMISION_CHARGE" precision="22" scale="0" />
         </property>
-        <property name="totalPrice" type="java.math.Doubel">
+        <property name="totalPrice" type="java.lang.Double">
             <column name="TOTAL_PRICE" precision="22" scale="0" />
         </property>
-        <property name="orderPrice" type="java.math.Doubel">
+        <property name="orderPrice" type="java.lang.Double">
             <column name="ORDER_PRICE" precision="22" scale="0" />
         </property>
-        <property name="actualPrice" type="java.math.Doubel">
+        <property name="actualPrice" type="java.lang.Double">
             <column name="ACTUAL_PRICE" precision="22" scale="0" />
         </property>
         <property name="parentOrderId" type="java.lang.String">
