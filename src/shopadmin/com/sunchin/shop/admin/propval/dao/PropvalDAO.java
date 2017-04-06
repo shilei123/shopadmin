@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.propValue.dao;
+package com.sunchin.shop.admin.propval.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +16,12 @@ import framework.config.SysDict;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
-@Repository("propValueDAO")
-public class PropValueDAO extends PageDAO{
+@Repository("propvalDAO")
+public class PropvalDAO extends PageDAO{
 	
 	public final String SELECT_SQL = " select t.id,t.val_code,t.val_name,t.order_,to_char(t.create_time,'yyyy-MM-dd hh24:mm:ss')as create_time from SC_PROPVAL t where flag=? ";
 
-	public int queryPropValueCount(PageBean pageBean) {
+	public int queryPropvalCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>(2);
 		params.add(FlagEnum.ACT.getCode());
 		String sql = this.buildWhereSql(pageBean, params);
@@ -29,7 +29,7 @@ public class PropValueDAO extends PageDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ScPropval> queryPropValuePagination(PageBean pageBean) {
+	public List<ScPropval> queryPropvalPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>(2);
 		params.add(FlagEnum.ACT.getCode());
 		String sql = this.buildWhereSql(pageBean, params);
@@ -60,13 +60,13 @@ public class PropValueDAO extends PageDAO{
 	 *	获得属性值信息
 	 */
 	@SuppressWarnings("unchecked")
-	public List<ScPropval> getPropValue(String id) {
+	public List<ScPropval> getPropval(String id) {
 		Map<String, Object> params = new HashMap<String, Object>(1);
 		params.put("flag", FlagEnum.ACT.getCode());
 		return DBUtil.getInstance().queryByPojo(ScPropval.class,params);
 	}
 	
-	public void delPropValue(String id){
+	public void delPropval(String id){
 		String hql = " update ScPropValue set flag=? where id=? ";
 		DBUtil.getInstance().executeHql(hql, SysDict.FLAG_HIS, id);
 	}

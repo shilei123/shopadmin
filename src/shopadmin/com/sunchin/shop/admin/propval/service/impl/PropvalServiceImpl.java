@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.propValue.service.impl;
+package com.sunchin.shop.admin.propval.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -10,39 +10,39 @@ import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScPropval;
-import com.sunchin.shop.admin.propValue.dao.PropValueDAO;
-import com.sunchin.shop.admin.propValue.service.PropValueService;
+import com.sunchin.shop.admin.propval.dao.PropvalDAO;
+import com.sunchin.shop.admin.propval.service.PropvalService;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
 
-@Service("propValueService")
-public class PropValueServiceImpl implements PropValueService {
+@Service("propvalService")
+public class PropvalServiceImpl implements PropvalService {
 
-	@Resource(name="propValueDAO")
-	private PropValueDAO propValueDAO;
+	@Resource(name="propvalDAO")
+	private PropvalDAO propvalDAO;
 	@Resource(name="dbUtil")
 	private DBUtil db;
 	
 	@Override
-	public PageBean queryPropValueList(PageBean pageBean) throws Exception {
-		int total = propValueDAO.queryPropValueCount(pageBean);
+	public PageBean queryPropvalList(PageBean pageBean) throws Exception {
+		int total = propvalDAO.queryPropvalCount(pageBean);
 		pageBean.setTotal(total);
-		List<ScPropval> pageData = propValueDAO.queryPropValuePagination(pageBean);
+		List<ScPropval> pageData = propvalDAO.queryPropvalPagination(pageBean);
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}
 	
 	@Override
-	public void delPropValue(String id) throws Exception {
-		List<ScPropval> list = propValueDAO.getPropValue(id);
+	public void delPropval(String id) throws Exception {
+		List<ScPropval> list = propvalDAO.getPropval(id);
 		if(list!=null && !list.isEmpty()){
-			propValueDAO.delPropValue(id);
+			propvalDAO.delPropval(id);
 		}
 	}
 	
 	@Override
-	public void updatePropValue(ScPropval propValue) throws Exception {
+	public void updatePropval(ScPropval propValue) throws Exception {
 		ScPropval val = (ScPropval) db.get(ScPropval.class, propValue.getId());
 		val.setValName(propValue.getValName());
 		val.setValCode(propValue.getValCode());
@@ -55,7 +55,7 @@ public class PropValueServiceImpl implements PropValueService {
 	 * 新增
 	 */
 	@Override
-	public void addPropValue(ScPropval propValue) throws Exception {
+	public void addPropval(ScPropval propValue) throws Exception {
 		propValue.setId(UUID.randomUUID().toString());
 		propValue.setCreateTime(new Date());
 		propValue.setFlag(FlagEnum.ACT.getCode());
@@ -63,7 +63,7 @@ public class PropValueServiceImpl implements PropValueService {
 	}
 
 	@Override
-	public ScPropval queryPropValue(String id) throws Exception {
+	public ScPropval queryPropval(String id) throws Exception {
 		Object obj = db.get(ScPropval.class, id);
 		if(obj != null) {
 			return (ScPropval) obj;

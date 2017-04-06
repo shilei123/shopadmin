@@ -5,7 +5,7 @@ import java.util.Map;
 
 import framework.bean.PageBean;
 
-public interface PropPropValueService {
+public interface PropPropvalService {
 
 	/**
 	 * 保存属性属性值关系
@@ -13,14 +13,14 @@ public interface PropPropValueService {
 	 * @param checkPropPropValueIds	用逗号隔开的字符串
 	 * @throws Exception
 	 */
-	public void savePropPropValue(PageBean pageBean) throws Exception;
+	public void savePropPropval(PageBean pageBean) throws Exception;
 	
 	/**
 	 * 分页查询所有属性值
 	 * @param pageBean
 	 * @throws Exception
 	 */
-	public PageBean queryPropPropValue(PageBean pageBean) throws Exception;
+	public PageBean queryPropPropval(PageBean pageBean) throws Exception;
 	
 	/**
 	 * 查询该属性的所有属性值
@@ -28,7 +28,7 @@ public interface PropPropValueService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Map<String, Object>> queryPropPropValueCheck(PageBean pageBean) throws Exception;
+	public List<Map<String, Object>> queryPropPropvalCheck(PageBean pageBean) throws Exception;
 	
 	/**
 	 * 查询该类别下的所有属性和属性值

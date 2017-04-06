@@ -9,8 +9,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sunchin.shop.admin.category.dao.PropertyCategoryDAO;
-import com.sunchin.shop.admin.category.service.PropertyCategoryService;
+import com.sunchin.shop.admin.category.dao.CatePropDAO;
+import com.sunchin.shop.admin.category.service.CatePropService;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScCateProp;
 import com.sunchin.shop.admin.property.dao.PropertyDAO;
@@ -19,21 +19,21 @@ import framework.bean.PageBean;
 import framework.db.DBUtil;
 import framework.util.CommonUtils;
 
-@Service("propCateService")
-public class PropertyCategoryServiceImpl implements PropertyCategoryService {
+@Service("catePropService")
+public class CatePropServiceImpl implements CatePropService {
 
 	@Resource(name="dbUtil")
 	private DBUtil db;
 	@Resource(name="propertyDAO")
 	private PropertyDAO propertyDAO;
-	@Resource(name="propCateDAO")
-	private PropertyCategoryDAO propCateDAO;
+	@Resource(name="catePropDAO")
+	private CatePropDAO catePropDAO;
 	
 	@Override
 	public void savePropCate(PageBean pageBean) throws Exception {
 		String cateId = CommonUtils.getString(pageBean.getQueryParams().get("cateId"));
 		String checkPropIds = CommonUtils.getString(pageBean.getQueryParams().get("checkPropIds"));
-		List<Map<String, Object>> list = propCateDAO.queryPropCateByCateId(cateId);//查询和类别相关的所有属性
+		List<Map<String, Object>> list = catePropDAO.queryPropCateByCateId(cateId);//查询和类别相关的所有属性
 		if( checkPropIds==null || cateId==null
 				|| ("".equals(checkPropIds) && (list==null || list.isEmpty())) ) {//异常情况
 			return;
@@ -98,7 +98,7 @@ public class PropertyCategoryServiceImpl implements PropertyCategoryService {
 	}
 	
 	private void delPropCate(String cateId, String propId){
-		propCateDAO.delPropCate(cateId, propId);
+		catePropDAO.delPropCate(cateId, propId);
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class PropertyCategoryServiceImpl implements PropertyCategoryService {
 	public List<Map<String, Object>> queryPropCateCheck(PageBean pageBean) throws Exception {
 		//该类别选中的属性
 		String cateId = CommonUtils.getString(pageBean.getQueryParams().get("cateId"));
-		return propCateDAO.queryPropCateByCateId(cateId);
+		return catePropDAO.queryPropCateByCateId(cateId);
 	}
 
 }

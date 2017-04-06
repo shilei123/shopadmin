@@ -5,7 +5,7 @@ import java.util.Map;
 
 import framework.bean.PageBean;
 
-public interface PropertyCategoryService {
+public interface CatePropService {
 
 	/**
 	 * 保存类别属性关系

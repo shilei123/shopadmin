@@ -11,10 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.catePropPropval.dao.CatePropPropvalDAO;
 import com.sunchin.shop.admin.catePropPropval.service.CatePropPropvalService;
-import com.sunchin.shop.admin.category.dao.CategoryDAO;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScCatePropPropval;
-import com.sunchin.shop.admin.property.dao.PropPropValueDAO;
 
 import framework.db.DBUtil;
 import framework.util.CommonUtils;
@@ -25,10 +23,6 @@ public class CatePropPropvalServiceImpl implements CatePropPropvalService {
 
 	@Resource(name="catePropPropvalDAO")
 	private CatePropPropvalDAO catePropPropvalDAO;
-	@Resource(name="propPropValueDAO")
-	private PropPropValueDAO propPropValueDAO;
-	@Resource(name="categoryDAO")
-	private CategoryDAO categoryDAO;
 	
 	/**
 	 *	@param propPropValIds	所有选中的属性属性值关系

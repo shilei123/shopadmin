@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<package name="propValue" extends="json-default" namespace="/view/shop/admin/propValue">
-		<action name="propValue" class="com.sunchin.shop.admin.propValue.action.PropValueAction">
+	<package name="propval" extends="json-default" namespace="/view/shop">
+		<action name="propval" class="com.sunchin.shop.admin.propval.action.PropvalAction">
 			<result type="json"><param name="ignoreHierarchy">false</param></result>
 		</action>
 	</package>

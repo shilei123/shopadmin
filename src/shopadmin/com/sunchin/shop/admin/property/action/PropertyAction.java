@@ -17,7 +17,7 @@ public class PropertyAction extends PageAction {
 	private ScProperty property;
 	
 	/**
-	 * 查询
+	 * 分页查询
 	 * @return
 	 */
 	public String query() {

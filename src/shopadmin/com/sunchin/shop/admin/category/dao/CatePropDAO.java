@@ -11,8 +11,8 @@ import com.sunchin.shop.admin.dict.FlagEnum;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
-@Repository("propCateDAO")
-public class PropertyCategoryDAO extends PageDAO{
+@Repository("catePropDAO")
+public class CatePropDAO extends PageDAO{
 	
 	public final String SELECT_SQL = " select t.id,t.PROP_ID,t.CATE_ID from SC_PROPERTY_CATEGORY t where t.flag=? ";
 	

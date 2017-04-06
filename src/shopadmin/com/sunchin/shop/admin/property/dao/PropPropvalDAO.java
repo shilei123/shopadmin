@@ -12,15 +12,15 @@ import framework.db.DBUtil;
 import framework.db.PageDAO;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-@Repository("propPropValueDAO")
-public class PropPropValueDAO extends PageDAO{
+@Repository("propPropvalDAO")
+public class PropPropvalDAO extends PageDAO{
 
 	/**
 	 * 查询该类别的所有属性对应的属性属性值关系
 	 * @param cateId
 	 * @return
 	 */
-	public List<Map> queryPropPropValByCateId(String cateId){
+	public List<Map> queryPropPropvalByCateId(String cateId){
 		//需要查出类别下的所有属性，暂不加上t4.flag=1 and t5.flag=1
 		StringBuffer sql = new StringBuffer();
 		sql.append(" select t1.cate_name,t3.id as prop_id,t3.prop_name,t4.id as prop_propval_id,t5.id as val_id,t5.val_name from sc_category t1 ");
@@ -45,7 +45,7 @@ public class PropPropValueDAO extends PageDAO{
 	 * @param cateId
 	 * @return
 	 */
-	public List<Map<String, Object>> queryPropPropValueByPropId(String propId) {
+	public List<Map<String, Object>> queryPropPropvalByPropId(String propId) {
 		StringBuffer sql = new StringBuffer(" select t.* from SC_PROP_PROPVAL t where t.flag=? and t.prop_id=? ");
 		List<String> params = new ArrayList<String>(2);
 		params.add(FlagEnum.ACT.getCode());
@@ -53,12 +53,12 @@ public class PropPropValueDAO extends PageDAO{
 		return DBUtil.getInstance().queryBySQL(sql.toString(), params);
 	}
 	
-	public void delAllPropPropValue(String propId){
+	public void delAllPropPropval(String propId){
 		String hql = " update ScPropPropval set flag=? where propId=? ";
 		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), propId);
 	}
 
-	public void delPropPropValue(String propId, String valId){
+	public void delPropPropval(String propId, String valId){
 		String hql = " update ScPropPropval set flag=? where propId=? and valId=? ";
 		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), propId, valId);
 	}

@@ -6,15 +6,15 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
-import com.sunchin.shop.admin.category.service.PropertyCategoryService;
+import com.sunchin.shop.admin.category.service.CatePropService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
 
-public class PropertyCategoryAction extends PageAction{
+public class CatePropAction extends PageAction{
 	
-	@Resource(name="propCateService")
-	private PropertyCategoryService propCateService;
+	@Resource(name="catePropService")
+	private CatePropService catePropService;
 	
 	private List<Map<String, Object>> listCheck;
 	
@@ -25,7 +25,7 @@ public class PropertyCategoryAction extends PageAction{
 	 */
 	public String savePropCate(){
 		try {
-			propCateService.savePropCate(this.getPageBean());
+			catePropService.savePropCate(this.getPageBean());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,7 +38,7 @@ public class PropertyCategoryAction extends PageAction{
 	 */
 	public String queryPropCate(){
 		try {
-			PageBean resultData = propCateService.queryPropCate(this.getPageBean());
+			PageBean resultData = catePropService.queryPropCate(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
@@ -53,7 +53,7 @@ public class PropertyCategoryAction extends PageAction{
 	 */
 	public String queryPropCateCheck(){
 		try {
-			listCheck = propCateService.queryPropCateCheck(this.getPageBean());
+			listCheck = catePropService.queryPropCateCheck(this.getPageBean());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

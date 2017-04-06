@@ -1,18 +1,18 @@
-package com.sunchin.shop.admin.propValue.action;
+package com.sunchin.shop.admin.propval.action;
 
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.pojo.ScPropval;
-import com.sunchin.shop.admin.propValue.service.PropValueService;
+import com.sunchin.shop.admin.propval.service.PropvalService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
 
-public class PropValueAction extends PageAction {
+public class PropvalAction extends PageAction {
 	
-	@Resource(name="propValueService")
-	private PropValueService propValueService; 
+	@Resource(name="propvalService")
+	private PropvalService propvalService; 
 	
 	private ScPropval propValue;
 	
@@ -22,7 +22,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String query() {
 		try {
-			PageBean resultData = propValueService.queryPropValueList(this.getPageBean());
+			PageBean resultData = propvalService.queryPropvalList(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
@@ -37,7 +37,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String delete() {
 		try {
-			propValueService.delPropValue(propValue.getId());
+			propvalService.delPropval(propValue.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,7 +50,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String updatePropValue() {
 		try {
-			propValueService.updatePropValue(propValue);
+			propvalService.updatePropval(propValue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,7 +63,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String addPropValue() {
 		try {
-			propValueService.addPropValue(propValue);
+			propvalService.addPropval(propValue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,7 +76,7 @@ public class PropValueAction extends PageAction {
 	 */
 	public String queryPropValueById() {
 		try {
-			propValue = propValueService.queryPropValue(propValue.getId());
+			propValue = propvalService.queryPropval(propValue.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

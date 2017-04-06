@@ -1,10 +1,10 @@
-package com.sunchin.shop.admin.propValue.service;
+package com.sunchin.shop.admin.propval.service;
 
 import com.sunchin.shop.admin.pojo.ScPropval;
 
 import framework.bean.PageBean;
 
-public interface PropValueService {
+public interface PropvalService {
 
 	/**
 	 * 查询属性值列表
@@ -12,28 +12,28 @@ public interface PropValueService {
 	 * @return
 	 * @throws Exception
 	 */
-	public PageBean queryPropValueList(PageBean pageBean) throws Exception;
+	public PageBean queryPropvalList(PageBean pageBean) throws Exception;
 
 	/**
 	 * 删除属性值
 	 * @param id
 	 * @throws Exception
 	 */
-	public void delPropValue(String id) throws Exception;
+	public void delPropval(String id) throws Exception;
 
 	/**
 	 * 修改属性值
-	 * @param property
+	 * @param propval
 	 * @throws Exception
 	 */
-	public void updatePropValue(ScPropval propValue) throws Exception;
+	public void updatePropval(ScPropval propval) throws Exception;
 
 	/**
 	 * 新增属性值
-	 * @param property
+	 * @param propval
 	 * @throws Exception
 	 */
-	public void addPropValue(ScPropval propValue) throws Exception;
+	public void addPropval(ScPropval propval) throws Exception;
 
 	/**
 	 * 查询某个
@@ -41,5 +41,5 @@ public interface PropValueService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ScPropval queryPropValue(String id) throws Exception;
+	public ScPropval queryPropval(String id) throws Exception;
 }

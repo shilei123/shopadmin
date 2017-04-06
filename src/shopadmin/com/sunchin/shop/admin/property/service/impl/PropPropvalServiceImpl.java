@@ -15,30 +15,30 @@ import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScPropPropval;
-import com.sunchin.shop.admin.propValue.dao.PropValueDAO;
-import com.sunchin.shop.admin.property.dao.PropPropValueDAO;
-import com.sunchin.shop.admin.property.service.PropPropValueService;
+import com.sunchin.shop.admin.property.dao.PropPropvalDAO;
+import com.sunchin.shop.admin.property.service.PropPropvalService;
+import com.sunchin.shop.admin.propval.dao.PropvalDAO;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
 import framework.util.CommonUtils;
 
 @SuppressWarnings("rawtypes")
-@Service("propPropValueService")
-public class PropPropValueServiceImpl implements PropPropValueService {
+@Service("propPropvalService")
+public class PropPropvalServiceImpl implements PropPropvalService {
 
 	@Resource(name="dbUtil")
 	private DBUtil db;
-	@Resource(name="propValueDAO")
-	private PropValueDAO propValueDAO;
-	@Resource(name="propPropValueDAO")
-	private PropPropValueDAO propPropValueDAO;
+	@Resource(name="propvalDAO")
+	private PropvalDAO propvalDAO;
+	@Resource(name="propPropvalDAO")
+	private PropPropvalDAO propPropvalDAO;
 	
 	@Override
-	public void savePropPropValue(PageBean pageBean) throws Exception {
+	public void savePropPropval(PageBean pageBean) throws Exception {
 		String propertyId = CommonUtils.getString(pageBean.getQueryParams().get("propertyId"));
 		String checkPropValueIds = CommonUtils.getString(pageBean.getQueryParams().get("checkPropValueIds"));
-		List<Map<String, Object>> list = propPropValueDAO.queryPropPropValueByPropId(propertyId);//查询和属性相关的所有属性值
+		List<Map<String, Object>> list = propPropvalDAO.queryPropPropvalByPropId(propertyId);//查询和属性相关的所有属性值
 		if( checkPropValueIds==null || propertyId==null
 				|| ("".equals(checkPropValueIds) && (list==null || list.isEmpty())) ) {//异常情况
 			return;
@@ -106,11 +106,11 @@ public class PropPropValueServiceImpl implements PropPropValueService {
 	}
 	
 	private void delAllPropPropValue(String propId){
-		propPropValueDAO.delAllPropPropValue(propId);
+		propPropvalDAO.delAllPropPropval(propId);
 	}
 	
 	private void delPropPropValue(String propId, String valId){
-		propPropValueDAO.delPropPropValue(propId, valId);
+		propPropvalDAO.delPropPropval(propId, valId);
 	}
 	
 	/**
@@ -118,7 +118,7 @@ public class PropPropValueServiceImpl implements PropPropValueService {
 	 * @param cateId
 	 */
 	public List queryPropPropValByCateId(String cateId){
-		List<Map> list = propPropValueDAO.queryPropPropValByCateId(cateId);
+		List<Map> list = propPropvalDAO.queryPropPropvalByCateId(cateId);
 		List map = this.generateData(list);
 		return map;
 	}
@@ -173,18 +173,18 @@ public class PropPropValueServiceImpl implements PropPropValueService {
 	}
 
 	@Override
-	public PageBean queryPropPropValue(PageBean pageBean) throws Exception {
-		int total = propValueDAO.queryPropValueCount(pageBean);
-		List list = propValueDAO.queryPropValuePagination(pageBean);
+	public PageBean queryPropPropval(PageBean pageBean) throws Exception {
+		int total = propvalDAO.queryPropvalCount(pageBean);
+		List list = propvalDAO.queryPropvalPagination(pageBean);
 		pageBean.setTotal(total);
 		pageBean.setPageData(list);
 		return pageBean;
 	}
 	
 	@Override
-	public List<Map<String, Object>> queryPropPropValueCheck(PageBean pageBean) throws Exception {
+	public List<Map<String, Object>> queryPropPropvalCheck(PageBean pageBean) throws Exception {
 		String propertyId = CommonUtils.getString(pageBean.getQueryParams().get("propertyId"));
-		return propPropValueDAO.queryPropPropValueByPropId(propertyId);
+		return propPropvalDAO.queryPropPropvalByPropId(propertyId);
 	}
 
 }

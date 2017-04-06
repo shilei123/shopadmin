@@ -4,7 +4,7 @@
 <head>
 <jsp:include page="/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>常见问题管理</title>
+<title>常见管理</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <style>
   #vld-tooltip {
@@ -49,15 +49,15 @@
 							<div class="am-panel-bd am-collapse am-in frame-search-panel"id="collapse-panel-1">
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
-										<td style="width:100px;">问题类型：</td>
+										<td style="width:100px;">类型：</td>
 										<td style="width:200px;">
-											<select name="queryParams.type" id="commentType" style="height:32px; width:157px;"></select>
+											<select name="queryParams.faqType" id="faqType" style="height:32px; width:157px;"></select>
 										</td>
-										<td style="width:100px;">问题分类：</td>
+										<td style="width:100px;">分类：</td>
 										<td style="width:200px;">
-											<select name="queryParams.type" id="commentType" style="height:32px; width:157px;"></select>
+											<select name="queryParams.category" id="category" style="height:32px; width:157px;"></select>
 										</td>
-										<td style="width:100px;">问题时间：</td>
+										<td style="width:100px;">时间：</td>
 										<td>
 					        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
 										  <input type="text" name="queryParams.startTime" id="startTime" class="am-form-field">
@@ -74,14 +74,20 @@
 										</div>
 					        		</td>
 									</tr>
-										<td style="width:100px;">问题内容：</td>
-										<td style="width:200px;"><input name="queryParams.content" id="233" class="am-form-field"/></td>
-										<td style="width:100px;">提问人：</td>
-										<td style="width:200px;"><input name="queryParams.commentPeople" class="am-form-field" placeholder="暂未关联用户信息"/></td>
-										<td style="width:100px;">是否热点问题：</td>
+										<td style="width:100px;">是否热点：</td>
 										<td style="width:200px;">
 											<div>
-												<input name="queryParams.score" class="am-form-field" placeholder="用户评分大于等于"/>
+												<select name="queryParams.hotQuestion" id="hotQuestion" style="height:32px; width:157px;">
+													<!-- <option value="">-请选择-</option>
+													<option value="1">是</option>
+													<option value="0">否</option> -->
+												</select>
+											</div>
+										</td>
+										<td style="width:100px;">标题：</td>
+										<td style="width:200px;">
+											<div>
+												<input type="text" name="queryParams.faqTitle" id="faqTitle" style="height:32px; width:157px;"/>
 											</div>
 										</td>
 										<td>
@@ -98,11 +104,13 @@
 							<thead>
 								<tr>
 									<th width="2%" field="index"></th>
-									<th width="10%" field="">问题标题</th>
-									<th width="30%" field="">问题内容</th>
-									<th width="10%" field="">问题分类</th>
-									<th width="15%" field="">问题类型</th>
-									<th width="10%" field="">是否热点问题</th>
+									<th width="10%" field="faqTitle">标题</th>
+									<th width="10%" field="faqType">类型</th>
+									<th width="10%" field="faqCategory">分类</th>
+  									<th width="10%" field="hotQuestion">是否热点</th>
+  									<th width="10%" field="createTime">时间</th>
+									<th width="5%" field="order_">排序</th>
+									<!-- <th width="5%" field="parentFaqId">父id</th> -->
 									<th width="20%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>
@@ -126,23 +134,31 @@
 		        <div align="center">
 		        	<table class="frame-modal-table" border="0" bordercolor="black">
 			        	<tr>
-			        		<td width="100" class="table_title">评论类型：</td>
+			        		<td width="100" class="table_title">类型：</td>
 			        		<td>
-			        			<select id="commentType2" disabled="disabled"></select>
+			        			<select id="faqType2" disabled="disabled"></select>
 			        		</td>
 			        	</tr>
 			        	<tr>
-			        		<td class="table_title">评分：</td>
-			        		<td><input id="score2" class="am-form-field" style="width:90%" disabled="disabled"/></td>
+			        		<td width="100" class="table_title">分类：</td>
+			        		<td>
+			        			<select id="category2" disabled="disabled"></select>
+			        		</td>
 			        	</tr>
 			        	<tr>
-			        		<td class="table_title">评论人：</td>
-			        		<td><input id="commentPeople2" class="am-form-field" style="width:90%" disabled="disabled" placeholder="暂未关联用户数据"/></td>
+			        		<td width="100" class="table_title">是否热点：</td>
+			        		<td>
+			        			<select id="hotQuestion2" disabled="disabled"></select>
+			        		</td>
 			        	</tr>
 			        	<tr>
-			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">评论内容：</div></td>
+			        		<td class="table_title">排序：</td>
+			        		<td><input id="order2" class="am-form-field" style="width:90%" disabled="disabled"/></td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">内容：</div></td>
 			        		<td valign="top"> 
-			        			<textarea rows="" cols="" id="content2" style="width:90%;height:100px;margin-top: 5px;" class="am-form-field" disabled="disabled"></textarea> 
+			        			<textarea rows="" cols="" id="faqContent2" style="width:90%;height:100px;margin-top: 5px;" class="am-form-field" disabled="disabled"></textarea> 
 			        		</td>
 			        	</tr>
 		       	 	</table>

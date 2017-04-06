@@ -6,15 +6,15 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
-import com.sunchin.shop.admin.property.service.PropPropValueService;
+import com.sunchin.shop.admin.property.service.PropPropvalService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
 
-public class PropPropValueAction extends PageAction{
+public class PropPropvalAction extends PageAction{
 	
-	@Resource(name="propPropValueService")
-	private PropPropValueService propPropValueService;
+	@Resource(name="propPropvalService")
+	private PropPropvalService propPropvalService;
 	
 	private List<Map<String, Object>> listCheck;
 	
@@ -22,9 +22,9 @@ public class PropPropValueAction extends PageAction{
 	 * 保存属性属性值关系
 	 * @return
 	 */
-	public String savePropPropValue(){
+	public String savePropPropval(){
 		try {
-			propPropValueService.savePropPropValue(this.getPageBean());
+			propPropvalService.savePropPropval(this.getPageBean());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -35,9 +35,9 @@ public class PropPropValueAction extends PageAction{
 	 * 查询属性值（分页）
 	 * @return
 	 */
-	public String queryPropPropValue(){
+	public String queryPropPropval(){
 		try {
-			PageBean resultData = propPropValueService.queryPropPropValue(this.getPageBean());
+			PageBean resultData = propPropvalService.queryPropPropval(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
@@ -50,9 +50,9 @@ public class PropPropValueAction extends PageAction{
 	 * 查询属性对应的属性值
 	 * @return
 	 */
-	public String queryPropPropValueCheck(){
+	public String queryPropPropvalCheck(){
 		try {
-			listCheck = propPropValueService.queryPropPropValueCheck(this.getPageBean());
+			listCheck = propPropvalService.queryPropPropvalCheck(this.getPageBean());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

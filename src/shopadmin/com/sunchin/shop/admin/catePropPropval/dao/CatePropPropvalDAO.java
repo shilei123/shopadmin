@@ -89,12 +89,12 @@ public class CatePropPropvalDAO {
 	}
 	
 	public void delAllCatePropPropValue(String cateId) {
-		String hql = " update ScCatePropPropVal set flag=? where cateId=? ";
+		String hql = " update ScCatePropPropval set flag=? where cateId=? ";
 		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), cateId);
 	}
 	
 	public void delCatePropPropValue(String cateId, String proppropvalId) {
-		String hql = " update ScCatePropPropVal set flag=? where cateId=? and proppropvalId=? ";
+		String hql = " update ScCatePropPropval set flag=? where cateId=? and ppvId=? ";
 		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), cateId, proppropvalId);
 	}
 }
