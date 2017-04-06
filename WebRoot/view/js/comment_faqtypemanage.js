@@ -16,7 +16,7 @@ $(function() {
 		$("#form1").validate({
 	        submitHandler:function(form){
 	            $('#form1').form('submit', {
-		    		url:  path_ + "/view/shop/faqType!saveFaqType.action",
+		    		url:  path_ + "/view/shop/comment/faqType!saveFaqType.action",
 		    		onSubmit: function() {
 		    			return checkForm();
 		    		},
@@ -39,7 +39,7 @@ $(function() {
 		$("#form1").validate({
 			submitHandler:function(form){
 				$('#form1').form('submit', {
-					url:  path_ + "/view/shop/faqType!updateFaqType.action",
+					url:  path_ + "/view/shop/comment/faqType!updateFaqType.action",
 					onSubmit: function() {
 						return checkForm();
 					},
@@ -59,7 +59,7 @@ $(function() {
 function initFaqTypeTree() {
 	$.ajax( {
 		type : "POST",
-		url : path_ + "/view/shop/faqType!initFaqTypeTree.action",
+		url : path_ + "/view/shop/comment/faqType!initFaqTypeTree.action",
 		dataType : "json",
 		success : function(json) {
 			console.log(json.trees);
@@ -132,7 +132,7 @@ $("#delCategoryBtn").click(function() {
 	showConfirm("确认删除？",function() {
 		$.ajax( {
 			type : "POST",
-			url : path_ + "/view/shop/faqType!delFaqType.action",
+			url : path_ + "/view/shop/comment/faqType!delFaqType.action",
 			dataType : "json",
 			data: {"faqType.id": node.pkId},
 			success : function(json) {

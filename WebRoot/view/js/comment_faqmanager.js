@@ -7,7 +7,7 @@ var initFaqType = function() {
 	var data = {"type1":"FAQ_TYPE","type2":"FAQ_CATEGORY","type3":"HOT_QUESTION"};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/faq!queryDictsByType.action",
+		url : path_ + "/view/shop/comment/faq!queryDictsByType.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
@@ -53,7 +53,7 @@ $('#queryBtn').click(function() {
 
 var query = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/shop/faq!queryFaqList.action";
+	var url = path_ + "/view/shop/comment/faq!queryFaqList.action";
 	pageData(url, "contentListTable", data);
 };
 
@@ -69,7 +69,7 @@ var queryFaqInfoWin = function(id) {
 	var data = {"faq.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/faq!queryFaqById.action",
+		url : path_ + "/view/shop/comment/faq!queryFaqById.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
@@ -93,7 +93,7 @@ var delFaq = function(id) {
 		var data = {"faq.id" : id};
 		$.ajax({
 			type : "POST",
-			url : path_ + "/view/shop/faq!delFaq.action",
+			url : path_ + "/view/shop/comment/faq!delFaq.action",
 			data : data,
 			dataType : "json",
 			success : function(json) {

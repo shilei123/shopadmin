@@ -4,7 +4,7 @@ $(function() {
 
 var query = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/shop/propval!query.action";
+	var url = path_ + "/view/shop/propValue/propval!query.action";
 	pageData(url, "propValueListTable", data);
 };
 
@@ -57,9 +57,9 @@ $("#saveBtn").click(function() {
 	var propValueOrder = $("#propValueOrder").val();
 	var url = "";
 	if(propValueId!=null /*&& propValueId!=undefine*/ && propValueId!=""){
-		url = path_ + "/view/shop/propval!updatePropValue.action"
+		url = path_ + "/view/shop/propValue/propval!updatePropValue.action"
 	}else{
-		url = path_ + "/view/shop/propval!addPropValue.action"
+		url = path_ + "/view/shop/propValue/propval!addPropValue.action"
 	}
 	var data = { "propValue.id" : propValueId, "propValue.flag" : propValueFlag, 
 			"propValue.valName" : propValueName, "propValue.valCode" : propValueCode, "propValue.valOrder" : propValueOrder };
@@ -103,7 +103,7 @@ var showEditPropWin = function(id) {
 	var data = {"propValue.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/propval!queryPropValueById.action",
+		url : path_ + "/view/shop/propValue/propval!queryPropValueById.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
@@ -129,7 +129,7 @@ var deleteProp = function(id) {
 		var data = {"propValue.id" : id};
 		$.ajax({
 			type : "POST",
-			url : path_ + "/view/shop/propval!delete.action",
+			url : path_ + "/view/shop/propValue/propval!delete.action",
 			data : data,
 			dataType : "json",
 			success : function(json) {

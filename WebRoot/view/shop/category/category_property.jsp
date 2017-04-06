@@ -49,7 +49,7 @@ request.setAttribute("categoryId", categoryId);
 	});
 	var queryPropCateCheck = function(){
 		$.ajax({
-			url : "${path }/view/shop/cateProp!queryPropCateCheck.action",
+			url : "${path }/view/shop/category/cateProp!queryPropCateCheck.action",
 			type : 'POST',
 			data : formGetCurrentJsp("form1"),
 			dataType: "json",
@@ -75,7 +75,7 @@ request.setAttribute("categoryId", categoryId);
 	
 	var query = function() {
 		var data = formGetCurrentJsp("form1");
-		var url = "${path }/view/shop/cateProp!queryPropCate.action";
+		var url = "${path }/view/shop/category/cateProp!queryPropCate.action";
 		pageDataCurrentJsp(url, "categoryParamsTable", data);
 	};
 	
@@ -208,7 +208,7 @@ request.setAttribute("categoryId", categoryId);
 		$("#form1").validate({
 			submitHandler:function(form) {
 	            $("#form1").form('submit', {
-		    		url:  "${path }/view/shop/cateProp!savePropCate.action",
+		    		url:  "${path }/view/shop/category/cateProp!savePropCate.action",
 		    		success:function(data) {
 		    			window.parent.showAlert("操作成功！");
 		    			closeCurrentWin();

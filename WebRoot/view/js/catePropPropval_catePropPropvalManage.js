@@ -8,7 +8,7 @@ $(function() {
 function initCategoryTree() {
 	$.ajax( {
 		type : "POST",
-		url : path_ + "/view/shop/catePropPropval!queryCategoryTree.action",
+		url : path_ + "/view/shop/catePropPropval/catePropPropval!queryCategoryTree.action",
 		dataType : "json",
 		success : function(json) {
 			//console.log(json);
@@ -28,7 +28,7 @@ var categoryClick = function(node) {
 	//是最后一级，拼html
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/catePropPropval!queryListByCateId.action",
+		url : path_ + "/view/shop/catePropPropval/catePropPropval!queryListByCateId.action",
 		dataType : "json",
 		data: {"cateId": node.pkId},
 		success : function(json){
@@ -116,7 +116,7 @@ var saveIt = function(cateId) {
 	var data = {"propPropValIds": temp, "cateId": cateId};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/catePropPropval!saveCatePropPropVal.action",
+		url : path_ + "/view/shop/catePropPropval/catePropPropval!saveCatePropPropVal.action",
 		data : data,
 		dataType : "json",
 		success : function(json) {

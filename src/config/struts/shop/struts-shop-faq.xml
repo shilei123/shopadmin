@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<package name="faq" extends="json-default" namespace="/view/shop">
+	<package name="faq" extends="json-default" namespace="/view/shop/comment">
 		<action name="faq" class="com.sunchin.shop.admin.comment.action.FaqAction">
 			<result type="json"><param name="ignoreHierarchy">false</param></result>
 		</action>

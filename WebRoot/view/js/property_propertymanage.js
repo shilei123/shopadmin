@@ -4,7 +4,7 @@ $(function() {
 
 var query = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/shop/property!query.action";
+	var url = path_ + "/view/shop/property/property!query.action";
 	pageData(url, "propertyListTable", data);
 };
 
@@ -57,9 +57,9 @@ $("#saveBtn").click(function() {
 	var propOrder = $("#propOrder").val();
 	var url = "";
 	if(propId!=null && propId!=undefined && propId!=""){
-		url = path_ + "/view/shop/property!updateProperty.action"
+		url = path_ + "/view/shop/property/property!updateProperty.action"
 	}else{
-		url = path_ + "/view/shop/property!addProperty.action"
+		url = path_ + "/view/shop/property/property!addProperty.action"
 	}
 	var data = { "property.id" : propId, "property.flag" : propFlag, "property.propName" : propName, "property.propCode" : propCode, "property.order" : propOrder };
 	$.ajax({
@@ -102,7 +102,7 @@ var showEditPropWin = function(id) {
 	var data = {"property.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/property!queryPropertyById.action",
+		url : path_ + "/view/shop/property/property!queryPropertyById.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
@@ -128,7 +128,7 @@ var deleteProp = function(id) {
 		var data = {"property.id" : id};
 		$.ajax({
 			type : "POST",
-			url : path_ + "/view/shop/property!delete.action",
+			url : path_ + "/view/shop/property/property!delete.action",
 			data : data,
 			dataType : "json",
 			success : function(json) {
@@ -153,7 +153,7 @@ var showConfigModel = function(id) {
 }
 var queryPropValueCheck = function(){
 	$.ajax({
-		url : path_ + "/view/shop/propPropval!queryPropPropvalCheck.action",
+		url : path_ + "/view/shop/property/propPropval!queryPropPropvalCheck.action",
 		type : 'POST',
 		data : formGetCurrentJsp("form1"),
 		dataType: "json",
@@ -189,7 +189,7 @@ var writeHidden = function(data){
 };
 var queryPropValue = function() {
 	var data = formGetCurrentJsp("form1");
-	var url = path_ + "/view/shop/propPropval!queryPropPropval.action";
+	var url = path_ + "/view/shop/property/propPropval!queryPropPropval.action";
 	pageDataCurrentJsp(url, "propValueTable", data);
 };
 function pageDataCurrentJsp(url, targetId, params, currPageNum, rowCount, page) {
@@ -300,7 +300,7 @@ $("#saveBtn1").click(function() {
 	$("#form1").validate({
 		submitHandler:function(form) {
             $("#form1").form('submit', {
-	    		url:path_ + "/view/shop/propPropval!savePropPropval.action",
+	    		url:path_ + "/view/shop/property/propPropval!savePropPropval.action",
 	    		success:function(data) {
 	    			window.parent.showAlert("操作成功！");
 	    			closeModal("doc-modal-1");
