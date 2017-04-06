@@ -58,7 +58,7 @@
                 <comment>广告结束时间</comment>
             </column>
         </property>
-         <property name="createTime" type="java.util.Date">
+         <property name="createTime" type="java.lang.Double">
                <column name="CREATE_TIME">
                 <comment>创建时间</comment>
             </column>

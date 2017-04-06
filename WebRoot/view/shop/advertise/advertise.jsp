@@ -139,7 +139,7 @@
 			  			<tr>
 			  				<td class="table_title">广告类型:</td>
 			  				<td colspan="3">
-			  					<select name="advertise.linkkind" id="linkkinds" onchange="changeLinkkind();" data-am-selected="{btnWidth: '163px'}">
+			  					<select name="advertise.linkkind" id="linkkinds" data-am-selected="{btnWidth: '163px'}">
 			  					</select> 
 			  				</td>
 			  			</tr>
@@ -147,7 +147,7 @@
 			  				<td class="table_title">广告对象:</td>
 			  				<td width="300px">
 			  					<input type="hidden" name="advertise.imglink" id="imglink" />
-			  					<input id="imglinkLabel" readonly="readonly" style="width: 97%;" class="am-form-field" required="true"/> 
+			  					<input id="imglinkLabel" readonly="readonly" style="width: 97%;" class="am-form-field"/> 
 			  				</td>
 			  				<td>
 			  					<a href="#" class="easyui-linkbutton" onclick="showQueryGoodsWin();return false;" style="display: none;" id="goodsBtn">选择商品</a>
@@ -194,5 +194,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/advertise.js"></script>
+<script type="text/javascript" src="${path }/view/js/advertise_advertise.js"></script>
 </html>

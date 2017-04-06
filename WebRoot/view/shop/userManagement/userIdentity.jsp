@@ -116,5 +116,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/userIdentity.js"></script>
+<script type="text/javascript" src="${path }/view/js/userManagement_userIdentity.js"></script>
 </html>

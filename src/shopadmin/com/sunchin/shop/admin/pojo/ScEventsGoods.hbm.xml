@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <class name="com.sunchin.shop.admin.pojo.ScEventsGoods" table="SC_EVENTS_GOODS" >
-        <id name="Id" type="java.lang.String">
+        <id name="id" type="java.lang.String">
             <column name="ID" length="36" />
             <generator class="assigned"></generator>
         </id>

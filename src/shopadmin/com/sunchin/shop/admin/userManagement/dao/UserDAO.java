@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
+import com.sunchin.shop.admin.pojo.ScGrade;
 import com.sunchin.shop.admin.pojo.ScUserBase;
 import com.sunchin.shop.admin.pojo.ScIdentity;
 import com.sunchin.shop.admin.pojo.ScPurse;
@@ -315,5 +316,53 @@ public class UserDAO extends PageDAO{
 		return null;
 	}
 
+	public int queryUserGradeCount(PageBean pageBean) {
+		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
+		params.add(DictionaryTypeEnum.USER_GRADE.getType());
+		params.add(DictionaryTypeEnum.ISUSE.getType());
+		String sql = this.userGradeWhereSql(pageBean, params);
+		return DBUtil.getInstance().queryCountBySQL(sql, params);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ScGrade> queryUserGradePagination(PageBean pageBean) {
+		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
+		params.add(DictionaryTypeEnum.USER_GRADE.getType());
+		params.add(DictionaryTypeEnum.ISUSE.getType());
+		String sql = this.userGradeWhereSql(pageBean, params);
+		return this.query(sql, params, DBUtil.getInstance(), pageBean);
+	}
+
+	private String userGradeWhereSql(PageBean pageBean, List<String> params) {
+		// 拼接查询条件
+		StringBuffer sql = new StringBuffer(" select t1.id,t1.need_integral,t2.name user_grade,t3.name isuse,t1.remark ");
+		sql.append(" from sc_grade t1 ");
+		sql.append(" left join sc_dictionary t2 on t2.code=t1.user_grade ");
+		sql.append(" left join sc_dictionary t3 on t3.code=t1.isuse ");
+		sql.append(" where t1.flag=? ");
+		sql.append(" and t2.type=? ");
+		sql.append(" and t3.type=? ");
+		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
+			String gradeType = pageBean.getQueryParams().get("gradeType");
+			if (StringUtils.isNotBlank(gradeType) && !"-1".equals(gradeType)){
+				params.add(gradeType);
+				sql.append(" and t1.user_grade=? ");
+			}
+		}
+		return sql.toString();
+	}
 	
+	@SuppressWarnings("unchecked")
+	public ScGrade queryGradeById(String id) {
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("id",id);
+		params.put("flag",FlagEnum.ACT.getCode());
+		List<ScGrade> lists = DBUtil.getInstance().queryByPojo(ScGrade.class, params);
+		if(lists != null && !lists.isEmpty()){
+			return lists.get(0);
+		}
+		return null;
+	}
 }

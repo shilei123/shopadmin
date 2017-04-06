@@ -64,5 +64,5 @@
 	</div>
 	<!-- content end -->
 </body>
-<script type="text/javascript" src="${path }/view/js/userWallet.js"></script>
+<script type="text/javascript" src="${path }/view/js/userManagement_userWallet.js"></script>
 </html>

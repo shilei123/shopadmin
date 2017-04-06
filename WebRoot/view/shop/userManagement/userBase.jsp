@@ -69,5 +69,5 @@
 	</div>
 	<!-- content end -->
 </body>
-<script type="text/javascript" src="${path }/view/js/userBase.js"></script>
+<script type="text/javascript" src="${path }/view/js/userManagement_userBase.js"></script>
 </html>

@@ -75,4 +75,18 @@ public class EventsDAO extends PageDAO{
 		}
 		return null;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>> queryEvents(String id) {
+		StringBuffer sql = new StringBuffer(" select t1.*,t2.id eventsGoodsId,t2.events_id,t2.goods_id,t2.goods_child_id,t2.events_money,t2.scope ");
+		sql.append(" from sc_events t1 ");
+		sql.append(" left join sc_events_goods t2 on t1.id=t2.events_id ");
+		sql.append(" where t1.id=? ");
+		sql.append(" and t1.flag=? ");
+		List<Map<String,Object>> lists =DBUtil.getInstance().queryBySQL(sql.toString(),id,FlagEnum.ACT.getCode());
+		if(lists != null && !lists.isEmpty()){
+			return lists;
+		}
+		return null;
+	}
 }

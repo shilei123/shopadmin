@@ -89,5 +89,5 @@
 	</div>
 	<!-- content end -->
 </body>
-<script type="text/javascript" src="${path }/view/js/article.js"></script>
+<script type="text/javascript" src="${path }/view/js/article_article.js"></script>
 </html>

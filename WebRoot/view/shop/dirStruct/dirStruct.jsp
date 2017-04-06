@@ -111,7 +111,7 @@
     	</div>
   	</div>
   	
-  	<script type="text/javascript" src="${path }/view/js/dirStruct.js"></script>
+  	<script type="text/javascript" src="${path }/view/js/dirStruct_dirStruct.js"></script>
   	
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-add">
 		<div class="am-modal-dialog">

@@ -1,8 +1,10 @@
 package com.sunchin.shop.admin.events.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ import com.sunchin.shop.admin.events.dao.EventsDAO;
 import com.sunchin.shop.admin.events.service.IEventsService;
 import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScEvents;
+import com.sunchin.shop.admin.pojo.ScEventsGoods;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
@@ -62,15 +65,11 @@ public class EventsServiceImpl implements IEventsService{
 	}
 
 	/**
-	 * 查询单条记录
+	 * 编辑
 	 */
 	@Override
-	public ScEvents queryEvents(String id) {
-		Object obj = DBUtil.getInstance().get(ScEvents.class, id);
-		if(obj != null) {
-			return (ScEvents) obj;
-		}
-		return null;
+	public List<Map<String, Object>> queryEvents(String id) {
+			return eventsDAO.queryEvents(id);
 	}
 	
 	/**
@@ -78,29 +77,48 @@ public class EventsServiceImpl implements IEventsService{
 	 */
 	@Override
 	@Transactional
-	public void saveEvents(ScEvents eventsinfo) {
-		if (eventsinfo == null) {
+	public void saveEvents(ScEvents events,String eventsGoodsList) {
+		if (events == null) {
 			return;
 		}
-		DBUtil db = DBUtil.getInstance();
-		// 新增
-		if (StringUtils.isBlank(eventsinfo.getId())) {
-			String id = UUID.randomUUID().toString();
-			eventsinfo.setId(id);
-			eventsinfo.setCreateTime(new Date());
-			eventsinfo.setFlag(FlagEnum.ACT.getCode());
-			db.insert(eventsinfo);
-			//添加商品待写
-		} else { // 修改
-			ScEvents vo = (ScEvents) db.get(ScEvents.class, eventsinfo.getId());
-			vo.setName(eventsinfo.getName());
-			vo.setIsuse(eventsinfo.getIsuse());
-			vo.setMemo(eventsinfo.getMemo());
-			vo.setStartTime(eventsinfo.getStartTime());
-			vo.setEndTime(eventsinfo.getEndTime());
-			vo.setUpdateTime(new Date());
-			db.update(vo);
+		List<String> lists = new ArrayList<>();
+		String [] news = eventsGoodsList.split(",");
+		for(int i=0;i<news.length;i++){
+				String goodsId = news[i];
+				if(goodsId !=""){
+					lists.add(goodsId);
+				}
 		}
 		
+		DBUtil db = DBUtil.getInstance();
+		// 新增
+		if (StringUtils.isBlank(events.getId())) {
+			String id = UUID.randomUUID().toString();
+			events.setId(id);
+			events.setCreateTime(new Date());
+			events.setFlag(FlagEnum.ACT.getCode());
+			db.insert(events);
+			if(lists != null && !lists.isEmpty()){
+				for(int i=0;i<lists.size();i++){
+					  ScEventsGoods eventsGoods = new ScEventsGoods();
+					  String goodsId = lists.get(i);
+					  String ID = UUID.randomUUID().toString();
+					  eventsGoods.setId(ID);
+					  eventsGoods.setEventsId(id);
+					  eventsGoods.setGoodsId(goodsId);
+					  db.insert(eventsGoods);
+				}
+			}
+		} else { // 修改
+			ScEvents vo = (ScEvents) db.get(ScEvents.class, events.getId());
+			vo.setName(events.getName());
+			vo.setIsuse(events.getIsuse());
+			vo.setMemo(events.getMemo());
+			vo.setStartTime(events.getStartTime());
+			vo.setEndTime(events.getEndTime());
+			vo.setUpdateTime(new Date());
+			db.update(vo);
+			
+		}
 	}
 }

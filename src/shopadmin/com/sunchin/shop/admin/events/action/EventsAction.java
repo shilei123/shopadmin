@@ -1,6 +1,7 @@
 package com.sunchin.shop.admin.events.action;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -9,6 +10,7 @@ import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.events.service.IEventsService;
 import com.sunchin.shop.admin.pojo.ScDictionary;
 import com.sunchin.shop.admin.pojo.ScEvents;
+import com.sunchin.shop.admin.pojo.ScEventsGoods;
 import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.action.PageAction;
@@ -23,6 +25,9 @@ public class EventsAction extends PageAction{
 	
 	private ScEvents events;
 	private List<ScDictionary> dictionaryList;
+	private String eventsGoodsList;
+	private List<Map<String,Object>> eventsList;
+	private ScEventsGoods eventsGoods;
 	
 	/**
 	 * 查询
@@ -40,13 +45,12 @@ public class EventsAction extends PageAction{
 	}
 	
 	/**
-	 * 查看单条记录
+	 * 编辑
 	 */
 	public String queryEvents(){
 		try {
-			events = eventsService.queryEvents(events.getId());
+			eventsList = eventsService.queryEvents(events.getId());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -57,9 +61,8 @@ public class EventsAction extends PageAction{
 	 */
 	public String save(){
 		try {
-			eventsService.saveEvents(events);
+			eventsService.saveEvents(events,eventsGoodsList);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -103,5 +106,28 @@ public class EventsAction extends PageAction{
 		this.dictionaryList = dictionaryList;
 	}
 
+	public String getEventsGoodsList() {
+		return eventsGoodsList;
+	}
+
+	public void setEventsGoodsList(String eventsGoodsList) {
+		this.eventsGoodsList = eventsGoodsList;
+	}
+
+	public List<Map<String, Object>> getEventsList() {
+		return eventsList;
+	}
+
+	public void setEventsList(List<Map<String, Object>> eventsList) {
+		this.eventsList = eventsList;
+	}
+
+	public ScEventsGoods getEventsGoods() {
+		return eventsGoods;
+	}
+
+	public void setEventsGoods(ScEventsGoods eventsGoods) {
+		this.eventsGoods = eventsGoods;
+	}
 	
 }

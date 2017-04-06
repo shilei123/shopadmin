@@ -138,5 +138,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/coupon.js"></script>
+<script type="text/javascript" src="${path }/view/js/coupon_coupon.js"></script>
 </html>

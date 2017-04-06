@@ -44,14 +44,10 @@ public class AdvertiseDAO extends PageDAO{
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t1.memo,t2.name linkkind,t1.ordernumb,t3.name isuse, ");
-		sql.append(" t1.type,t1.kind,to_char(t1.start_time,'yyyy-mm-dd') start_time,to_char(t1.end_time,'yyyy-mm-dd') end_time,t1.create_time, ");
-		sql.append(" t4.goods_name,t5.name events_name,t6.cate_name ");
+		sql.append(" t1.type,t1.kind,to_char(t1.start_time,'yyyy-mm-dd') start_time,to_char(t1.end_time,'yyyy-mm-dd') end_time,t1.create_time ");
 		sql.append(" from sc_advertise t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.linkkind ");
 		sql.append(" left join sc_dictionary t3 on t3.code=t1.isuse ");
-		sql.append(" left join sc_goods t4 on t4.id=t1.imglink ");
-		sql.append(" left join sc_events t5 on t5.id=t1.imglink ");
-		sql.append(" left join sc_category t6 on t6.id=t1.imglink ");
 		sql.append(" where t1.flag=? ");
 		sql.append(" and t2.type=?");
 		sql.append(" and t3.type=?");
@@ -85,8 +81,12 @@ public class AdvertiseDAO extends PageDAO{
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> findAdvertiseList(String id) {
-		StringBuffer sql = new StringBuffer(" select t1.*,t2.name infoName from sc_advertise t1 ");
+		StringBuffer sql = new StringBuffer(" select t1.*,t2.name infoName,t4.goods_name,t5.name events_name,t6.cate_name ");
+		sql.append(" from sc_advertise t1 ");
 		sql.append(" left join sc_events t2 on t2.id=t1.imglink ");
+		sql.append(" left join sc_goods t4 on t4.id=t1.imglink ");
+		sql.append(" left join sc_events t5 on t5.id=t1.imglink ");
+		sql.append(" left join sc_category t6 on t6.id=t1.imglink ");
 		sql.append(" where t1.flag=?");
 		sql.append(" and t1.id=?");
 		//待完善
@@ -129,7 +129,7 @@ public class AdvertiseDAO extends PageDAO{
 	
 	private String goodsWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
-		StringBuffer sql = new StringBuffer(" select t1.id,t1.goods_name,t3.name isuse,t2.brand_name,t1.create_time ");
+		StringBuffer sql = new StringBuffer(" select t1.id,t1.title,t3.name isuse,t2.brand_name,t1.create_time ");
 		sql.append(" from  sc_goods t1 ");
 		sql.append(" left join sc_brand t2 on t1.brand_id=t2.id ");
 		sql.append(" left join sc_dictionary t3 on t3.code=t1.isuse ");
@@ -140,7 +140,7 @@ public class AdvertiseDAO extends PageDAO{
 			String goodsName = pageBean.getQueryParams().get("goodsName");
 			if (StringUtils.isNotBlank(goodsName)){
 				params.add(goodsName+"%");
-				sql.append(" and t1.goods_name like ? ");
+				sql.append(" and t1.title like ? ");
 			}
 		}
 		sql.append(" order by t1.create_time desc ");
