@@ -85,4 +85,9 @@ public class CommentDAO extends PageDAO{
 		}
 		return null;
 	}
+	
+	public void delComment(String id){
+		String hql = " update ScComment set flag=? where id=? ";
+		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), id);
+	}
 }

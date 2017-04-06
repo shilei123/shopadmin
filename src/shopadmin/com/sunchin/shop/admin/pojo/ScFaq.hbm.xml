@@ -32,8 +32,8 @@
                 <comment>类型</comment>
             </column>
         </property>
-        <property name="parentId" type="java.lang.String">
-            <column name="PARENT_ID" length="36">
+        <property name="parentFaqId" type="java.lang.String">
+            <column name="PARENT_Faq_ID" length="36">
                 <comment>父id</comment>
             </column>
         </property>

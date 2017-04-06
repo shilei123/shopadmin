@@ -2,6 +2,12 @@ package com.sunchin.shop.admin.dict;
 
 public enum DictionaryTypeEnum {
 
+	HOT_QUESTION("HOT_QUESTION"), //是否热点问题
+	
+	FAQ_TYPE("FAQ_TYPE"), //常见问题种类（包括商品和问题分类）
+	
+	FAQ_CATEGORY("FAQ_CATEGORY"), //常见问题的类型（包括问题、回答、追问）
+
 	TRADE_TYPE("TRADE_TYPE"), //交易类型
 
 	PURSE_TYPE("PURSE_TYPE"), //钱包类型
@@ -41,7 +47,6 @@ public enum DictionaryTypeEnum {
 	private DictionaryTypeEnum(String type) {
 		this.type = type;
 	}
-
 
 	public String getType() {
 		return type;

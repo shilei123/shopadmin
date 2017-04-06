@@ -40,7 +40,7 @@ $('#queryBtn').click(function() {
 
 var query = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/shop/admin/comment/comment!queryCommentList.action";
+	var url = path_ + "/view/shop/comment!queryCommentList.action";
 	pageData(url, "contentListTable", data);
 };
 
@@ -70,7 +70,7 @@ var showEditCommentWin = function(id) {
 	var data = {"comment.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/admin/comment/comment!queryCommentById.action",
+		url : path_ + "/view/shop/comment!queryCommentById.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
@@ -85,7 +85,7 @@ var delComment = function(id) {
 		var data = {"comment.id" : id};
 		$.ajax({
 			type : "POST",
-			url : path_ + "/view/shop/admin/comment/comment!delComment.action",
+			url : path_ + "/view/shop/comment!delComment.action",
 			data : data,
 			dataType : "json",
 			success : function(json) {

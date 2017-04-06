@@ -1,51 +1,66 @@
 package com.sunchin.shop.admin.comment.service.impl;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.comment.dao.FaqDAO;
 import com.sunchin.shop.admin.comment.service.FaqService;
+import com.sunchin.shop.admin.pojo.ScFaq;
+
+import framework.bean.PageBean;
+import framework.db.DBUtil;
 
 @Service("faqService")
 public class FaqServiceImpl implements FaqService {
 
 	@Resource(name="faqDAO")
 	private FaqDAO faqDAO;
+	@Resource(name="dbUtil")
+	private DBUtil db;
 	
-	/*public PageBean queryCommentList(PageBean pageBean) throws Exception{
-		int total = commentDAO.queryCommentCount(pageBean);
+	public PageBean queryFaqList(PageBean pageBean) throws Exception{
+		int total = faqDAO.queryFaqCount(pageBean);
 		pageBean.setTotal(total);
-		List<Map<String, Object>> pageData = commentDAO.queryCommentPagination(pageBean);
-		pageData = this.dealPageData(pageData);
+		List<Map<String, Object>> pageData = faqDAO.queryFaqPagination(pageBean);
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}
-
-	private List<Map<String, Object>> dealPageData(List<Map<String, Object>> pageData) {
-		if(pageData!=null && !pageData.isEmpty()){
-			for (Map<String, Object> map : pageData) {
-				String content = CommonUtils.getString(map.get("content"));
-				if(content.length()>20){
-					content = content.substring(0, 20) + "... ...";
-					map.put("content", content);
-				}
-			}
-		}
-		return pageData;
-	}
-
+	
 	@Override
-	public ScComment queryCommentById(String id) throws Exception {
-		return commentDAO.queryCommentById(id);
-	}
-
-	@Override
-	public void delComment(String id) throws Exception {
-		ScComment comment = commentDAO.queryCommentById(id);
-		if(comment!=null){
-			String hql = " update ScComment set flag=? where id=? ";
-			DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), id);
+	public ScFaq queryFaqById(String id) throws Exception {
+		ScFaq faq = new ScFaq();
+		Object[] objArr = faqDAO.queryPojoById(id);
+		for (int i = 0; i < objArr.length; i++) {
+			if(objArr[i]==null)
+				objArr[i]="";
 		}
-	}*/
+		faq.setId(objArr[0].toString());
+		faq.setFaqTitle(objArr[1].toString());
+		faq.setFaqContent(objArr[2].toString());
+		faq.setCategory(objArr[3].toString());
+		faq.setParentFaqId(objArr[4].toString());
+		faq.setHotQuestion(objArr[5].toString());
+		if(!objArr[6].toString().isEmpty()){
+			faq.setOrder(((BigDecimal)objArr[6]).intValue());
+		}
+		if(!objArr[7].toString().isEmpty()){
+			faq.setCreateTime((Date)objArr[7]);
+		}
+		faq.setFaqType(objArr[8].toString());
+		faq.setFaqTypeId(objArr[9].toString());
+		faq.setFlag(objArr[10].toString());
+		faq.setBelong(objArr[11].toString());
+		return faq;
+	}
+    
+	@Override
+	public void delFaq(String id) throws Exception {
+		faqDAO.delFaq(id);
+	}
 }

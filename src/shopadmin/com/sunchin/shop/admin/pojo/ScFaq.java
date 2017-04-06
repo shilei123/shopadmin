@@ -11,7 +11,7 @@ public class ScFaq implements java.io.Serializable {
 	private String faqType;
 	private String faqTypeId;
 	private String category;
-	private String parentId;
+	private String parentFaqId;
 	private String hotQuestion;
 	private Integer order;
 	private Date createTime;
@@ -67,12 +67,12 @@ public class ScFaq implements java.io.Serializable {
 		this.category = category;
 	}
 
-	public String getParentId() {
-		return parentId;
+	public String getParentFaqId() {
+		return parentFaqId;
 	}
 
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
+	public void setParentFaqId(String parentFaqId) {
+		this.parentFaqId = parentFaqId;
 	}
 
 	public String getHotQuestion() {

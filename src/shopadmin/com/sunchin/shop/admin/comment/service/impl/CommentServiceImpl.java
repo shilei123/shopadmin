@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.comment.dao.CommentDAO;
 import com.sunchin.shop.admin.comment.service.CommentService;
-import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScComment;
 
 import framework.bean.PageBean;
-import framework.db.DBUtil;
 import framework.util.CommonUtils;
 
 @Service("commentService")
@@ -51,10 +49,6 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public void delComment(String id) throws Exception {
-		ScComment comment = commentDAO.queryCommentById(id);
-		if(comment!=null){
-			String hql = " update ScComment set flag=? where id=? ";
-			DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), id);
-		}
+		commentDAO.delComment(id);
 	}
 }

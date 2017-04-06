@@ -4,20 +4,33 @@ $(function() {
 });
 
 var initFaqType = function() {
-	var data = {"dict.type":"FAQ_CATEGORY"};
+	var data = {"type1":"FAQ_TYPE","type2":"FAQ_CATEGORY","type3":"HOT_QUESTION"};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/admin/dict!queryDictByType.action",
+		url : path_ + "/view/shop/faq!queryDictsByType.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
-			/*var html = "<option value=''>-请选择-</option>";
-			var dicts = data.dicts;
-			console.log(dicts);
-			for(x in dicts){
-				html += "<option value='" + dicts[x].code + "'>" + dicts[x].name + "</option>"
+			var html = "<option value=''>-请选择-</option>";
+			var dict1 = data.dict1;
+			for(x in dict1){
+				html += "<option value='" + dict1[x].code + "'>" + dict1[x].name + "</option>"
 			}
-			$("#commentType").html(html);*/
+			$("#faqType").html(html);
+			
+			html = "<option value=''>-请选择-</option>";
+			var dict2 = data.dict2;
+			for(x in dict2){
+				html += "<option value='" + dict2[x].code + "'>" + dict2[x].name + "</option>"
+			}
+			$("#category").html(html);
+			
+			html = "<option value=''>-请选择-</option>";
+			var dict3 = data.dict3;
+			for(x in dict3){
+				html += "<option value='" + dict3[x].code + "'>" + dict3[x].name + "</option>"
+			}
+			$("#hotQuestion").html(html);
 		},
 		error : function(e) {
 		}
@@ -26,7 +39,7 @@ var initFaqType = function() {
 
 var openFaqInfoWin = function(title) {
 	$("#title").text(title);
-	showModal("doc-modal-2",500,350);
+	showModal("doc-modal-2",600,400);
 };
 
 $("#closeBtn").click(function() {
@@ -40,7 +53,7 @@ $('#queryBtn').click(function() {
 
 var query = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/faq/faq!queryFaqList.action";
+	var url = path_ + "/view/shop/faq!queryFaqList.action";
 	pageData(url, "contentListTable", data);
 };
 
@@ -52,40 +65,35 @@ var formatterAction = function(value, row) {
 	return html;
 };
 
-var setFaqInfo = function(data) {
-	/*var type = "";
-	if(data.comment.type=="1"){
-		type="评论";
-	}else if(data.comment.type=="2"){
-		type="追评";
-	}
-	var html = "<option>" + type + "</option>";
-	$("#commentType2").html(html);
-	$("#score2").val(data.comment.score);
-	$("#commentPeople2").val(data.comment.commentPeople);
-	$("#content2").val(data.comment.content);*/
-};
-
 var queryFaqInfoWin = function(id) {
-	/*var data = {"comment.id" : id};
+	var data = {"faq.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/comment/comment!queryCommentById.action",
+		url : path_ + "/view/shop/faq!queryFaqById.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
-			setFaqInfo(data);
+			setFaqInfo(data.faq);
 			openFaqInfoWin("查看问题");
 		}
-	});*/
+	});
+};
+
+var setFaqInfo = function(faq) {
+	console.log(faq);
+	$("#faqType2").html("<option value='1'>" + faq.faqType + "</option>");
+	$("#category2").html("<option value='1'>" + faq.category + "</option>");
+	$("#hotQuestion2").html("<option value='1'>" + faq.hotQuestion + "</option>");
+	$("#order2").val(faq.order);
+	$("#faqContent2").val(faq.faqContent);
 };
 
 var delFaq = function(id) {
-	/*showConfirm("确认删除？", function() {
-		var data = {"comment.id" : id};
+	showConfirm("确认删除？", function() {
+		var data = {"faq.id" : id};
 		$.ajax({
 			type : "POST",
-			url : path_ + "/view/comment/comment!delComment.action",
+			url : path_ + "/view/shop/faq!delFaq.action",
 			data : data,
 			dataType : "json",
 			success : function(json) {
@@ -96,6 +104,6 @@ var delFaq = function(id) {
 				showAlert("操作失败");
 			}
 		});
-	});*/
+	});
 };
 
