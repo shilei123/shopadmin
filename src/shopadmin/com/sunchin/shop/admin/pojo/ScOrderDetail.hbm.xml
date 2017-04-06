@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScOrderDetail" table="SC_ORDER_DETAIL">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="orderId" type="java.lang.String">
+            <column name="ORDER_ID" length="36" />
+        </property>
+        <property name="childOrderId" type="java.lang.String">
+            <column name="CHILD_ORDER_ID" length="36" />
+        </property>
+        <property name="goodsId" type="java.lang.String">
+            <column name="GOODS_ID" length="36" />
+        </property>
+        <property name="childGoodsId" type="java.lang.String">
+            <column name="CHILD_GOODS_ID" length="36" />
+        </property>
+        <property name="count" type="java.math.Integer">
+            <column name="COUNT" precision="22" scale="0" />
+        </property>
+        <property name="unitPrice" type="java.math.Double">
+            <column name="UNIT_PRICE" precision="22" scale="0" />
+        </property>
+        <property name="amount" type="java.math.Double">
+            <column name="AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7" />
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+        <property name="belong" type="java.lang.String">
+            <column name="BELONG" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>
