@@ -1,6 +1,16 @@
 package com.sunchin.shop.admin.dict;
 
 public enum DictionaryTypeEnum {
+	
+	ORDER_PAY_MODE("ORDER_PAY_MODE"), //订单支付方式
+	
+	ORDER_INVOICE("ORDER_INVOICE"), //订单是否需要发票
+	
+	ORDER_SPLIT("ORDER_SPLIT"), //订单是否拆分
+	
+	ORDER_STS("ORDER_STS"), //订单状态（待付款、待收货、待评价）
+	
+	ORDER_DELIVERY_MODE("ORDER_DELIVERY_MODE"), //订单送货方式（自提、平邮、快递等）
 
 	HOT_QUESTION("HOT_QUESTION"), //是否热点问题
 	
