@@ -117,5 +117,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/user_coupon.js"></script>
+<script type="text/javascript" src="${path }/view/js/coupon_userCoupon.js"></script>
 </html>

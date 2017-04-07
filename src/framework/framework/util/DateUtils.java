@@ -8,8 +8,8 @@ public class DateUtils {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
 	private static String[] PATTERN_DATAS = new String[]{"","","","","yyyy","","","yyyy-MM","","","yyyy-MM-dd","","","yyyy-MM-dd hh","","","yyyy-MM-dd hh:mm","","","yyyy-MM-dd hh:mm:ss"};
 	private static String[] WEEK_DAYS = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
-	private static String PATTERN_DATE = "yyyy-MM-dd";
-	private static String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
+	public static String PATTERN_DATE = "yyyy-MM-dd";
+	public static String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
 	
 	public static java.util.Date getDate(){
 		return new java.util.Date();
@@ -43,6 +43,10 @@ public class DateUtils {
 	
 	public static java.util.Date parseDate(String date){
 		return new java.util.Date(parse(PATTERN_DATE, date));
+	}
+	
+	public static java.util.Date parseDate(String date, String pattern){
+		return new java.util.Date(parse(pattern, date));
 	}
 	
 	public static java.util.Date parseDatetime(String date){

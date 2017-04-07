@@ -112,6 +112,7 @@ $("#saveBtn").click(function() {
 });
 
 var clearForm = function() {
+	$("#couponId").val('');
 	$("#couponTypeModal").val('');
 	$("#couponName").val('');
 	$("#couponZsBalance").val('');

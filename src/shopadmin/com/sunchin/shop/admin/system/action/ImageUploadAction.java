@@ -16,7 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import com.sunchin.shop.admin.system.service.ImageUploadService;
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.pojo.ScImages;
+import com.sunchin.shop.admin.pojo.ScImage;
 import com.sunchin.shop.admin.util.ImageServiceUtil;
 
 import framework.action.PageAction;
@@ -32,13 +32,13 @@ public class ImageUploadAction extends PageAction {
 	private File img;
 	private String imgFileName;
 	private String imgContentType;
-	private ScImages imgResult; 
+	private ScImage imgResult; 
 	
 	private static String localUploadPath = ConfigUtil.getInstance().getLocalUploadPath();
 	
 	public String query() {
 		try {
-			PageBean resultData = imageUploadService.queryImages(this.getPageBean());
+			PageBean resultData = imageUploadService.queryImage(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class ImageUploadAction extends PageAction {
 	            //上传至图片服务器
 	            String savePath = ImageServiceUtil.uploadImg(newFile);
 	            if(StringUtils.isNotBlank(savePath)) {
-	            	this.imgResult = this.getScImages(newFile, savePath, imgType);
+	            	this.imgResult = this.getScImage(newFile, savePath, imgType);
 	            	DBUtil db = DBUtil.getInstance();
 	            	db.insert(this.imgResult);
 	            }
@@ -92,8 +92,8 @@ public class ImageUploadAction extends PageAction {
 		return Action.SUCCESS;
 	}
 	
-	private ScImages getScImages(File file, String filePath, String imgType) {
-		ScImages img = new ScImages();
+	private ScImage getScImage(File file, String filePath, String imgType) {
+		ScImage img = new ScImage();
 		img.setId(UUID.randomUUID().toString());
 		img.setImgName(this.imgFileName);
 		img.setFileName(file.getName());
@@ -105,11 +105,11 @@ public class ImageUploadAction extends PageAction {
 		return img;
     }
 
-	public ScImages getImgResult() {
+	public ScImage getImgResult() {
 		return imgResult;
 	}
 
-	public void setImgResult(ScImages imgResult) {
+	public void setImgResult(ScImage imgResult) {
 		this.imgResult = imgResult;
 	}
 

@@ -40,7 +40,11 @@ public enum DictionaryTypeEnum {
 	
 	ISUSE("ISUSE"), //是否默认
 	
-	ARTICLE_TYPE("ARTICLE_TYPE");//文章分类
+	ARTICLE_TYPE("ARTICLE_TYPE"),//文章分类
+	
+	USER_GRADE("USER_GRADE"),//会员等级
+	
+	SCOPE("SCOPE");
 	
 	private String type;
 

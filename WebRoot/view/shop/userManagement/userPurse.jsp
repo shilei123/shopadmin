@@ -104,5 +104,5 @@
 	</div>
 	<!-- content end -->
 </body>
-<script type="text/javascript" src="${path }/view/js/userPurse.js"></script>
+<script type="text/javascript" src="${path }/view/js/userManagement_userPurse.js"></script>
 </html>

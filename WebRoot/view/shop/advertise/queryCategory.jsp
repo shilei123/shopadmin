@@ -133,7 +133,7 @@
       		</div>
     	</div>
   	</div>
-<script type="text/javascript" src="${path }/view/js/queryCategocy.js"></script>
+<script type="text/javascript" src="${path }/view/js/advertise_queryCategocy.js"></script>
 </div>
 </body>
 </html>

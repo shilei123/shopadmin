@@ -6,23 +6,23 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sunchin.shop.admin.pojo.ScImages;
+import com.sunchin.shop.admin.pojo.ScImage;
 
-import com.sunchin.shop.admin.system.dao.ScImagesDAO;
+import com.sunchin.shop.admin.system.dao.ScImageDAO;
 import com.sunchin.shop.admin.system.service.ImageUploadService;
 
 import framework.bean.PageBean;
 
 @Service("imageUploadService")
 public class ImageUploadServiceImpl implements ImageUploadService {
-	@Resource(name = "scImagesDAO")
-	private ScImagesDAO imagesDAO;
+	@Resource(name = "scImageDAO")
+	private ScImageDAO imageDAO;
 	
 	@Override
-	public PageBean queryImages(PageBean pageBean) {
-		int total = imagesDAO.queryImagesCount(pageBean);
+	public PageBean queryImage(PageBean pageBean) {
+		int total = imageDAO.queryImagesCount(pageBean);
 		pageBean.setTotal(total);
-		List<ScImages> pageData = imagesDAO.queryImagesPagination(pageBean);
+		List<ScImage> pageData = imageDAO.queryImagesPagination(pageBean);
 		pageBean.setPageData(pageData);
 		return pageBean;
 	}

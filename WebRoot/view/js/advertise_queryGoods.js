@@ -22,7 +22,7 @@ var queryGoods = function() {
 
 var formatterAttachAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='saveGoods(\""+ row.id + "\",\""+row.goodsName+"\")'><span class='am-icon-search'></span>选择</a>";
+	html += "<a href='javascript:void(0)' onclick='saveGoods(\""+ row.id + "\",\""+row.title+"\")'><span class='am-icon-search'></span>选择</a>";
 	html += "</div>";
 	return html;
 };

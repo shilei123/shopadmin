@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.pojo.ScDictionary;
+import com.sunchin.shop.admin.pojo.ScGrade;
 import com.sunchin.shop.admin.pojo.ScIdentity;
 import com.sunchin.shop.admin.pojo.ScUser;
 import com.sunchin.shop.admin.system.service.DictService;
@@ -29,10 +30,12 @@ public class UserAction extends PageAction{
 	private List<ScDictionary> userStatusList; //账户状态
 	private List<ScDictionary> identityStatus; //身份证状态
 	private List<ScDictionary> userSexList; //性别
+	private List<ScDictionary> userGradeList; //会员等级
+ 	private List<ScDictionary> isuseList; //是否启用
 	
 	private ScUser user;
 	private ScIdentity identity;
-	
+	private ScGrade grade;
 	
 	/**
 	 * 查询会员基础信息
@@ -104,8 +107,61 @@ public class UserAction extends PageAction{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 *	查询会员等级设定
+	 */
+	public String queryUserGrade(){
+		try {
+			PageBean resultData = userService.queryUserGrade(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 编辑会员等级
+	 * @return
+	 */
+	public String findGrade(){
+		try {
+			grade = userService.findGrade(grade.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 保存会员等级
+	 */
+	public String saveGrade(){
+		try {
+			userService.saveGrade(grade);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 删除会员等级
+	 * @return
+	 */
+	public String deleteUserGrade(){
+		try {
+			userService.deleteUserGrade(grade.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	
@@ -179,6 +235,8 @@ public class UserAction extends PageAction{
 			userStatusList = dictService.getDictByType(DictionaryTypeEnum.USER_STATUS.getType());
 			identityStatus  = dictService.getDictByType(DictionaryTypeEnum.IDENTITY_STATUS.getType());
 			userSexList  = dictService.getDictByType(DictionaryTypeEnum.USER_SEX.getType());
+			userGradeList = dictService.getDictByType(DictionaryTypeEnum.USER_GRADE.getType());
+			isuseList = dictService.getDictByType(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -267,4 +325,27 @@ public class UserAction extends PageAction{
 		this.identity = identity;
 	}
 
+	public List<ScDictionary> getUserGradeList() {
+		return userGradeList;
+	}
+
+	public void setUserGradeList(List<ScDictionary> userGradeList) {
+		this.userGradeList = userGradeList;
+	}
+
+	public List<ScDictionary> getIsuseList() {
+		return isuseList;
+	}
+
+	public void setIsuseList(List<ScDictionary> isuseList) {
+		this.isuseList = isuseList;
+	}
+
+	public ScGrade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(ScGrade grade) {
+		this.grade = grade;
+	}
 }

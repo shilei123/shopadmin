@@ -2,13 +2,18 @@ package com.sunchin.shop.admin.userManagement.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.IdentityStatusEnum;
+import com.sunchin.shop.admin.dict.StatusEnum;
+import com.sunchin.shop.admin.pojo.ScGrade;
 import com.sunchin.shop.admin.pojo.ScUserBase;
 import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScIdentity;
@@ -101,6 +106,18 @@ public class UserServiceImpl implements IUserService{
 	}
 	
 	/**
+	 * 查询会员等级
+	 */
+	@Override
+	public PageBean queryUserGrade(PageBean pageBean) throws Exception {
+		int total = userDAO.queryUserGradeCount(pageBean);
+		pageBean.setTotal(total);
+		List<ScGrade> pageData = userDAO.queryUserGradePagination(pageBean);
+		pageBean.setPageData(pageData);
+		return pageBean;
+	}
+	
+	/**
 	 * 认证成功
 	 */
 	@Override
@@ -137,5 +154,51 @@ public class UserServiceImpl implements IUserService{
 		 vo.setFailureReason(identity.getFailureReason());
 		 DBUtil.getInstance().update(vo);
 	}
-	
+
+	/**
+	 * 保存会员等级
+	 */
+	@Override
+	@Transactional
+	public void saveGrade(ScGrade grade) throws Exception {
+		if (grade == null) {
+			return;
+		}
+		DBUtil db = DBUtil.getInstance();
+		// 新增
+		if (StringUtils.isBlank(grade.getId())) {
+			String id = UUID.randomUUID().toString();
+			grade.setId(id);
+			grade.setFlag(FlagEnum.ACT.getCode());
+			grade.setCreateTime(new Date());
+			db.insert(grade);
+		} else { // 修改
+			ScGrade vo = (ScGrade) db.get(ScGrade.class, grade.getId());
+			vo.setNeedIntegral(grade.getNeedIntegral());
+			vo.setIsuse(grade.getIsuse());
+			vo.setRemark(grade.getRemark());
+			vo.setUserGrade(grade.getUserGrade());
+			vo.setUpdateTime(new Date());
+			db.update(vo);
+		}
+	}
+
+	/**
+	 * 删除会员等级
+	 */
+	@Override
+	@Transactional
+	public void deleteUserGrade(String id) throws Exception {
+		 ScGrade grade =  userDAO.queryGradeById(id);
+		 grade.setFlag(FlagEnum.HIS.getCode());
+		 DBUtil.getInstance().update(grade);
+	}
+
+	/**
+	 * 编辑会员等级
+	 */
+	@Override
+	public ScGrade findGrade(String id) throws Exception {
+		return userDAO.queryGradeById(id);
+	}
 }

@@ -46,7 +46,7 @@ var findAdvertiseIsuse = function() {
 				AdvertiseIsuseHtml = html;
 				isuse.append(html);
 				
-				var html = "<option value=''>-请选择-</option>";
+				var html = "<option value='-1'>-请选择-</option>";
 				$(data.dictionaryList).each(function(index) {
 					var advertiseType = data.dictionaryList[index];
 					html += "<option value='" + advertiseType.code + "'>" + advertiseType.name + "</option>";
@@ -77,16 +77,25 @@ $("#closeBtn").click(function() {
 	closeModal("editAdvertiseModal");
 });
 
-var changeLinkkind = function() {
+var editInit=false;
+$("#linkkinds").change(function(){
 	showBtn();
-	$("#imglink").val("");
+	if(!editInit) {
+		$("#imglink").val("");
 	$("#imglinkLabel").val("");
-}
-
+	}
+	editInit = false;
+});
 
 var showBtn = function() {
 	var linkkind = $("#linkkinds").val();
-	if(linkkind=="0") {
+	if(linkkind=="-1"){
+		$("#imglinkLabel").attr("readonly",true);
+		$("#cateBtn").css("display","none");
+		$("#goodsBtn").css("display","none");
+		$("#eventBtn").css("display","none");
+	}
+	else if(linkkind=="0") {
 		$("#imglinkLabel").attr("readonly",true);
 		$("#cateBtn").css("display","none");
 		$("#goodsBtn").css("display","");
@@ -130,6 +139,7 @@ $("#addBtn").click(function() {
 	clearForm();
 	openWin("新增");
 	showType();
+	showBtn();
 });
 
 //表单验证
@@ -145,6 +155,13 @@ var checkSumbit = function() {
 	if(linkkinds == "-1"){
 		$("#errorMsg").html("广告类型不能为空！");
 		$("#linkkinds").focus();
+		return false;
+	}
+	
+	var imglinkLabel = $("#imglinkLabel").val();
+	if(imglinkLabel.length == 0){
+		$("#errorMsg").html("广告对象不能为空！");
+		$("#imglinkLabel").focus();
 		return false;
 	}
 	
@@ -226,8 +243,10 @@ var setAdvertiseForm = function(data) {
 	if(objId =="3"){
 		$("#imglinkLabel").val(data.map.cateName);
 	}
+	editInit = true;
 	$("#errorMsg").html("&nbsp;");
 };
+
 
 //选择商品
 var showQueryGoodsWin = function(){

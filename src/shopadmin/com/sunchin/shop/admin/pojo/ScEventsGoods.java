@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class ScEventsGoods  implements java.io.Serializable {
 
-     private String Id;
+     private String id;
      private String eventsId;
      private String goodsId;
      private String goodsChildId;
@@ -20,12 +20,13 @@ public class ScEventsGoods  implements java.io.Serializable {
     }
 
 	public String getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(String id) {
-		Id = id;
+		this.id = id;
 	}
+
 
 	public String getEventsId() {
 		return eventsId;

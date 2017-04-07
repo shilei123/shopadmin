@@ -112,5 +112,5 @@ tr {
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/addArticle.js"></script>
+<script type="text/javascript" src="${path }/view/js/article_addArticle.js"></script>
 </html>

@@ -12,23 +12,23 @@
                 <comment>商品id</comment>
             </column>
         </property>
-        <property name="goodsChildId" type="java.lang.String">
-            <column name="GOODS_CHILD_ID" length="36">
+        <property name="childGoodsId" type="java.lang.String">
+            <column name="CHILD_GOODS_ID" length="36">
                 <comment>商品子表id</comment>
             </column>
         </property>
-        <property name="catePropPropvalId" type="java.lang.String">
-            <column name="CATE_PROP_PROPVAL_ID" length="36">
+        <property name="cppvId" type="java.lang.String">
+            <column name="CPPV_ID" length="36">
                 <comment>类别-属性属性值id</comment>
             </column>
         </property>
         <property name="type" type="java.lang.String">
-            <column name="TYPE" length="1">
+            <column name="TYPE" length="3">
                 <comment>spu 不会影响到库存和价格的属性,又叫关键属性/sku 会影响到库存和价格的属性, 又叫销售属性</comment>
             </column>
         </property>
-        <property name="orders" type="java.lang.Integer">
-            <column name="ORDERS">
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_">
                 <comment>排序</comment>
             </column>
         </property>
@@ -42,8 +42,8 @@
                 <comment>创建时间</comment>
             </column>
         </property>
-        <property name="createPeople" type="java.lang.String">
-            <column name="CREATE_PEOPLE" length="36">
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36">
                 <comment>创建人</comment>
             </column>
         </property>

@@ -39,8 +39,8 @@
 				     		<thead>
 								<tr>
 									<th width="2%" field="index"></th>
-									<th width="40%" field="goodsName">商品名称</th>
-									<th width="10%" field="brandName">品牌</th>
+									<th width="40%" field="title">商品名称</th>
+									<th width="20%" field="brandName">品牌</th>
 									<th width="10%" field="isuse">状态</th>
 									<th width="10%" formatter="formatterAttachAction">操作</th>
 								</tr>
@@ -59,5 +59,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/queryGoods.js"></script>
+<script type="text/javascript" src="${path }/view/js/advertise_queryGoods.js"></script>
 </html>

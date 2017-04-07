@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.goods.action;
+package com.sunchin.shop.admin.goodsManager.action;
 
 /**
  * @author yangchaowen

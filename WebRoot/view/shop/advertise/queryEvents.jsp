@@ -60,5 +60,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/queryEvents.js"></script>
+<script type="text/javascript" src="${path }/view/js/advertise_queryEvents.js"></script>
 </html>

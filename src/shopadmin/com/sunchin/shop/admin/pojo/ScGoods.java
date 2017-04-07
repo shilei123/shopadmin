@@ -26,6 +26,11 @@ public class ScGoods implements java.io.Serializable {
 	private Double salePrice;
 	private Double promotionPrice;
 	private String goodsNo;
+	private String freightType;
+	private String freightId;
+	private String publishType;
+	private Date publishTime;
+	private String sts;
 	private Date createTime;
 	private String createUserId;
 	private String flag;
@@ -205,6 +210,46 @@ public class ScGoods implements java.io.Serializable {
 
 	public void setBelong(String belong) {
 		this.belong = belong;
+	}
+
+	public String getFreightType() {
+		return freightType;
+	}
+
+	public void setFreightType(String freightType) {
+		this.freightType = freightType;
+	}
+
+	public String getFreightId() {
+		return freightId;
+	}
+
+	public void setFreightId(String freightId) {
+		this.freightId = freightId;
+	}
+
+	public String getPublishType() {
+		return publishType;
+	}
+
+	public void setPublishType(String publishType) {
+		this.publishType = publishType;
+	}
+
+	public Date getPublishTime() {
+		return publishTime;
+	}
+
+	public void setPublishTime(Date publishTime) {
+		this.publishTime = publishTime;
+	}
+
+	public String getSts() {
+		return sts;
+	}
+
+	public void setSts(String sts) {
+		this.sts = sts;
 	}
 
 }

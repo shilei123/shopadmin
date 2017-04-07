@@ -8,9 +8,39 @@
             <column name="ID" length="36" />
             <generator class="assigned"></generator>
         </id>
-        <property name="userName" type="java.lang.String">
-             <column name="USER_NAME" length="50">
-                <comment>用户名</comment>
+         <property name="userGrade" type="java.lang.String">
+             <column name="USER_GRADE" length="1">
+                <comment>会员等级</comment>
+            </column>
+        </property>
+         <property name="needIntegral" type="java.lang.Double">
+             <column name="NEED_INTEGRAL">
+                <comment>所需积分</comment>
+            </column>
+        </property>
+         <property name="isuse" type="java.lang.String">
+             <column name="ISUSE" length="1">
+                <comment>是否启用/默认1，1启用，0不启用</comment>
+            </column>
+        </property>
+          <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+         <property name="updateTime" type="java.util.Date">
+               <column name="UPDATE_TIME">
+                <comment>修改时间</comment>
+            </column>
+        </property>
+        <property name="remark" type="java.lang.String">
+               <column name="REMARK" length="50">
+                <comment>备注</comment>
+            </column>
+        </property>
+         <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1">
+                <comment>数据有效性/默认0，0有效，1无效</comment>
             </column>
         </property>
          <property name="belong" type="java.lang.String">

@@ -95,7 +95,7 @@ $("#nextBtn").click(function() {
 		$("#selectValue").val(four);
 	} */
 	
-	window.location.href = path_ + "/view/shop/goods/goodsAdd.jsp?selectValue=" + $("#selectValue").val() + "&selectText=" + $("#selectText").text();
+	window.location.href = path_ + "/view/shop/goodsManager/goodsAdd.jsp?selectValue=" + $("#selectValue").val() + "&selectText=" + $("#selectText").text();
 });
 
 $("#firstCategory").change(function() {
@@ -116,7 +116,7 @@ $("#fourCategory").change(function() {
 var queryCategory = function(selectObj, cateId) {
 	$.ajax({
 		type : "POST",
-		url:  path_ + "/view/category/category!queryGategory.action",
+		url:  path_ + "/view/shop/category/category!queryGategory.action",
 		data : {"category.id":cateId},
 		dataType : "json",
 		success : function(json) {

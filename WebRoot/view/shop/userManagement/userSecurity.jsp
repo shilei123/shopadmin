@@ -93,5 +93,5 @@
 	</div>
 	<!-- content end -->
 </body>
-<script type="text/javascript" src="${path }/view/js/userSecurity.js"></script>
+<script type="text/javascript" src="${path }/view/js/userManagement_userSecurity.js"></script>
 </html>

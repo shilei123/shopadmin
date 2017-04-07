@@ -10,13 +10,13 @@ public class ScGoodsCatePropPropVal implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String goodsId;
-	private String goodsChildId;
-	private String catePropPropvalId;
+	private String childGoodsId;
+	private String cppvId;
 	private String type;
-	private int orders;
+	private int order;
 	private String flag;
 	private Date createTime;
-	private String createPeople;
+	private String createUserId;
 
 	public String getId() {
 		return this.id;
@@ -34,28 +34,12 @@ public class ScGoodsCatePropPropVal implements java.io.Serializable {
 		this.goodsId = goodsId;
 	}
 
-	public String getCatePropPropvalId() {
-		return this.catePropPropvalId;
-	}
-
-	public void setCatePropPropvalId(String catePropPropvalId) {
-		this.catePropPropvalId = catePropPropvalId;
-	}
-
 	public String getType() {
 		return this.type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public int getOrders() {
-		return this.orders;
-	}
-
-	public void setOrders(int orders) {
-		this.orders = orders;
 	}
 
 	public String getFlag() {
@@ -73,20 +57,37 @@ public class ScGoodsCatePropPropVal implements java.io.Serializable {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-
-	public String getCreatePeople() {
-		return this.createPeople;
+	
+	public String getChildGoodsId() {
+		return childGoodsId;
 	}
 
-	public void setCreatePeople(String createPeople) {
-		this.createPeople = createPeople;
+	public void setChildGoodsId(String childGoodsId) {
+		this.childGoodsId = childGoodsId;
 	}
 
-	public String getGoodsChildId() {
-		return goodsChildId;
+	public String getCppvId() {
+		return cppvId;
+	}
+
+	public void setCppvId(String cppvId) {
+		this.cppvId = cppvId;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public String getCreateUserId() {
+		return createUserId;
+	}
+
+	public void setCreateUserId(String createUserId) {
+		this.createUserId = createUserId;
 	}
 	
-	public void setGoodsChildId(String goodsChildId) {
-		this.goodsChildId = goodsChildId;
-	}
 }

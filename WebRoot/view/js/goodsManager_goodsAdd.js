@@ -11,11 +11,14 @@ var resetEditor = function() {
 };
 //清空编辑器草稿箱
 var clearLocalData = function() {
-	UE.getEditor('editor').execCommand("clearlocaldata");
+	UE.getEditor('pceditor').execCommand("clearlocaldata");
 };
 //判断编辑器是否有内容
 var hasContent = function() {
-	return UE.getEditor('editor').hasContents();
+	return UE.getEditor('pceditor').hasContents();
+};
+var getContent = function() {
+    return UE.getEditor('pceditor').getContent();
 };
 
 //加载layui的laydate组件
@@ -40,7 +43,7 @@ var cppInfo = new Array(); //类别-属性-属性值关系列表
 var queryCatePropPropVal = function() {
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/catePropPropval/catePropPropval!queryByCateId.action",
+		url : path_ + "/view/shop/catePropPropval/catePropPropval!queryByCateId.action",
 		dataType : "json",
 		data: "cateId="+cateId,
 		success : function(json) {
@@ -111,16 +114,16 @@ $("#addPropertyDiv").click(function() {
 	}
 	
 	//根据标识检测是否填过相同的子商品
-	if($("#"+existsGoodsKey).length==0) {
+	if($("#"+existsGoodsKey).length == 0) {
 		var trHtml = "";
 		trHtml += "<tr>";
-		trHtml += "    <td style='text-align:left;'><input type='hidden' name='gcpp.catePropPropvalId' id='"+existsGoodsKey+"' value='"+childGoodsValue+"'/><div style='margin-top:5px;margin-bottom:5px;'>"+childGoodsLabel+"</div></td>";
-		trHtml += "    <td>&nbsp;<input name='goodsChild.purchasePrice' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='goodsChild.marketPrice' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='goodsChild.salePrice' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='goodsChild.promotionPrice' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='goodsChild.childNo' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td style='text-align:left;'><input type='hidden' id='"+existsGoodsKey+"' value='"+childGoodsValue+"'/><div style='margin-top:5px;margin-bottom:5px;'>"+childGoodsLabel+"</div></td>";
+		trHtml += "    <td>&nbsp;<input name='purchasePriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='marketPriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='salePriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='promotionPriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='availableNum' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
+		trHtml += "    <td>&nbsp;<input name='childNoInput' style=\"width:80px;\"/>&nbsp;</td>";
 		trHtml += "    <td>&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteGoodChilds(\""+existsGoodsKey+"\")'><span class='am-icon-remove'></i>删除</a>&nbsp;</td>";
 		trHtml += "</tr>";
 		$("#goodsChildTable tbody").prepend(trHtml);
@@ -231,6 +234,23 @@ var checkChildGoods = function(fieldName) {
 	return bool;
 }
 
+//添加商品参数按钮
+$(".addGoodsParam").click(function() {
+	addGoodsParams();
+});
+
+//添加商品参数函数
+var addGoodsParams = function() {
+	$('<div style="padding: 1px;">参数名：<input class="am-form-field" name="paramName" style="width:150px;display: inline-block;"/>&nbsp;&nbsp;参数值：<input class="am-form-field" name="paramVal" style="width:150px;display: inline-block;"/>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="javascript:removeGoodsParams(this);"><span class="am-icon-minus-square" style="width: auto;color:red;font-size: 18px;" title="删除"></span></a><!--&nbsp;&nbsp;<a href="javascript:void(0);" onclick="javascript:addGoodsParams();">添加</a>--></div>').appendTo("#paramsDiv");
+};
+
+//删除商品参数函数
+var removeGoodsParams = function(but) {
+	var elem = but.parentNode;
+	var elemParent = elem.parentNode
+	elemParent.removeChild(elem);
+};
+
 //保存按钮
 var checkChildGoodsFieldThis = function(obj) {
 	var $obj = $(obj);
@@ -241,36 +261,24 @@ var checkChildGoodsFieldThis = function(obj) {
 	}
 };
 
-$("#saveBtn").click(function() {
-	if(!checkRequiredField("title")) {
+//提交表单
+$("#saveBtn,#testbtn").click(function() {
+	if(!checkPageData()) 
 		return;
-	}; 
 	
-	//同时验证子商品的价格信息，用css标红
-	var b1 = checkChildGoods("goodsChild.purchasePrice");
-	var b2 = checkChildGoods("goodsChild.marketPrice");
-	var b3 = checkChildGoods("goodsChild.salePrice");
-	var b4 = checkChildGoods("goodsChild.promotionPrice");
-	if(!b1 || !b2 || !b3 || !b4) {
-		showLayerMsg("请输入完整库存配置信息");
-		$(".inputerror:first").focus(); //
-		return;
-	}
-	console.log("验证通过！");
-	return;
-	//验证图片
-	var imgSrcCount = 0;
-	$(".img").each(function(index) {
-		if($(this).attr("src") == undefined || $(this).attr("src").length==0) {
-			imgSrcCount++;
-		}
-	}); 
-	if(imgSrcCount==$(".img").length) {
-		showLayerMsg("请选择商品图片");
-		$("#imgPosition").focus();
-		$("#imgPosition").blur();
-		return;
-	}
+	var data = getPageData();
+	
+	$.ajax({
+		type : "POST",
+		url : path_ + "/view/shop/goodsManager/goodsInfoAction!saveGoods.action",
+		dataType : "json",
+		data: data,
+		success : function(json) {
+			console.log("ok");
+		}, error: function(e){
+			console.log("error");
+		} 
+	});
 });
 
 var checkRequiredField = function(fieldId,msg) {
@@ -281,24 +289,160 @@ var checkRequiredField = function(fieldId,msg) {
 	var fieldValue = $("#"+fieldId).val();
 	if(fieldValue.length==0) {
 		showLayerMsg(msg);
-		//$field.addClass("inputerror");
 		$field.focus();
 		return false;
 	};
 	return true;
 };
 
-$(".addGoodsAttr").click(function() {
-	addGoodsAttribute();
-});
+var checkPageData = function() {
+	if(!checkRequiredField("title")) {
+		return false;
+	}; 
+	
+	//子商品数量
+	var goodsChildCount = $("#goodsChildTable tbody tr").length; 
+	if(goodsChildCount > 0) { //有子商品，则验证子商品填写的完整性
+		//同时验证子商品的价格信息，用css标红
+		var b1 = checkChildGoods("purchasePriceInput");
+		var b2 = checkChildGoods("marketPriceInput");
+		var b3 = checkChildGoods("salePriceInput");
+		var b4 = checkChildGoods("promotionPriceInput");
+		var b5 = checkChildGoods("availableNum");
+		if(!b1 || !b2 || !b3 || !b4 || !b5) {
+			showLayerMsg("请输入完整库存配置信息");
+			$(".inputerror:first").focus(); 
+			return false;
+		}
+	} else { //有子商品，则验证商品价格和库存字段必填
+		if(!checkRequiredField("purchasePrice")) {
+			return false;
+		}; 
+		
+		if(!checkRequiredField("marketPrice")) {
+			return false;
+		}; 
+		
+		if(!checkRequiredField("salePrice")) {
+			return false;
+		}; 
+		
+		if(!checkRequiredField("promotionPrice")) {
+			return false;
+		}; 
+		
+		if(!checkRequiredField("availableNum")) {
+			return false;
+		};
+	}
+	
+	//验证图片
+	var imgSrcCount = 0;
+	$(".img").each(function(index) {
+		if($(this).attr("src") == undefined || $(this).attr("src").length==0) {
+			imgSrcCount++;
+		}
+	}); 
+	
+	if(imgSrcCount==$(".img").length) {
+		showLayerMsg("请选择商品图片");
+		$("#imgPosition").focus();
+		$("#imgPosition").blur();
+		return false;
+	}
+	
+	if(!hasContent()) {
+		showLayerMsg("请填写详情！");
+		$("#tab1").focus();
+		return false;
+	}
+	
+	var freightType = $('input:radio[name="goods.freightType"]:checked').val();
+	if(freightType == undefined) {
+		showLayerMsg("请选择运费");
+		$("#freightType1").focus();
+		$("#freightType1").blur();
+		return false;
+	}
+	
+	var publishType = $('input:radio[name="goods.publishType"]:checked').val();
+	if(publishType == undefined) {
+		showLayerMsg("请选择商品发布");
+		$("#publishType1").focus();
+		$("#publishType1").blur();
+		return false;
+	}
+	
+	return true;
+};
 
-var addGoodsAttribute = function() {
-	$('<div style="padding: 1px;">参数名：<input class="am-form-field" name="attrName" style="width:150px;display: inline-block;"/>&nbsp;&nbsp;参数值：<input class="am-form-field" name="attrValue" style="width:150px;display: inline-block;"/>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="javascript:removeGoodsAttribute(this);"><span class="am-icon-minus-square" style="width: auto;color:red;font-size: 18px;" title="删除"></span></a><!--&nbsp;&nbsp;<a href="javascript:void(0);" onclick="javascript:addGoodsAttribute();">添加</a>--></div>').appendTo("#shuxingDiv");
-}
+//组装页面数据
+var getPageData = function() {
+	//得到子商品信息串
+	var trs = $("#goodsChildTable tbody tr");
+	var childGoods = new Array();
+	for (var i = 0; i < trs.length; i++) {
+		var $tr = $(trs[i]);
+		var tds = $tr.children("td");
+		
+		var childGoodsId = $(tds[0]).children("input:eq(0)").val();
+		var purchasePrice = $(tds[1]).children("input:eq(0)").val();
+		var marketPrice = $(tds[2]).children("input:eq(0)").val();
+		var salePrice = $(tds[3]).children("input:eq(0)").val();
+		var promotionPrice = $(tds[4]).children("input:eq(0)").val();
+		var availableNum = $(tds[5]).children("input:eq(0)").val();
+		var goodsNo = $(tds[6]).children("input:eq(0)").val();
+		
+		var tempjson = {"childGoodsId":childGoodsId,"purchasePrice":purchasePrice,
+						"marketPrice":marketPrice,"salePrice":salePrice,
+						"promotionPrice":promotionPrice,"availableNum":availableNum,
+						"goodsNo":goodsNo};
+		childGoods.push(tempjson);
+	}
+	
+	//得到图片
+	var imgIdHiddens = $("input[name='imgIdHidden']");
+	var imgs = "",m = "";
+	for (var i = 0; i < imgIdHiddens.length; i++) {
+		var $img = $(imgIdHiddens[i]);
+		if($img.val().length==0)
+			continue;
+		imgs += m + $img.val();
+		m = ",";
+	}
+	
+	//获得参数
+	var params = new Array();
+	var paramNames = $("input[name='paramName']");
+	var paramVals = $("input[name='paramVal']");
+	if(paramNames.length==paramVals.length) {
+		for (var i = 0; i < paramNames.length; i++) {
+			var $paramName = $(paramNames[i]);
+			var $paramVal = $(paramVals[i]);
+			if($paramName.val().length > 0 && $paramVal.val().length > 0) {
+				params.push({"paramName":$paramName.val(),"paramVal":$paramVal.val()});
+			}
+		}
+	}
 
-//删除商品参数
-var removeGoodsAttribute = function(but) {
-	var elem = but.parentNode;
-	var elemParent = elem.parentNode
-	elemParent.removeChild(elem);
-}
+	var data = {
+		"goods.title" : $("#title").val() ,
+		"goods.subTitle" : $("#subTitle").val() ,
+		"goods.purchasePrice" : $("#purchasePrice").val() ,
+		"goods.marketPrice" : $("#marketPrice").val() ,
+		"goods.salePrice" : $("#salePrice").val() ,
+		"goods.promotionPrice" : $("#promotionPrice").val() ,
+		"goods.availableNum" : $("#availableNum").val() ,
+		"goods.goodsNo" : $("#goodsNo").val() ,
+		"goods.freightType" : $('input:radio[name="goods.freightType"]:checked').val() ,
+		"goods.publishType" : $('input:radio[name="goods.publishType"]:checked').val() ,
+		"goods.freightId" : $("#freightId").val() ,
+		"goods.publishTime" : $("#publishTime").val() ,
+		"goods.childGoods" : JSON.stringify(childGoods),
+		"goods.imgs" : imgs,
+		"goods.params" : JSON.stringify(params),
+		"goods.detail" : getContent()
+	};
+	
+	return data;
+};

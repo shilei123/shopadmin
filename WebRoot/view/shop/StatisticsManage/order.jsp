@@ -86,5 +86,5 @@
 	</div>
 	<!-- content end -->
 </body>
-<script type="text/javascript" src="${path }/view/js/order.js"></script>
+<script type="text/javascript" src="${path }/view/js/statisticsManage_order.js"></script>
 </html>

@@ -136,5 +136,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/freight.js"></script>
+<script type="text/javascript" src="${path }/view/js/freight_freight.js"></script>
 </html>
