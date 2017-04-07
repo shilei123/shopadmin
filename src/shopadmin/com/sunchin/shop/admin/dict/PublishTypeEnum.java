@@ -6,7 +6,7 @@ public enum PublishTypeEnum {
 	
 	PUBLISH("2", "立即发布"),
 	
-	DELAY("3", "定时发布");
+	TIMER_PUBLISH("3", "定时发布");
 
 	private String code;
 

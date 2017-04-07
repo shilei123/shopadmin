@@ -2,7 +2,7 @@ package com.sunchin.shop.admin.dict;
 
 public enum AuditStsEnum {
 
-	WAIT_AUDIT("1", "待审核"),
+	WAIT("1", "待审核"),
 
 	PASS("2", "通过"),
 	

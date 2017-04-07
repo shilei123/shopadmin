@@ -254,7 +254,7 @@
 	var addTab = function(menuId,menuName,menuUrl) {
 		var nav = '<li><span class="am-icon-close" id="'+menuId+'"></span>' +
         	'<a href="#tab'+tabCounter+'"> ' + menuName + '</a></li>';
-      	var content = '<div class="am-tab-panel" style="margin-left:0xp;" id="tab'+tabCounter+'"><iframe src="${basePath }'+menuUrl+'" scrolling="o" frameborder="" allowfullscreen mozallowfullscreen webkitallowfullscreen style="width:100%; height:'+(contentHeight-5)+'px;overflow: hidden;"/></div>';
+      	var content = '<div class="am-tab-panel" style="margin-left:0xp;" id="tab'+tabCounter+'"><iframe src="'+menuUrl+'" scrolling="o" frameborder="" allowfullscreen mozallowfullscreen webkitallowfullscreen style="width:100%; height:'+(contentHeight-5)+'px;overflow: hidden;"/></div>';
 
       	$nav.append(nav);
       	$bd.append(content);
@@ -312,7 +312,7 @@
 				if(childmenu.attributes.openMethod!=null && childmenu.attributes.openMethod=='open') {
 					html += '<li><a href="javascript:window.open(\'${basePath }'+childmenu.attributes.url+'\');"><span class="am-icon-chevron-right"></span>&nbsp;&nbsp;'+childmenu.text+'</a></li>';
 				} else {
-					html += '<li><a href="javascript:addMenu(\''+childmenu.id+'\',\''+childmenu.text+'\',\''+childmenu.attributes.url+'\');"><span class="am-icon-chevron-right"></span>&nbsp;&nbsp;'+childmenu.text+'</a></li>';
+					html += '<li><a href="javascript:addMenu(\''+childmenu.id+'\',\''+childmenu.text+'\',\'${basePath }'+childmenu.attributes.url+'\');"><span class="am-icon-chevron-right"></span>&nbsp;&nbsp;'+childmenu.text+'</a></li>';
 				}
 			}
         	html += '</ul>';

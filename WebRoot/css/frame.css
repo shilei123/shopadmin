@@ -34,8 +34,8 @@ body table {
 .am-table>thead>tr>th {
 	/* color: #787878; */
 	border-bottom: 0px solid #ddd;
-	/* background-color: #F3F3F3; */
-	background:url(../images/1.png);
+	background-color: #F3F3F3;
+	/* background:url(../images/1.png); */
 	vertical-align: middle;
 	height: 40px;
 }
