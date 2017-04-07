@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
-<struts>
-	<package name="userCoupon" extends="json-default" namespace="/view/shop/coupon">
-		<action name="userCoupon" class="com.sunchin.shop.admin.coupon.action.UserCouponAction">
-			<result type="json"><param name="ignoreHierarchy">false</param></result>
-		</action>
-	</package>
-</struts>    
