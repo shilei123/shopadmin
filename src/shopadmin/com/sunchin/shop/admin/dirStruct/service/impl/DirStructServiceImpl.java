@@ -81,7 +81,8 @@ public class DirStructServiceImpl implements IDirStructService{
 			List perforManceList = (ArrayList) node.get("children");
 			if(!perforManceList.isEmpty()) {
 				Collections.sort(perforManceList, new ComparatorDirStructVO());
-				node.put("state", "closed"); //节点状态：关闭
+				//节点状态：关闭
+				node.put("state", "closed"); 
 			}
 		} 
 	}
