@@ -100,19 +100,29 @@
 		        	<table class="frame-modal-table" border="0" bordercolor="black">
 			        	<tr>
 			        		<td width="100" class="table_title">属性名称：</td>
-			        		<td><input name="property.propName" id="propName" placeholder="属性名称" class="am-form-field" style="width:90%" minlength="3" required/></td>
+			        		<td>
+			        			<div class="frame-div-padd10">
+				        			<input name="property.propName" id="propName" placeholder="属性名称" class="am-form-field" style="width:90%" minlength="3" required/>
+			        			</div>
+			        		</td>
 			        	</tr>
 			        	<tr>
 			        		<td class="table_title">属性编码：</td>
 			        		<td>
-			        			<input name="property.propCode" id="propCode" placeholder="属性编码" class="am-form-field" style="width:90%" required/>
-			        			<input name="property.id" id="propId" type="hidden"/>	
-			        			<input name="property.flag" id="propFlag" type="hidden"/>	
+			        			<div class="frame-div-padd10">
+			        				<input name="property.propCode" id="propCode" placeholder="属性编码" class="am-form-field" style="width:90%" required/>
+			        				<input name="property.id" id="propId" type="hidden"/>	
+			        				<input name="property.flag" id="propFlag" type="hidden"/>
+			        			</div>	
 			        		</td>
 			        	</tr>
 			        	<tr>
 			        		<td class="table_title">属性排序：</td>
-			        		<td><input name="property.order" id="propOrder" placeholder="属性排序" class="am-form-field" style="width:90%"/></td>
+			        		<td>
+				        		<div class="frame-div-padd10">
+				        			<input name="property.order" id="propOrder" placeholder="属性排序" class="am-form-field" style="width:90%"/>
+					        	</div>
+			        		</td>
 			        	</tr>
 		       	 	</table>
 		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
@@ -153,9 +163,9 @@
 				            <div class="am-u-sm-12">
 								<div class="am-cf">
 									<span style="margin-left:-350px;">
-										共<span id="rowCount1"></span>条记录<div id="page1" class="am-fr">
+										共<span id="rowCount1"></span>条记录<span id="page1" class="am-fr"></span>
 									</span>
-								</div></div>
+								</div>
 							</div>
 			            	<div align="center" style="display: ;">
 			            		<button type="button" class="am-btn am-btn-success" id="saveBtn1"><span class="am-icon-save"></span> 保存</button>

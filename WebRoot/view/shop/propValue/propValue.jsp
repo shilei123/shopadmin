@@ -99,19 +99,29 @@
 		        	<table class="frame-modal-table" border="0" bordercolor="black">
 			        	<tr>
 			        		<td width="100" class="table_title">属性值名称：</td>
-			        		<td><input name="propValue.propName" id="propValueName" placeholder="属性值名称" class="am-form-field" style="width:90%" minlength="3" required/></td>
+			        		<td>
+			        			<div class="frame-div-padd10">
+			        				<input name="propValue.propName" id="propValueName" placeholder="属性值名称" class="am-form-field" style="width:90%" minlength="3" required/>
+			        			</div>
+			        		</td>
 			        	</tr>
 			        	<tr>
 			        		<td class="table_title">属性值编码：</td>
 			        		<td>
-			        			<input name="propValue.propCode" id="propValueCode" placeholder="属性值编码" class="am-form-field" style="width:90%" required/>
-			        			<input name="propValue.id" id="propValueId" type="hidden"/>	
-			        			<input name="propValue.flag" id="propValueFlag" type="hidden"/>	
+			        			<div class="frame-div-padd10">
+				        			<input name="propValue.propCode" id="propValueCode" placeholder="属性值编码" class="am-form-field" style="width:90%" required/>
+				        			<input name="propValue.id" id="propValueId" type="hidden"/>	
+				        			<input name="propValue.flag" id="propValueFlag" type="hidden"/>
+				        		</div>	
 			        		</td>
 			        	</tr>
 			        	<tr>
 			        		<td class="table_title">属性值排序：</td>
-			        		<td><input name="propValue.propOrder" id="propValueOrder" placeholder="属性值排序" class="am-form-field" style="width:90%"/></td>
+			        		<td>
+			        			<div class="frame-div-padd10">
+			        				<input name="propValue.propOrder" id="propValueOrder" placeholder="属性值排序" class="am-form-field" style="width:90%"/>
+			        			</div>
+			        		</td>
 			        	</tr>
 		       	 	</table>
 		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>

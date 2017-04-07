@@ -96,7 +96,7 @@ $('#addCategoryBtn').click(function() {
 	$("#inp2-isuse").val("");
 	$("#inp2-parentId").val(obj.categoryId);
 	$("#inp2-level").val(parseInt(obj.levels)+1);
-	showModal("doc-modal-add", 600, 400);
+	showModal("doc-modal-add", 600, 420);
 });
 
 $('#editCategoryBtn').click(function() {
@@ -118,7 +118,7 @@ $('#editCategoryBtn').click(function() {
 	$("#inp2-logo").val(obj.logo);
 	$("#inp2-url").val(obj.url);
 	$("#inp2-isuse").val(obj.isuse);
-	showModal("doc-modal-add", 600, 400);
+	showModal("doc-modal-add", 600, 420);
 });
 
 $("#delCategoryBtn").click(function() {
