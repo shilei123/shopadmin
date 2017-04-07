@@ -147,79 +147,78 @@
 				<form id="form1" method="post">
 	    		<table border="0" bordercolor="red" align="center" id="category_detail_table">
 	    			<tr>
-						<td width="150">
-							<div class="frame-div-padd10">
+						<td width="100" class="table_title">
 		        				<label for="cateName" class="am-form-label">类别名称：</label>
-		        			</div>
 						</td>
 						<td>
 							<div class="frame-div-padd10">
+		        				<input type="text" name="category.cateName" id="inp2-cateName" style="width:300px;" placeholder="请输入类别名称" class="am-form-field"/>
 		        				<input type="hidden" id="inp2-id" name="category.id" style="width:300px;"/>
 		        				<input type="hidden" id="inp2-parentId" name="category.parentId" style="width:300px;"/>
 		        				<input type="hidden" id="inp2-level" name="category.level" style="width:300px;"/>
-		        				<input type="text" name="category.cateName" id="inp2-cateName" style="width:300px;" placeholder="请输入类别名称"/>
 		        			</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div class="frame-div-padd10">
+							<div class="table_title">
 		        				<label for="category.order" class="am-form-label">排序序号：</label>
 		        			</div>
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" name="category.order" id="inp2-cateOrder" style="width: 300px;" placeholder="请输入排序序号">
+		        				<input type="text" name="category.order" id="inp2-cateOrder" style="width: 300px;" placeholder="请输入排序序号" class="am-form-field">
 		        			</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div class="frame-div-padd10">
+							<div class="table_title">
 		        				<label for="category.remark" class="am-form-label">类别描述：</label>
 		        			</div>
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" name="category.remark" id="inp2-memo" style="width: 300px;" placeholder="请输入类别描述"/>
+		        				<input type="text" name="category.remark" id="inp2-memo" style="width: 300px;" placeholder="请输入类别描述" class="am-form-field"/>
 		        				
 		        			</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div class="frame-div-padd10">
+							<div class="table_title">
 		        				<label for="logo" class="am-form-label">类别图标：</label>
 		        			</div>
 						</td>
 						<td>
-							<div class="frame-div-padd10">
-		        				<input type="text" name="category.logo" id="inp2-logo" style="width: 300px;"/>
+							<div class="frame-div-padd10" style="display: inline-flex;">
+		        				<input type="text" name="category.logo" id="inp2-logo" style="width: 250px;" class="am-form-field"
+		        				placeholder="待增加功能后再修改此处样式"/>
 		        				<button>上传</button>
 		        			</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div class="frame-div-padd10">
+							<div class="table_title">
 		        				<label for="url" class="am-form-label">导航链接：</label>
 		        			</div>
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text" name="category.url" id="inp2-url" style="width: 120px;"/>
+		        				<input type="text" name="category.url" id="inp2-url" style="width: 120px;" class="am-form-field"/>
 		        			</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div class="frame-div-padd10">
+							<div class="table_title">
 		        				<label for="isuse" class="am-form-label">是否有效：</label>
 		        			</div>
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<select name="category.isuse" id="inp2-isuse">
+		        				<select name="category.isuse" id="inp2-isuse" class="am-form-field">
 		        					<option value="">--请选择--</option>
 		        					<option value="1">有效</option>
 		        					<option value="0">无效</option>
