@@ -12,19 +12,27 @@ import javax.annotation.Resource;
 import oracle.sql.NUMBER;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.jdbc.core.metadata.Db2CallMetaDataProvider;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.StatusEnum;
 import com.sunchin.shop.admin.events.dao.EventsDAO;
 import com.sunchin.shop.admin.events.service.IEventsService;
+import com.sunchin.shop.admin.pojo.ScChildGoods;
 import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScEvents;
 import com.sunchin.shop.admin.pojo.ScEventsGoods;
+import com.sunchin.shop.admin.pojo.ScGoods;
+import com.sunchin.shop.admin.pojo.ScGoodsCatePropPropVal;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
+import framework.util.CommonUtils;
 
 @Repository("eventsService")
 public class EventsServiceImpl implements IEventsService{
@@ -62,6 +70,7 @@ public class EventsServiceImpl implements IEventsService{
 			eventsinfo.setFlag(FlagEnum.HIS.getCode());
 			db.update(eventsinfo);
 		}
+		
 	}
 
 	/**
@@ -78,47 +87,115 @@ public class EventsServiceImpl implements IEventsService{
 	@Override
 	@Transactional
 	public void saveEvents(ScEvents events,String eventsGoodsList) {
-		if (events == null) {
-			return;
+		if(StringUtils.isBlank(events.getId())) {
+			this.save(events,eventsGoodsList);
+		} else {
+			this.update(events,eventsGoodsList);
 		}
-		List<String> lists = new ArrayList<>();
-		String [] news = eventsGoodsList.split(",");
-		for(int i=0;i<news.length;i++){
-				String goodsId = news[i];
-				if(goodsId !=""){
-					lists.add(goodsId);
-				}
+	}
+	
+	public void save(ScEvents events,String eventsGoodsList){
+		JSONArray childGoodsArr = null;
+		if(StringUtils.isNotBlank(eventsGoodsList)){
+			childGoodsArr = JSON.parseArray(eventsGoodsList);
 		}
 		
 		DBUtil db = DBUtil.getInstance();
-		// 新增
-		if (StringUtils.isBlank(events.getId())) {
-			String id = UUID.randomUUID().toString();
-			events.setId(id);
-			events.setCreateTime(new Date());
-			events.setFlag(FlagEnum.ACT.getCode());
-			db.insert(events);
-			if(lists != null && !lists.isEmpty()){
-				for(int i=0;i<lists.size();i++){
-					  ScEventsGoods eventsGoods = new ScEventsGoods();
-					  String goodsId = lists.get(i);
-					  String ID = UUID.randomUUID().toString();
-					  eventsGoods.setId(ID);
-					  eventsGoods.setEventsId(id);
-					  eventsGoods.setGoodsId(goodsId);
-					  db.insert(eventsGoods);
+		String id = UUID.randomUUID().toString();
+		events.setId(id);
+		events.setCreateTime(new Date());
+		events.setFlag(FlagEnum.ACT.getCode());
+		db.insert(events);
+		
+		if(childGoodsArr != null && !childGoodsArr.isEmpty()) {
+			List<ScEventsGoods> childGoodsList = new ArrayList<ScEventsGoods>(childGoodsArr.size());
+            
+			for(int i = 0; i < childGoodsArr.size(); i++) {
+	            JSONObject goodsChildJson = (JSONObject) childGoodsArr.get(i);
+	            String childGoodsId = CommonUtils.getString(goodsChildJson.get("childGoodsId"));
+	            Double goodsPrice = CommonUtils.getDouble(goodsChildJson.get("goodsPrice"));
+	            String goodsRange = CommonUtils.getString(goodsChildJson.get("goodsRange"));
+	            ScEventsGoods childEventsGoodsVo = new ScEventsGoods();
+	            childEventsGoodsVo.setGoodsId(childGoodsId);
+	            childEventsGoodsVo.setEventsMoney(goodsPrice);
+	            childEventsGoodsVo.setScope(goodsRange);
+	            childGoodsList.add(childEventsGoodsVo);
+			}
+			
+			for(int i=0;i<childGoodsList.size();i++){
+				ScEventsGoods eventsGoods = new ScEventsGoods();
+				ScEventsGoods  vo = (ScEventsGoods) childGoodsList.get(i);
+				String ID = UUID.randomUUID().toString();
+				eventsGoods.setId(ID);
+				eventsGoods.setEventsId(id);
+				eventsGoods.setGoodsId(vo.getGoodsId());
+				eventsGoods.setGoodsChildId(vo.getGoodsChildId());
+				eventsGoods.setEventsMoney(vo.getEventsMoney());
+				eventsGoods.setScope(vo.getScope());
+				DBUtil.getInstance().insert(eventsGoods);
+			}
+		}
+	}
+	
+	public void update(ScEvents events,String eventsGoodsList){
+		ScEvents vo = (ScEvents) DBUtil.getInstance().get(ScEvents.class, events.getId());
+		vo.setName(events.getName());
+		vo.setIsuse(events.getIsuse());
+		vo.setMemo(events.getMemo());
+		vo.setStartTime(events.getStartTime());
+		vo.setEndTime(events.getEndTime());
+		vo.setUpdateTime(new Date());
+		DBUtil.getInstance().update(vo);
+		
+		JSONArray childGoodsArr = null;
+		if(StringUtils.isNotBlank(eventsGoodsList)){
+			childGoodsArr = JSON.parseArray(eventsGoodsList);
+		}
+		
+		if(childGoodsArr != null && !childGoodsArr.isEmpty()) {
+			List<ScEventsGoods> childGoodsList = new ArrayList<ScEventsGoods>(childGoodsArr.size());
+            
+			for(int i = 0; i < childGoodsArr.size(); i++) {
+	            JSONObject goodsChildJson = (JSONObject) childGoodsArr.get(i);
+	            String childGoodsId = CommonUtils.getString(goodsChildJson.get("childGoodsId"));
+	            Double goodsPrice = CommonUtils.getDouble(goodsChildJson.get("goodsPrice"));
+	            String goodsRange = CommonUtils.getString(goodsChildJson.get("goodsRange"));
+	            String eventsGoodsId = CommonUtils.getString(goodsChildJson.get("eventsGoodsId"));
+	            ScEventsGoods childEventsGoodsVo = new ScEventsGoods();
+	            if(!eventsGoodsId.equals("")){
+	            	 childEventsGoodsVo.setId(eventsGoodsId);
+	            }
+	            childEventsGoodsVo.setEventsId(events.getId());
+	            childEventsGoodsVo.setGoodsId(childGoodsId);
+	            childEventsGoodsVo.setEventsMoney(goodsPrice);
+	            childEventsGoodsVo.setScope(goodsRange);
+	            childGoodsList.add(childEventsGoodsVo);
+			}
+			for(int i=0;i<childGoodsList.size();i++){
+				ScEventsGoods eventsGoods = new ScEventsGoods();
+				ScEventsGoods  vo1 = (ScEventsGoods) childGoodsList.get(i);
+				if(vo1.getId() != null){
+					DBUtil.getInstance().update(vo1);
+				}else{
+					String ID = UUID.randomUUID().toString();
+					eventsGoods.setId(ID);
+					eventsGoods.setEventsId(events.getId());
+					eventsGoods.setGoodsId(vo1.getGoodsId());
+					eventsGoods.setGoodsChildId(vo1.getGoodsChildId());
+					eventsGoods.setEventsMoney(vo1.getEventsMoney());
+					eventsGoods.setScope(vo1.getScope());
+					DBUtil.getInstance().insert(eventsGoods);
 				}
 			}
-		} else { // 修改
-			ScEvents vo = (ScEvents) db.get(ScEvents.class, events.getId());
-			vo.setName(events.getName());
-			vo.setIsuse(events.getIsuse());
-			vo.setMemo(events.getMemo());
-			vo.setStartTime(events.getStartTime());
-			vo.setEndTime(events.getEndTime());
-			vo.setUpdateTime(new Date());
-			db.update(vo);
-			
 		}
+	}
+
+	/**
+	 * 删除活动商品
+	 */
+	@Override
+	public void deleteEventsGoods(String id) throws Exception {
+		ScEventsGoods vo = (ScEventsGoods) DBUtil.getInstance().get(ScEventsGoods.class, id);
+		DBUtil.getInstance().delete(vo);
 	}
 }

@@ -38,7 +38,7 @@ public class EventsDAO extends PageDAO{
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t2.name isuse, ");
-		sql.append(" to_char(t1.start_time,'yyyy-mm-dd') start_time,to_char(t1.end_time,'yyyy-mm-dd') end_time,t1.create_time ");
+		sql.append(" to_char(t1.start_time,'yyyy-mm-dd hh24:mi:ss') start_time,to_char(t1.end_time,'yyyy-mm-dd hh24:mi:ss') end_time,t1.create_time ");
 		sql.append(" from sc_events t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.isuse ");
 		sql.append(" where t1.flag=? ");
@@ -78,9 +78,10 @@ public class EventsDAO extends PageDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> queryEvents(String id) {
-		StringBuffer sql = new StringBuffer(" select t1.*,t2.id eventsGoodsId,t2.events_id,t2.goods_id,t2.goods_child_id,t2.events_money,t2.scope ");
+		StringBuffer sql = new StringBuffer(" select t1.*,to_char(t1.start_time,'yyyy-mm-dd hh24:mi:ss') start_time,to_char(t1.end_time,'yyyy-mm-dd hh24:mi:ss') end_time,t2.id eventsGoodsId,t2.events_id,t2.goods_id,t2.goods_child_id,t2.events_money,t2.scope,t3.goods_name ");
 		sql.append(" from sc_events t1 ");
 		sql.append(" left join sc_events_goods t2 on t1.id=t2.events_id ");
+		sql.append(" left join sc_goods t3 on t3.id = t2.goods_id ");
 		sql.append(" where t1.id=? ");
 		sql.append(" and t1.flag=? ");
 		List<Map<String,Object>> lists =DBUtil.getInstance().queryBySQL(sql.toString(),id,FlagEnum.ACT.getCode());

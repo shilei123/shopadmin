@@ -9,7 +9,7 @@ $(function() {
 function initCategoryTree() {
 	$.ajax( {
 		type : "POST",
-		url : path_ + "/view/category/category!categoryTree.action",
+		url : path_ + "/view/shop/category/category!categoryTree.action",
 		dataType : "json",
 		success : function(json) {
 			console.log(json);
