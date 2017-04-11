@@ -26,5 +26,5 @@ var formatterAction = function(value, row) {
 };
 
 var showEditGoodsTab = function(goodsId) {
-	window.parent.parent.addMenu("editGoodsTabId"+goodsId,"编辑商品",path_+"/view/shop/goodsManager/goodsEdit.jsp?selectText=ddd&selectValue=111");
+	openTab("editGoodsTabId"+goodsId,"编辑商品",path_+"/view/shop/goodsManager/goodsAdd.jsp?goodsId="+goodsId);
 };

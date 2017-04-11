@@ -15,14 +15,20 @@
 <script type="text/javascript" charset="utf-8" src="${path }/ueditor/lang/zh-cn/zh-cn.js"></script>
 <link rel="stylesheet" href="goodsAdd.css" />
 <%
-	String selectValue = request.getParameter("selectValue");
-	String selectText = new String(request.getParameter("selectText").getBytes("ISO-8859-1"),"UTF-8");
+
+	String goodsId = request.getParameter("goodsId")==null?"":request.getParameter("goodsId");
+	String cateId = request.getParameter("cateId")==null?"":request.getParameter("cateId");
+	String cateName = request.getParameter("cateName")==null?"":new String(request.getParameter("cateName").getBytes("ISO-8859-1"),"UTF-8");
 %>
 <script type="text/javascript">
-	var cateId = "<%=selectValue %>";
+	var goodsId = "<%=goodsId %>";
+	var cateId = "<%=cateId %>";
+	var cateName = "<%=cateName %>";
 </script>
 </head>
 <body>
+	<input type="hidden" id="cateId" value=""/>
+	<input type="hidden" id="goodsId" value=""/>
 	<!-- content start -->
 	<div class="am-cf ">
 		<div class="admin-content">
@@ -40,8 +46,9 @@
 							<tr>
 								<td class="table_title frame-required"><span>*</span>商品分类：</td>
 								<td valign="bottom">
-									<%=selectText %>&nbsp;<button class="am-btn am-btn-warning am-btn-xs am-round" onclick="window.location.href='${path}/view/shop/goods/goodsTypeSelect.jsp'">编辑</button>
-									<input type="hidden" id="cateId" value="<%=selectValue %>"/>
+									<span id="cateName"></span>&nbsp;
+									<button class="am-btn am-btn-warning am-btn-xs am-round" 
+									onclick="window.location.href='${path}/view/shop/goods/goodsTypeSelect.jsp'">编辑</button>
 								</td>
 							</tr>
 							<tr>
@@ -225,7 +232,7 @@
 									<div>
 										<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType1" value="<%=PublishTypeEnum.IN_STORE.getCode() %>" data-am-ucheck/>放入仓库</label>
 										<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType2" value="<%=PublishTypeEnum.PUBLISH.getCode() %>" data-am-ucheck/>立即发布</label>
-										<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="goods.publishType" id="publishType3" value="<%=PublishTypeEnum.DELAY.getCode() %>" data-am-ucheck/>发布时间</label>
+										<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="goods.publishType" id="publishType3" value="<%=PublishTypeEnum.TIMER_PUBLISH.getCode() %>" data-am-ucheck/>发布时间</label>
 										<input class="am-form-field" style="display: inline-block;width: 150px;margin-top: -15px;" id="publishTime"></div>
 									</div>
 								</td>

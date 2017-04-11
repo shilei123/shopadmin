@@ -17,6 +17,7 @@
 <%
 	String selectValue = request.getParameter("selectValue");
 	String selectText = new String(request.getParameter("selectText").getBytes("ISO-8859-1"),"UTF-8");
+	String goodsId = request.getParameter("goodsId");
 %>
 <script type="text/javascript">
 	var cateId = "<%=selectValue %>";

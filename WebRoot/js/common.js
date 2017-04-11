@@ -26,7 +26,15 @@ var showConfirm = function(msg,callbackfun) {
 		window.top.showConfirm_(msg,callbackfun);
 	}
 };
-
+var openTab = function(tabId, tabName, tabUrl) {
+	if(window.parent.parent!=null) {
+		window.parent.parent.addMenu(tabId, tabName, tabUrl);
+	} else if(window.parent!=null) { 
+		window.top.addMenu(tabId, tabName, tabUrl);
+	} else if(window.top!=null) {
+		window.top.addMenu(tabId, tabName, tabUrl);
+	}
+};
 var showLoading = function() {
 	/*var index = layer.load(2, {
     	shade: [0.1,'#fff'] //0.1透明度的白色背景

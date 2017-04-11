@@ -28,11 +28,73 @@ $("#publishTime").click(function() {
 });
 
 $(function() {
-	//查询类别下的品牌
+	$("#goodsId").val(goodsId);
+	$("#cateId").val(cateId);
+	$("#cateName").html(cateName);
 	
+	if(goodsId=="") { //新增
+		initGoods4Add();
+	} else { //编辑
+		initGoods4Edit();
+	}
+});
+
+//编辑商品-初始化商品信息
+var initGoods4Edit = function() {
+	$.ajax({
+		type : "POST",
+		url : path_ + "/view/shop/goodsManager/goodsInfoAction!loadGoods.action",
+		dataType : "json",
+		data: {"goodsVO.id":goodsId},
+		success : function(json) {
+			cateId = json.goodsMap.cateId;
+			//回显值
+			setPage(json.goodsMap,json.goodsImgList);
+			//查询类别下的品牌
+			//查询类别属性属性值
+			queryCatePropPropVal();
+		},
+		error: function(e){
+			console.log("查询类别属性属性值异常");
+		} 
+	});
+};
+
+var setPage = function(json,goodsImgList) {
+	$("#cateId").val(json.cateId);
+	$("#cateName").html(json.cateName);
+	$("#title").val(json.title);
+	$("#subTitle").val(json.subTitle);
+	ue.addListener("ready", function() {
+    	// editor准备好之后才可以使用
+    	ue.setContent(json.detail);
+    });
+	$("#purchasePrice").val(json.purchasePrice);
+	$("#marketPrice").val(json.marketPrice);
+	$("#salePrice").val(json.salePrice);
+	$("#promotionPrice").val(json.promotionPrice);
+	$("#availableNum").val(json.availableNum);
+	$("#goodsNo").val(json.goodsNo);
+	$(":radio[name='goods.freightType'][value='" + json.freightType + "']").attr("checked", "checked"); //attr和prop都有效
+	$(":radio[name='goods.publishType'][value='" + json.publishType + "']").prop("checked", "checked"); //attr和prop都有效
+	console.log(json.detail);
+	console.log(json.params);
+	//设置图片
+	var imgIdHiddens = $("input[name='imgIdHidden']");
+	for (var i = 0; i < goodsImgList.length; i++) {
+		var goodsImg = goodsImgList[i];
+		var $img = $(imgIdHiddens[i]);
+		$img.val(goodsImg.id);
+		$img.prev().attr("src",imageServer_+"/"+goodsImg.imgPath+"/"+goodsImg.fileName);
+	}
+}
+
+//新增商品-初始化商品信息
+var initGoods4Add = function() {
+	//查询类别下的品牌
 	//查询类别属性属性值
 	queryCatePropPropVal();
-});
+};
 
 //var cateInfo = new Array(); //类别列表
 var propInfo = new Array(); //属性列表

@@ -3,6 +3,7 @@ package com.sunchin.shop.admin.goodsManager.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import com.sunchin.shop.admin.dict.GoodsStsEnum;
 import com.sunchin.shop.admin.dict.PublishTypeEnum;
 import com.sunchin.shop.admin.goodsManager.bean.GoodsBean;
 import com.sunchin.shop.admin.goodsManager.dao.ScGoodsDAO;
+import com.sunchin.shop.admin.goodsManager.dao.ScGoodsImageDAO;
 import com.sunchin.shop.admin.goodsManager.service.GoodsService;
 import com.sunchin.shop.admin.pojo.ScChildGoods;
 import com.sunchin.shop.admin.pojo.ScGoods;
@@ -42,6 +44,8 @@ import framework.util.DateUtils;
 public class GoodsServiceImpl implements GoodsService {
 	@Resource(name = "goodsDAO")
 	private ScGoodsDAO goodsDAO;
+	@Resource(name = "goodsImageDAO")
+	private ScGoodsImageDAO goodsImageDAO;
 	
 	/**
 	 * 保存商品
@@ -126,8 +130,8 @@ public class GoodsServiceImpl implements GoodsService {
 			goodsImageList = new ArrayList<ScGoodsImage>(imgIds.length);
 			imageUseRecList = new ArrayList<ScImageUseRec>(imgIds.length);
 			for(int i = 0; i < imgIds.length; i++) {
-				goodsImageList.add(this.buildGoodsImageVo(goodsVo));
-				imageUseRecList.add(this.buildImageUseRecVo(goodsVo));
+				goodsImageList.add(this.buildGoodsImageVo(goodsVo,imgIds[i]));
+				imageUseRecList.add(this.buildImageUseRecVo(goodsVo,imgIds[i]));
 			}
 		}
 		
@@ -144,6 +148,29 @@ public class GoodsServiceImpl implements GoodsService {
 		db.insert(imageUseRecList);
 	}
 	
+
+	/**
+	 * 根据ID查询商品
+	 * @param goods
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public Map loadGoods(ScGoods goodsVO) throws Exception {
+		return this.goodsDAO.queryMapById(goodsVO.getId());
+	}
+	
+	/**
+	 * 查询商品图片
+	 * @param goodsVO
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public List loadGoodsImages(ScGoods goodsVO) throws Exception {
+		return this.goodsImageDAO.queryListByGoodsId(goodsVO.getId());
+	}
+
 	private ScChildGoods buildChildGoodsVo(ScGoods goodsVo, JSONObject goodsChildJson) {
 		Double purchasePrice = CommonUtils.getDouble(goodsChildJson.get("purchasePrice"));
         Double marketPrice = CommonUtils.getDouble(goodsChildJson.get("marketPrice"));
@@ -232,25 +259,26 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsVo;
 	}
 	
-	private ScGoodsImage buildGoodsImageVo(ScGoods goodsVo) {
+	private ScGoodsImage buildGoodsImageVo(ScGoods goodsVo, String imageId) {
 		ScGoodsImage goodsImageVo = new ScGoodsImage();
 		goodsImageVo.setId(UUID.randomUUID().toString());
 		goodsImageVo.setGoodsId(goodsVo.getId());
+		goodsImageVo.setImageId(imageId);
 		goodsImageVo.setCreateTime(goodsVo.getCreateTime());
 		goodsImageVo.setCreateUserId(goodsVo.getCreateUserId());
 		goodsImageVo.setFlag(FlagEnum.ACT.getCode());
 		return goodsImageVo;
 	}
 	
-	private ScImageUseRec buildImageUseRecVo(ScGoods goodsVo) {
+	private ScImageUseRec buildImageUseRecVo(ScGoods goodsVo, String imgId) {
 		ScImageUseRec imageUseRecVo = new ScImageUseRec();
 		imageUseRecVo.setId(UUID.randomUUID().toString());
 		imageUseRecVo.setBusiId(goodsVo.getId());
+		imageUseRecVo.setImgId(imgId);
 		imageUseRecVo.setBusiType(BusiTypeEnum.GOODS.getCode());
 		imageUseRecVo.setCreateTime(goodsVo.getCreateTime());
 		imageUseRecVo.setCreateUserId(goodsVo.getCreateUserId());
 		imageUseRecVo.setFlag(FlagEnum.ACT.getCode());
 		return imageUseRecVo;
 	}
-
 }
