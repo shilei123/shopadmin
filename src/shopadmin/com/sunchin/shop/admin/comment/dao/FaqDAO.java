@@ -1,7 +1,5 @@
 package com.sunchin.shop.admin.comment.dao;
 
-import java.io.BufferedReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.lob.SerializableClob;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -102,7 +99,7 @@ public class FaqDAO extends PageDAO{
 	}
 	
 	public Object[] queryPojoById(String id){
-		final StringBuffer sql = new StringBuffer();
+		StringBuffer sql = new StringBuffer();
 		sql.append(" select t.id,t.faq_title,t.faq_content,t2.name faq_category,t.parent_faq_id,t3.name as hot_question,t.order_,t.create_time ,t1.name faq_type,t.faq_type_id,t.flag,t.belong from SC_FAQ t ");
 		sql.append(" left join sc_dictionary t1 on t1.code = t.faq_type and t1.type=? ");
 		sql.append(" left join sc_dictionary t2 on t2.code = t.category and t2.type=?");
@@ -112,7 +109,7 @@ public class FaqDAO extends PageDAO{
 		sql.append(" and t2.flag=? ");
 		sql.append(" and t3.flag=? ");
 		sql.append(" and t.id=? ");
-		final List<String> params = new ArrayList<String>(8);
+		List<String> params = new ArrayList<String>(8);
 		params.add(DictionaryTypeEnum.FAQ_TYPE.getType());
 		params.add(DictionaryTypeEnum.FAQ_CATEGORY.getType());
 		params.add(DictionaryTypeEnum.HOT_QUESTION.getType());
@@ -121,9 +118,10 @@ public class FaqDAO extends PageDAO{
 		params.add(FlagEnum.ACT.getCode());
 		params.add(FlagEnum.ACT.getCode());
 		params.add(id);
+		
 		List<Object[]> list = queryBySql(sql, params);
 		if(list!=null && !list.isEmpty()){
-			getClob(list.get(0));
+			//getClob(list.get(0));
 			return list.get(0);
 		}
 		return null;
@@ -133,7 +131,7 @@ public class FaqDAO extends PageDAO{
 	 * Clob转String
 	 * @param objArr
 	 */
-	private void getClob(Object[] objArr) {
+	/*private void getClob(Object[] objArr) {
 		SerializableClob c = null;
 		StringBuffer sb = null;
 		for (int i = 0; i < objArr.length; i++) {
@@ -152,7 +150,7 @@ public class FaqDAO extends PageDAO{
 			  		e.printStackTrace();
 			  	} 
 		}
-	}
+	}*/
 
 	private List<Object[]> queryBySql(final StringBuffer sql, final List<String> params) {
 		return hibernateTemplate.execute(new HibernateCallback() {

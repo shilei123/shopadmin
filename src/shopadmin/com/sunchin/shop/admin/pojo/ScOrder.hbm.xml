@@ -61,6 +61,9 @@
         <property name="createUserId" type="java.lang.String">
             <column name="CREATE_USER_ID" length="36" />
         </property>
+        <property name="userId" type="java.lang.String">
+            <column name="USER_ID" length="36" />
+        </property>
         <property name="flag" type="java.lang.String">
             <column name="FLAG" length="1" />
         </property>
