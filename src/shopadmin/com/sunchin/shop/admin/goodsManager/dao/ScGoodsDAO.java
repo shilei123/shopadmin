@@ -42,7 +42,12 @@ public class ScGoodsDAO extends PageDAO {
 	}
 	
 	public Map queryMapById(String id) {
-		StringBuffer sql = new StringBuffer(" select t.*,c.cate_name from sc_goods t left join sc_category c on t.cate_id=c.id where t.id=? ");
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select t.*, c.cate_name,r.available_num ");
+		sql.append(" from sc_goods t ");
+		sql.append(" left join sc_category c on t.cate_id = c.id ");
+		sql.append(" left join sc_repertory r on r.goods_id = t.id ");
+		sql.append(" where t.id = ? ");
 		List list = DBUtil.getInstance().queryBySQL(sql.toString(), id);
 		if(list != null && !list.isEmpty()) {
 			return (Map) list.get(0);

@@ -21,6 +21,7 @@ import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.GoodsStsEnum;
 import com.sunchin.shop.admin.dict.PublishTypeEnum;
 import com.sunchin.shop.admin.goodsManager.bean.GoodsBean;
+import com.sunchin.shop.admin.goodsManager.dao.ScChildGoodsDAO;
 import com.sunchin.shop.admin.goodsManager.dao.ScGoodsDAO;
 import com.sunchin.shop.admin.goodsManager.dao.ScGoodsImageDAO;
 import com.sunchin.shop.admin.goodsManager.service.GoodsService;
@@ -39,13 +40,15 @@ import framework.helper.RequestHelper;
 import framework.util.CommonUtils;
 import framework.util.DateUtils;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked","rawtypes"})
 @Service("goodsService")
 public class GoodsServiceImpl implements GoodsService {
 	@Resource(name = "goodsDAO")
 	private ScGoodsDAO goodsDAO;
 	@Resource(name = "goodsImageDAO")
 	private ScGoodsImageDAO goodsImageDAO;
+	@Resource(name = "childGoodsDAO")
+	private ScChildGoodsDAO childGoodsDAO;
 	
 	/**
 	 * 保存商品
@@ -85,8 +88,8 @@ public class GoodsServiceImpl implements GoodsService {
 		//商品VO
 		ScGoods goodsVo = this.buildGoodsVo(goodsBean);
 		List<ScChildGoods> childGoodsList = null; //子商品VO
+		List<ScRepertory> repList = null; //库存VO
 		List<ScGoodsCatePropPropVal> gcppList = null; //商品、类别属性属性值关系VO
-		ScRepertory repVo = null; //库存VO
 		List<ScGoodsImage> goodsImageList = null; //商品图片vo
 		List<ScImageUseRec> imageUseRecList = null; //图片资源占用vo
 		
@@ -97,6 +100,7 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		if(childGoodsArr != null && !childGoodsArr.isEmpty()) {
 			childGoodsList = new ArrayList<ScChildGoods>(childGoodsArr.size());
+			repList = new ArrayList<ScRepertory>(childGoodsArr.size());
             gcppList = new ArrayList<ScGoodsCatePropPropVal>();
             
             //循环子商品
@@ -110,18 +114,20 @@ public class GoodsServiceImpl implements GoodsService {
 	            ScChildGoods childGoodsVo = this.buildChildGoodsVo(goodsVo, goodsChildJson);
 	            childGoodsList.add(childGoodsVo);
 	            
+	            //库存VO
+	            repList.add(this.buildRepertoryVo(goodsVo, childGoodsVo, availableNum));
+	            
 	            //商品、类别属性属性值关系VO
 	            for (int j = 0; j < cppvInfos.length; j++) {
-	            	String cppvId = cppvInfos[j].split(":")[0];
+	            	/*String cppvId = cppvInfos[j].split(":")[0];*/
+	            	String cppvId = cppvInfos[j];
 	            	gcppList.add(this.buildGoodsCatePropPropValVo(goodsVo, childGoodsVo, cppvId));
 	            }
-	            
-	            //库存VO
-	            repVo = this.buildRepertoryVo(goodsVo, childGoodsVo, availableNum);
 			}
 		} else {
+			repList = new ArrayList<ScRepertory>(1);
 			//库存VO
-            repVo = this.buildRepertoryVo(goodsVo, null, CommonUtils.getInteger(goodsBean.getAvailableNum()));
+			repList.add(this.buildRepertoryVo(goodsVo, null, CommonUtils.getInteger(goodsBean.getAvailableNum())));
 		}
 		
 		//图片
@@ -143,9 +149,12 @@ public class GoodsServiceImpl implements GoodsService {
 		if(gcppList != null) { 
 			db.insert(gcppList);
 		}
-		db.insert(repVo);
+		if(repList != null) {
+			db.insert(repList);
+		}
 		db.insert(goodsImageList);
 		db.insert(imageUseRecList);
+		goodsBean.setId(goodsVo.getId());
 	}
 	
 
@@ -169,6 +178,17 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public List loadGoodsImages(ScGoods goodsVO) throws Exception {
 		return this.goodsImageDAO.queryListByGoodsId(goodsVO.getId());
+	}
+	
+	/**
+	 * 查询子商品列表
+	 * @param goodsVO
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public List loadChildGoods(ScGoods goodsVO) throws Exception {
+		return this.childGoodsDAO.queryListByGoodsId(goodsVO.getId());
 	}
 
 	private ScChildGoods buildChildGoodsVo(ScGoods goodsVo, JSONObject goodsChildJson) {
@@ -226,6 +246,7 @@ public class GoodsServiceImpl implements GoodsService {
 		goodsVo.setId(UUID.randomUUID().toString());
 		goodsVo.setTitle(goodsBean.getTitle());
 		goodsVo.setSubTitle(goodsBean.getSubTitle());
+		goodsVo.setCateId(goodsBean.getCateId());
 		goodsVo.setBrandId(goodsBean.getBrandId());
 		goodsVo.setDetail(goodsBean.getDetail());
 		goodsVo.setParams(goodsBean.getParams());
