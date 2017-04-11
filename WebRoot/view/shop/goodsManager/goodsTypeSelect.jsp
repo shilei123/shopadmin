@@ -95,7 +95,7 @@ $("#nextBtn").click(function() {
 		$("#selectValue").val(four);
 	} */
 	
-	window.location.href = path_ + "/view/shop/goodsManager/goodsAdd.jsp?selectValue=" + $("#selectValue").val() + "&selectText=" + $("#selectText").text();
+	window.location.href = path_ + "/view/shop/goodsManager/goodsAdd.jsp?cateId=" + $("#selectValue").val() + "&cateName=" + $("#selectText").text();
 });
 
 $("#firstCategory").change(function() {

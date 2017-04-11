@@ -15,20 +15,15 @@
 <script type="text/javascript" charset="utf-8" src="${path }/ueditor/lang/zh-cn/zh-cn.js"></script>
 <link rel="stylesheet" href="goodsAdd.css" />
 <%
-
-	String goodsId = request.getParameter("goodsId")==null?"":request.getParameter("goodsId");
-	String cateId = request.getParameter("cateId")==null?"":request.getParameter("cateId");
-	String cateName = request.getParameter("cateName")==null?"":new String(request.getParameter("cateName").getBytes("ISO-8859-1"),"UTF-8");
+	String selectValue = request.getParameter("selectValue");
+	String selectText = new String(request.getParameter("selectText").getBytes("ISO-8859-1"),"UTF-8");
+	String goodsId = request.getParameter("goodsId");
 %>
 <script type="text/javascript">
-	var goodsId = "<%=goodsId %>";
-	var cateId = "<%=cateId %>";
-	var cateName = "<%=cateName %>";
+	var cateId = "<%=selectValue %>";
 </script>
 </head>
 <body>
-	<input type="hidden" id="cateId" value=""/>
-	<input type="hidden" id="goodsId" value=""/>
 	<!-- content start -->
 	<div class="am-cf ">
 		<div class="admin-content">
@@ -46,9 +41,8 @@
 							<tr>
 								<td class="table_title frame-required"><span>*</span>商品分类：</td>
 								<td valign="bottom">
-									<span id="cateName"></span>&nbsp;
-									<button class="am-btn am-btn-warning am-btn-xs am-round" 
-									onclick="window.location.href='${path}/view/shop/goods/goodsTypeSelect.jsp'">编辑</button>
+									<%=selectText %>&nbsp;<button class="am-btn am-btn-warning am-btn-xs am-round" onclick="window.location.href='${path}/view/shop/goods/goodsTypeSelect.jsp'">编辑</button>
+									<input type="hidden" id="cateId" value="<%=selectValue %>"/>
 								</td>
 							</tr>
 							<tr>
@@ -76,7 +70,7 @@
 												<table id="propertyEditTable"><thead><tr></tr></thead><tbody><tr></tr></tbody></table>
 											</td>
 											<td valign="middle">
-												<div id="addPropertyDiv"><img src="${path}/images/add2.png"/></div><!-- <a href="javascript:void(0);" id="testbtn">test</a> -->
+												<div id="addPropertyDiv"><img src="${path}/images/add2.png"/></div>
 											</td>
 										</tr>
 									</table>

@@ -9,6 +9,7 @@ public class ScGoods implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = -1215697287918126549L;
 	private String id;
+	private String cateId;
 	private String brandId;
 	private String title;
 	private String subTitle;
@@ -30,7 +31,8 @@ public class ScGoods implements java.io.Serializable {
 	private String freightId;
 	private String publishType;
 	private Date publishTime;
-	private String sts;
+	private String goodsSts;
+	private String auditSts;
 	private Date createTime;
 	private String createUserId;
 	private String flag;
@@ -42,6 +44,14 @@ public class ScGoods implements java.io.Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getCateId() {
+		return cateId;
+	}
+
+	public void setCateId(String cateId) {
+		this.cateId = cateId;
 	}
 
 	public String getBrandId() {
@@ -244,12 +254,20 @@ public class ScGoods implements java.io.Serializable {
 		this.publishTime = publishTime;
 	}
 
-	public String getSts() {
-		return sts;
+	public String getGoodsSts() {
+		return goodsSts;
 	}
 
-	public void setSts(String sts) {
-		this.sts = sts;
+	public void setGoodsSts(String goodsSts) {
+		this.goodsSts = goodsSts;
+	}
+
+	public String getAuditSts() {
+		return auditSts;
+	}
+
+	public void setAuditSts(String auditSts) {
+		this.auditSts = auditSts;
 	}
 
 }

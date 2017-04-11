@@ -63,7 +63,8 @@
 				<prop key="hibernate.dialect">framework.db.MyOracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop  key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.connection.SetBigStringTryClob">true</prop>
 			</props>
 		</property>
 	</bean>
