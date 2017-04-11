@@ -52,7 +52,7 @@
 										<select id="status" name="queryParams.sts" data-am-selected="{btnWidth: '164px'}">
 										</select>
 										</td>
-										<td>
+										<td align="center">
 										<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>
 									</tr>

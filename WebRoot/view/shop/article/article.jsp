@@ -54,7 +54,7 @@
 											<select id="articleType" name="queryParams.articleType" data-am-selected="{btnWidth: '164px'}">
 											</select>
 										</td>
-										<td colspan="2">
+										<td colspan="2" style="padding-left: 20px;">
 											<button type="button" id="addBtn" class="am-btn am-btn-primary frame-search-button">新增</button>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>

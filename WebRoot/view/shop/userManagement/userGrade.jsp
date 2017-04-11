@@ -26,11 +26,11 @@
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
 										<td class="query_title" style="width:100px;">会员等级：</td>
-										<td>
+										<td width="200px">
 											<select id="gradeType" name="queryParams.gradeType" data-am-selected="{btnWidth: '164px'}">
 											</select>
 										</td>
-										<td>
+										<td align="left">
 											<button type="button" id="addBtn" class="am-btn am-btn-primary frame-search-button">新增</button>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>

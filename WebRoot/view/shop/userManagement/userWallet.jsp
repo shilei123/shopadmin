@@ -25,10 +25,10 @@
 							<div class="am-panel-bd am-collapse am-in frame-search-panel"id="collapse-panel-1">
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
-										<td class="query_title" >用户名：</td>
-										<td><input name="queryParams.userName" class="am-form-field"/></td>
+										<td class="query_title" width="100px">用户名：</td>
+										<td width="200px"><input name="queryParams.userName" class="am-form-field"/></td>
 										<td class="query_title" style="width:100px;">钱包类型：</td>
-										<td>
+										<td width="200px">
 											<select id="purseType" name="queryParams.purseType" data-am-selected="{btnWidth: '164px'}">
 											</select>
 										</td>

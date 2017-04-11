@@ -52,7 +52,7 @@
 										<select id="couponType" name="queryParams.couponType" data-am-selected="{btnWidth: '164px'}">
 										</select>
 										</td>
-										<td colspan="2">
+										<td colspan="2" align="center">
 											<button type="button" id="addBtn" class="am-btn am-btn-primary frame-search-button">新增</button>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>
