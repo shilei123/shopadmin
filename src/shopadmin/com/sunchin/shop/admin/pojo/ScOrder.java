@@ -24,6 +24,7 @@ public class ScOrder implements java.io.Serializable {
 	private String parentOrderId;
 	private Date createTime;
 	private String createUserId;
+	private String userId;
 	private String flag;
 	private String belong;
 
@@ -193,6 +194,14 @@ public class ScOrder implements java.io.Serializable {
 
 	public void setBelong(String belong) {
 		this.belong = belong;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

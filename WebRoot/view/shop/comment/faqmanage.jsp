@@ -59,21 +59,22 @@
 										</td>
 										<td style="width:100px;">时间：</td>
 										<td>
-					        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-										  <input type="text" name="queryParams.startTime" id="startTime" class="am-form-field">
-										  <span class="am-input-group-btn am-datepicker-add-on">
-										    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-										  </span>
-										</div>
-										~
-										<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-										  <input type="text" name="queryParams.endTime" id="endTime" class="am-form-field">
-										  <span class="am-input-group-btn am-datepicker-add-on">
-										    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-										  </span>
-										</div>
-					        		</td>
+						        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+											  <input type="text" name="queryParams.startTime" id="startTime" class="am-form-field">
+											  <span class="am-input-group-btn am-datepicker-add-on">
+											    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+											  </span>
+											</div>
+											~
+											<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
+											  <input type="text" name="queryParams.endTime" id="endTime" class="am-form-field">
+											  <span class="am-input-group-btn am-datepicker-add-on">
+											    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+											  </span>
+											</div>
+					        			</td>
 									</tr>
+									<tr>
 										<td style="width:100px;">是否热点：</td>
 										<td style="width:200px;">
 											<div>
@@ -84,6 +85,8 @@
 												</select>
 											</div>
 										</td>
+									</tr>
+									<tr>
 										<td style="width:100px;">标题：</td>
 										<td style="width:200px;">
 											<div>
@@ -93,6 +96,7 @@
 										<td>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>
+									</tr>
 								</table>
 							</div>
 						</div>
@@ -135,21 +139,15 @@
 		        	<table class="frame-modal-table" border="0" bordercolor="black">
 			        	<tr>
 			        		<td width="100" class="table_title">类型：</td>
-			        		<td>
-			        			<select id="faqType2" disabled="disabled"></select>
-			        		</td>
+			        		<td><input id="faqType2" class="am-form-field" style="width:90%" disabled="disabled"/></td>
 			        	</tr>
 			        	<tr>
 			        		<td width="100" class="table_title">分类：</td>
-			        		<td>
-			        			<select id="category2" disabled="disabled"></select>
-			        		</td>
+			        		<td><input id="category2" class="am-form-field" style="width:90%" disabled="disabled"/></td>
 			        	</tr>
 			        	<tr>
 			        		<td width="100" class="table_title">是否热点：</td>
-			        		<td>
-			        			<select id="hotQuestion2" disabled="disabled"></select>
-			        		</td>
+			        		<td><input id="hotQuestion2" class="am-form-field" style="width:90%" disabled="disabled"/></td>
 			        	</tr>
 			        	<tr>
 			        		<td class="table_title">排序：</td>
