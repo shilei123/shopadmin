@@ -61,11 +61,11 @@
 											</select>
 										</td>
 										<td class="query_title" style="width:100px;">操作类型：</td>
-										<td>
+										<td colspan="2">
 											<select id="optionType" name="queryParams.optionType" data-am-selected="{btnWidth: '164px'}">
 											</select>
 										</td>
-										<td colspan="1" >
+										<td>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>
 										</tr>

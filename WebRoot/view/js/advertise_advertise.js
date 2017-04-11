@@ -1,7 +1,14 @@
 var AdvertiseLinkkindHtml = "";
 var AdvertiseTypeHtml = "";
 var AdvertiseIsuseHtml = "";
-
+//加载layui的laydate组件
+layui.use('laydate', function(){});
+$("#starttime").click(function() {
+	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
+});
+$("#endtime").click(function() {
+	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
+});	
 $(function() {
 	queryAdvertise();
 	findAdvertiseType();

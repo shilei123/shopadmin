@@ -81,6 +81,19 @@ public class EventsAction extends PageAction{
 		return Action.SUCCESS;
 	}
 
+	/**
+	 * 删除活动商品
+	 * @return
+	 */
+	public String delEventsGoods(){
+		try {
+			eventsService.deleteEventsGoods(eventsGoods.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
 	public String queryEventsType(){
 		try {
 			dictionaryList = dictService.getDictByType(DictionaryTypeEnum.ADVERTISE_ISUSE.getType());

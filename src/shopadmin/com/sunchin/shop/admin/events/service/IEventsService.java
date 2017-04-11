@@ -18,4 +18,6 @@ public interface IEventsService {
 
 	void saveEvents(ScEvents events,String eventsGoodsList) throws Exception;
 
+	void deleteEventsGoods(String id) throws Exception;
+
 }

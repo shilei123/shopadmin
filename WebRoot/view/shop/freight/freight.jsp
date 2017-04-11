@@ -25,8 +25,8 @@
 							<div class="am-panel-bd am-collapse am-in frame-search-panel"id="collapse-panel-1">
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
-										<td class="query_title" >模板名称：</td>
-										<td><input name="queryParams.templateName" class="am-form-field"/></td>
+										<td class="query_title" width="100px">模板名称：</td>
+										<td width="200px"><input name="queryParams.templateName" class="am-form-field"/></td>
 					        			<td>
 											<button type="button" id="addBtn" class="am-btn am-btn-primary frame-search-button">新增</button>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>

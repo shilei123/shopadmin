@@ -57,7 +57,7 @@
 											<select id="identityStatus" name="queryParams.identityStatus" data-am-selected="{btnWidth: '164px'}">
 											</select>
 										</td>
-										<td colspan="2" align="left">
+										<td colspan="2" style="padding-left: 20px;">
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>
 									</tr>

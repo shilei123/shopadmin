@@ -8,8 +8,11 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import com.sunchin.shop.admin.dict.AuditStsEnum;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
+import com.sunchin.shop.admin.dict.PublishTypeEnum;
+import com.sunchin.shop.admin.dict.PutawayEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
 import com.sunchin.shop.admin.pojo.ScUserBase;
 import com.sunchin.shop.admin.pojo.ScEvents;
@@ -44,7 +47,7 @@ public class AdvertiseDAO extends PageDAO{
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t1.memo,t2.name linkkind,t1.ordernumb,t3.name isuse, ");
-		sql.append(" t1.type,t1.kind,to_char(t1.start_time,'yyyy-mm-dd') start_time,to_char(t1.end_time,'yyyy-mm-dd') end_time,t1.create_time ");
+		sql.append(" t1.type,t1.kind,to_char(t1.start_time,'yyyy-mm-dd hh24:mi:ss') start_time,to_char(t1.end_time,'yyyy-mm-dd hh24:mi:ss') end_time,t1.create_time ");
 		sql.append(" from sc_advertise t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.linkkind ");
 		sql.append(" left join sc_dictionary t3 on t3.code=t1.isuse ");
@@ -66,12 +69,12 @@ public class AdvertiseDAO extends PageDAO{
 			String startTime = pageBean.getQueryParams().get("startRegTime");
 			if (StringUtils.isNotBlank(startTime)){
 				params.add(startTime);
-				sql.append(" and t1.starttime >= to_date(?,'yyyy-MM-dd hh24:mi:ss')");
+				sql.append(" and t1.start_time >= to_date(?,'yyyy-MM-dd hh24:mi:ss')");
 			}
 			String endTime = pageBean.getQueryParams().get("endRegTime");
 			if (StringUtils.isNotBlank(endTime)){
 				params.add(endTime+" 23:59:59 ");
-				sql.append(" and t1.endtime <= to_date(?,'yyyy-MM-dd hh24:mi:ss')");
+				sql.append(" and t1.end_time <= to_date(?,'yyyy-MM-dd hh24:mi:ss')");
 			}
 		}
 		sql.append(" order by t1.create_time desc ");
@@ -81,7 +84,7 @@ public class AdvertiseDAO extends PageDAO{
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> findAdvertiseList(String id) {
-		StringBuffer sql = new StringBuffer(" select t1.*,t2.name infoName,t4.goods_name,t5.name events_name,t6.cate_name ");
+		StringBuffer sql = new StringBuffer(" select t1.*,to_char(t1.start_time,'yyyy-mm-dd hh24:mi:ss') start_time,to_char(t1.end_time,'yyyy-mm-dd hh24:mi:ss') end_time,t2.name infoName,t4.goods_name,t5.name events_name,t6.cate_name ");
 		sql.append(" from sc_advertise t1 ");
 		sql.append(" left join sc_events t2 on t2.id=t1.imglink ");
 		sql.append(" left join sc_goods t4 on t4.id=t1.imglink ");
@@ -113,7 +116,9 @@ public class AdvertiseDAO extends PageDAO{
 	public int queryGoodsCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
-		params.add(DictionaryTypeEnum.ISUSE.getType());
+		/*params.add(DictionaryTypeEnum.ISUSE.getType());
+		params.add(PutawayEnum.YES.getCode());
+		params.add(AuditStsEnum.PASS.getCode());*/
 		String sql = this.goodsWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
@@ -122,7 +127,9 @@ public class AdvertiseDAO extends PageDAO{
 	public List<ScGoods> queryGoodsPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
-		params.add(DictionaryTypeEnum.ISUSE.getType());
+		/*params.add(DictionaryTypeEnum.ISUSE.getType());
+		params.add(PutawayEnum.YES.getCode());
+		params.add(AuditStsEnum.PASS.getCode());*/
 		String sql = this.goodsWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
@@ -133,8 +140,10 @@ public class AdvertiseDAO extends PageDAO{
 		sql.append(" from  sc_goods t1 ");
 		sql.append(" left join sc_brand t2 on t1.brand_id=t2.id ");
 		sql.append(" left join sc_dictionary t3 on t3.code=t1.isuse ");
-		sql.append(" where t1.isuse=? ");
-		sql.append(" and t3.type=? ");
+		sql.append(" where t1.flag=?");
+		/*sql.append(" and t3.type=? ");
+		sql.append(" and t1.putaway=?");
+		sql.append(" and t1.auditSts=?");*/
 		
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String goodsName = pageBean.getQueryParams().get("goodsName");

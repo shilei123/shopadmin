@@ -103,27 +103,21 @@
 			  				<td width="100" class="table_title">广告名称:</td>
 			  				<td colspan="3">
 			  					<input type="hidden" name="advertise.id" id="id" /> 
-			  					<input name="advertise.name" id="name" style="width: 83.5%;" class="am-form-field" required="true"/> 
+			  					<input name="advertise.name" id="name" style="width: 92%;" class="am-form-field" required="true"/> 
 			  				</td>
 			  			</tr>
 			  			<tr>
 			        		<td>广告开始时间：</td>
 					   		<td valign="top">
-							    <div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-								   <input type="text" name="advertise.startTime" id="starttime" class="am-form-field" style="width: 120px">
-							       <span class="am-input-group-btn am-datepicker-add-on">
-								   <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-								</span>
-								</div>
+					   		<div>
+					   		<input class="am-form-field" name="advertise.startTime" id="starttime" style="width:152px"/>
+					   		</div>
 							</td>
 							<td>广告结束时间：</td>
 							<td>
-								<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-							       <input type="text" name="advertise.endTime" id="endtime" class="am-form-field" style="width: 120px">
-								   <span class="am-input-group-btn am-datepicker-add-on">
-								   <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-								</span>
-						    	</div>
+							<div>
+							<input class="am-form-field" name="advertise.endTime" id="endtime" style="width:152px"/>
+							</div>
 	        				</td>
 			        	</tr>
 			  		<!-- 	<tr>
