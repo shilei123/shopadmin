@@ -47,9 +47,9 @@ public class CouponDAO extends PageDAO{
 		sql.append(" from sc_coupon t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.coupon_type ");
 		sql.append(" left join sc_dictionary t3 on t3.code=t1.coupon_status ");
-		sql.append(" where t1.coupon_flag=?");
-		sql.append(" and t2.type=?");
-		sql.append(" and t3.type=?");
+		sql.append(" where t1.flag=? ");
+		sql.append(" and t2.type=? ");
+		sql.append(" and t3.type=? ");
 		
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String couponName = pageBean.getQueryParams().get("couponName");
