@@ -246,11 +246,25 @@
 	});
     
     //选中最后一个tab
-    var  selectLastTab = function() {
+    var selectLastTab = function() {
     	var index = $nav.children('li').length;
 		$tab.tabs('open', index > 0 ? index - 1 : index + 1);
     };
 	
+  	//关闭tab
+    var closeTab = function(menuId) {
+    	var $menu = $("#"+menuId);
+    	var $item = $menu.closest('li');
+		var index = $nav.children('li').index($item);
+      
+		$item.remove();
+		$bd.find('.am-tab-panel').eq(index).remove();
+
+		$tab.tabs('open', index > 0 ? index - 1 : index + 1);
+		$tab.tabs('refresh');
+		//selectLastTab();
+    };
+    
 	var addTab = function(menuId,menuName,menuUrl) {
 		var nav = '<li><span class="am-icon-close" id="'+menuId+'"></span>' +
         	'<a href="#tab'+tabCounter+'"> ' + menuName + '</a></li>';
@@ -263,6 +277,8 @@
     };
     
   	var addMenu = function(menuId,menuName,menuUrl) {
+  		menuUrl += menuUrl.indexOf("?")>0?"&tabId="+menuId:"?tabId="+menuId;
+  		
   		var $menu = $("#"+menuId);
   		if($menu.length==0) {
   			addTab(menuId,menuName,menuUrl);

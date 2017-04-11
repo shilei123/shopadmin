@@ -15,7 +15,6 @@
 <script type="text/javascript" charset="utf-8" src="${path }/ueditor/lang/zh-cn/zh-cn.js"></script>
 <link rel="stylesheet" href="goodsAdd.css" />
 <%
-
 	String goodsId = request.getParameter("goodsId")==null?"":request.getParameter("goodsId");
 	String cateId = request.getParameter("cateId")==null?"":request.getParameter("cateId");
 	String cateName = request.getParameter("cateName")==null?"":new String(request.getParameter("cateName").getBytes("ISO-8859-1"),"UTF-8");

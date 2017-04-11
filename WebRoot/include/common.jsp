@@ -14,10 +14,14 @@ String imageServer = ConfigUtil.getInstance().getImageServer();
 String attachServer = ConfigUtil.getInstance().getAttachServer();
 request.setAttribute("imageServer", imageServer);
 request.setAttribute("attachServer", attachServer);
+
+String thisTabId = request.getParameter("tabId")==null?"":request.getParameter("tabId");
+request.setAttribute("thisTabId", thisTabId);
 %>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 <!--
+var thisTabId = "${thisTabId}";
 var path_ = "${path}";
 var basePath_ = "${basePath}";
 var imageServer_ = "${imageServer}";

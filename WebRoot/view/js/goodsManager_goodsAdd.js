@@ -389,6 +389,8 @@ var checkChildGoodsFieldThis = function(obj) {
 
 //提交表单
 $("#saveBtn").click(function() {
+	closeThisTab();
+	return;
 	if(!checkPageData()) 
 		return;
 	
@@ -402,8 +404,15 @@ $("#saveBtn").click(function() {
 		success : function(json) {
 			if(json.goods.id != null) {
 				$("#goodsId").val(json.goods.id);
-				showAlert("商品录入成功！");
+				showMsg("操作成功！");
+				
+				if(goodsId != "") { //编辑
+					closeTab("editGoodsTabId"+goodsId);
+				} else { //关闭新增
+					closeThisTab();
+				}
 			}
+			
 		}, error: function(e) {
 			console.log("error");
 		} 

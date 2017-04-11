@@ -35,6 +35,25 @@ var openTab = function(tabId, tabName, tabUrl) {
 		window.top.addMenu(tabId, tabName, tabUrl);
 	}
 };
+var closeTab = function(tabId) {
+	if(window.parent.parent!=null) {
+		window.parent.parent.closeTab(tabId);
+	} else if(window.parent!=null) { 
+		window.top.closeTab(tabId);
+	} else if(window.top!=null) {
+		window.top.closeTab(tabId);
+	}
+};
+
+var closeThisTab = function() {
+	if(window.parent.parent!=null) {
+		window.parent.parent.closeTab(thisTabId);
+	} else if(window.parent!=null) { 
+		window.top.closeTab(thisTabId);
+	} else if(window.top!=null) {
+		window.top.closeTab(thisTabId);
+	}
+};
 var showLoading = function() {
 	/*var index = layer.load(2, {
     	shade: [0.1,'#fff'] //0.1透明度的白色背景
