@@ -19,7 +19,7 @@ public class ScCoupon  implements java.io.Serializable {
      private Integer couponExpiryDate;
      private String couponRemark;
      private String couponStatus;
-     private String couponFlag;
+     private String flag;
      private Date createTime;
      private String optionAdminid;
      private Date optionTime;
@@ -119,16 +119,13 @@ public class ScCoupon  implements java.io.Serializable {
 		this.couponStatus = couponStatus;
 	}
 
-
-	public String getCouponFlag() {
-		return couponFlag;
+	public String getFlag() {
+		return flag;
 	}
 
-
-	public void setCouponFlag(String couponFlag) {
-		this.couponFlag = couponFlag;
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
-
 
 	public Date getCreateTime() {
 		return createTime;
