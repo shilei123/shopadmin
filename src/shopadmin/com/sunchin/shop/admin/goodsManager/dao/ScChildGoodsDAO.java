@@ -1,16 +1,19 @@
 package com.sunchin.shop.admin.goodsManager.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
+import com.sunchin.shop.admin.pojo.ScChildGoods;
 
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
 @SuppressWarnings("rawtypes")
-@Repository("childGoodsDAO")
+@Repository("scChildGoodsDAO")
 public class ScChildGoodsDAO extends PageDAO {
 	
 	public List queryListByGoodsId(String goodsId) {
@@ -39,7 +42,15 @@ public class ScChildGoodsDAO extends PageDAO {
 		sql.append(" left join sc_child_goods_temp cgt on cg.id=cgt.child_goods_id ");
 		sql.append(" where cg.goods_id=? ");
 		sql.append(" and   cg.flag=? ");
+		sql.append(" order by cg.create_time desc ");
 		List list = DBUtil.getInstance().queryBySQL(sql.toString(), goodsId, goodsId, FlagEnum.ACT.getCode());
 		return list;
+	}
+	
+	public List<ScChildGoods> queryPojoListByGoodsId(String goodsId) {
+		Map<String, String> params = new HashMap<String, String>(2);
+		params.put("goodsId", goodsId);
+		params.put("flag", FlagEnum.ACT.getCode());
+		return DBUtil.getInstance().queryByPojo(ScChildGoods.class, params);
 	}
 }

@@ -11,7 +11,7 @@ import framework.db.DBUtil;
 import framework.db.PageDAO;
 
 @SuppressWarnings("rawtypes")
-@Repository("goodsImageDAO")
+@Repository("scGoodsImageDAO")
 public class ScGoodsImageDAO extends PageDAO {
 	
 	public List queryListByGoodsId(String goodsId) {
@@ -33,5 +33,9 @@ public class ScGoodsImageDAO extends PageDAO {
 	
 	public ScGoods queryPojoById(String id) {
 		return (ScGoods) DBUtil.getInstance().get(ScGoods.class, id);
+	}
+	
+	public int deleteByGoodsId(String goodsId) {
+		return DBUtil.getInstance().executeSQL(" delete from sc_goods_image t where t.goods_id=? ", goodsId);
 	}
 }

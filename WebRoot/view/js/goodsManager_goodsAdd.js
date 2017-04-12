@@ -86,7 +86,7 @@ var setPage = function(json,goodsImgList,childGoodsList) {
 	for (var i = 0; i < goodsImgList.length; i++) {
 		var goodsImg = goodsImgList[i];
 		var $img = $(imgIdHiddens[i]);
-		$img.val(goodsImg.id);
+		$img.val(goodsImg.imageId);
 		$img.prev().attr("src",imageServer_+"/"+goodsImg.imgPath+"/"+goodsImg.fileName);
 	}
 	
@@ -115,7 +115,8 @@ var setPage = function(json,goodsImgList,childGoodsList) {
 	
 	//回显子商品
 	if(childGoodsList != undefined && childGoodsList != null && childGoodsList.length > 0) {
-		for (var i = 0; i < childGoodsList.length; i++) {
+		var len = childGoodsList.length;
+		for (var i = len-1; i >= 0; i--) {
 			var childGoods = childGoodsList[i];
 			var propNames = childGoods.propNames.split(",");
 			var valNames = childGoods.valNames.split(",");
@@ -232,8 +233,9 @@ $("#addPropertyDiv").click(function() {
 	showOrHideGoodsPriceTable();
 });
 
+//添加子商品
 var prePendGoodsChildTable = function(existsGoodsKey, childGoodsValue, childGoodsLabel, childGoods) {
-	var purchasePrice="",marketPrice="",salePrice="",promotionPrice="",availableNum="",childNo="";
+	var purchasePrice="",marketPrice="",salePrice="",promotionPrice="",availableNum="",childNo="",pkId="";
 	if(childGoods!=undefined && childGoods!=null){
 		purchasePrice = childGoods.purchasePrice;
 		marketPrice = childGoods.marketPrice;
@@ -241,6 +243,7 @@ var prePendGoodsChildTable = function(existsGoodsKey, childGoodsValue, childGood
 		promotionPrice = childGoods.promotionPrice;
 		availableNum = childGoods.availableNum;
 		childNo = childGoods.childNo;
+		pkId = childGoods.id;
 	}
 	var trHtml = "";
 	trHtml += "<tr>";
@@ -251,7 +254,8 @@ var prePendGoodsChildTable = function(existsGoodsKey, childGoodsValue, childGood
 	trHtml += "    <td>&nbsp;<input name='promotionPriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+promotionPrice+"'/>&nbsp;</td>";
 	trHtml += "    <td>&nbsp;<input name='availableNumInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+availableNum+"'/>&nbsp;</td>";
 	trHtml += "    <td>&nbsp;<input name='childNoInput' style=\"width:80px;\" value='"+childNo+"'/>&nbsp;</td>";
-	trHtml += "    <td>&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteGoodChilds(\""+existsGoodsKey+"\")'><span class='am-icon-remove'></i>删除</a>&nbsp;</td>";
+	trHtml += "    <td>&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteGoodChilds(\""+existsGoodsKey+"\")'><span class='am-icon-remove'></i>删除</a>&nbsp;";
+	trHtml += "    <input type='hidden' value='"+pkId+"'/></td>";
 	trHtml += "</tr>";
 	$("#goodsChildTable tbody").prepend(trHtml);
 };
@@ -342,13 +346,13 @@ var checkChildGoods = function(fieldName) {
 	var bool = true;
 	for(var i = 0; i < fields.length; i++) {
 		var field = $(fields[i]);
-		//var tdIndex = field.parent().index();
-		//var headText = field.parent().parent().parent().prev().children("tr:eq(0)").children("th:eq("+tdIndex+")").text().replace("*","");
+		/*var tdIndex = field.parent().index();
+		var headText = field.parent().parent().parent().prev().children("tr:eq(0)").children("th:eq("+tdIndex+")").text().replace("*","");*/
 		if(field.val().length==0) {
 			bool = false;
 			field.addClass("inputerror");
-			//showLayerMsg("请输入" + headText);
-			//field.focus();
+			/*showLayerMsg("请输入" + headText);
+			field.focus();*/
 		} else {
 			field.removeClass("inputerror");
 		}
@@ -389,13 +393,14 @@ var checkChildGoodsFieldThis = function(obj) {
 
 //提交表单
 $("#saveBtn").click(function() {
-	closeThisTab();
-	return;
+	//表单验证
 	if(!checkPageData()) 
 		return;
 	
+	//获取页面数据
 	var data = getPageData();
 	
+	//ajax保存
 	$.ajax({
 		type : "POST",
 		url : path_ + "/view/shop/goodsManager/goodsInfoAction!saveGoods.action",
@@ -412,7 +417,6 @@ $("#saveBtn").click(function() {
 					closeThisTab();
 				}
 			}
-			
 		}, error: function(e) {
 			console.log("error");
 		} 
@@ -530,11 +534,12 @@ var getPageData = function() {
 		var promotionPrice = $(tds[4]).children("input:eq(0)").val();
 		var availableNum = $(tds[5]).children("input:eq(0)").val();
 		var goodsNo = $(tds[6]).children("input:eq(0)").val();
+		var pkId = $(tds[7]).children("input:eq(0)").val();
 		
 		var tempjson = {"cppvStr":cppvStr,"purchasePrice":purchasePrice,
 						"marketPrice":marketPrice,"salePrice":salePrice,
 						"promotionPrice":promotionPrice,"availableNum":availableNum,
-						"goodsNo":goodsNo};
+						"goodsNo":goodsNo,"pkId":pkId};
 		childGoods.push(tempjson);
 	}
 	
@@ -587,4 +592,4 @@ var getPageData = function() {
 	
 	return data;
 };
-//-----------------------------------------------BEGIN 业务结束----------------------------------------------------
+//-----------------------------------------------BEGIN 业务结束------------------------------------------------------

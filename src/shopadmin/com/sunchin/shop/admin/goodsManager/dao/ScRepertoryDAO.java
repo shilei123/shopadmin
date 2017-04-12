@@ -14,8 +14,8 @@ import framework.db.DBUtil;
 import framework.db.PageDAO;
 
 @SuppressWarnings("rawtypes")
-@Repository("scGoodsDAO")
-public class ScGoodsDAO extends PageDAO {
+@Repository("scRepertoryDAO")
+public class ScRepertoryDAO extends PageDAO {
 	
 	public List queryGoodsPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
@@ -57,5 +57,9 @@ public class ScGoodsDAO extends PageDAO {
 	
 	public ScGoods queryPojoById(String id) {
 		return (ScGoods) DBUtil.getInstance().get(ScGoods.class, id);
+	}
+	
+	public int deleteByGoodsId(String goodsId) {
+		return DBUtil.getInstance().executeSQL(" delete from sc_repertory t where t.goods_id=? ", goodsId);
 	}
 }
