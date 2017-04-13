@@ -21,5 +21,12 @@
 				<param name="contentType">text/html</param>
 			</result>
 		</action>
+		<!-- 图片服务管理 -->
+		<action name="ueImageUpload" class="com.sunchin.shop.admin.system.action.UEImageUploadAction">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
 	</package>
 </struts>

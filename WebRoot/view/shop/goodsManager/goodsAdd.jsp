@@ -56,20 +56,27 @@
 							</tr>
 							<tr>
 								<td class="table_title frame-required"><span>*</span>商品标题：</td>
-								<td><input name="goods.title" id="title" placeholder="商品标题" class="am-form-field" style="width:500px;"/></td>
+								<td><input name="goods.title" id="title" placeholder="商品标题" class="am-form-field" style="width:600px;"/></td>
 							</tr>
 							<tr>
 								<td class="table_title">商品副标题：</td>
 								<td><input name="goods.subTitle" id="subTitle" placeholder="商品副标题" class="am-form-field" style="width:600px;"/></td>
 							</tr>
 							<tr>
-								<td class="table_title">商品属性：</td>
-								<td><div id="propertyDiv"></div></td>
+								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">无库存销售：</div></td>
+								<td>
+									<label class="am-radio am-success" style="display: inline-block;margin-bottom:5px;"><input type="radio" name="" id="" value="" data-am-ucheck/>是</label>
+									<label class="am-radio am-success" style="display: inline-block;margin-top: 11px;margin-bottom:5px;"><input type="radio" name="" id="" value="" data-am-ucheck/>否</label>
+								</td>
+							</tr>
+							<tr>
+								<td class="table_title"><div style="margin-bottom: 12px;display: inline-block;">商品属性：</div></td>
+								<td><div id="propertyDiv" style="margin-bottom: 10px;"></div></td>
 							</tr>
 							<tr style="display:none;">
-								<td class="table_title"><span id="propValSpan"></span>商品属性值：</td>
+								<td class="table_title" valign="top"><span id="propValSpan"></span>商品属性值：</td>
 								<td>
-									<table style="margin-bottom: 5px;">
+									<table style="margin-bottom: 10px;">
 										<tr>
 											<td valign="middle">
 												<table id="propertyEditTable"><thead><tr></tr></thead><tbody><tr></tr></tbody></table>
@@ -197,6 +204,18 @@
 								</td>
 							</tr>
 							<tr>
+								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 10px;display: inline-block;">电脑版描述：</div></td>
+								<td>
+									<script id="pceditor" name="goods.goodsDetail" type="text/plain" style="width:99%;height:300px;margin-top: 10px;"></script>
+								</td>
+							</tr>
+							<tr>
+								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 10px;display: inline-block;">手机版描述：</div></td>
+								<td>
+									<script id="mobileeditor" name="" type="text/plain" style="width:99%;height:300px;margin-top: 10px;"></script>
+								</td>
+							</tr>
+							<!-- <tr>
 								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 10px;display: inline-block;">商品描述：</div></td>
 								<td>
 									<div class="am-tabs" style="margin-top: 10px;" data-am-tabs>
@@ -214,26 +233,29 @@
 										</div>
 									</div>
 								</td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">运费：</div></td>
 								<td>
-									<div>
-										<label class="am-radio am-success"><input type="radio" name="goods.freightType" id="freightType1" value="<%=FreightTypeEnum.BIZ.getCode() %>" data-am-ucheck/>卖家承担运费</label>
-										<label class="am-radio am-success"><input type="radio" name="goods.freightType" id="freightType2" value="<%=FreightTypeEnum.BUYER.getCode() %>" data-am-ucheck/>买家承担运费</label>
-										<input type="hidden" id="freightId">
-									</div>
+									<label class="am-radio am-success"><input type="radio" name="goods.freightType" id="freightType1" value="<%=FreightTypeEnum.BIZ.getCode() %>" data-am-ucheck/>卖家承担运费</label>
+									<label class="am-radio am-success"><input type="radio" name="goods.freightType" id="freightType2" value="<%=FreightTypeEnum.BUYER.getCode() %>" data-am-ucheck/>买家承担运费</label>
+									<input type="hidden" id="freightId">
 								</td>
 							</tr>
 							<tr>
 								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">商品发布：</div></td>
 								<td>
-									<div>
-										<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType1" value="<%=PublishTypeEnum.IN_STORE.getCode() %>" data-am-ucheck/>放入仓库</label>
-										<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType2" value="<%=PublishTypeEnum.PUBLISH.getCode() %>" data-am-ucheck/>立即发布</label>
-										<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="goods.publishType" id="publishType3" value="<%=PublishTypeEnum.TIMER_PUBLISH.getCode() %>" data-am-ucheck/>发布时间</label>
-										<input class="am-form-field" style="display: inline-block;width: 150px;margin-top: -15px;" id="publishTime"></div>
-									</div>
+									<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType1" value="<%=PublishTypeEnum.IN_STORE.getCode() %>" data-am-ucheck/>放入仓库</label>
+									<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType2" value="<%=PublishTypeEnum.PUBLISH.getCode() %>" data-am-ucheck/>立即发布</label>
+									<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="goods.publishType" id="publishType3" value="<%=PublishTypeEnum.TIMER_PUBLISH.getCode() %>" data-am-ucheck/>发布时间</label>
+									<input class="am-form-field" style="display: inline-block;width: 150px;margin-top: -15px;" id="publishTime"></div>
+								</td>
+							</tr>
+							<tr>
+								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">虚拟商品：</div></td>
+								<td>
+									<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="" id="" value="" data-am-ucheck/>是</label>
+									<label class="am-radio am-success" style="display: inline-block;margin-top: 11px;"><input type="radio" name="" id="" value="" data-am-ucheck/>否</label>
 								</td>
 							</tr>
 						</table>

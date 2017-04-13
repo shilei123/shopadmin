@@ -1,7 +1,21 @@
 //-----------------------------------------------begin 实例化编辑器------------------------------------------------
+var tbr = {toolbars: [[
+                       'fullscreen', 'source', '|', 'undo', 'redo', '|',
+                       'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+                       'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+                       'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+                       'directionalityltr', 'directionalityrtl', 'indent', '|',
+                       'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+                       'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+                       'simpleupload', 'emotion', 'attachment', 'map', 'pagebreak', 'template', 'background', '|',
+                       'horizontal', 'date', 'time', 'spechars', 'wordimage', '|',
+                       'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+                       'preview', 'searchreplace', 'help'
+                   ]]};
 //实例化编辑器
 //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-var ue = UE.getEditor('pceditor');
+var ue = UE.getEditor('pceditor',tbr);
+var mue = UE.getEditor('mobileeditor',tbr);
 //重置编辑器
 var resetEditor = function() {
 	if(ue){
@@ -10,17 +24,29 @@ var resetEditor = function() {
         clearLocalData();
 	}
 };
+
 //清空编辑器草稿箱
 var clearLocalData = function() {
 	UE.getEditor('pceditor').execCommand("clearlocaldata");
 };
+
 //判断编辑器是否有内容
 var hasContent = function() {
 	return UE.getEditor('pceditor').hasContents();
 };
+
 var getContent = function() {
     return UE.getEditor('pceditor').getContent();
 };
+
+UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+UE.Editor.prototype.getActionUrl = function(action) {
+	if (action == 'uploadimage') {
+        return path_ + "/view/shop/admin/ueImageUpload!upload.action";
+    } else {
+        return this._bkGetActionUrl.call(this, action);
+    }
+}
 //-----------------------------------------------END 实例化编辑器--------------------------------------------------
 
 //-----------------------------------------------BEGIN 加载layUI的laydate组件-------------------------------------
@@ -420,6 +446,13 @@ $("#saveBtn").click(function() {
 		}, error: function(e) {
 			console.log("error");
 		} 
+	});
+});
+
+$("#closeBtn").click(function() {
+	showConfirm("确定取消？",function(){
+		showMsg("取消成功");
+		closeThisTab();
 	});
 });
 
