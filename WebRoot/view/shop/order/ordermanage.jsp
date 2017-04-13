@@ -134,7 +134,7 @@
 									<th width="6%" field="deliverymode">运送方式</th>
 									<th width="6%" field="orderstatus">订单状态</th>
 									<th width="7%" field="issplit">是否拆分</th>
-									<!-- <th width="6%" field="invoice">是否发票</th> -->
+									<th width="8%" field="invoice">是否需要发票</th>
 									<th width="6%" field="paymode">付款方式</th>
 									<th width="6%" field="totalPrice">订单总价</th>
 									<!-- <th width="6%" field="commisionCharge">手续费</th>

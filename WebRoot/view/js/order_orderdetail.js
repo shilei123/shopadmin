@@ -16,9 +16,9 @@ var initOrder = function(){
 	});
 }
 
-/*$("#closeBtn").click(function() {
-	closeModal("doc-modal-2");
-});*/
+$("#retBtn").click(function() {
+	closeThisTab();
+});
 
 var clearOrderInfo = function() {
 	var liArr = $('ul li span');
@@ -84,11 +84,11 @@ var setSonOrdersInfo = function(data){
 			
 			html += "<ul>"
 			html += "<li class='prop_li'>订单编号：<span id=''>" + sonOrders[i].orderCode + "</span></li>";
-			html += "<li class='prop_li'>发票编号：<span id='invoiceCode'>" + sonOrders[i].invoiceCode + "</span></li>";
-			html += "<li class='prop_li'>抬头：<span id='header'>" + sonOrders[i].header + "</span></li>";
-			html += "<li class='prop_li'>姓名：<span id='invoiceName'>" + sonOrders[i].invoiceName + "</span></li>";
-			html += "<li class='prop_li'>发票内容：<span id='content'>" + sonOrders[i].content + "</span></li>";
-			html += "<li class='prop_li'>备注：<span id='remark'>" + sonOrders[i].remark + "</span></li>";
+			html += "<li class='prop_li'>发票编号：<span id=''>" + sonOrders[i].invoiceCode + "</span></li>";
+			html += "<li class='prop_li'>抬头：<span id=''>" + sonOrders[i].header + "</span></li>";
+			html += "<li class='prop_li'>姓名：<span id=''>" + sonOrders[i].invoiceName + "</span></li>";
+			html += "<li class='prop_li'>发票内容：<span id=''>" + sonOrders[i].content + "</span></li>";
+			html += "<li class='prop_li'>备注：<span id=''>" + sonOrders[i].remark + "</span></li>";
 			html += "</ul>"
 			if(i!=sonOrders.length-1){
 				temp += "<hr>";
@@ -118,13 +118,13 @@ var setGoodsInfo = function(orderGoods){
 			html += "</tr><tr>";
 			html += "<td style='width:10%;'><div><span class=''><a href='javascript:void(0);' target='_blank'><img src=''/>" + orderGoods[i].imgPath + orderGoods[i].fileName + "</a></span></div></td>";
 			html += "<td><a href='' target='_blank'>" + orderGoods[i].goodsName + "</a></td>";
-			html += "<td><span class='red_common'>￥" + orderGoods[i].unitPrice + "</span></td>";
+			html += "<td><span class='red'>￥" + orderGoods[i].unitPrice + "</span></td>";
     		/*<script type="text/javascript">
 				var price = number_format(10488,2);
 				document.write(price);
 			</script>*/
 			html += "<td>" + orderGoods[i].count + "</td>";
-			html += "<td><span class='red_common'>￥" + orderGoods[i].amount + "</span></td>";
+			html += "<td><span class='red'>￥" + orderGoods[i].amount + "</span></td>";
 			/*<script type="text/javascript">
 				var payprice = number_format(20976,2);
 				document.write(payprice);

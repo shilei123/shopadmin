@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String orderId = request.getParameter("orderId");
-orderId="id3";
+String orderId = request.getParameter("orderId")==null?"":request.getParameter("orderId");
 request.setAttribute("orderId", orderId);
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -35,6 +34,9 @@ request.setAttribute("orderId", orderId);
   	border-top: #fbfbfb solid 1px;
   	border-bottom: #fbfbfb solid 1px;
   }
+  .red{
+  	color:red;
+  }
 </style>
 </head>
 <body>
@@ -49,9 +51,9 @@ request.setAttribute("orderId", orderId);
 				<ul>
 					<li>订单编号：<span id='orderCode'></span></li>
 					<li>订单状态：<span id='orderStatus'></span></li>
-					<li>订单金额：<span id='totalPrice'></span></li>
+					<li>订单金额：<span id='totalPrice' class='red'></span></li>
 					<li>运费：<span id='commisionCharge'></span></li>
-					<li>支付金额：<span id='actualPrice'></span></li>
+					<li>支付金额：<span id='actualPrice' class='red'></span></li>
 				</ul>
 			</td>
 		</tr>
@@ -108,6 +110,7 @@ request.setAttribute("orderId", orderId);
         </tr>
 		</tbody>
 	</table>
+	<button class='am-btn am-btn-primary frame-search-button' id='retBtn' style="margin: 20px;">返回</button>
 </body>
 <script type="text/javascript" src="${path }/view/js/order_orderdetail.js"></script>
 </html>

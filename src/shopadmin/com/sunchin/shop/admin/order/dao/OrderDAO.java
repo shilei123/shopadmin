@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.OrderInvoiceEnum;
-import com.sunchin.shop.admin.dict.OrderIssplitEnum;
 import com.sunchin.shop.admin.pojo.ScOrder;
 
 import framework.bean.PageBean;
@@ -50,10 +49,10 @@ public class OrderDAO extends PageDAO{
 		sql.append(" and t3.flag = ? ");
 		sql.append(" and t4.flag = ? ");
 		sql.append(" and t5.flag = ? ");
-		sql.append(" and t.issplit = ? ");
+		sql.append(" and t.parent_order_id is null ");
 		PAGE_SQL = sql.toString();
 		
-		pageParams = new ArrayList<String>(12);
+		pageParams = new ArrayList<String>(11);
 		pageParams.add(DictionaryTypeEnum.ORDER_PAY_MODE.getType());
 		pageParams.add(DictionaryTypeEnum.ORDER_INVOICE.getType());
 		pageParams.add(DictionaryTypeEnum.ORDER_SPLIT.getType());
@@ -65,7 +64,6 @@ public class OrderDAO extends PageDAO{
 		pageParams.add(FlagEnum.ACT.getCode());
 		pageParams.add(FlagEnum.ACT.getCode());
 		pageParams.add(FlagEnum.ACT.getCode());
-		pageParams.add(OrderIssplitEnum.ORDER_ISSPLIT_Y.getCode());
 	}
 
 	public int queryOrderCount(PageBean pageBean) {
@@ -188,7 +186,9 @@ public class OrderDAO extends PageDAO{
 			isInvoice = true;//开单张发票	null在CommonUtils中处理
 		}
 		StringBuffer sql = new StringBuffer();
-		sql.append(" select t.order_code ,t.total_price ,t.actual_price  ,t1.name as order_status ,t.invoice ,t.invoice_record_id ");//订单状态
+		sql.append(" select t.order_code ,t1.name as order_status ,t.invoice ,t.invoice_record_id ");//订单状态
+		sql.append(" ,decode(t.total_price,t.total_price,'￥'||t.total_price)as total_price ");
+		sql.append(" ,decode(t.actual_price,t.actual_price,'￥'||t.actual_price)as actual_price ");
 		sql.append(" ,decode(t.commision_charge,'0','免运费',t.commision_charge,t.commision_charge) as commision_charge ");//订单信息
 		sql.append(" ,decode(t.num,t.num,t.num||'件')as num ,to_char(t.create_time, 'yyyy-MM-dd hh24:mm:ss') as create_time ,t.remark ,t2.name as pay_mode ,t3.name as issplit ,t4.nick_name ");//订单信息
 		sql.append("  ,t5.name as rec_name ,t5.phone ,t5.post_code ,t5.province ,t5.city ,t5.county ,t5.address_detail ");//收货信息
@@ -244,7 +244,9 @@ public class OrderDAO extends PageDAO{
 	 */
 	public List<ScOrder> querySonOrderById(String id, String invoiceRecordId) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" select t.id,t.order_code,decode(t.num,t.num,t.num||'件')as num,t0.name as order_status,t.total_price,t.actual_price ");
+		sql.append(" select t.id,t.order_code,decode(t.num,t.num,t.num||'件')as num,t0.name as order_status ");
+		sql.append(" ,decode(t.total_price,t.total_price,'￥'||t.total_price)as total_price ");
+		sql.append(" ,decode(t.actual_price,t.actual_price,'￥'||t.actual_price)as actual_price ");
 		sql.append(" ,decode(t.commision_charge,'0','免运费',t.commision_charge,t.commision_charge) as commision_charge ");//订单信息
 		if(invoiceRecordId.isEmpty()){
 			sql.append(" ,t1.invoice_code,t1.content,nvl(t1.remark,'无') as remark,t2.name as invoice_name,t2.header ");
