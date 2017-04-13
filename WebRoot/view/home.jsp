@@ -254,15 +254,17 @@
   	//关闭tab
     var closeTab = function(menuId) {
     	var $menu = $("#"+menuId);
-    	var $item = $menu.closest('li');
-		var index = $nav.children('li').index($item);
-      
-		$item.remove();
-		$bd.find('.am-tab-panel').eq(index).remove();
-
-		$tab.tabs('open', index > 0 ? index - 1 : index + 1);
-		$tab.tabs('refresh');
-		//selectLastTab();
+    	if($menu.length > 0) {
+	    	var $item = $menu.closest('li');
+			var index = $nav.children('li').index($item);
+	      
+			$item.remove();
+			$bd.find('.am-tab-panel').eq(index).remove();
+	
+			$tab.tabs('open', index > 0 ? index - 1 : index + 1);
+			$tab.tabs('refresh');
+			//selectLastTab();
+    	}
     };
     
 	var addTab = function(menuId,menuName,menuUrl) {
