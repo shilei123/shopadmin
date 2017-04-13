@@ -76,7 +76,7 @@ var showQueryOrderWin = function(id) {
 	var data = {"order.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/order/order!queryOrderById.action",
+		//url : path_ + "/view/shop/order/order!queryOrderById.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {

@@ -10,23 +10,29 @@ import com.sunchin.shop.admin.pojo.ScDictionary;
 import com.sunchin.shop.admin.pojo.ScOrder;
 import com.sunchin.shop.admin.system.service.DictService;
 import com.opensymphony.xwork2.Action;
+import com.sunchin.shop.admin.order.service.OrderDetailService;
 import com.sunchin.shop.admin.order.service.OrderService;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
 import framework.util.CommonUtils;
 
+@SuppressWarnings("rawtypes")
 public class OrderAction extends PageAction{
 
 	@Resource(name="orderService")
 	private OrderService orderService;
+	@Resource(name="orderDetailService")
+	private OrderDetailService orderDetailService;
 	@Resource(name = "dictService")
 	private DictService dictService;
 	
 	private Map<String, List<ScDictionary>> initMap;
 	private Map<String, String> initType;
 	private ScOrder order;
-	private List<ScOrder> orderList;
+	private Map orderMap;//订单基础信息
+	private List<ScOrder> sonOrders;//子订单信息
+	private List<Map> orderGoods;//商品信息
 	
 	public String queryOrderList(){
 		try {
@@ -41,7 +47,9 @@ public class OrderAction extends PageAction{
 	
 	public String queryOrderById(){
 		try {
-			orderList = orderService.queryOrderById(order.getId());
+			orderMap = orderService.queryOrderById(order.getId());//订单基础信息
+			sonOrders = orderService.querySonOrderById(order.getId()); //子订单信息
+			orderGoods = orderDetailService.queryByOrderId(order.getId());//商品信息
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -103,12 +111,28 @@ public class OrderAction extends PageAction{
 		this.order = order;
 	}
 
-	public List<ScOrder> getOrderList() {
-		return orderList;
+	public Map getOrderMap() {
+		return orderMap;
 	}
 
-	public void setOrderList(List<ScOrder> orderList) {
-		this.orderList = orderList;
+	public void setOrderMap(Map orderMap) {
+		this.orderMap = orderMap;
+	}
+
+	public List<ScOrder> getSonOrders() {
+		return sonOrders;
+	}
+
+	public List<Map> getOrderGoods() {
+		return orderGoods;
+	}
+
+	public void setOrderGoods(List<Map> orderGoods) {
+		this.orderGoods = orderGoods;
+	}
+
+	public void setSonOrders(List<ScOrder> sonOrders) {
+		this.sonOrders = sonOrders;
 	}
 
 }

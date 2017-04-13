@@ -1,11 +1,13 @@
 package com.sunchin.shop.admin.order.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sunchin.shop.admin.pojo.ScOrder;
 
 import framework.bean.PageBean;
 
+@SuppressWarnings("rawtypes")
 public interface OrderService {
 
 	/**
@@ -17,12 +19,12 @@ public interface OrderService {
 	public PageBean queryOrderList(PageBean pageBean) throws Exception;
 	
 	/**
-	 * 查询某条订单
+	 * 查询订单基础信息
 	 * @param id
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ScOrder> queryOrderById(String id) throws Exception;
+	public Map queryOrderById(String id) throws Exception;
 	
 	/**
 	 * 删除订单
@@ -30,5 +32,12 @@ public interface OrderService {
 	 * @throws Exception
 	 */
 	public void delOrder(String id) throws Exception;
+
+	/**
+	 * 查询子订单
+	 * @param id
+	 * @throws Exception
+	 */
+	public List<ScOrder> querySonOrderById(String id) throws Exception;
 
 }

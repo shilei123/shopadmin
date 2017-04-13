@@ -12,7 +12,9 @@ import com.sunchin.shop.admin.order.service.OrderService;
 import com.sunchin.shop.admin.pojo.ScOrder;
 
 import framework.bean.PageBean;
+import framework.util.CommonUtils;
 
+@SuppressWarnings("rawtypes")
 @Repository("orderService")
 public class OrderServiceImpl implements OrderService {
 
@@ -29,11 +31,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<ScOrder> queryOrderById(String id) throws Exception {
+	public Map queryOrderById(String id) throws Exception {
 		ScOrder order = orderDAO.queryOrderById(id);
 		if(order==null) return null;
-		List<ScOrder> list = orderDAO.queryOrderDetailById(id, order.getInvoiceRecordId(), order.getParentOrderId());
-		return list;
+		Map map = orderDAO.queryOrderDetailById(id, order);
+		return map;
 	}
 
 	/**
@@ -42,6 +44,15 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void delOrder(String id) throws Exception {
 		
+	}
+
+	@Override
+	public List<ScOrder> querySonOrderById(String id) throws Exception {
+		ScOrder order = orderDAO.queryOrderById(id);
+		if(order==null) return null;
+		String invoiceRecordId = CommonUtils.getString(order.getInvoiceRecordId());
+		List<ScOrder> list = orderDAO.querySonOrderById(id, invoiceRecordId);
+		return list;
 	}
 	
 }

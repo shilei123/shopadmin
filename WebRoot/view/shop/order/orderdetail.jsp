@@ -1,4 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String orderId = request.getParameter("orderId");
+orderId="id5";
+request.setAttribute("orderId", orderId);
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -7,123 +12,102 @@
 <title>订单管理</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <style>
-  #vld-tooltip {
-    position: absolute;
-    z-index: 1000;
-    padding: 5px 10px;
-    background: #F37B1D;
-    min-width: 150px;
-    color: #fff;
-    transition: all 0.15s;
-    box-shadow: 0 0 5px rgba(0,0,0,.15);
-    display: ;
+  .orderTable ul li,.prop_li{
+	width:50%;
+	float:left;
+	padding:0px;
   }
-
-  #vld-tooltip:before {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    width: 0;
-    height: 0;
-    margin-left: -8px;
-    content: "";
-    border-width: 0 8px 8px;
-    border-color: transparent transparent #F37B1D;
-    border-style: none inset solid;
+  #a_connet:hover{
+  	cursor: pointer;
+  }
+  th{
+  	height:30px;
+  }
+  body{
+  	overflow-y: scroll;
+  }
+  .bigTh{
+  	height: 40px;
+  	font-size: 16px;
+  	background-color: #fbfbfb;
+  }
+  th{
+  	border-top: #fbfbfb solid 1px;
+  	border-bottom: #fbfbfb solid 1px;
   }
 </style>
 </head>
 <body>
-	<div class="am-cf ">
-		<div class="admin-content">
-			<div class="admin-content-body">
-				<div class="am-g">
-					<div class="am-u-sm-12 page-table-main">
-						<table class="am-table am-table-bordered am-table-striped am-table-hover">
-							<tr>
-								<td colspan="4" style="background-color: '#e2e2e2';">订单状态</td>
-							</tr>
-							<tr>
-				        		<td class="table_title">订单编号：</td>
-				        		<td>
-				        			<!-- <input id="orderCode2" class="am-form-field" style="width:90%" disabled="disabled"/> -->
-				        			<span id='span_order_code'></span>
-				        		</td>
-				        		<td class="table_title">订单状态：</td>
-				        		<td>
-				        			<!-- <input id="deliveryMode2" class="am-form-field" style="width:90%" disabled="disabled"/> -->
-				        			<span id='span_order_sts'></span>
-				        		</td>
-				        	</tr>
-				        	<tr>
-				        		<td class="table_title">订单金额：</td>
-				        		<td>
-				        			<span id='span_total_price'></span>
-				        			<!-- <input id="orderStatus2" class="am-form-field" style="width:90%" disabled="disabled"/> -->
-				        		</td>
-				        		<td class="table_title">运费：</td>
-				        		<td>
-				        			<span id='span_commision_charge'></span>
-				        			<!-- <input id="" class="am-form-field" style="width:90%" disabled="disabled" placeholder="暂未关联"/> -->
-				        		</td>
-				        	</tr>
-				        	<tr>
-				        		<td class="table_title">支付金额：</td>
-				        		<td>
-				        			<span id='span_actual_price'></span>
-				        		</td>
-				        		<td class="table_title"></td>
-				        		<td>
-				        			<!-- <span id='span_commision_charge'></span> -->
-				        			<!-- <input id="" class="am-form-field" style="width:90%" disabled="disabled" placeholder="暂未关联"/> -->
-				        		</td>
-				        	</tr>
-						</table>
-						<table class="am-table am-table-bordered am-table-striped am-table-hover">
-							<tr>
-								<td colspan="4" style="background-color: '#e2e2e2';">订单状态</td>
-							</tr>
-							<tr>
-				        		<td class="table_title">订单编号：</td>
-				        		<td>
-				        			<!-- <input id="orderCode2" class="am-form-field" style="width:90%" disabled="disabled"/> -->
-				        			<span id='span_order_code'></span>
-				        		</td>
-				        		<td class="table_title">订单状态：</td>
-				        		<td>
-				        			<!-- <input id="deliveryMode2" class="am-form-field" style="width:90%" disabled="disabled"/> -->
-				        			<span id='span_order_sts'></span>
-				        		</td>
-				        	</tr>
-				        	<tr>
-				        		<td class="table_title">订单金额：</td>
-				        		<td>
-				        			<span id='span_total_price'></span>
-				        			<!-- <input id="orderStatus2" class="am-form-field" style="width:90%" disabled="disabled"/> -->
-				        		</td>
-				        		<td class="table_title">运费：</td>
-				        		<td>
-				        			<span id='span_commision_charge'></span>
-				        			<!-- <input id="" class="am-form-field" style="width:90%" disabled="disabled" placeholder="暂未关联"/> -->
-				        		</td>
-				        	</tr>
-				        	<tr>
-				        		<td class="table_title">支付金额：</td>
-				        		<td>
-				        			<span id='span_actual_price'></span>
-				        		</td>
-				        		<td class="table_title"></td>
-				        		<td>
-				        			<!-- <span id='span_commision_charge'></span> -->
-				        			<!-- <input id="" class="am-form-field" style="width:90%" disabled="disabled" placeholder="暂未关联"/> -->
-				        		</td>
-				        	</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<input type="hidden" id="orderId" value="${orderId }"/>
+	<table class="am-tabl am-table-hover orderTable" style="width:100%; margin:10px;" id="orderDetailTable">
+		<tbody>
+		<tr>
+			<th style="background-color: '#e2e2e2';" class='bigTh'>订单状态</th>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li>订单编号：<span id='orderCode'></span></li>
+					<li>订单状态：<span id='orderStatus'></span></li>
+					<li>订单金额：<span id='totalPrice'></span></li>
+					<li>运费：<span id='commisionCharge'></span></li>
+					<li>支付金额：<span id='actualPrice'></span></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+            <th class='bigTh'>订单详情</th>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <th style="border-top: none;">订单信息</th>
+        </tr>
+        <tr>
+            <td>
+            	<ul>
+	                <li>买家：<span id='nickName'></span></li>
+					<li>件数：<span id='num'></span></li>
+					<li>支付方式：<span id='payMode'></span></li>
+					<li>下单时间：<span id='createTime'></span></li>
+					<li>是否拆分：<span id='issplit'></span></li>
+					<!-- <li><strong id='strong_connect'>关联订单：<span id='connectOrder'></span></li> -->
+            	</ul>
+            </td>
+        </tr>
+        <tr>
+            <th>子订单信息</th>
+        </tr>
+        <tr>
+            <td id='sonOrdersInfo_td'></td>
+        </tr>
+        <tr>
+            <th>发票信息</th>
+        </tr>
+        <tr>
+            <td id='invoiceInfo_td'></td>
+        </tr>
+        <tr>
+            <th>商品信息</th>
+        </tr>
+        <tr>
+            <td id='goodsInfo_td'></td>
+        </tr>
+        <tr>
+            <th>收货信息</th>
+        </tr>
+         <tr>
+            <td>
+            	<ul>
+	                <li>收货人姓名：<span id='recName'></span></li>
+					<li>收货人手机：<span id='phone'></span></li>
+					<li>邮编：<span id='postCode'></span></li>
+					<li>收货地址：<span id='province'></span><span id='city'></span><span id='county'></span></li>
+					<li>详细地址：<span id='addressDetail'></span></li>
+            	</ul>
+            </td>
+        </tr>
+		</tbody>
+	</table>
 </body>
 <script type="text/javascript" src="${path }/view/js/order_orderdetail.js"></script>
 </html>
