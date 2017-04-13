@@ -78,7 +78,7 @@ public class CouponServiceImpl implements ICouponService{
 			coupon.setId(id);
 			coupon.setCreateTime(new Date());
 			coupon.setCouponStatus(StatusEnum.ACT.getCode());
-			coupon.setCouponFlag(FlagEnum.ACT.getCode());
+			coupon.setFlag(FlagEnum.ACT.getCode());
 			db.insert(coupon);
 		} else { // 修改
 			ScCoupon vo = (ScCoupon) db.get(ScCoupon.class, coupon.getId());
@@ -106,7 +106,7 @@ public class CouponServiceImpl implements ICouponService{
 		ScCoupon coupon = getCoupon(id);
 		if(userCoupon != null){
 			if(coupon != null) {
-				coupon.setCouponFlag(FlagEnum.HIS.getCode());
+				coupon.setFlag(FlagEnum.HIS.getCode());
 				db.update(coupon);
 			}
 		}else{

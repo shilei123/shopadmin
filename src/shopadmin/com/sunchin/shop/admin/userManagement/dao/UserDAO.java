@@ -71,6 +71,7 @@ public class UserDAO extends PageDAO{
 		List<String> params = new ArrayList<String>();
 		params.add(DictionaryTypeEnum.IDENTITY_STATUS.getType());
 		params.add(DictionaryTypeEnum.USER_STATUS.getType());
+		params.add(FlagEnum.ACT.getCode());
 		String sql = this.userWhereSql(pageBean, params);
 		return DBUtil.getInstance().queryCountBySQL(sql, params);
 	}
@@ -80,6 +81,7 @@ public class UserDAO extends PageDAO{
 		List<String> params = new ArrayList<String>();
 		params.add(DictionaryTypeEnum.IDENTITY_STATUS.getType());
 		params.add(DictionaryTypeEnum.USER_STATUS.getType());
+		params.add(FlagEnum.ACT.getCode());
 		String sql = this.userWhereSql(pageBean, params);
 		return this.query(sql, params, DBUtil.getInstance(), pageBean);
 	}
@@ -96,7 +98,7 @@ public class UserDAO extends PageDAO{
 		sql.append(" left join sc_dictionary t4 on t4.code=t1.user_status ");
 		sql.append(" where t3.type=? ");
 		sql.append(" and t4.type=? ");
-		
+		sql.append(" and t1.flag=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String userName = pageBean.getQueryParams().get("userName");
 			if (StringUtils.isNotBlank(userName)){
@@ -135,6 +137,7 @@ public class UserDAO extends PageDAO{
 	
 	public int queryUserPurseCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.TRADE_TYPE.getType());
 		params.add(DictionaryTypeEnum.TRADE_TYPE.getType());
 		params.add(DictionaryTypeEnum.OPTION_TYPE.getType());
@@ -146,6 +149,7 @@ public class UserDAO extends PageDAO{
 	@SuppressWarnings("unchecked")
 	public List<ScPurse> queryUserPursePagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.TRADE_TYPE.getType());
 		params.add(DictionaryTypeEnum.TRADE_TYPE.getType());
 		params.add(DictionaryTypeEnum.OPTION_TYPE.getType());
@@ -166,7 +170,8 @@ public class UserDAO extends PageDAO{
 		sql.append(" left join sc_dictionary t4 on t4.code=t1.trade_state ");
 		sql.append(" left join sc_dictionary t5 on t5.code=t1.option_type ");
 		sql.append(" left join sc_dictionary t6 on t6.code=t1.purse_type ");
-		sql.append(" where t3.type=? ");
+		sql.append(" where t1.flag=? ");
+		sql.append(" and t3.type=? ");
 		sql.append(" and t4.type=? ");
 		sql.append(" and t5.type=? ");
 		sql.append(" and t6.type=? ");
@@ -265,6 +270,7 @@ public class UserDAO extends PageDAO{
 
 	public int queryUserWalletCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.PURSE_TYPE.getType());
 		params.add(DictionaryTypeEnum.UNIT.getType());
 		String sql = this.userWalletWhereSql(pageBean, params);
@@ -274,6 +280,7 @@ public class UserDAO extends PageDAO{
 	@SuppressWarnings("unchecked")
 	public List<ScWallet> queryUserWalletPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.PURSE_TYPE.getType());
 		params.add(DictionaryTypeEnum.UNIT.getType());
 		String sql = this.userWalletWhereSql(pageBean, params);
@@ -287,7 +294,8 @@ public class UserDAO extends PageDAO{
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.purse_type ");
 		sql.append(" left join sc_dictionary t3 on t3.code=t1.unit ");
 		sql.append(" left join sc_user t4 on t4.id=t1.user_id ");
-		sql.append(" where t2.type=? ");
+		sql.append(" where t1.flag=? ");
+		sql.append(" and t2.type=? ");
 		sql.append(" and t3.type=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String userName = pageBean.getQueryParams().get("userName");

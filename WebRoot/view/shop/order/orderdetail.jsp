@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String orderId = request.getParameter("orderId");
-orderId="id5";
+orderId="id3";
 request.setAttribute("orderId", orderId);
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

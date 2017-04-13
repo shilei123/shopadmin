@@ -19,6 +19,7 @@ import framework.bean.PageBean;
  * 2017年3月3日
  * 商品信息的新增，编辑等操作
  */
+@SuppressWarnings({"rawtypes"})
 public class GoodsInfoAction extends PageAction {
 	@Resource(name = "goodsService")
 	private GoodsService goodsService;
@@ -26,6 +27,7 @@ public class GoodsInfoAction extends PageAction {
 	private ScGoods goodsVO;
 	private Map goodsMap;
 	private List goodsImgList;
+	private List childGoodsList;
 	
 	//保存商品
 	public String saveGoods() {
@@ -42,6 +44,7 @@ public class GoodsInfoAction extends PageAction {
 		try {
 			this.goodsMap = this.goodsService.loadGoods(goodsVO);
 			this.goodsImgList = this.goodsService.loadGoodsImages(goodsVO);
+			this.childGoodsList = this.goodsService.loadChildGoods(goodsVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,4 +93,7 @@ public class GoodsInfoAction extends PageAction {
 		return goodsImgList;
 	}
 	
+	public List getChildGoodsList() {
+		return childGoodsList;
+	}
 }

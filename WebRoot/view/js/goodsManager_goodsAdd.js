@@ -1,3 +1,4 @@
+//-----------------------------------------------begin 实例化编辑器------------------------------------------------
 //实例化编辑器
 //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 var ue = UE.getEditor('pceditor');
@@ -20,27 +21,29 @@ var hasContent = function() {
 var getContent = function() {
     return UE.getEditor('pceditor').getContent();
 };
+//-----------------------------------------------END 实例化编辑器--------------------------------------------------
 
+//-----------------------------------------------BEGIN 加载layUI的laydate组件-------------------------------------
 //加载layui的laydate组件
 layui.use('laydate', function(){});
-$("#publishTime").click(function() {
-	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
-});
+//-----------------------------------------------END 加载layUI的laydate组件---------------------------------------
 
+//-----------------------------------------------BEGIN 业务开始--------------------------------------------------
 $(function() {
+	//回显接收到的参数
 	$("#goodsId").val(goodsId);
 	$("#cateId").val(cateId);
 	$("#cateName").html(cateName);
 	
 	if(goodsId=="") { //新增
-		initGoods4Add();
+		initGoodsForAdd();
 	} else { //编辑
-		initGoods4Edit();
+		initGoodsForEdit();
 	}
 });
 
 //编辑商品-初始化商品信息
-var initGoods4Edit = function() {
+var initGoodsForEdit = function() {
 	$.ajax({
 		type : "POST",
 		url : path_ + "/view/shop/goodsManager/goodsInfoAction!loadGoods.action",
@@ -48,9 +51,10 @@ var initGoods4Edit = function() {
 		data: {"goodsVO.id":goodsId},
 		success : function(json) {
 			cateId = json.goodsMap.cateId;
-			//回显值
-			setPage(json.goodsMap,json.goodsImgList);
+			//回显页面值
+			setPage(json.goodsMap,json.goodsImgList,json.childGoodsList);
 			//查询类别下的品牌
+			
 			//查询类别属性属性值
 			queryCatePropPropVal();
 		},
@@ -60,15 +64,13 @@ var initGoods4Edit = function() {
 	});
 };
 
-var setPage = function(json,goodsImgList) {
+//回显页面值
+var setPage = function(json,goodsImgList,childGoodsList) {
+	//回显基本信息
 	$("#cateId").val(json.cateId);
 	$("#cateName").html(json.cateName);
 	$("#title").val(json.title);
 	$("#subTitle").val(json.subTitle);
-	ue.addListener("ready", function() {
-    	// editor准备好之后才可以使用
-    	ue.setContent(json.detail);
-    });
 	$("#purchasePrice").val(json.purchasePrice);
 	$("#marketPrice").val(json.marketPrice);
 	$("#salePrice").val(json.salePrice);
@@ -77,20 +79,66 @@ var setPage = function(json,goodsImgList) {
 	$("#goodsNo").val(json.goodsNo);
 	$(":radio[name='goods.freightType'][value='" + json.freightType + "']").attr("checked", "checked"); //attr和prop都有效
 	$(":radio[name='goods.publishType'][value='" + json.publishType + "']").prop("checked", "checked"); //attr和prop都有效
-	console.log(json.detail);
-	console.log(json.params);
-	//设置图片
+	$("#publishTime").val(json.publishTime==null?"":json.publishTime.replace("T"," "));
+	
+	//回显图片
 	var imgIdHiddens = $("input[name='imgIdHidden']");
 	for (var i = 0; i < goodsImgList.length; i++) {
 		var goodsImg = goodsImgList[i];
 		var $img = $(imgIdHiddens[i]);
-		$img.val(goodsImg.id);
+		$img.val(goodsImg.imageId);
 		$img.prev().attr("src",imageServer_+"/"+goodsImg.imgPath+"/"+goodsImg.fileName);
 	}
+	
+	//回显详情富文本控件
+	ue.addListener("ready", function() {
+    	// editor准备好之后才可以使用
+    	ue.setContent(json.detail);
+    });
+	
+	//回显参数列表
+	var paramsArr = JSON.parse(json.params);
+	if(paramsArr.length > 0) {
+		//生成参数input
+		for (var i = 1; i < paramsArr.length; i++) {
+			addGoodsParams();
+		}
+		//填充参数
+		var paramNames = $("input[name='paramName']");
+		var paramVals = $("input[name='paramVal']");
+		for (var i = 0; i < paramsArr.length; i++) {
+			var p = paramsArr[i];
+			$(paramNames[i]).val(p.paramName);
+			$(paramVals[i]).val(p.paramVal);
+		}
+	}
+	
+	//回显子商品
+	if(childGoodsList != undefined && childGoodsList != null && childGoodsList.length > 0) {
+		var len = childGoodsList.length;
+		for (var i = len-1; i >= 0; i--) {
+			var childGoods = childGoodsList[i];
+			var propNames = childGoods.propNames.split(",");
+			var valNames = childGoods.valNames.split(",");
+			
+			var childGoodsLabel = "";
+			var br = "";
+			var split = "";
+			for (var j = 0; j < propNames.length; j++) {
+				childGoodsLabel += br + "&nbsp;<strong>" + propNames[j] + "</strong>：" + valNames[j] + "&nbsp;";
+				br = "<br/>";
+				split = "_";
+			}
+			//添加子商品
+			prePendGoodsChildTable(childGoods.existsGoodsKey, childGoods.existsGoodsKey, childGoodsLabel, childGoods);
+		}
+	} 
+	//隐藏和显示商品价格、库存、货号信息
+	showOrHideGoodsPriceTable();
 }
 
 //新增商品-初始化商品信息
-var initGoods4Add = function() {
+var initGoodsForAdd = function() {
 	//查询类别下的品牌
 	//查询类别属性属性值
 	queryCatePropPropVal();
@@ -155,9 +203,9 @@ $("#addPropertyDiv").click(function() {
 		return;
 	}
 	
-	var childGoodsValue = "";
 	var existsGoodsKey = "";
 	var childGoodsLabel = "";
+	//var childGoodsValue = "";
 	
 	var br = "";
 	var split = "";
@@ -169,7 +217,7 @@ $("#addPropertyDiv").click(function() {
 		
 		existsGoodsKey += split + cppId;
 		childGoodsLabel += br + "&nbsp;<strong>" + propName + "</strong>：" + valName + "&nbsp;";
-		childGoodsValue += split + cppId + ":" + propName + ":" + valName;
+		//childGoodsValue += split + cppId + ":" + propName + ":" + valName;
 		
 		br = "<br/>";
 		split = "_";
@@ -177,24 +225,40 @@ $("#addPropertyDiv").click(function() {
 	
 	//根据标识检测是否填过相同的子商品
 	if($("#"+existsGoodsKey).length == 0) {
-		var trHtml = "";
-		trHtml += "<tr>";
-		trHtml += "    <td style='text-align:left;'><input type='hidden' id='"+existsGoodsKey+"' value='"+childGoodsValue+"'/><div style='margin-top:5px;margin-bottom:5px;'>"+childGoodsLabel+"</div></td>";
-		trHtml += "    <td>&nbsp;<input name='purchasePriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='marketPriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='salePriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='promotionPriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='availableNum' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<input name='childNoInput' style=\"width:80px;\"/>&nbsp;</td>";
-		trHtml += "    <td>&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteGoodChilds(\""+existsGoodsKey+"\")'><span class='am-icon-remove'></i>删除</a>&nbsp;</td>";
-		trHtml += "</tr>";
-		$("#goodsChildTable tbody").prepend(trHtml);
+		prePendGoodsChildTable(existsGoodsKey, existsGoodsKey, childGoodsLabel, null);
 	} else {
 		showLayerMsg("该商品已经添加！");
 	}
 	//隐藏和显示商品价格、库存、货号信息
 	showOrHideGoodsPriceTable();
 });
+
+//添加子商品
+var prePendGoodsChildTable = function(existsGoodsKey, childGoodsValue, childGoodsLabel, childGoods) {
+	var purchasePrice="",marketPrice="",salePrice="",promotionPrice="",availableNum="",childNo="",pkId="";
+	if(childGoods!=undefined && childGoods!=null){
+		purchasePrice = childGoods.purchasePrice;
+		marketPrice = childGoods.marketPrice;
+		salePrice = childGoods.salePrice;
+		promotionPrice = childGoods.promotionPrice;
+		availableNum = childGoods.availableNum;
+		childNo = childGoods.childNo;
+		pkId = childGoods.id;
+	}
+	var trHtml = "";
+	trHtml += "<tr>";
+	trHtml += "    <td style='text-align:left;'><input type='hidden' id='"+existsGoodsKey+"' value='"+childGoodsValue+"'/><div style='margin-top:5px;margin-bottom:5px;'>"+childGoodsLabel+"</div></td>";
+	trHtml += "    <td>&nbsp;<input name='purchasePriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+purchasePrice+"'/>&nbsp;</td>";
+	trHtml += "    <td>&nbsp;<input name='marketPriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+marketPrice+"'/>&nbsp;</td>";
+	trHtml += "    <td>&nbsp;<input name='salePriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+salePrice+"'/>&nbsp;</td>";
+	trHtml += "    <td>&nbsp;<input name='promotionPriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+promotionPrice+"'/>&nbsp;</td>";
+	trHtml += "    <td>&nbsp;<input name='availableNumInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+availableNum+"'/>&nbsp;</td>";
+	trHtml += "    <td>&nbsp;<input name='childNoInput' style=\"width:80px;\" value='"+childNo+"'/>&nbsp;</td>";
+	trHtml += "    <td>&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteGoodChilds(\""+existsGoodsKey+"\")'><span class='am-icon-remove'></i>删除</a>&nbsp;";
+	trHtml += "    <input type='hidden' value='"+pkId+"'/></td>";
+	trHtml += "</tr>";
+	$("#goodsChildTable tbody").prepend(trHtml);
+};
 
 //删除所选子商品
 var deleteGoodChilds = function(existsGoodsKey) {
@@ -282,19 +346,23 @@ var checkChildGoods = function(fieldName) {
 	var bool = true;
 	for(var i = 0; i < fields.length; i++) {
 		var field = $(fields[i]);
-		//var tdIndex = field.parent().index();
-		//var headText = field.parent().parent().parent().prev().children("tr:eq(0)").children("th:eq("+tdIndex+")").text().replace("*","");
+		/*var tdIndex = field.parent().index();
+		var headText = field.parent().parent().parent().prev().children("tr:eq(0)").children("th:eq("+tdIndex+")").text().replace("*","");*/
 		if(field.val().length==0) {
 			bool = false;
 			field.addClass("inputerror");
-			//showLayerMsg("请输入" + headText);
-			//field.focus();
+			/*showLayerMsg("请输入" + headText);
+			field.focus();*/
 		} else {
 			field.removeClass("inputerror");
 		}
 	}
 	return bool;
 }
+
+$("#publishTime").click(function() {
+	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
+});
 
 //添加商品参数按钮
 $(".addGoodsParam").click(function() {
@@ -324,20 +392,32 @@ var checkChildGoodsFieldThis = function(obj) {
 };
 
 //提交表单
-$("#saveBtn,#testbtn").click(function() {
+$("#saveBtn").click(function() {
+	//表单验证
 	if(!checkPageData()) 
 		return;
 	
+	//获取页面数据
 	var data = getPageData();
 	
+	//ajax保存
 	$.ajax({
 		type : "POST",
 		url : path_ + "/view/shop/goodsManager/goodsInfoAction!saveGoods.action",
 		dataType : "json",
 		data: data,
 		success : function(json) {
-			console.log("ok");
-		}, error: function(e){
+			if(json.goods.id != null) {
+				$("#goodsId").val(json.goods.id);
+				showMsg("操作成功！");
+				
+				if(goodsId != "") { //编辑
+					closeTab("editGoodsTabId"+goodsId);
+				} else { //关闭新增
+					closeThisTab();
+				}
+			}
+		}, error: function(e) {
 			console.log("error");
 		} 
 	});
@@ -370,7 +450,7 @@ var checkPageData = function() {
 		var b2 = checkChildGoods("marketPriceInput");
 		var b3 = checkChildGoods("salePriceInput");
 		var b4 = checkChildGoods("promotionPriceInput");
-		var b5 = checkChildGoods("availableNum");
+		var b5 = checkChildGoods("availableNumInput");
 		if(!b1 || !b2 || !b3 || !b4 || !b5) {
 			showLayerMsg("请输入完整库存配置信息");
 			$(".inputerror:first").focus(); 
@@ -447,18 +527,19 @@ var getPageData = function() {
 		var $tr = $(trs[i]);
 		var tds = $tr.children("td");
 		
-		var childGoodsId = $(tds[0]).children("input:eq(0)").val();
+		var cppvStr = $(tds[0]).children("input:eq(0)").val();
 		var purchasePrice = $(tds[1]).children("input:eq(0)").val();
 		var marketPrice = $(tds[2]).children("input:eq(0)").val();
 		var salePrice = $(tds[3]).children("input:eq(0)").val();
 		var promotionPrice = $(tds[4]).children("input:eq(0)").val();
 		var availableNum = $(tds[5]).children("input:eq(0)").val();
 		var goodsNo = $(tds[6]).children("input:eq(0)").val();
+		var pkId = $(tds[7]).children("input:eq(0)").val();
 		
-		var tempjson = {"childGoodsId":childGoodsId,"purchasePrice":purchasePrice,
+		var tempjson = {"cppvStr":cppvStr,"purchasePrice":purchasePrice,
 						"marketPrice":marketPrice,"salePrice":salePrice,
 						"promotionPrice":promotionPrice,"availableNum":availableNum,
-						"goodsNo":goodsNo};
+						"goodsNo":goodsNo,"pkId":pkId};
 		childGoods.push(tempjson);
 	}
 	
@@ -488,6 +569,9 @@ var getPageData = function() {
 	}
 
 	var data = {
+		"goods.id" : $("#goodsId").val() ,
+		"goods.cateId" : $("#cateId").val() ,
+		"goods.brandId" : $("#brandId").val() ,
 		"goods.title" : $("#title").val() ,
 		"goods.subTitle" : $("#subTitle").val() ,
 		"goods.purchasePrice" : $("#purchasePrice").val() ,
@@ -508,3 +592,4 @@ var getPageData = function() {
 	
 	return data;
 };
+//-----------------------------------------------BEGIN 业务结束------------------------------------------------------

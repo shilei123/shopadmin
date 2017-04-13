@@ -48,8 +48,8 @@
                 <comment>状态</comment>
             </column>
         </property>
-         <property name="couponFlag" type="java.lang.String">
-               <column name="COUPON_FLAG" length="1" >
+         <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1" >
                 <comment>是否删除</comment>
             </column>
         </property>

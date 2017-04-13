@@ -59,8 +59,6 @@ var setSonOrdersInfo = function(data){
 		html += "<ul><li style='width: 100%;'>未关联到发票信息</li></ul>";
 	}
 	//invoice==1	且	子订单sonOrders为空		且	父订单invoiceRecordId不为空	开单张发票
-	console.log(sonOrders[0]);
-	console.log(invoiceRecordId);
 	if(invoice=='1' && sonOrders[0]==undefined && invoiceRecordId!=null){
 		html += "<ul>"
 		html += "<li class='prop_li'>订单编号：<span id=''>" + orderMap.orderCode + "</span></li>";
@@ -118,7 +116,7 @@ var setGoodsInfo = function(orderGoods){
 			html += "<th>件数</th>";
 			html += "<th>小计</th>";
 			html += "</tr><tr>";
-			html += "<td style='width:10%;'><div><span class=''><a href='javascript:void(0);' target='_blank'><img src=''/>" + orderGoods[i].imgPath + "</a></span></div></td>";
+			html += "<td style='width:10%;'><div><span class=''><a href='javascript:void(0);' target='_blank'><img src=''/>" + orderGoods[i].imgPath + orderGoods[i].fileName + "</a></span></div></td>";
 			html += "<td><a href='' target='_blank'>" + orderGoods[i].goodsName + "</a></td>";
 			html += "<td><span class='red_common'>￥" + orderGoods[i].unitPrice + "</span></td>";
     		/*<script type="text/javascript">

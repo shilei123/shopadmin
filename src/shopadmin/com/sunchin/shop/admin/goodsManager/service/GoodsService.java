@@ -39,5 +39,13 @@ public interface GoodsService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List loadGoodsImages(ScGoods goodsVO) throws Exception;
+	List loadGoodsImages(ScGoods goodsVO) throws Exception;
+	
+	/**
+	 * 查询子商品列表
+	 * @param goodsVO
+	 * @return
+	 * @throws Exception
+	 */
+	List loadChildGoods(ScGoods goodsVO) throws Exception;
 }
