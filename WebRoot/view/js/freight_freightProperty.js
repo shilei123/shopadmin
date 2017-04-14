@@ -268,17 +268,30 @@ var clearForm = function() {
 var setFreightForm = function(data) {
 	$("#templateName").val(data.freightList[0].templateName);
 	var valuation = data.freightList[0].valuation;
+	$("input[type='radio']").attr("disabled","disabled");
 	var a = $("#piece").val();
 	if(a == valuation){
 		$("#piece").attr("checked","checked");
+		$(".span_init").html("件内,");
+		$(".span_stack").html("件,增加运费")
+		$(".span_initialInt").html("首件数(件)");
+		$(".span_stackInt").html("续件数(件)");
 	}
 	var b = $("#weight").val();
 	if(b == valuation){
 		$("#weight").attr("checked","checked");
+		$(".span_init").html("kg内,");
+		$(".span_stack").html("kg,增加运费")
+		$(".span_initialInt").html("首重量(kg)");
+		$(".span_stackInt").html("续重量(kg)");
 	}
 	var c = $("#volume").val();
 	if(c == valuation){
 		$("#volume").attr("checked","checked");
+		$(".span_init").html("m³内,");
+		$(".span_stack").html("m³,增加运费")
+		$(".span_initialInt").html("首体积(m³)");
+		$(".span_stackInt").html("续体积(m³)");
 	}
 	for(var i=0;i<data.freightList.length;i++){
 		var mode = data.freightList[i].transportMode;
