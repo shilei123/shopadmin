@@ -424,10 +424,10 @@ var getCheckedTableList = function(tableName,tableNames,childUserFreight,obj){
 		var $tr = $(freightCheckTable[i]);
 		var freightCheckTableTd = $tr.children("td");
 		var range = $(freightCheckTableTd[0]).children("input:eq(1)").val();
-		var initialInts = $(freightCheckTableTd[1]).children("input:eq(0)").val();
-		var initialPrices = $(freightCheckTableTd[2]).children("input:eq(0)").val();
-		var stackInts = $(freightCheckTableTd[3]).children("input:eq(0)").val();
-		var stackPrices = $(freightCheckTableTd[4]).children("input:eq(0)").val();
+		var initialInt = $(freightCheckTableTd[1]).children("input:eq(0)").val();
+		var initialPrice = $(freightCheckTableTd[2]).children("input:eq(0)").val();
+		var stackInt = $(freightCheckTableTd[3]).children("input:eq(0)").val();
+		var stackPrice = $(freightCheckTableTd[4]).children("input:eq(0)").val();
 		var userFreightId = $(freightCheckTableTd[5]).children("input:eq(0)").val();
 		var tempjson = {"userFreightId":userFreightId,"mode":obj,"range":range,"initialInt":initialInt,"initialPrice":initialPrice,"stackInt":stackInt,"stackPrice":stackPrice};
 		childUserFreight.push(tempjson);
