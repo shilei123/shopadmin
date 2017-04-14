@@ -10,6 +10,7 @@ import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.freight.service.IFreightService;
 import com.sunchin.shop.admin.pojo.ScDictionary;
 import com.sunchin.shop.admin.pojo.ScFreight;
+import com.sunchin.shop.admin.pojo.ScUserFreight;
 import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.action.PageAction;
@@ -24,7 +25,9 @@ public class FreightAction extends PageAction{
 	
 	private List<ScDictionary> isuseList;  //是否默认
 	private ScFreight fre;
+	private ScUserFreight userFre;
 	List<Map<String, Object>> freightList;
+	private String childUserFreightList;
 	
 	/**
 	 * 查询模板信息
@@ -45,9 +48,9 @@ public class FreightAction extends PageAction{
 	/**
 	 * 是否默认
 	 */
-	public String queryIsuse(){
+	public String saveIsuse(){
 		try {
-			isuseList  = dictService.getDictByType(DictionaryTypeEnum.ISUSE.getType());
+			freightService.saveIsuse(fre.getId());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,8 +76,12 @@ public class FreightAction extends PageAction{
 	 * @return
 	 */
 	public String save(){
-		
-		
+		try {
+			freightService.save(fre,childUserFreightList);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
 	
@@ -85,6 +92,16 @@ public class FreightAction extends PageAction{
 	public String delete(){
 		try {
 			freightService.deleteFreight(fre.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	public String delUserFreight(){
+		try {
+			freightService.delUserFreight(userFre.getId());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,5 +133,20 @@ public class FreightAction extends PageAction{
 		this.freightList = freightList;
 	}
 
+	public String getChildUserFreightList() {
+		return childUserFreightList;
+	}
+
+	public void setChildUserFreightList(String childUserFreightList) {
+		this.childUserFreightList = childUserFreightList;
+	}
+
+	public ScUserFreight getUserFre() {
+		return userFre;
+	}
+
+	public void setUserFre(ScUserFreight userFre) {
+		this.userFre = userFre;
+	}
 	
 }

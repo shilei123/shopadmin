@@ -15,5 +15,10 @@ public interface IFreightService {
 
 	void deleteFreight(String id) throws Exception;
 
+	void save(ScFreight fre, String childUserFreightList) throws Exception;
+
+	void delUserFreight(String id) throws Exception;
+
+	void saveIsuse(String id) throws Exception;
 
 }

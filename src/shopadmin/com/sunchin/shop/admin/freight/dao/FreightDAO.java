@@ -12,6 +12,7 @@ import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScFreight;
 import com.sunchin.shop.admin.pojo.ScUserCoupon;
+import com.sunchin.shop.admin.pojo.ScUserFreight;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
@@ -23,6 +24,7 @@ public class FreightDAO extends PageDAO{
 	public int queryFreightCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
 		params.add(FlagEnum.ACT.getCode());
+		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.TRANSPORT_MODE.getType());
 		params.add(DictionaryTypeEnum.ISUSE.getType());
 		String sql = this.buildWhereSql(pageBean, params);
@@ -32,6 +34,7 @@ public class FreightDAO extends PageDAO{
 	@SuppressWarnings("unchecked")
 	public List<ScFreight> queryFreightPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
 		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.TRANSPORT_MODE.getType());
 		params.add(DictionaryTypeEnum.ISUSE.getType());
@@ -48,6 +51,7 @@ public class FreightDAO extends PageDAO{
 		sql.append(" left join sc_dictionary t3 on t3.code=t2.transport_mode ");
 		sql.append(" left join sc_dictionary t4 on t4.code=t1.isuse ");
 		sql.append(" where t1.flag=? ");
+		sql.append(" and t2.flag=? ");
 		sql.append(" and t3.type=? ");
 		sql.append(" and t4.type=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
@@ -62,12 +66,13 @@ public class FreightDAO extends PageDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> findFreightList(String id) {
-		StringBuffer sql = new StringBuffer(" select t1.*,t2.* ");
+		StringBuffer sql = new StringBuffer(" select t1.*,t2.*,t2.id user_freight_id ");
 		sql.append(" from sc_freight t1 ");
 		sql.append(" left join sc_user_freight t2 on t1.id=t2.freight_id ");
 		sql.append(" where t1.flag=?");
+		sql.append(" and t2.flag=? ");
 		sql.append(" and t1.id=?");
-		List<Map<String, Object>> lists = DBUtil.getInstance().queryBySQL(sql.toString(),FlagEnum.ACT.getCode(),id);
+		List<Map<String, Object>> lists = DBUtil.getInstance().queryBySQL(sql.toString(),FlagEnum.ACT.getCode(),FlagEnum.ACT.getCode(),id);
 		if(lists != null && !lists.isEmpty()){
 			return lists;
 		}
@@ -83,6 +88,30 @@ public class FreightDAO extends PageDAO{
 		List<ScFreight> freight= DBUtil.getInstance().queryByPojo(ScFreight.class, params);
 		if(freight != null && !freight.isEmpty())	{
 			return freight.get(0);
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ScUserFreight findUserFreight(String id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id",id);
+		params.put("flag", FlagEnum.ACT.getCode());
+		List<ScUserFreight> freight= DBUtil.getInstance().queryByPojo(ScUserFreight.class, params);
+		if(freight != null && !freight.isEmpty())	{
+			return freight.get(0);
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ScFreight> findFreightIsuse() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("isuse",FlagEnum.ACT.getCode());
+		params.put("flag", FlagEnum.ACT.getCode());
+		List<ScFreight> freight= DBUtil.getInstance().queryByPojo(ScFreight.class, params);
+		if(freight != null && !freight.isEmpty())	{
+			return freight;
 		}
 		return null;
 	}

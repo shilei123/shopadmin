@@ -50,8 +50,8 @@
 										<th width="10%"  field="initialPrice">运费(元)</th>
 										<th width="10%"  field="stackInt">续件(个)</th>
 										<th width="10%"  field="stackPrice">续费(元)</th>
-										<th width="10%"  field="isuse">是否默认</th>
-										<th width="15%"  formatter="formatterAction">操作</th>
+										<th width="8%"  field="isuse">是否默认</th>
+										<th width="20%"  formatter="formatterAction">操作</th>
 									</tr>
 								</thead>
 						</table>
@@ -73,65 +73,7 @@
 	    	</div>
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
-		        <div align="center">
-		        	<table id="edit_fre_table" class="frame-modal-table" border="0" bordercolor="black">
-		        		<input type="hidden" name="freight.id" id="vId"/>
-			        	<tr>
-			        		<td width="100px" class="table_title">模板名称：</td>
-			        		<td><input name="freight.templateName" maxlength="50" id="templateName" placeholder="模板名称" class="am-form-field" style="width:78%"/></td>
-			        		<td width="100px" class="table_title">是否默认：</td>
-			        		<td>
-			        			<select name="freight.isuse" id="isuse" data-am-selected="{btnWidth: '152px'}">
-			        		</td>
-			        	</tr>
-			        	<tr>
-				        	<td width="100px" class="table_title">计价方式：</td>
-				        	<td colspan="3">
-				        	<input id="piece" name="freight.valuation" checked="checked" value="0" type="radio"/><label for="piece">按件数</label>
-			        		<input id="weight" name="freight.valuation" value="1" type="radio"/><label for="weight">按重量</label>
-			        		<input id="volume" name="freight.valuation" value="2" type="radio"/><label for="volume">按体积</label>
-			        		</td>
-			        	</tr>
-			        	<tr>
-			        		<td style="padding-left:30px;" colspan="4">运送方式：除指定地区外，其余地区的运费采用"默认运费"</td>
-						</tr>
-						<tr>
-							<td style="padding-left:130px;" colspan="4">
-								<div class="postage-tpl" id="py">
-									<p class="trans-line">
-										<input id="mail" type="checkbox" value="0" name="freight.TransportMode"> <label for="mail">平邮</label>
-									</p>
-								</div>
-							</td>
-		        		</tr>
-		        		<tr id="mails"></tr>
-		        		<tr>
-			        		<td  style="padding-left:130px;" colspan="4">
-				        		<div class="postage-tpl" id="kd">
-									<p class="trans-line">
-										<input id="express" type="checkbox" value="1" name="freight.TransportMode"> <label for="express">快递</label>
-									</p>
-								</div>
-								</td>
-		        		</tr>
-		        		<tr id="expresl"></tr>
-		        		<tr>
-			        		<td style="padding-left:130px;" colspan="4">
-				        		<div class="postage-tpl" id="es">
-									<p class="trans-line">
-										<input id="ems" type="checkbox" value="2" name="freight.TransportMode"> <label for="ems">EMS</label>
-									</p>
-								</div>
-			        		</td>
-		        		</tr>
-		        		<tr id="emss"></tr>
-		       	 	</table>
-		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
-		       	 	<div align="center">
-						<button type="button" class="am-btn am-btn-success" id="saveBtn"><span class="am-icon-save"></span> 保存</button>
-						<button type="button" class="am-btn am-btn-default" id="closeBtn"><span class="am-icon-undo"></span> 取消</button>
-					</div>
-	           	</div>
+		        <iframe id="freightParamsFrame" scrolling="no" frameborder="0" style="width:720px; height: 380px;overflow: hidden;overflow-x:hidden;overflow-y:hidden;"></iframe>
 	    	</div>
 		</div>
 	</div>
