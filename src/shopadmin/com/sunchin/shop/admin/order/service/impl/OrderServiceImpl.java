@@ -54,5 +54,30 @@ public class OrderServiceImpl implements OrderService {
 		List<ScOrder> list = orderDAO.querySonOrderById(id, invoiceRecordId);
 		return list;
 	}
+
+	@Override
+	public void confirmOrder(String id) throws Exception {
+		List<ScOrder> list = orderDAO.querySonOrderByParentOrderId(id);
+		for (ScOrder order : list) {
+			String orderId = order.getId();
+			orderDAO.confirmOrder(orderId);
+		}
+		orderDAO.confirmOrder(id);
+	}
+
+	@Override
+	public void cancelOrder(String id) throws Exception {
+		List<ScOrder> list = orderDAO.querySonOrderByParentOrderId(id);
+		for (ScOrder order : list) {
+			String orderId = order.getId();
+			orderDAO.cancelOrder(orderId);
+		}
+		orderDAO.cancelOrder(id);
+	}
+
+	@Override
+	public void changePriceOrder(String id, Double actualPrice)throws Exception {
+		orderDAO.changePriceOrder(id, actualPrice);
+	}
 	
 }

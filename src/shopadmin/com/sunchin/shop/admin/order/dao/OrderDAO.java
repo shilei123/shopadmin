@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.OrderInvoiceEnum;
+import com.sunchin.shop.admin.dict.OrderStsEnum;
 import com.sunchin.shop.admin.pojo.ScOrder;
 
 import framework.bean.PageBean;
@@ -27,6 +30,9 @@ public class OrderDAO extends PageDAO{
 	public String DETAIL_SQL;
 	public List<String> detailParams;
 	
+	@Resource(name="dbUtil")
+	private DBUtil db;
+	
 	/**
 	 * 初始化订单查询分页sql和参数（只展示父订单、子订单在选择父订单后展开）
 	 */
@@ -35,24 +41,27 @@ public class OrderDAO extends PageDAO{
 		sql.append(" select t.id, t.order_code, t.split_time, t.remark, t.total_price, t.order_price ");
 		sql.append(" ,decode(t.num,t.num,t.num||'件')as num ");
 		sql.append(" ,decode(t.commision_charge,'0','免运费',t.commision_charge,t.commision_charge) as commision_charge ");
-		sql.append(" ,t.actual_price, to_char(t.create_time, 'yyyy-MM-dd hh24:mm:ss') as create_time, t1.name as payMode, ");
-		sql.append(" t2.name as invoice, t3.name as issplit, t4.name as orderStatus, t5.name as deliveryMode ");
+		sql.append(" ,t.actual_price, to_char(t.create_time, 'yyyy-MM-dd hh24:mm:ss') as create_time, t1.name as payMode ");
+		sql.append(" ,t2.name as invoice, t3.name as issplit, t4.name as orderStatus, t5.name as deliveryMode ");
+		sql.append(" ,t6.nick_Name ");
 		sql.append(" from SC_ORDER t ");
 		sql.append(" left join Sc_Dictionary t1 on t1.code=t.pay_mode and t1.type=? ");
 		sql.append(" left join Sc_Dictionary t2 on t2.code=t.invoice and t2.type=? ");
 		sql.append(" left join Sc_Dictionary t3 on t3.code=t.issplit and t3.type=? ");
 		sql.append(" left join Sc_Dictionary t4 on t4.code=t.order_status and t4.type=? ");
 		sql.append(" left join Sc_Dictionary t5 on t5.code=t.delivery_mode and t5.type=? ");
+		sql.append(" left join Sc_User t6 on t6.id=t.user_id ");
 		sql.append(" where t.flag = ? "); 
 		sql.append(" and t1.flag = ? ");
 		sql.append(" and t2.flag = ? ");
 		sql.append(" and t3.flag = ? ");
 		sql.append(" and t4.flag = ? ");
 		sql.append(" and t5.flag = ? ");
+		sql.append(" and t6.flag = ? ");
 		sql.append(" and t.parent_order_id is null ");
 		PAGE_SQL = sql.toString();
 		
-		pageParams = new ArrayList<String>(11);
+		pageParams = new ArrayList<String>(12);
 		pageParams.add(DictionaryTypeEnum.ORDER_PAY_MODE.getType());
 		pageParams.add(DictionaryTypeEnum.ORDER_INVOICE.getType());
 		pageParams.add(DictionaryTypeEnum.ORDER_SPLIT.getType());
@@ -64,18 +73,19 @@ public class OrderDAO extends PageDAO{
 		pageParams.add(FlagEnum.ACT.getCode());
 		pageParams.add(FlagEnum.ACT.getCode());
 		pageParams.add(FlagEnum.ACT.getCode());
+		pageParams.add(FlagEnum.ACT.getCode());
 	}
 
 	public int queryOrderCount(PageBean pageBean) {
 		this.initPageSqlParams();
 		String sql = this.buildWhereSql(pageBean, pageParams);
-		return DBUtil.getInstance().queryCountBySQL(sql, pageParams);
+		return db.queryCountBySQL(sql, pageParams);
 	}
 
 	public List<Map<String, Object>> queryOrderPagination(PageBean pageBean) {
 		this.initPageSqlParams();
 		String sql = this.buildWhereSql(pageBean, pageParams);
-		List<Map<String, Object>> pageData = this.query(sql, pageParams, DBUtil.getInstance(), pageBean);
+		List<Map<String, Object>> pageData = this.query(sql, pageParams, db, pageBean);
 		return pageData;
 	}
 
@@ -156,7 +166,7 @@ public class OrderDAO extends PageDAO{
 		Map<String, Object> params = new HashMap<String, Object>(2);
 		params.put("flag", FlagEnum.ACT.getCode());
 		params.put("id", id);
-		List<ScOrder> list = DBUtil.getInstance().queryByPojo(ScOrder.class,params);
+		List<ScOrder> list = db.queryByPojo(ScOrder.class,params);
 		if(list!=null && !list.isEmpty()){
 			return list.get(0);
 		}
@@ -171,7 +181,7 @@ public class OrderDAO extends PageDAO{
 	 */
 	public Map queryOrderDetailById(String id, ScOrder order){
 		this.initDetailSqlParams(id, order);
-		List<Map> list = DBUtil.getInstance().queryBySQL(DETAIL_SQL, detailParams);
+		List<Map> list = db.queryBySQL(DETAIL_SQL, detailParams);
 		if(list!=null && !list.isEmpty())
 			return list.get(0);
 		return null;
@@ -181,7 +191,7 @@ public class OrderDAO extends PageDAO{
 		String invoice = CommonUtils.getString(order.getInvoice()); 
 		String invoiceRecordId = CommonUtils.getString(order.getInvoiceRecordId());
 		boolean isInvoice = false;
-		if(OrderInvoiceEnum.ORDER_INVOICE_Y.getCode().equals(invoice) 
+		if(OrderInvoiceEnum.YES.getCode().equals(invoice) 
 				&& !invoiceRecordId.isEmpty()){
 			isInvoice = true;//开单张发票	null在CommonUtils中处理
 		}
@@ -273,8 +283,47 @@ public class OrderDAO extends PageDAO{
 			params.add(FlagEnum.ACT.getCode());
 			params.add(FlagEnum.ACT.getCode());
 		}
-		List<ScOrder> list = DBUtil.getInstance().queryBySQL(sql.toString(), params);
+		List<ScOrder> list = db.queryBySQL(sql.toString(), params);
 		return list;
+	}
+
+	/**
+	 * 确认货到付款订单（修改包括子订单的orderStatus已提交为已确认）
+	 * @param id
+	 */
+	public void confirmOrder(String id) {
+		String hql = " update ScOrder set orderStatus=? where id=? ";
+		db.executeHql(hql, OrderStsEnum.CONFIRM.getCode(), id);
+	}
+	
+	/**
+	 * 确认货到付款订单（修改包括子订单的orderStatus已提交为已确认）
+	 * @param id
+	 */
+	public void cancelOrder(String id) {
+		String hql = " update ScOrder set orderStatus=? where id=? and flag=? ";
+		db.executeHql(hql, OrderStsEnum.CANCEL.getCode(), id, FlagEnum.ACT.getCode());
+	}
+	
+	/**
+	 * 查询子订单
+	 * @param parentOrderId
+	 * @return
+	 */
+	public List<ScOrder> querySonOrderByParentOrderId(String parentOrderId){
+		String hql = " from ScOrder where flag=? and parentOrderId=? ";
+		List<ScOrder> list = db.queryByHql(hql, FlagEnum.ACT.getCode(), parentOrderId);
+		return list;
+	}
+
+	/**
+	 * 修改订单费用
+	 * @param id
+	 * @param actualPrice
+	 */
+	public void changePriceOrder(String id, Double actualPrice) {
+		String hql = " update ScOrder set actualPrice=? where id=? and flag=? ";
+		db.executeHql(hql, actualPrice, id, FlagEnum.ACT.getCode());
 	}
 	
 }

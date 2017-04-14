@@ -130,7 +130,7 @@
 								<tr>
 									<th width="2%" field="index"></th>
 									<th width="6%" field="orderCode">订单编号</th>
-									<!-- <th width="6%" field="num">订单数量</th> -->
+									<th width="8%" field="nickName">买家</th>
 									<th width="6%" field="deliverymode">运送方式</th>
 									<th width="6%" field="orderstatus">订单状态</th>
 									<th width="7%" field="issplit">是否拆分</th>
@@ -154,37 +154,63 @@
 		</div>
 	</div>
 	
-	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
 		<div class="am-modal-dialog">
 	    	<div class="am-modal-hd"><span id="title"></span>
 	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 	    	</div>
 	    	<hr>
-	    	<div class="am-modal-bd frame-am-modal-bd">
+	    	<div class="am-modal-bd frame-am-modal-bd" style="margin-top: 5px;">
 		        <div align="center">
 		        	<table class="frame-modal-table" border="0" bordercolor="black">
 			        	<tr>
 			        		<td width="100" class="table_title">订单编号：</td>
 			        		<td>
-			        			<input id="orderCode2" class="am-form-field" style="width:90%" disabled="disabled"/>
+			        			<input id="orderCode1" class="am-form-field" style="width:85%" disabled="disabled"/>
+			        			<input id="operate1" type="hidden" disabled="disabled"/>
+			        			<input id="orderId1" type="hidden" disabled="disabled"/>
 			        		</td>
-			        	</tr>
-			        	<tr>
-			        		<td class="table_title">运送方式：</td>
-			        		<td><input id="deliveryMode2" class="am-form-field" style="width:90%" disabled="disabled"/></td>
-			        	</tr>
-			        	<tr>
-			        		<td class="table_title">订单状态：</td>
-			        		<td><input id="orderStatus2" class="am-form-field" style="width:90%" disabled="disabled"/></td>
-			        	</tr>
-			        	<tr>
-			        		<td class="table_title">收货信息：</td>
-			        		<td><input id="" class="am-form-field" style="width:90%" disabled="disabled" placeholder="暂未关联"/></td>
 			        	</tr>
 		       	 	</table>
 		       	 	<br>
 		       	 	<div align="center">
+						<button type="button" class="am-btn am-btn-success" id="confirmBtn"><span class="am-icon-check"></span>确认</button>
 						<button type="button" class="am-btn am-btn-default" id="closeBtn"><span class="am-icon-undo"></span>关闭</button>
+					</div>
+	           	</div>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
+		<div class="am-modal-dialog">
+	    	<div class="am-modal-hd"><span>调整费用</span>
+	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+	    	</div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd" style="margin-top: 5px;">
+		        <div align="center">
+		        	<table class="frame-modal-table" border="0" bordercolor="black">
+			        	<tr>
+			        		<td width="100" class="table_title">订单编号：</td>
+			        		<td>
+			        			<input id="orderCode2" class="am-form-field" style="width:85%" disabled="disabled"/>
+			        			<input id="orderId2" type="hidden" disabled="disabled"/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td class="table_title">买家：</td>
+			        		<td><input id="nickName2" class="am-form-field" style="width:85%" disabled="disabled"/></td>
+			        	</tr>
+			        	<tr>
+			        		<td class="table_title">支付总额：</td>
+			        		<td><input id="actual_price2" class="am-form-field" style="width:85%"/></td>
+			        	</tr>
+		       	 	</table>
+		       	 	<br>
+		       	 	<div align="center">
+						<button type="button" class="am-btn am-btn-success" id="changeBtn2"><span class="am-icon-check"></span>确认</button>
+						<button type="button" class="am-btn am-btn-default" id="closeBtn2"><span class="am-icon-undo"></span>关闭</button>
 					</div>
 	           	</div>
 	    	</div>

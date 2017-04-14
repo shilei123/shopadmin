@@ -11,7 +11,7 @@ import framework.bean.PageBean;
 public interface OrderService {
 
 	/**
-	 * 分页查询订单
+	 * 分页查询订单（不包括子订单）
 	 * @param pageBean
 	 * @return
 	 * @throws Exception
@@ -27,17 +27,40 @@ public interface OrderService {
 	public Map queryOrderById(String id) throws Exception;
 	
 	/**
-	 * 删除订单
+	 * 删除订单（empty method）
 	 * @param id
 	 * @throws Exception
 	 */
 	public void delOrder(String id) throws Exception;
 
 	/**
-	 * 查询子订单
+	 * 查询子订单详情
 	 * @param id
 	 * @throws Exception
 	 */
 	public List<ScOrder> querySonOrderById(String id) throws Exception;
+
+	/**
+	 * 确认货到付款订单（包括子订单）
+	 * @param id
+	 * @throws Exception
+	 */
+	public void confirmOrder(String id) throws Exception;
+
+	/**
+	 * 取消订单（包括子订单）
+	 * @param id
+	 * @throws Exception
+	 */
+	public void cancelOrder(String id) throws Exception;
+
+	/**
+	 * 修改订单费用
+	 * @param id
+	 * @param actualPrice
+	 * @throws Exception
+	 */
+	public void changePriceOrder(String id, Double actualPrice) throws Exception;
+	
 
 }

@@ -110,7 +110,7 @@ request.setAttribute("orderId", orderId);
         </tr>
 		</tbody>
 	</table>
-	<button class='am-btn am-btn-primary frame-search-button' id='retBtn' style="margin: 20px;">返回</button>
+	<button class='am-btn am-btn-primary frame-search-button' id='retBtn' style="margin: 20px;">关闭</button>
 </body>
 <script type="text/javascript" src="${path }/view/js/order_orderdetail.js"></script>
 </html>

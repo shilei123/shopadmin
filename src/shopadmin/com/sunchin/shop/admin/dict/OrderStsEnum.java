@@ -1,16 +1,26 @@
 package com.sunchin.shop.admin.dict;
 
-public enum OrderIssplitEnum {
-
-	YES("1", "是"),
+public enum OrderStsEnum {
 	
-	NO("0", "否");
+	SUBMIT("1", "已提交"),
+	
+	CONFIRM("2", "已确认"),
+	
+	UNRECEIPT("3", "待收货"),
+	
+	FINISH("4", "已完成"),
+	
+	CANCEL("5", "已取消"),
+	
+	UNPAY("6", "待付款"),
+	
+	UNDELIVERY("7", "待发货");
 
 	private String code;
 
 	private String name;
 
-	private OrderIssplitEnum(String code, String name) {
+	private OrderStsEnum(String code, String name) {
 		this.code = code;
 		this.name = name;
 	}

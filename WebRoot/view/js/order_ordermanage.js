@@ -37,155 +37,133 @@ var initSelect = function(data, id){
 	$("#" + id).html(html);
 }
 
-var openOrderInfoWin = function(title) {
-	$("#title").text(title);
-	showModal("doc-modal-2",500,350);
-};
-
-$("#closeBtn").click(function() {
-	closeModal("doc-modal-2");
-});
-
 //绑定搜索按钮的分页
 $('#queryBtn').click(function() {
 	query();
 });
 
+$('#closeBtn').click(function() {
+	closeModal("doc-modal-1");
+});
+$('#closeBtn2').click(function() {
+	closeModal("doc-modal-2");
+});
+
 var query = function() {
-	var data = formGet2("from_query");
+	var data = formGet("from_query");
 	var url = path_ + "/view/shop/order/order!queryOrderList.action";
-	pageData2(url, "orderListTable", data);
+	pageData(url, "orderListTable", data);
 };
 
 var formatterAction = function(value, row) {
+	var orderstatus = row["orderstatus"];
+	var paymode = row["paymode"];
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a id='a1' href='javascript:void(0)' onclick='showQueryOrderWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span><span id='a1span'>查看详情</span></a>";
-	/*html += "<a id='a2' href='javascript:void(0)' onclick='showEditOrderWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span>编辑</a>";*/
+	html += "<a id='a1' href='javascript:void(0)' onclick='showQueryOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-search'></span><span id='a1span'>查看详情</span></a>";
+	if(paymode=="货到付款"){
+		if(orderstatus=="已提交"){
+			//"货到付款"且"已提交"加上确认订单功能
+			html += "<a id='a2' href='javascript:void(0)' onclick='showConfirmOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-check'></span>确认订单</a>";
+		}else if(orderstatus=="已确认"){
+			//"货到付款"且"已确认"加上取消订单功能
+			html += "<a id='a2' href='javascript:void(0)' onclick='showCancelOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-remove'></span>取消订单</a>";
+		}
+	}else{//线上支付
+		if(orderstatus=="待付款"){
+			//"线上支付或支付宝微信"且"待付款"加上调整费用功能
+			html += "<a id='a2' href='javascript:void(0)' onclick='showChangePriceOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\",\""+ row["nickName"]+ "\",\""+ row["actualPrice"]+ "\")'><span class='am-icon-adjust'></span>调整费用</a>";
+		}else if(orderstatus=="待发货"){
+			//"线上支付或支付宝微信"且"待发货"加上取消订单功能
+			html += "<a id='a2' href='javascript:void(0)' onclick='showCancelOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-remove'></span>取消订单</a>";
+		}
+	}
 	html += "</div>";
 	return html;
 };
 
-var setOrderInfo = function(order) {
-	$("#orderCode2").val(order.orderCode);
-	$("#deliveryMode2").val(order.deliveryMode);
-	$("#orderStatus2").val(order.orderStatus);
-	//$("#content2").val(order.content);
+var showQueryOrderWin = function(id, orderCode) {
+	closeTab("queryOrderDetailTabId");
+	openTab("queryOrderDetailTabId","订单详情("+orderCode+")",path_+"/view/shop/order/orderdetail.jsp?tabId=queryOrderDetailTabId&orderId="+id);
 };
 
-var showQueryOrderWin = function(id) {
-	/*var data = {"order.id" : id};
+var showConfirmOrderWin = function(id, orderCode) {
+	$('#title').text("确认货到付款订单");
+	$('#orderCode1').val(orderCode);
+	$('#orderId1').val(id);
+	$('#operate1').val("confirm");
+	showModal("doc-modal-1",400,190);
+};
+
+var showCancelOrderWin = function(id, orderCode) {
+	$('#title').text("取消订单");
+	$('#orderCode1').val(orderCode);
+	$('#orderId1').val(id);
+	$('#operate1').val("cancel");
+	//取消订单、修改该订单以及子订单的order_status
+	showModal("doc-modal-1",400,190);
+};
+
+var showChangePriceOrderWin = function(id, orderCode, nickName, actualPrice) {
+	//调整费用、修改该订单以及子订单的actual_price
+	$('#orderId2').val(id);
+	$('#orderCode2').val(orderCode);
+	$('#nickName2').val(nickName);
+	$('#actual_price2').val(actualPrice);
+	showModal("doc-modal-2",400,270);
+};
+
+//确认订单和取消订单（修改该订单以及子订单的orderStatus）
+$('#confirmBtn').click(function() {
+	var val = $('#operate1').val();
+	var data = {"order.id":$('#orderId1').val()};
+	var url = "";
+	if(val=="confirm"){
+		url = path_ + "/view/shop/order/order!confirmOrder.action";
+		modifyOrderField(data, url);
+	}else if(val=="cancel"){
+		url = path_ + "/view/shop/order/order!cancelOrder.action";
+		modifyOrderField(data, url);
+	}
+});
+
+var modifyOrderField = function (data, url){
 	$.ajax({
 		type : "POST",
-		//url : path_ + "/view/shop/order/order!queryOrderById.action",
+		url : url,
 		data : data,
 		dataType : "json",
-		success : function(data) {
-			console.log(data.orderList);
-			setOrderInfo(data.order);
-			openOrderInfoWin("查看订单");
-		}
-	});*/
-	openTab("queryOrderDetailTabId"+id,"订单详情",path_+"/view/shop/order/orderdetail.jsp?tabId=queryOrderDetailTabId"+id+"&orderId="+id);
-};
-
-/*=========================================================分页方法======================================================*/
-
-var createTr2 = function(data, targetId) {
-	var tableTh = $("#"+targetId+" thead tr th");
-	if(data.rows != null && data.rows == 0 && tableTh != null && tableTh.length > 0) {
-		return "<tr><td colspan='"+tableTh.length+"' style='text-align:center;height:50px;vertical-align: middle;'>&nbsp;暂无记录!</td></tr>";
-	}
-	var html = "";
-	$(data.rows).each(function(index) {
-		var row = data.rows[index];
-		var index2 = index+1;
-		html += "<tr >";
-		$(tableTh).each(function(i) {
-			var fieldName = $(tableTh[i]).attr("field");
-			var formatter = $(tableTh[i]).attr("formatter");
-			var w = $(tableTh[i]).attr("width");
-			html += "<td width='"+w+"'>";
-			if(fieldName==undefined && formatter==undefined) { //字段名为空，则返回空列
-				html += "&nbsp;";
-			} else {
-				if(fieldName=="index") {//字段名为index,返回序号列
-					html += "<div style='text-align: center;'>" + index2 + "</div>";
-				} else{
-					if(formatter==undefined) { //格式化为空，则返回文本列
-						html += getColumnValue2(row[fieldName]);
-					} else { //格式化不为空，则调用格式化函数
-						html += window[formatter](getColumnValue2(row[fieldName]), row);
-						//"货到付款"且"已提交"加上确认订单功能
-						
-						//"货到付款"且"已确认"加上取消订单功能
-						
-						//"线上支付或支付宝微信"且"待付款"加上调整费用功能
-						
-						//"线上支付或支付宝微信"且"待发货"加上取消订单功能
-						
-						//可以挪到发货管理做？方便权限管理
-					}
-				}
-			}
-			html += "</td>";
-		});
-		html += "</tr>";
-	});
-	html += "";
-	return html;
-};
-
-var getColumnValue2 = function(fieldValue) {
-	if(fieldValue==null)
-		return "&nbsp;";
-	return fieldValue;
-};
-
-function pageData2(url, targetId, params, currPageNum, rowCount, page) {
-	params["page"] = (currPageNum || 1);
-	rowCount = rowCount || 'rowCount';
-	page = page || 'page';
-	$.ajax({
-		url : url,
-		type : 'POST',
-		data : params,
-		dataType: "json",
-		success : function(data) {
-			//console.log(data);
-			$('#'+targetId+' tbody').empty();
-			var html = createTr2(data, targetId);
-			$("#"+targetId).append(html);
-			$("#"+rowCount).text(data.total);
-			//显示分页
-			var pages = Math.ceil(data.total / data.rowCount);
-			laypage({
-				cont : page, //容器。值支持id名、原生dom对象，jquery对象。
-				pages : pages, //通过后台拿到的总页数
-				curr : currPageNum || 1, //当前页
-				groups : 5, //连续显示分页数
-				//skin: 'yahei',//皮肤
-				//skip: true, //是否开启跳页
-				jump : function(obj, first) { //触发分页后的回调
-					if (!first) { //点击跳页触发函数自身，并传递当前页：obj.curr//first一个Boolean，检测页面是否初始加载
-						pageData2(url, targetId, params, obj.curr, rowCount, page);
-					}
-				}
-			});
+		success : function(json) {
+			closeModal("doc-modal-1");
+			showAlert("操作成功");
+			query();
 		},
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			//alert('e:' + XMLHttpRequest.responseText);
+		error : function(e) {
+			showAlert("操作失败！");
 		}
 	});
 };
 
-function formGet2(formId){
-	var obj = new Object();
-	$("#"+ formId +" :input").each(function(i, n){
-		if(n.name!=null && n.name!=''){
-			obj[n.name] = n.value;
-		}else if(n.id!=null && n.id!=''){
-			obj[n.id] = n.value;
+//修改订单价格
+$('#changeBtn2').click(function() {
+	var actualPrice = $('#actual_price2').val();
+	if(isNaN(actualPrice)){
+		alert("请输入数字!");
+		return;
+	}
+	var data = {"order.id":$('#orderId2').val(),"order.actualPrice":actualPrice};
+	var url = path_ + "/view/shop/order/order!changePriceOrder.action";
+	$.ajax({
+		type : "POST",
+		url : url,
+		data : data,
+		dataType : "json",
+		success : function(json) {
+			closeModal("doc-modal-2");
+			showAlert("操作成功");
+			query();
+		},
+		error : function(e) {
+			showAlert("操作失败！");
 		}
 	});
-	return obj;
-}
+});
