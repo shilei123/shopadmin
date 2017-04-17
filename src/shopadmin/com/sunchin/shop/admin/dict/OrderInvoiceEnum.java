@@ -2,9 +2,9 @@ package com.sunchin.shop.admin.dict;
 
 public enum OrderInvoiceEnum {
 
-	ORDER_INVOICE_Y("1", "是"),
+	YES("1", "是"),
 	
-	ORDER_INVOICE_N("0", "否");
+	NO("0", "否");
 
 	private String code;
 

@@ -86,6 +86,45 @@ public class OrderAction extends PageAction{
 		}
 		return Action.SUCCESS;
 	}
+	
+	/**
+	 * 确认货到付款订单（包括子订单）
+	 * @return
+	 */
+	public String confirmOrder(){
+		try {
+			orderService.confirmOrder(order.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 取消订单（包括子订单）
+	 * @return
+	 */
+	public String cancelOrder(){
+		try {
+			orderService.cancelOrder(order.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 调整费用（父订单的actual_price）
+	 * @return
+	 */
+	public String changePriceOrder(){
+		try {
+			orderService.changePriceOrder(order.getId(), order.getActualPrice());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
 
 	public Map<String, List<ScDictionary>> getInitMap() {
 		return initMap;
