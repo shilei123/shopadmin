@@ -307,8 +307,8 @@ public class GoodsServiceImpl implements GoodsService {
 		if(StringUtils.isNotBlank(goodsBean.getPublishTime())) {
 			goodsVo.setPublishTime(DateUtils.parseDate(goodsBean.getPublishTime(), DateUtils.PATTERN_DATETIME));
 		}
-		goodsVo.setEmptyStore("");
-		goodsVo.setVirtual("");
+		goodsVo.setEmptyStore(goodsBean.getEmptyStore());
+		goodsVo.setVirtual(goodsBean.getVirtual());
 		goodsVo.setPurchasePrice(CommonUtils.getDouble(goodsBean.getPurchasePrice()));
 		goodsVo.setMarketPrice(CommonUtils.getDouble(goodsBean.getMarketPrice()));
 		goodsVo.setSalePrice(CommonUtils.getDouble(goodsBean.getSalePrice()));

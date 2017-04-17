@@ -1,6 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.sunchin.shop.admin.dict.PublishTypeEnum"%>
 <%@ page import="com.sunchin.shop.admin.dict.FreightTypeEnum"%>
+<%@ page import="com.sunchin.shop.admin.dict.EmptyStoreEnum"%>
+<%@ page import="com.sunchin.shop.admin.dict.VirtualEnum"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -65,8 +67,8 @@
 							<tr>
 								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">无库存销售：</div></td>
 								<td>
-									<label class="am-radio am-success" style="display: inline-block;margin-bottom:5px;"><input type="radio" name="" id="" value="" data-am-ucheck/>是</label>
-									<label class="am-radio am-success" style="display: inline-block;margin-top: 11px;margin-bottom:5px;"><input type="radio" name="" id="" value="" data-am-ucheck/>否</label>
+									<label class="am-radio am-success" style="display: inline-block;margin-bottom:5px;"><input type="radio" name="goods.emptyStore" id="emptyStore1" value="<%=EmptyStoreEnum.Y.getCode() %>" data-am-ucheck/>是</label>
+									<label class="am-radio am-success" style="display: inline-block;margin-top: 11px;margin-bottom:5px;"><input type="radio" name="goods.emptyStore" id="emptyStore2" value="<%=EmptyStoreEnum.N.getCode() %>" data-am-ucheck/>否</label>
 								</td>
 							</tr>
 							<tr>
@@ -254,8 +256,8 @@
 							<tr>
 								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">虚拟商品：</div></td>
 								<td>
-									<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="" id="" value="" data-am-ucheck/>是</label>
-									<label class="am-radio am-success" style="display: inline-block;margin-top: 11px;"><input type="radio" name="" id="" value="" data-am-ucheck/>否</label>
+									<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="goods.virtual" id="virtual1" value="<%=VirtualEnum.Y.getCode() %>" data-am-ucheck/>是</label>
+									<label class="am-radio am-success" style="display: inline-block;margin-top: 11px;"><input type="radio" name="goods.virtual" id="virtual12" value="<%=VirtualEnum.N.getCode() %>" data-am-ucheck/>否</label>
 								</td>
 							</tr>
 						</table>

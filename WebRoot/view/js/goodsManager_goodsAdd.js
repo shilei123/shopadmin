@@ -70,6 +70,7 @@ $(function() {
 
 //编辑商品-初始化商品信息
 var initGoodsForEdit = function() {
+	showLoading();
 	$.ajax({
 		type : "POST",
 		url : path_ + "/view/shop/goodsManager/goodsInfoAction!loadGoods.action",
@@ -79,6 +80,7 @@ var initGoodsForEdit = function() {
 			cateId = json.goodsMap.cateId;
 			//回显页面值
 			setPage(json.goodsMap,json.goodsImgList,json.childGoodsList);
+			
 			//查询类别下的品牌
 			
 			//查询类别属性属性值
@@ -86,6 +88,7 @@ var initGoodsForEdit = function() {
 		},
 		error: function(e){
 			console.log("查询类别属性属性值异常");
+			closeLoading();
 		} 
 	});
 };
@@ -103,8 +106,10 @@ var setPage = function(json,goodsImgList,childGoodsList) {
 	$("#promotionPrice").val(json.promotionPrice);
 	$("#availableNum").val(json.availableNum);
 	$("#goodsNo").val(json.goodsNo);
+	$(":radio[name='goods.emptyStore'][value='" + json.emptyStore + "']").attr("checked", "checked"); //attr和prop都有效
 	$(":radio[name='goods.freightType'][value='" + json.freightType + "']").attr("checked", "checked"); //attr和prop都有效
 	$(":radio[name='goods.publishType'][value='" + json.publishType + "']").prop("checked", "checked"); //attr和prop都有效
+	$(":radio[name='goods.virtual'][value='" + json.virtual + "']").attr("checked", "checked"); //attr和prop都有效
 	$("#publishTime").val(json.publishTime==null?"":json.publishTime.replace("T"," "));
 	
 	//回显图片
@@ -161,6 +166,9 @@ var setPage = function(json,goodsImgList,childGoodsList) {
 	} 
 	//隐藏和显示商品价格、库存、货号信息
 	showOrHideGoodsPriceTable();
+	//无库存销售 （等于 是 则隐藏库存必填标志；等于 否 则显示库存必填标志）
+	showOrHideRepRequired(json.emptyStore);
+	closeLoading();
 }
 
 //新增商品-初始化商品信息
@@ -278,7 +286,7 @@ var prePendGoodsChildTable = function(existsGoodsKey, childGoodsValue, childGood
 	trHtml += "    <td>&nbsp;<input name='marketPriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+marketPrice+"'/>&nbsp;</td>";
 	trHtml += "    <td>&nbsp;<input name='salePriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+salePrice+"'/>&nbsp;</td>";
 	trHtml += "    <td>&nbsp;<input name='promotionPriceInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+promotionPrice+"'/>&nbsp;</td>";
-	trHtml += "    <td>&nbsp;<input name='availableNumInput' onblur='javascript:checkChildGoodsFieldThis(this);' style=\"width:80px;\" value='"+availableNum+"'/>&nbsp;</td>";
+	trHtml += "    <td>&nbsp;<input name='availableNumInput' onblur='javascript:checkChildGoodsAvailableNumFieldThis(this);' style=\"width:80px;\" value='"+availableNum+"'/>&nbsp;</td>";
 	trHtml += "    <td>&nbsp;<input name='childNoInput' style=\"width:80px;\" value='"+childNo+"'/>&nbsp;</td>";
 	trHtml += "    <td>&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteGoodChilds(\""+existsGoodsKey+"\")'><span class='am-icon-remove'></i>删除</a>&nbsp;";
 	trHtml += "    <input type='hidden' value='"+pkId+"'/></td>";
@@ -367,7 +375,8 @@ var queryCpp = function(cateId, propId, valId) {
 	}
 };
 
-var checkChildGoods = function(fieldName) {
+//验证子商品列表中文本框的必填（根据name属性判断一组同名的字段）
+var checkChildGoodsFieldsRequired = function(fieldName) {
 	var fields = $("input[name='"+fieldName+"']");
 	var bool = true;
 	for(var i = 0; i < fields.length; i++) {
@@ -381,6 +390,32 @@ var checkChildGoods = function(fieldName) {
 			field.focus();*/
 		} else {
 			field.removeClass("inputerror");
+		}
+	}
+	return bool;
+}
+
+//验证子商品列表中文本框的是数字（根据name属性判断一组同名的字段，对没填的不验证正确性）
+var checkChildGoodsFieldsNumber = function(fieldName) {
+	var numReg = /^[1-9]\d*$/;　　//正整数
+	
+	//如果无库存销售为是，则可以输入非负整数（正整数 + 0）
+	var emptyStore = $('input:radio[name="goods.emptyStore"]:checked').val();
+	if(emptyStore.length > 0 && emptyStore==$("#emptyStore1").val()) {
+		numReg = /^[0-9]\d*$/;
+	}
+	
+	var fields = $("input[name='"+fieldName+"']");
+	var bool = true;
+	for(var i = 0; i < fields.length; i++) {
+		var field = $(fields[i]);
+		if(field.val().length > 0) {
+			if(!numReg.test(field.val())) {
+				bool = false;
+				field.addClass("inputerror");
+			} else {
+				field.removeClass("inputerror");
+			}
 		}
 	}
 	return bool;
@@ -407,13 +442,27 @@ var removeGoodsParams = function(but) {
 	elemParent.removeChild(elem);
 };
 
-//保存按钮
+//验证子商品必填字段
 var checkChildGoodsFieldThis = function(obj) {
 	var $obj = $(obj);
-	if($obj.val().length>0) {
+	if($obj.val().length > 0) {
 		$obj.removeClass("inputerror");
 	} else {
 		$obj.addClass("inputerror");
+	}
+};
+
+//验证子商品（库存）字段
+var checkChildGoodsAvailableNumFieldThis = function(obj) {
+	var emptyStore = $('input:radio[name="goods.emptyStore"]:checked').val();
+	if(emptyStore.length > 0) {
+		//如果无库存销售为否，则验证必填
+		if(emptyStore==$("#emptyStore2").val()) {
+			checkChildGoodsFieldThis(obj);
+		}
+		checkChildGoodsFieldsNumber("availableNumInput");
+	} else {
+		$(obj).removeClass("inputerror");
 	}
 };
 
@@ -426,6 +475,9 @@ $("#saveBtn").click(function() {
 	//获取页面数据
 	var data = getPageData();
 	
+	//显示进度条
+	showLoading();
+	
 	//ajax保存
 	$.ajax({
 		type : "POST",
@@ -434,6 +486,9 @@ $("#saveBtn").click(function() {
 		data: data,
 		success : function(json) {
 			if(json.goods.id != null) {
+				//隐藏进度条
+				closeLoading();
+				
 				$("#goodsId").val(json.goods.id);
 				showMsg("操作成功！");
 				
@@ -445,6 +500,8 @@ $("#saveBtn").click(function() {
 			}
 		}, error: function(e) {
 			console.log("error");
+			//隐藏进度条
+			closeLoading();
 		} 
 	});
 });
@@ -455,6 +512,33 @@ $("#closeBtn").click(function() {
 		closeThisTab();
 	});
 });
+
+//选择放入仓库和立即发布时，将发布时间置空
+$("#publishType1,publishType2").click(function() {
+	$("#publishTime").val("");
+});
+
+$("#emptyStore1,#emptyStore2").click(function() {
+	showOrHideRepRequired(this.value);
+});
+
+//无库存销售 （等于 是 则隐藏库存必填标志；等于 否 则显示库存必填标志）
+var showOrHideRepRequired = function(val) {
+	if(val==$("#emptyStore1").val()) {
+		$("#goodsChildTable thead tr th").eq(5).children("span:eq(0)").hide();
+		//去除库存必填样式
+		var availableNumInputs = $("input[name='availableNumInput']");
+		for(var i = 0; i < availableNumInputs.length; i++) {
+			$(availableNumInputs[i]).removeClass("inputerror");
+		}
+	} else if(val==$("#emptyStore2").val()) {
+		$("#goodsChildTable thead tr th").eq(5).children("span:eq(0)").show();
+		//验证子商品必填
+		checkChildGoodsFieldsRequired("availableNumInput");
+	}
+	//验证填写的库存值的正确性
+	checkChildGoodsFieldsNumber("availableNumInput");
+};
 
 var checkRequiredField = function(fieldId,msg) {
 	var $field = $("#"+fieldId);
@@ -475,17 +559,37 @@ var checkPageData = function() {
 		return false;
 	}; 
 	
+	var emptyStore = $('input:radio[name="goods.emptyStore"]:checked').val();
+	if(emptyStore == undefined) {
+		showLayerMsg("请选择无库存销售");
+		$("#emptyStore1").focus();
+		$("#emptyStore1").blur();
+		return false;
+	}
+	
 	//子商品数量
 	var goodsChildCount = $("#goodsChildTable tbody tr").length; 
 	if(goodsChildCount > 0) { //有子商品，则验证子商品填写的完整性
 		//同时验证子商品的价格信息，用css标红
-		var b1 = checkChildGoods("purchasePriceInput");
-		var b2 = checkChildGoods("marketPriceInput");
-		var b3 = checkChildGoods("salePriceInput");
-		var b4 = checkChildGoods("promotionPriceInput");
-		var b5 = checkChildGoods("availableNumInput");
+		var b1 = checkChildGoodsFieldsRequired("purchasePriceInput");
+		var b2 = checkChildGoodsFieldsRequired("marketPriceInput");
+		var b3 = checkChildGoodsFieldsRequired("salePriceInput");
+		var b4 = checkChildGoodsFieldsRequired("promotionPriceInput");
+		var b5 = true;
+		if(emptyStore==$("#emptyStore2").val()) { //无库存销售为否，则验证库存的必填
+			b5 = checkChildGoodsFieldsRequired("availableNumInput");
+		}
+		
 		if(!b1 || !b2 || !b3 || !b4 || !b5) {
 			showLayerMsg("请输入完整库存配置信息");
+			$(".inputerror:first").focus(); 
+			return false;
+		}
+		
+		//填写了库存，则验证库存的正确性
+		var b6 = checkChildGoodsFieldsNumber("availableNumInput");
+		if(!b6) {
+			showLayerMsg("请输入正确的库存值");
 			$(".inputerror:first").focus(); 
 			return false;
 		}
@@ -545,6 +649,24 @@ var checkPageData = function() {
 		showLayerMsg("请选择商品发布");
 		$("#publishType1").focus();
 		$("#publishType1").blur();
+		return false;
+	} 
+	
+	if(publishType==$("#publishType3").val()) {
+		var publishTime = $("#publishTime").val();
+		if(publishTime.length==0) {
+			showLayerMsg("请选择发布时间");
+			$("#publishTime").focus();
+			$("#publishTime").blur();
+			return false;
+		}
+	}
+	
+	var virtual = $('input:radio[name="goods.virtual"]:checked').val();
+	if(virtual == undefined) {
+		showLayerMsg("请选择是否虚拟商品");
+		$("#virtual1").focus();
+		$("#virtual1").blur();
 		return false;
 	}
 	
@@ -620,7 +742,9 @@ var getPageData = function() {
 		"goods.childGoods" : JSON.stringify(childGoods),
 		"goods.imgs" : imgs,
 		"goods.params" : JSON.stringify(params),
-		"goods.detail" : getContent()
+		"goods.detail" : getContent(),
+		"goods.emptyStore" : $('input:radio[name="goods.emptyStore"]:checked').val(),
+		"goods.virtual" : $('input:radio[name="goods.virtual"]:checked').val()
 	};
 	
 	return data;
