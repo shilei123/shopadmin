@@ -80,7 +80,7 @@
 	    	</div>
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
-	    	<iframe id="eventsParamsFrame" scrolling="no" frameborder="0" style="width:875px; height: 400px;overflow: hidden;overflow-x:hidden;overflow-y:hidden;"></iframe>
+	    		<iframe id="eventsParamsFrame" scrolling="no" frameborder="0" style="width:875px; height: 400px;overflow: hidden;overflow-x:hidden;overflow-y:hidden;"></iframe>
 	    	</div>
 		</div>
 	</div>

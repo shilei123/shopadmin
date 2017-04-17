@@ -1,4 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String key = request.getParameter("key")==null?"":request.getParameter("key");
+request.setAttribute("key", key);
+%>
 <html>
 <head>
 <jsp:include page="/include/common.jsp"></jsp:include>
@@ -40,6 +44,7 @@ em.zt {
 <div class="btns">
 	<button class="J_Submit" type="button">确定</button>
 	<button class="J_Cancel" type="button">取消</button>
+	<input type="hidden" id="key" value="${key}"/>
 </div>
 </div>
 	</li>
@@ -66,8 +71,10 @@ $('.J_Submit').click(function(){
     });
 	$("#filename").val(str);
 	$("#file").val(aaa);
-    parent.$('#divts').html($("#file").val());
-    parent.$('#cityName').val($("#filename").val());
+	var key = $("#key").val();
+    parent.$("#divts"+key).html($("#file").val());
+    parent.$("#cityName"+key).val($("#filename").val());
+    parent.$("#mode"+key).val($("#file").val());
     parent.layer.close(index);
 });
 

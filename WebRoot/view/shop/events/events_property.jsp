@@ -88,5 +88,5 @@ request.setAttribute("eventsId", eventsId);
   	</div>
 </div>
 </body>
-<script type="text/javascript" src="${path }/view/js/events_property.js"></script>
+<script type="text/javascript" src="${path }/view/js/events_eventsProperty.js"></script>
 </html>

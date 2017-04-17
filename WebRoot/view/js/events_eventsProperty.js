@@ -7,6 +7,7 @@ $("#startTime").click(function() {
 $("#endTime").click(function() {
 	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
 });	
+//初始化
 	$(function() {
 		queryEventsType();
 		var vId =$("#vId").val();
@@ -44,10 +45,7 @@ $("#endTime").click(function() {
 			data : data,
 			dataType : "json",
 			success : function(data) {
-				console.log(data);
-				var isuse = $("#isuse");
-				isuse.empty();
-				isuse.append(eventsTypeHtml);
+				setIsuse();
 				$("#goodsChildTable tbody").html('');
 				setEventsForm(data);
 			}
@@ -58,7 +56,7 @@ $("#endTime").click(function() {
 	$("#chooseGoodsBtn").click(function(){
 		//打开商品列表窗口
 		var url=path_ +"/view/shop/advertise/queryGoods.jsp";
-		showLayerModal("选择商品",url,700,450);
+		showLayerModal("选择商品",url,800,400);
 	});
 
 	//选择商品的回调函数
