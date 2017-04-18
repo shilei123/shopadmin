@@ -137,46 +137,47 @@
 	</div>
 	
 	<div class="am-cf">
-	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
-		<div class="am-modal-dialog">
-	    	<div class="am-modal-hd"><span id="title">属性与属性值配置</span>
-	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-	    	</div>
-	    	<hr>
-	    	<div class="admin-content">
-		    	<div class="admin-content-body">
-		      		<div class="am-g">
-		      			<form id="form1" method="post">
-		      				<input type="hidden" name="queryParams.propertyId" id="propertyId" value=""/>
-		      				<input type="hidden" name="queryParams.checkPropValueIds" id="checkPropValueIds" value=""/>
-		      				<div style="width: 100%;overflow: auto;">
-				            <table class="am-table am-table-bordered am-table-striped am-table-hover" id="propValueTable">
-				              <thead>
-					              <tr>
-					                <th field="index">序号</th>
-					                <th field="checkbox">选择</th>
-									<th field="valName">属性值名称</th>
-					              </tr>
-				              </thead>
-				            </table>
-				            </div>
-				            <div class="am-u-sm-12">
-								<div class="am-cf">
-									<span style="margin-left:-350px;">
-										共<span id="rowCount1"></span>条记录<span id="page1" class="am-fr"></span>
-									</span>
-								</div>
-							</div>
-			            	<div align="center" style="display: ;">
-			            		<button type="button" class="am-btn am-btn-success" id="saveBtn1"><span class="am-icon-save"></span> 保存</button>
-								<button type="button" class="am-btn am-btn-default" id="closeBtn1"><span class="am-icon-undo"></span> 取消</button>
-			            	</div>
-			            </form>
-		      		</div>
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+			<div class="am-modal-dialog">
+		    	<div class="am-modal-hd"><span id="title">属性与属性值配置</span>
+		      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 		    	</div>
-		  	</div>
+		    	<hr>
+		    	<div class="admin-content">
+			    	<div class="admin-content-body">
+			      		<div class="am-g">
+			      			<form id="form1" method="post">
+			      				<input type="hidden" name="queryParams.propertyId" id="propertyId" value=""/>
+			      				<input type="hidden" name="queryParams.checkPropValueIds" id="checkPropValueIds" value=""/>
+			      				<div style="width: 100%;overflow: auto;">
+					            <table class="am-table am-table-bordered am-table-striped am-table-hover" id="propValueTable"
+					            		style="width:560px;margin-left:20px;">
+					              <thead>
+						              <tr>
+						                <th field="index">序号</th>
+						                <th field="checkbox">选择</th>
+										<th field="valName">属性值名称</th>
+						              </tr>
+					              </thead>
+					            </table>
+					            </div>
+					            <div class="am-u-sm-12">
+									<div class="am-cf">
+										<span style="margin-left:-350px;">
+											共<span id="rowCount1"></span>条记录<span id="page1" class="am-fr"></span>
+										</span>
+									</div>
+								</div>
+				            	<div align="center" style="display: ;">
+				            		<button type="button" class="am-btn am-btn-success" id="saveBtn1"><span class="am-icon-save"></span> 保存</button>
+									<button type="button" class="am-btn am-btn-default" id="closeBtn1"><span class="am-icon-undo"></span> 取消</button>
+				            	</div>
+				            </form>
+			      		</div>
+			    	</div>
+			  	</div>
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 <script type="text/javascript" src="${path }/view/js/property_propertymanage.js"></script>

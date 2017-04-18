@@ -49,7 +49,7 @@ public class OrderAction extends PageAction{
 		try {
 			orderMap = orderService.queryOrderById(order.getId());//订单基础信息
 			sonOrders = orderService.querySonOrderById(order.getId()); //子订单信息
-			orderGoods = orderDetailService.queryByOrderId(order.getId());//商品信息
+			orderGoods = orderDetailService.queryOrderDetailByOrderId(order.getId());//商品信息
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -88,12 +88,12 @@ public class OrderAction extends PageAction{
 	}
 	
 	/**
-	 * 确认货到付款订单（包括子订单）
+	 * 确认订单（拆分子订单）
 	 * @return
 	 */
 	public String confirmOrder(){
 		try {
-			orderService.confirmOrder(order.getId());
+			//orderService.confirmOrder(order.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -102,11 +102,12 @@ public class OrderAction extends PageAction{
 	
 	/**
 	 * 取消订单（包括子订单）
+	 * empty method modify by aobingcheng 2017/04/17
 	 * @return
 	 */
 	public String cancelOrder(){
 		try {
-			orderService.cancelOrder(order.getId());
+			//orderService.cancelOrder(order.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -125,7 +126,20 @@ public class OrderAction extends PageAction{
 		}
 		return Action.SUCCESS;
 	}
-
+	
+	/**
+	 * 查询订单对应的商品
+	 * @return
+	 */
+	public String queryOrderGoods(){
+		try {
+			orderGoods = orderDetailService.queryOrderDetailByOrderId("id3");//商品信息
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
 	public Map<String, List<ScDictionary>> getInitMap() {
 		return initMap;
 	}

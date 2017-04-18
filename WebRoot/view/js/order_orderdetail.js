@@ -40,8 +40,8 @@ var setSonOrdersInfo = function(data){
 	var orderMap = data.orderMap;
 	var sonOrders = data.sonOrders;
 	var orderGoods = data.orderGoods;
-	console.log(orderMap);
-	console.log(sonOrders);
+//	console.log(orderMap);
+//	console.log(sonOrders);
 	console.log(orderGoods);
 	if(sonOrders[0]==undefined){
 		var temp = "<ul><li style='width: 100%;'>无子订单</li></ul>";

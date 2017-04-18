@@ -34,7 +34,7 @@ public class OrderDAO extends PageDAO{
 	private DBUtil db;
 	
 	/**
-	 * 初始化订单查询分页sql和参数（只展示父订单、子订单在选择父订单后展开）
+	 * 初始化订单查询分页sql和参数（只展示父订单）
 	 */
 	private void initPageSqlParams(){
 		StringBuffer sql = new StringBuffer();
@@ -174,7 +174,7 @@ public class OrderDAO extends PageDAO{
 	}
 
 	/**
-	 * 查询订单基础信息（包括单张发票信息/即无子订单的订单发票信息）
+	 * 查询订单基础信息（包括单张发票信息/即没有子订单的订单发票信息）
 	 * @param id
 	 * @param order
 	 * @return
@@ -288,16 +288,16 @@ public class OrderDAO extends PageDAO{
 	}
 
 	/**
-	 * 确认货到付款订单（修改包括子订单的orderStatus已提交为已确认）
+	 * 确认货到付款订单（修改包括子订单的orderStatus已提交为待发货）
 	 * @param id
 	 */
 	public void confirmOrder(String id) {
-		String hql = " update ScOrder set orderStatus=? where id=? ";
-		db.executeHql(hql, OrderStsEnum.CONFIRM.getCode(), id);
+		String hql = " update ScOrder set orderStatus=? where id=? and flag=? ";
+		db.executeHql(hql, OrderStsEnum.UNDELIVERY.getCode(), id, FlagEnum.ACT.getCode());
 	}
 	
 	/**
-	 * 确认货到付款订单（修改包括子订单的orderStatus已提交为已确认）
+	 * 取消订单（修改包括子订单的orderStatus已提交为已取消）
 	 * @param id
 	 */
 	public void cancelOrder(String id) {
@@ -325,5 +325,6 @@ public class OrderDAO extends PageDAO{
 		String hql = " update ScOrder set actualPrice=? where id=? and flag=? ";
 		db.executeHql(hql, actualPrice, id, FlagEnum.ACT.getCode());
 	}
-	
 }
+	
+	
