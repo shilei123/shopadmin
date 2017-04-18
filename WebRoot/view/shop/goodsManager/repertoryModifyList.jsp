@@ -50,12 +50,12 @@
 								<tr>
 									<th width="2%" field="index"></th>
 									<th width="10%" field="goodsNo">货号</th>
-									<th width="38%" field="title" formatter="formatterTitle">标题</th>
-									<th width="10%" field="cateName">分类</th>
-									<th width="10%" field="brandName">品牌</th>
-									<th width="10%" field="goodsSts">商品状态</th>
-									<th width="10%" field="auditSts">商品审核状态</th>
-									<th width="10%" formatter="formatterAction">操作</th>
+									<th width="40%" field="title" formatter="formatterTitle">标题</th>
+									<th width="8%" field="cateName">分类</th>
+									<th width="8%" field="brandName">品牌</th>
+									<th width="6%" field="goodsSts" formatter="formatterGoodsSts">商品状态</th>
+									<th width="6%" field="auditSts" formatter="formatterAuditSts">审核状态</th>
+									<th width="20%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>
 						</table>
@@ -69,5 +69,5 @@
 	</div>
 	<!-- content end -->
 </body>
-<script type="text/javascript" src="${path }/view/js/goodsManager_goodsNoAuditList.js"></script>
+<script type="text/javascript" src="${path }/view/js/goodsManager_repertoryModifyList.js"></script>
 </html>

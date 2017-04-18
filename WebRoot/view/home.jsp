@@ -369,7 +369,7 @@
     var showConfirm_ = function(msg,callbackfun) {
     	//询问框
     	layer.confirm(msg, {
-    		icon: 2,btn: ['确认','取消'] //按钮
+    		icon: 3,btn: ['确认','取消'] //按钮
     	}, function(){
     		callbackfun();
     	}, function(){

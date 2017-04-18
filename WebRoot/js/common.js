@@ -59,9 +59,9 @@ var showLoading = function() {
     	shade: [0.1,'#fff'] //0.1透明度的白色背景
     });*/
 	//加载层-默认风格
-	//layer.load();
+	layer.load();
 	//加载层-风格2
-	layer.load(1);
+	//layer.load(1);
 	//加载层-风格3
 	//layer.load(2);
 	//加载层-风格4

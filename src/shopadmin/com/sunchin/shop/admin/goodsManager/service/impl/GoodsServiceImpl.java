@@ -404,4 +404,29 @@ public class GoodsServiceImpl implements GoodsService {
 		imageUseRecVo.setFlag(FlagEnum.ACT.getCode());
 		return imageUseRecVo;
 	}
+
+	@Override
+	public void passGoods(String goodsId) throws Exception {
+		this.goodsDAO.updateAuditStsById(goodsId, AuditStsEnum.PASS.getCode());
+	}
+
+	@Override
+	public void noPassGoods(String goodsId) throws Exception {
+		this.goodsDAO.updateAuditStsById(goodsId, AuditStsEnum.NO_PASS.getCode());
+	}
+
+	@Override
+	public void deleteGoods(String goodsId) throws Exception {
+		
+	}
+
+	@Override
+	public void putawayGoods(String goodsId) throws Exception {
+		this.goodsDAO.updateGoodsStsById(goodsId, GoodsStsEnum.PUTAWAY.getCode());
+	}
+
+	@Override
+	public void soldOutGoods(String goodsId) throws Exception {
+		this.goodsDAO.updateGoodsStsById(goodsId, GoodsStsEnum.OUT.getCode());
+	}
 }

@@ -8,6 +8,7 @@ import com.sunchin.shop.admin.pojo.ScGoods;
 
 import framework.bean.PageBean;
 
+@SuppressWarnings("rawtypes")
 public interface GoodsService {
 	
 	/**
@@ -48,4 +49,39 @@ public interface GoodsService {
 	 * @throws Exception
 	 */
 	List loadChildGoods(ScGoods goodsVO) throws Exception;
+	
+	/**
+	 * 通过
+	 * @param goodsId
+	 * @throws Exception
+	 */
+	void passGoods(String goodsId) throws Exception;
+	
+	/**
+	 * 不通过
+	 * @param goodsId
+	 * @throws Exception
+	 */
+	void noPassGoods(String goodsId) throws Exception;
+	
+	/**
+	 * 删除
+	 * @param goodsId
+	 * @throws Exception
+	 */
+	void deleteGoods(String goodsId) throws Exception;
+	
+	/**
+	 * 上架
+	 * @param goodsId
+	 * @throws Exception
+	 */
+	void putawayGoods(String goodsId) throws Exception;
+	
+	/**
+	 * 下架
+	 * @param goodsId
+	 * @throws Exception
+	 */
+	void soldOutGoods(String goodsId) throws Exception;
 }

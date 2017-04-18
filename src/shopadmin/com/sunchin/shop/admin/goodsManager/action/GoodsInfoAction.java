@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.dict.AuditStsEnum;
+import com.sunchin.shop.admin.dict.GoodsStsEnum;
 import com.sunchin.shop.admin.goodsManager.bean.GoodsBean;
 import com.sunchin.shop.admin.goodsManager.service.GoodsService;
 import com.sunchin.shop.admin.pojo.ScGoods;
@@ -52,17 +53,145 @@ public class GoodsInfoAction extends PageAction {
 	}
 	
 	/**
-	 * 查询未上架商品
+	 * 查询待审核商品
 	 * @return
 	 */
-	public String queryNoOnGoods() {
+	public String queryNoAuditList() {
 		try {
 			if(this.getPageBean().getQueryParams() != null) {
-				pageBean.getQueryParams().put("audit_sts", AuditStsEnum.WAIT.getCode());
+				pageBean.getQueryParams().put("auditSts", AuditStsEnum.WAIT.getCode()+","+AuditStsEnum.NO_PASS.getCode());
 			}
 			PageBean resultData = this.goodsService.queryGoods(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 查询未上架商品
+	 * @return
+	 */
+	public String queryNoPutawayList() {
+		try {
+			if(this.getPageBean().getQueryParams() != null) {
+				pageBean.getQueryParams().put("auditSts", AuditStsEnum.PASS.getCode());
+				pageBean.getQueryParams().put("goodsSts", GoodsStsEnum.IN_STORE.getCode()+","+GoodsStsEnum.TIMER_PUTAWAY.getCode());
+			}
+			PageBean resultData = this.goodsService.queryGoods(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 查询已上架商品
+	 * @return
+	 */
+	public String queryPutawayList() {
+		try {
+			if(this.getPageBean().getQueryParams() != null) {
+				pageBean.getQueryParams().put("auditSts", AuditStsEnum.PASS.getCode());
+				pageBean.getQueryParams().put("goodsSts", GoodsStsEnum.PUTAWAY.getCode());
+			}
+			PageBean resultData = this.goodsService.queryGoods(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 查询已下架商品
+	 * @return
+	 */
+	public String querySoldOutList() {
+		try {
+			if(this.getPageBean().getQueryParams() != null) {
+				pageBean.getQueryParams().put("auditSts", AuditStsEnum.PASS.getCode());
+				pageBean.getQueryParams().put("goodsSts", GoodsStsEnum.OUT.getCode());
+			}
+			PageBean resultData = this.goodsService.queryGoods(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 通过
+	 * @return
+	 */
+	public String pass() {
+		try {
+			this.goodsService.passGoods(this.goods.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 不通过
+	 * @return
+	 */
+	public String noPass() {
+		try {
+			this.goodsService.noPassGoods(this.goods.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 删除
+	 * @return
+	 */
+	public String delete() {
+		/*try {
+			if(this.getPageBean().getQueryParams() != null) {
+				pageBean.getQueryParams().put("auditSts", AuditStsEnum.PASS.getCode());
+				pageBean.getQueryParams().put("goodsSts", GoodsStsEnum.OUT.getCode());
+			}
+			PageBean resultData = this.goodsService.queryGoods(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 上架
+	 * @return
+	 */
+	public String putaway() {
+		try {
+			this.goodsService.putawayGoods(this.goods.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 下架
+	 * @return
+	 */
+	public String soldOut() {
+		try {
+			this.goodsService.soldOutGoods(this.goods.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

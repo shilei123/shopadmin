@@ -6,7 +6,7 @@ public enum AuditStsEnum {
 
 	PASS("2", "通过"),
 	
-	NO_PASS("1", "不通过");
+	NO_PASS("3", "不通过");
 
 	private String code;
 

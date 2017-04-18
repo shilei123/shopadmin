@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
@@ -35,7 +36,33 @@ public class ScGoodsDAO extends PageDAO {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(" select t.*,c.cate_name from sc_goods t left join sc_category c on t.cate_id=c.id where t.flag=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
-			DBUtil.bind(sql, params, " and t.audit_sts=? ", pageBean.getQueryParams().get("auditSts"));
+			String auditSts = pageBean.getQueryParams().get("auditSts");
+			if(StringUtils.isNotBlank(auditSts)) {
+				String[] auditStss = auditSts.split(",");
+				StringBuffer temp = new StringBuffer(" and (");
+				String m = "";
+				for (String str : auditStss) {
+					temp.append(m).append(" t.audit_sts=? ");
+					params.add(str);
+					m = " or ";
+				}
+				temp.append(")");
+				sql.append(temp);
+			}
+			
+			String goodsSts = pageBean.getQueryParams().get("goodsSts");
+			if(StringUtils.isNotBlank(goodsSts)) {
+				String[] goodsStss = goodsSts.split(",");
+				StringBuffer temp = new StringBuffer(" and (");
+				String m = "";
+				for (String str : goodsStss) {
+					temp.append(m).append(" t.goods_sts=? ");
+					params.add(str);
+					m = " or ";
+				}
+				temp.append(")");
+				sql.append(temp);
+			}
 		}
 		sql.append(" ORDER BY t.create_time desc ");
 		return sql.toString();
@@ -57,5 +84,13 @@ public class ScGoodsDAO extends PageDAO {
 	
 	public ScGoods queryPojoById(String id) {
 		return (ScGoods) DBUtil.getInstance().get(ScGoods.class, id);
+	}
+	
+	public int updateAuditStsById(String id, String auditSts) {
+		return DBUtil.getInstance().executeHql(" update ScGoods t set t.auditSts=? where t.id=? ", auditSts, id);
+	}
+	
+	public int updateGoodsStsById(String id, String goodsSts) {
+		return DBUtil.getInstance().executeHql(" update ScGoods t set t.goodsSts=? where t.id=? ", goodsSts, id);
 	}
 }
