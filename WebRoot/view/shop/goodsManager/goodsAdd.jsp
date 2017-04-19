@@ -49,7 +49,7 @@
 								<td valign="bottom">
 									<span id="cateName"></span>&nbsp;
 									<button class="am-btn am-btn-warning am-btn-xs am-round" 
-									onclick="window.location.href='${path}/view/shop/goods/goodsTypeSelect.jsp'">编辑</button>
+									onclick="window.location.href='${path}/view/shop/goodsManager/goodsTypeSelect.jsp'">编辑</button>
 								</td>
 							</tr>
 							<tr>

@@ -526,6 +526,7 @@ $("#emptyStore1,#emptyStore2").click(function() {
 var showOrHideRepRequired = function(val) {
 	if(val==$("#emptyStore1").val()) {
 		$("#goodsChildTable thead tr th").eq(5).children("span:eq(0)").hide();
+		$("#availableNum").parent().prev().children("span:eq(0)").hide();
 		//去除库存必填样式
 		var availableNumInputs = $("input[name='availableNumInput']");
 		for(var i = 0; i < availableNumInputs.length; i++) {
@@ -533,6 +534,7 @@ var showOrHideRepRequired = function(val) {
 		}
 	} else if(val==$("#emptyStore2").val()) {
 		$("#goodsChildTable thead tr th").eq(5).children("span:eq(0)").show();
+		$("#availableNum").parent().prev().children("span:eq(0)").show();
 		//验证子商品必填
 		checkChildGoodsFieldsRequired("availableNumInput");
 	}
@@ -596,23 +598,40 @@ var checkPageData = function() {
 	} else { //有子商品，则验证商品价格和库存字段必填
 		if(!checkRequiredField("purchasePrice")) {
 			return false;
-		}; 
+		} 
 		
 		if(!checkRequiredField("marketPrice")) {
 			return false;
-		}; 
+		}
 		
 		if(!checkRequiredField("salePrice")) {
 			return false;
-		}; 
+		}
 		
 		if(!checkRequiredField("promotionPrice")) {
 			return false;
-		}; 
+		}
 		
-		if(!checkRequiredField("availableNum")) {
-			return false;
-		};
+		if(emptyStore==$("#emptyStore2").val()) { //无库存销售为否，则验证库存的必填
+			if(!checkRequiredField("availableNum")) {
+				return false;
+			}
+			var numReg = /^[1-9]\d*$/;　　//正整数
+			if(!numReg.test($("#availableNum").val())) {
+				showLayerMsg("请填写有效的库存，且必须大于0");
+				$("#availableNum").focus();
+				return false;
+			}
+		} else if(emptyStore==$("#emptyStore1").val()) {//无库存销售为是，则库存可不填，如果填写了则 验证正确性(可以为0)
+			var numReg = /^[0-9]\d*$/;
+			if($("#availableNum").val().length > 0) {
+				if(!numReg.test($("#availableNum").val())) {
+					showLayerMsg("请填写有效的库存");
+					$("#availableNum").focus();
+					return false;
+				}
+			}
+		}
 	}
 	
 	//验证图片
