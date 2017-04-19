@@ -1,20 +1,23 @@
 package com.sunchin.shop.admin.dict;
 
 public enum OrderStsEnum {
+	UNPAY("1", "待付款"),
 	
-	SUBMIT("1", "已提交"),
+	UNCONFIRM("2", "待确认"),
 	
-	CONFIRM("2", "已确认"),
+	AAPLY_REFUND("3", "申请退款"),
 	
-	UNRECEIPT("3", "待收货"),
+	UNDELIVERY("4", "待发货"),
 	
-	FINISH("4", "已完成"),
+	UNRECEIPT("5", "待收货"),
 	
-	CANCEL("5", "已取消"),
+	FINISH("6", "已完成"),
 	
-	UNPAY("6", "待付款"),
+	CANCEL("7", "已取消"),
 	
-	UNDELIVERY("7", "待发货");
+	APPLY_RETURN_GOODS("8", "申请退货"),
+	
+	APPLY_EXCHANGE_GOODS("9", "申请换货");
 
 	private String code;
 

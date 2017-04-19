@@ -39,7 +39,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">订单管理</strong> / <small>订单的查看、修改</small>
+						<strong class="am-text-primary am-text-lg">发货管理</strong> / <small>待发货订单和已发货订单的查询与编辑</small>
 					</div>
 				</div>
 				<hr>
@@ -47,18 +47,19 @@
 					<div class="am-u-sm-12">
 						<div class="am-panel am-panel-primary">
 							<div class="am-panel-hd am-cf " data-am-collapse="{target: '#collapse-panel-1'}">查询条件<span class="am-icon-chevron-down am-fr"></span></div>
-							<div class="am-panel-bd am-collapse frame-search-panel m-panel-collapse"id="collapse-panel-1">
+							<div class="am-panel-bd am-collapse am-in frame-search-panel"id="collapse-panel-1">
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
-										<td style="width:100px;">运送方式：</td>
-										<td style="width:200px;">
-											<select name="queryParams.deliveryMode" id="orderDeliveryMode" style="height:32px; width:157px;"></select>
-										</td>
 										<td style="width:100px;">订单状态：</td>
 										<td style="width:200px;">
 											<select name="queryParams.orderStatus" id="orderSts" style="height:32px; width:157px;"></select>
 										</td>
-										<td style="width:100px;">下单时间：</td>
+										<td style="width:100px;">订单编号：</td>
+										<td style="width:200px;"><input name="queryParams.orderCode" id="orderCode" class="am-form-field"/></td>
+										<td align="left">
+											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
+										</td>
+										<!-- <td style="width:100px;">下单时间：</td>
 										<td>
 						        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
 											  <input type="text" name="queryParams.startTime" id="startTime" class="am-form-field">
@@ -73,9 +74,9 @@
 											    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
 											  </span>
 											</div>
-					        			</td>
+					        			</td> -->
 									</tr>
-									<tr>
+									<!-- <tr>
 										<td style="width:100px;">付款方式：</td>
 										<td style="width:200px;">
 											<select name="queryParams.payMode" id="orderPayMode" style="height:32px; width:157px;"></select>
@@ -100,8 +101,6 @@
 										<td style="width:200px;">
 											<select name="queryParams.invoice" id="orderInvoice" style="height:32px; width:157px;"></select>
 										</td>
-										<td style="width:100px;">订单编号：</td>
-										<td style="width:200px;"><input name="queryParams.orderCode" id="orderCode" class="am-form-field" placeholder="左右模糊查询"/></td>
 										<td style="width:100px;">实付金额：</td>
 										<td>
 						        			<div class="am-input-group am-datepicker-date">
@@ -112,12 +111,7 @@
 											  	<input type="text" name="queryParams.endActualPrice" id="endActualPrice" class="am-form-field" style="width: 152px;">
 											</div>
 					        			</td>
-									</tr>
-									<tr>
-										<td colspan="6" align="center">
-											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
-										</td>
-									</tr>
+									</tr>-->
 								</table>
 							</div>
 						</div>
@@ -156,12 +150,28 @@
 	
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
 		<div class="am-modal-dialog">
-	    	<div class="am-modal-hd"><span id="modalTitle"></span>
+	    	<div class="am-modal-hd"><span id="title"></span>
 	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 	    	</div>
 	    	<hr>
-	    	<div class="am-modal-bd frame-am-modal-bd">
-	      		<iframe id="confirmOrderFrame" scrolling="no" frameborder="0" style="width:100%; height: 380px;overflow: hidden;overflow-x:hidden;overflow-y:hidden;"></iframe>
+	    	<div class="am-modal-bd frame-am-modal-bd" style="margin-top: 5px;">
+		        <div align="center">
+		        	<table class="frame-modal-table" border="0" bordercolor="black">
+			        	<tr>
+			        		<td width="100" class="table_title">订单编号：</td>
+			        		<td>
+			        			<input id="orderCode1" class="am-form-field" style="width:85%" disabled="disabled"/>
+			        			<input id="operate1" type="hidden" disabled="disabled"/>
+			        			<input id="orderId1" type="hidden" disabled="disabled"/>
+			        		</td>
+			        	</tr>
+		       	 	</table>
+		       	 	<br>
+		       	 	<div align="center">
+						<button type="button" class="am-btn am-btn-success" id="confirmBtn"><span class="am-icon-check"></span>确认</button>
+						<button type="button" class="am-btn am-btn-default" id="closeBtn"><span class="am-icon-undo"></span>关闭</button>
+					</div>
+	           	</div>
 	    	</div>
 		</div>
 	</div>
@@ -201,5 +211,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path }/view/js/order_ordermanage.js"></script>
+<script type="text/javascript" src="${path }/view/js/order_deliverymanage.js"></script>
 </html>

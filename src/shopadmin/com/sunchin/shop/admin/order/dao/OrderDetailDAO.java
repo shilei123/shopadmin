@@ -18,12 +18,15 @@ public class OrderDetailDAO{
 	private String sql;
 	private List<String> params;
 	
+	private String confirmOrderSql;
+	private List<String> confirmOrderParams;
+	
 	/**
 	 * 订单详情对应的商品信息查询
 	 * @param orderId
 	 * @return
 	 */
-	public List<Map> queryByOrderId(String orderId){
+	public List<Map> queryOrderDetailByOrderId(String orderId){
 		this.initParams(orderId);
 		List<Map> list = DBUtil.getInstance().queryBySQL(sql, params);
 		return list;
@@ -55,6 +58,39 @@ public class OrderDetailDAO{
 //		params.add(flag);
 //		params.add(flag);
 		params.add(orderId);
+	}
+	
+	/**
+	 * 确认订单（查询子订单）
+	 * @param orderId
+	 * @return
+	 */
+	public List<Map> queryConfirmOrder(String orderId){
+		this.initConfirmParams(orderId);
+		List<Map> list = DBUtil.getInstance().queryBySQL(confirmOrderSql, confirmOrderParams);
+		return list;
+	}
+	
+	private void initConfirmParams(String orderId) {
+		StringBuffer tempSql = new StringBuffer();
+		tempSql.append("  ");
+		tempSql.append("  ");
+		tempSql.append("  ");
+		tempSql.append("  ");
+		tempSql.append("  ");
+		tempSql.append("  ");
+		tempSql.append("  ");
+		tempSql.append("  ");
+		tempSql.append("  ");
+		tempSql.append("  "); 
+		tempSql.append("  ");
+		tempSql.append("  ");
+		confirmOrderSql = tempSql.toString();
+		params = new ArrayList<String>(6);
+		String flag = FlagEnum.ACT.getCode();
+		confirmOrderParams.add(flag);
+		confirmOrderParams.add(flag);
+		confirmOrderParams.add(orderId);
 	}
 	
 }

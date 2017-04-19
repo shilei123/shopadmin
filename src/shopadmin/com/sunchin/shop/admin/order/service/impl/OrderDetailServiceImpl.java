@@ -10,15 +10,21 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.order.dao.OrderDetailDAO;
 import com.sunchin.shop.admin.order.service.OrderDetailService;
 
+@SuppressWarnings("rawtypes")
 @Repository("orderDetailService")
 public class OrderDetailServiceImpl implements OrderDetailService {
 
 	@Resource(name="orderDetailDAO")
 	private OrderDetailDAO orderDetailDAO;
 
-	@SuppressWarnings("rawtypes")
-	public List<Map> queryByOrderId(String orderId) throws Exception {
-		List<Map> list = orderDetailDAO.queryByOrderId(orderId);
+	public List<Map> queryOrderDetailByOrderId(String orderId) throws Exception {
+		List<Map> list = orderDetailDAO.queryOrderDetailByOrderId(orderId);
+		return list;
+	}
+
+	@Override
+	public List<Map> queryConfirmOrder(String id) throws Exception {
+		List<Map> list = orderDetailDAO.queryConfirmOrder(id);
 		return list;
 	}
 	
