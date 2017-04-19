@@ -80,6 +80,7 @@ body table {
 .table_title {
 	text-align: right;
 	width: 100px;
+	font-weight: bold;
 }
 
 .frame-required>span {

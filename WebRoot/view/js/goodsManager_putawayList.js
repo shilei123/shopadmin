@@ -45,16 +45,12 @@ var formatterGoodsSts = function(value, row) {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>修改</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'><i class='am-icon-edit'></span>编辑</a>";
 	if(row["auditSts"]=="1") {
-		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>通过</a>";
-		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>不通过</a>";
+		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><i class='am-icon-remove'></i>通过</a>";
+		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><i class='am-icon-remove'></i>不通过</a>";
 	}
-	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><i class='am-icon-remove'></i>删除</a>";
 	html += "</div>";
 	return html;
-};
-
-var showEditGoodsTab = function(goodsId) {
-	openTab("editGoodsTabId"+goodsId,"编辑商品",path_+"/view/shop/goodsManager/goodsAdd.jsp?tabId=editGoodsTabId"+goodsId+"&goodsId="+goodsId);
 };

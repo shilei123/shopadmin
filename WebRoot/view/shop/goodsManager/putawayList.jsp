@@ -69,5 +69,6 @@
 	</div>
 	<!-- content end -->
 </body>
+<script type="text/javascript" src="${path }/view/shop/goodsManager/goodsManager_formatter.js"></script>
 <script type="text/javascript" src="${path }/view/js/goodsManager_putawayList.js"></script>
 </html>

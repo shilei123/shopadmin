@@ -56,11 +56,6 @@ layui.use('laydate', function(){});
 
 //-----------------------------------------------BEGIN 业务开始--------------------------------------------------
 $(function() {
-	//回显接收到的参数
-	$("#goodsId").val(goodsId);
-	$("#cateId").val(cateId);
-	$("#cateName").html(cateName);
-	
 	if(goodsId=="") { //新增
 		initGoodsForAdd();
 	} else { //编辑
@@ -95,13 +90,6 @@ var initGoodsForEdit = function() {
 
 //回显页面值
 var setPage = function(json,goodsImgList,childGoodsList) {
-	//回显电脑版详情富文本控件
-	UE.getEditor('pceditor').addListener("ready", function() {
-    	// editor准备好之后才可以使用
-		console.log("setPage-pceditor-ready");
-    	ue.setContent(json.detail);
-    });
-	
 	//回显基本信息
 	$("#cateId").val(json.cateId);
 	$("#cateName").html(json.cateName);
@@ -127,6 +115,12 @@ var setPage = function(json,goodsImgList,childGoodsList) {
 		$img.val(goodsImg.imageId);
 		$img.prev().attr("src",imageServer_+"/"+goodsImg.imgPath+"/"+goodsImg.fileName);
 	}
+	
+	//回显电脑版详情富文本控件
+	ue.addListener('ready', function(editor) {
+		//console.log(editor+":"+editor);
+	    ue.setContent(json.detail,false);
+	});
 	
 	//回显参数列表
 	var paramsArr = JSON.parse(json.params);

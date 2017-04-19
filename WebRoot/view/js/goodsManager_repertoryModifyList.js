@@ -4,7 +4,7 @@ $(function() {
 
 var query = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/shop/goodsManager/goodsInfoAction!queryNoOnGoods.action";
+	var url = path_ + "/view/shop/goodsManager/goodsInfoAction!queryAllGoodsList.action";
 	pageData(url, "dataListTable", data);
 };
 
@@ -14,47 +14,29 @@ $('#queryBtn').click(function() {
 });
 
 var formatterTitle = function(value, row) {
-	return "<a href='javascript:void(0);' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'>"+value+"</a>";
-};
-
-var formatterAuditSts = function(value, row) {
-	var html = "";
-	if(value=="1") {
-		html = "待审核";
-	} else if(value=="2") {
-		html = "通过";
-	} else if(value=="3") {
-		html = "不通过";
-	}
-	return html;
-};
-
-var formatterGoodsSts = function(value, row) {
-	var html = "";
-	if(value=="1") {
-		html = "入库";
-	} else if(value=="2") {
-		html = "定时上架";
-	} else if(value=="3") {
-		html = "上架";
-	} else if(value=="4") {
-		html = "下架";
-	}
-	return html;
+	return "<a href='javascript:void(0);' onclick='showGoodsDetailTab(\""+ row["id"]+ "\")'>"+value+"</a>";
 };
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>修改</a>";
-	if(row["auditSts"]=="1") {
-		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>通过</a>";
-		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>不通过</a>";
-	}
-	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showRepEditWin(\""+ row["id"]+ "\")'><i class='am-icon-edit'></i>修改库存</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showPriceEditWin(\""+ row["id"]+ "\")'><i class='am-icon-edit'></i>修改价格</a>";
 	html += "</div>";
 	return html;
 };
 
-var showEditGoodsTab = function(goodsId) {
-	openTab("editGoodsTabId"+goodsId,"编辑商品",path_+"/view/shop/goodsManager/goodsAdd.jsp?tabId=editGoodsTabId"+goodsId+"&goodsId="+goodsId);
+$("#closeBtn1").click(function() {
+	closeModal("priceEditModel");
+});
+
+$("#closeBtn2").click(function() {
+	closeModal("repEditModel");
+});
+
+var showRepEditWin = function(id) {
+	showModal("repEditModel", 300, 300);
+};
+
+var showPriceEditWin = function(id) {
+	showModal("priceEditModel", 300, 300);
 };

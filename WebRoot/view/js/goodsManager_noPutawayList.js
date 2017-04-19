@@ -19,18 +19,14 @@ var formatterTitle = function(value, row) {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>修改</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'><i class='am-icon-edit'></i>编辑</a>";
 	if(row["goodsSts"]=="1") { //入库
-		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-success' onclick='putawayGoods(\""+ row["id"]+ "\")'><span class='am-icon-check-square-o'></i>上架</a>";
+		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-success' onclick='putawayGoods(\""+ row["id"]+ "\")'><i class='am-icon-check-square-o'></i>上架</a>";
 	} else if(row["goodsSts"]=="2") { //定时上架
 		/*html += "&nbsp;&nbsp;"+row.publishTime==null?"":row.publishTime.replace("T"," ");*/
 	}
 	html += "</div>";
 	return html;
-};
-
-var showEditGoodsTab = function(goodsId) {
-	openTab("editGoodsTabId"+goodsId,"编辑商品",path_+"/view/shop/goodsManager/goodsAdd.jsp?tabId=editGoodsTabId"+goodsId+"&goodsId="+goodsId);
 };
 
 var putawayGoods = function(goodsId) {

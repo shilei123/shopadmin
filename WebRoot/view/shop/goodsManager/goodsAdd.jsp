@@ -28,8 +28,8 @@
 </script>
 </head>
 <body>
-	<input type="hidden" id="cateId" value=""/>
-	<input type="hidden" id="goodsId" value=""/>
+	<input type="hidden" id="cateId" value="<%=cateId %>"/>
+	<input type="hidden" id="goodsId" value="<%=goodsId %>"/>
 	<!-- content start -->
 	<div class="am-cf ">
 		<div class="admin-content">
@@ -47,7 +47,7 @@
 							<tr>
 								<td class="table_title frame-required"><span>*</span>商品分类：</td>
 								<td valign="bottom">
-									<span id="cateName"></span>&nbsp;
+									<span id="cateName"><%=cateName %></span>&nbsp;
 									<button class="am-btn am-btn-warning am-btn-xs am-round" 
 									onclick="window.location.href='${path}/view/shop/goodsManager/goodsTypeSelect.jsp'">编辑</button>
 								</td>
@@ -196,7 +196,7 @@
 							<tr>
 								<td class="table_title" valign="top"><div style="margin-top: 13px;">商品参数：</div></td>
 								<td>
-									<div style="margin-top: 10px;" id="paramsDiv">
+									<div style="margin-top: 9px;" id="paramsDiv">
 										<div style="padding: 1px;">
 											参数名：<input class="am-form-field" name="paramName" style="width:150px;display: inline;"/>&nbsp;
 											参数值：<input class="am-form-field" name="paramVal" style="width:150px;display: inline;"/>&nbsp;&nbsp;<a 

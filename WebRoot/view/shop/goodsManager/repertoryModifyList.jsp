@@ -68,6 +68,95 @@
 		</div>
 	</div>
 	<!-- content end -->
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="priceEditModel">
+		<div class="am-modal-dialog">
+		 	<div class="am-modal-hd"><span id="title">编辑价格</span>
+		    	<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+		    </div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd">
+		        <div align="center">
+		        	<table class="frame-modal-table" border="0" bordercolor="black">
+			        	<tr>
+			        		<td valign="top" style="width:60px;" class="table_title"><div style="margin-top: 5px;">采购价：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" style="width:60px;" class="table_title"><div style="margin-top: 5px;">市场价：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" style="width:60px;" class="table_title"><div style="margin-top: 5px;">销售价：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" style="width:60px;" class="table_title"><div style="margin-top: 5px;">促销价：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+		       	 	</table>
+		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
+		       	 	<div align="center">
+		       	 		<button type="button" class="am-btn am-btn-success" id="saveBtn1"><span class="am-icon-save"></span> 保存</button>
+						<button type="button" class="am-btn am-btn-default" id="closeBtn1"><span class="am-icon-undo"></span> 取消</button>
+					</div>
+	           	</div>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="repEditModel">
+		<div class="am-modal-dialog">
+		 	<div class="am-modal-hd"><span id="title">编辑库存</span>
+		    	<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+		    </div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd">
+		        <div align="center">
+		        	<table class="frame-modal-table" border="0" bordercolor="black">
+			        	<tr>
+			        		<td valign="top" style="width:80px;" class="table_title"><div style="margin-top: 5px;">可用库存：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">销售库存：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">冻结库存：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">报损数量：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+		       	 	</table>
+		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
+		       	 	<div align="center">
+		       	 		<button type="button" class="am-btn am-btn-success" id="saveBtn2"><span class="am-icon-save"></span> 保存</button>
+						<button type="button" class="am-btn am-btn-default" id="closeBtn2"><span class="am-icon-undo"></span> 取消</button>
+					</div>
+	           	</div>
+	    	</div>
+		</div>
+	</div>
 </body>
+<script type="text/javascript" src="${path }/view/shop/goodsManager/goodsManager_formatter.js"></script>
 <script type="text/javascript" src="${path }/view/js/goodsManager_repertoryModifyList.js"></script>
 </html>

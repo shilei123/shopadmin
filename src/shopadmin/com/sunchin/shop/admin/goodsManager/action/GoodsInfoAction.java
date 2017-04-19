@@ -56,6 +56,21 @@ public class GoodsInfoAction extends PageAction {
 	 * 查询待审核商品
 	 * @return
 	 */
+	public String queryAllGoodsList() {
+		try {
+			PageBean resultData = this.goodsService.queryGoods(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 查询待审核商品
+	 * @return
+	 */
 	public String queryNoAuditList() {
 		try {
 			if(this.getPageBean().getQueryParams() != null) {

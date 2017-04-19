@@ -23,3 +23,11 @@ var formatterGoodsSts = function(value, row) {
 	}
 	return html;
 };
+
+var showEditGoodsTab = function(goodsId) {
+	openTab("editGoodsTabId_"+goodsId,"编辑商品",path_+"/view/shop/goodsManager/goodsAdd.jsp?tabId=editGoodsTabId_"+goodsId+"&goodsId="+goodsId);
+};
+
+var showGoodsDetailTab = function(goodsId) {
+	openTab("detailGoodsTabId_"+goodsId,"商品详情",path_+"/view/shop/goodsManager/goodsDetail.jsp?tabId=detailGoodsTabId_"+goodsId+"&goodsId="+goodsId);
+};
