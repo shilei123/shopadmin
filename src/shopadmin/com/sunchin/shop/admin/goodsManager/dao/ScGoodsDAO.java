@@ -36,6 +36,8 @@ public class ScGoodsDAO extends PageDAO {
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(" select t.*,c.cate_name from sc_goods t left join sc_category c on t.cate_id=c.id where t.flag=? ");
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
+			DBUtil.bind(sql, params, " and t.title like ? ", pageBean.getQueryParams().get("title"), pageBean.getQueryParams().get("title")+"%");
+			DBUtil.bind(sql, params, " and t.goods_no like ? ", pageBean.getQueryParams().get("goodsNo"), pageBean.getQueryParams().get("goodsNo")+"%");
 			String auditSts = pageBean.getQueryParams().get("auditSts");
 			if(StringUtils.isNotBlank(auditSts)) {
 				String[] auditStss = auditSts.split(",");

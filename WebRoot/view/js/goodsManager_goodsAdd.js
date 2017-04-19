@@ -271,7 +271,7 @@ var prePendGoodsChildTable = function(existsGoodsKey, childGoodsValue, childGood
 		salePrice = childGoods.salePrice;
 		promotionPrice = childGoods.promotionPrice;
 		availableNum = childGoods.availableNum;
-		childNo = childGoods.childNo;
+		childNo = childGoods.childNo==null?"":childGoods.childNo;
 		pkId = childGoods.id;
 	}
 	var trHtml = "";
@@ -488,7 +488,7 @@ $("#saveBtn").click(function() {
 				showMsg("操作成功！");
 				
 				if(goodsId != "") { //编辑
-					closeTab("editGoodsTabId"+goodsId);
+					closeTab("editGoodsTabId_"+goodsId);
 				} else { //关闭新增
 					closeThisTab();
 				}

@@ -25,9 +25,9 @@
 								<table id="from_query" class="frame-query-table" border="0" bordercolor="black">
 									<tr>
 										<td class="query_title" style="width:80px;">商品标题：</td>
-										<td><input name="queryParams.bankName" class="am-form-field"/></td>
+										<td><input name="queryParams.title" class="am-form-field"/></td>
 										<td class="query_title" style="width:80px;">&nbsp;商品货号：</td>
-										<td><input name="queryParams.bankDesc" class="am-form-field"/></td>
+										<td><input name="queryParams.goodsNo" class="am-form-field"/></td>
 										<td class="query_title" style="width:120px;">&nbsp;商品审核状态：</td>
 										<td><input name="queryParams.bankDesc" class="am-form-field"/></td>
 									</tr>

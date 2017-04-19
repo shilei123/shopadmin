@@ -35,7 +35,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">商品录入</strong> / <small>商品信息编辑</small>
+						<strong class="am-text-primary am-text-lg">商品查看</strong> / <small>商品信息查看</small>
 					</div>
 				</div>
 				<hr>
@@ -168,7 +168,7 @@
 							<tr>
 								<td class="table_title">商品发布：</td>
 								<td>
-									<span id="publishType"></span>
+									<span id="publishType"></span>&nbsp;<span id="publishTime"></span>
 									<input type="hidden" id="publishType1" value="<%=PublishTypeEnum.IN_STORE.getCode() %>" />
 									<input type="hidden" id="publishType2" value="<%=PublishTypeEnum.PUBLISH.getCode() %>" />
 									<input type="hidden" id="publishType3" value="<%=PublishTypeEnum.TIMER_PUBLISH.getCode() %>" />
@@ -179,7 +179,7 @@
 								<td>
 									<span id="virtual"></span>
 									<input type="hidden"id="virtual1" value="<%=VirtualEnum.Y.getCode() %>" />
-									<input type="hidden" id="virtual12" value="<%=VirtualEnum.N.getCode() %>" />
+									<input type="hidden" id="virtual2" value="<%=VirtualEnum.N.getCode() %>" />
 								</td>
 							</tr>
 						</table>

@@ -34,23 +34,52 @@ var setPage = function(json,goodsImgList,childGoodsList) {
 	$("#cateName").html(json.cateName);
 	$("#title").html(json.title);
 	$("#subTitle").html(json.subTitle);
-	$("#emptyStore").html(json.emptyStore=="0"?"否":"是");
+	var emptyStore = "";
+	if(json.emptyStore==$("#emptyStore1").val()) {
+		emptyStore = "是";
+	} else if(json.emptyStore==$("#emptyStore2").val()) {
+		emptyStore = "否";
+	}
+	$("#emptyStore").html(emptyStore);
 	$("#purchasePrice").html(json.purchasePrice);
 	$("#marketPrice").html(json.marketPrice);
 	$("#salePrice").html(json.salePrice);
 	$("#promotionPrice").html(json.promotionPrice);
 	$("#availableNum").html(json.availableNum);
 	$("#goodsNo").html(json.goodsNo);
-	$("#freightType").html(json.freightType);
-	$("#publishType").html(json.publishType);
-	$("#virtual").html(json.virtual=="0"?"否":"是");
-	$("#publishTime").val(json.publishTime==null?"":json.publishTime.replace("T"," "));
+	
+	var freightType = "";
+	if(json.freightType==$("#freightType1").val()) {
+		freightType = "卖家承担运费";
+	} else if(json.freightType==$("#freightType2").val()) {
+		freightType = "买家承担运费";
+	}
+	$("#freightType").html(freightType);
+	
+	var publishType = "";
+	if(json.publishType==$("#publishType1").val()) {
+		publishType = "放入仓库";
+	} else if(json.publishType==$("#publishType2").val()) {
+		publishType = "立即发布";
+	} else if(json.publishType==$("#publishType3").val()) {
+		publishType = "发布时间";
+	}
+	$("#publishType").html(publishType);
+	
+	var virtual = "";
+	if(json.virtual==$("#virtual1").val()) {
+		virtual = "是";
+	} else if(json.virtual==$("#virtual2").val()) {
+		virtual = "否";
+	}
+	$("#virtual").html(virtual);
+	$("#publishTime").html(json.publishTime==null?"":json.publishTime.replace("T"," "));
 	
 	//回显图片
 	for (var i = 0; i < goodsImgList.length; i++) {
 		var goodsImg = goodsImgList[i];
 		var src = imageServer_+"/"+goodsImg.imgPath+"/"+goodsImg.fileName;
-		$("#imagesDiv").append("<div class=\"imgDiv\"><img id=\"img1\" alt=\"\" src=\""+src+"\" class=\"img\"></div>");
+		$("#imagesDiv").append("<div class=\"imgDiv\" style='margin-right:10px;'><img id=\"img1\" alt=\"\" src=\""+src+"\" class=\"img\"></div>");
 	}
 	
 	$("#pcdetail").html(json.detail);
