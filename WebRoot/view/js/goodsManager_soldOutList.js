@@ -19,12 +19,28 @@ var formatterTitle = function(value, row) {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'><i class='am-icon-edit'></span>编辑</a>";
-	if(row["auditSts"]=="1") {
-		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><i class='am-icon-remove'></i>通过</a>";
-		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><i class='am-icon-remove'></i>不通过</a>";
-	}
-	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteBank(\""+ row["id"]+ "\")'><i class='am-icon-remove'></i>删除</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'><i class='am-icon-edit'></i>编辑</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-success' onclick='rePutawayGoods(\""+ row["id"]+ "\")'><i class='am-icon-check-square-o'></i>重新上架</a>";
 	html += "</div>";
 	return html;
+};
+
+var rePutawayGoods = function(goodsId) {
+	var data = {"goods.id":goodsId};
+	showConfirm("确认上架？",function() {
+		$.ajax({
+			type : "POST",
+			url : path_ + "/view/shop/goodsManager/goodsInfoAction!putaway.action",
+			data : data,
+			dataType : "json",
+			success : function(json) {
+				query();
+				showMsg("操作成功！");
+			},
+			error : function(e) {
+				showAlert("操作失败！");
+			}
+		});
+		
+	});
 };

@@ -50,12 +50,12 @@
 								<tr>
 									<th width="2%" field="index"></th>
 									<th width="10%" field="goodsNo">货号</th>
-									<th width="40%" field="title" formatter="formatterTitle">标题</th>
+									<th width="35%" field="title" formatter="formatterTitle">标题</th>
 									<th width="8%" field="cateName">分类</th>
 									<th width="8%" field="brandName">品牌</th>
 									<th width="6%" field="goodsSts" formatter="formatterGoodsSts">商品状态</th>
 									<th width="6%" field="auditSts" formatter="formatterAuditSts">审核状态</th>
-									<th width="20%" formatter="formatterAction">操作</th>
+									<th width="25%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>
 						</table>
@@ -113,6 +113,50 @@
 		</div>
 	</div>
 	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="childGoodsPriceEditModel">
+		<div class="am-modal-dialog">
+		 	<div class="am-modal-hd"><span id="title">编辑价格</span>
+		    	<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+		    </div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd">
+		        <div align="center">
+		        	<table class="frame-modal-table" border="0" bordercolor="black">
+			        	<tr>
+			        		<td valign="top" style="width:60px;" class="table_title"><div style="margin-top: 5px;">采购价：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" style="width:60px;" class="table_title"><div style="margin-top: 5px;">市场价：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" style="width:60px;" class="table_title"><div style="margin-top: 5px;">销售价：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+			        	<tr>
+			        		<td valign="top" style="width:60px;" class="table_title"><div style="margin-top: 5px;">促销价：</div></td>
+			        		<td valign="top"> 
+			        			<input  class="am-form-field" type="text" value=""/>
+			        		</td>
+			        	</tr>
+		       	 	</table>
+		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
+		       	 	<div align="center">
+		       	 		<button type="button" class="am-btn am-btn-success" id="saveBtn2"><span class="am-icon-save"></span> 保存</button>
+						<button type="button" class="am-btn am-btn-default" id="closeBtn2"><span class="am-icon-undo"></span> 取消</button>
+					</div>
+	           	</div>
+	    	</div>
+		</div>
+	</div>
+	
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="repEditModel">
 		<div class="am-modal-dialog">
 		 	<div class="am-modal-hd"><span id="title">编辑库存</span>
@@ -134,23 +178,40 @@
 			        			<input  class="am-form-field" type="text" value=""/>
 			        		</td>
 			        	</tr>
-			        	<tr>
-			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">冻结库存：</div></td>
-			        		<td valign="top"> 
-			        			<input  class="am-form-field" type="text" value=""/>
-			        		</td>
-			        	</tr>
-			        	<tr>
-			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">报损数量：</div></td>
-			        		<td valign="top"> 
-			        			<input  class="am-form-field" type="text" value=""/>
-			        		</td>
-			        	</tr>
 		       	 	</table>
 		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
 		       	 	<div align="center">
-		       	 		<button type="button" class="am-btn am-btn-success" id="saveBtn2"><span class="am-icon-save"></span> 保存</button>
-						<button type="button" class="am-btn am-btn-default" id="closeBtn2"><span class="am-icon-undo"></span> 取消</button>
+		       	 		<button type="button" class="am-btn am-btn-success" id="saveBtn3"><span class="am-icon-save"></span> 保存</button>
+						<button type="button" class="am-btn am-btn-default" id="closeBtn3"><span class="am-icon-undo"></span> 取消</button>
+					</div>
+	           	</div>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="priceHistoryModal">
+		<div class="am-modal-dialog">
+		 	<div class="am-modal-hd"><span id="title">价格历史</span>
+		    	<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+		    </div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd">
+	    		<div class="frame-modal-content">
+		        	<table class="am-table am-table-bordered am-table-striped am-table-hover" id="dataListTable1">
+						<thead>
+							<tr>
+								<th width="2%" field="index"></th>
+								<th width="25%" formatter="formatterAction">操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+		        <div>
+					<div class="am-u-sm-12">
+						<div class="am-cf">共<span id="rowCount1"></span>条记录<div id="page1" class="am-fr"></div></div>
+					</div>
+		       	 	<div align="center">
+						<button type="button" class="am-btn am-btn-default" id="closeBtn4"><span class="am-icon-undo"></span> 关闭</button>
 					</div>
 	           	</div>
 	    	</div>

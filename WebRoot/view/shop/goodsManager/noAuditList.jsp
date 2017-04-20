@@ -14,7 +14,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">待审核商品</strong> / <small>待审核商品</small>
+						<strong class="am-text-primary am-text-lg">待审核商品</strong> / <small>商品的编辑、审核、删除</small>
 					</div>
 				</div>
 				<hr>

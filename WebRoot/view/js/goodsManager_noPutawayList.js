@@ -17,6 +17,10 @@ var formatterTitle = function(value, row) {
 	return "<a href='javascript:void(0);' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'>"+value+"</a>";
 };
 
+var formatterPublishTime = function(value, row) {
+	return value==null?"":value.replace("T"," ");
+};
+
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditGoodsTab(\""+ row["id"]+ "\")'><i class='am-icon-edit'></i>编辑</a>";
@@ -24,6 +28,7 @@ var formatterAction = function(value, row) {
 		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-success' onclick='putawayGoods(\""+ row["id"]+ "\")'><i class='am-icon-check-square-o'></i>上架</a>";
 	} else if(row["goodsSts"]=="2") { //定时上架
 		/*html += "&nbsp;&nbsp;"+row.publishTime==null?"":row.publishTime.replace("T"," ");*/
+		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-success' onclick='putawayGoods(\""+ row["id"]+ "\")'><i class='am-icon-check-square-o'></i>提前上架</a>";
 	}
 	html += "</div>";
 	return html;

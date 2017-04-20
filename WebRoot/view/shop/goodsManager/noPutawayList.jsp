@@ -4,7 +4,7 @@
 <head>
 <jsp:include page="/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>待审核商品</title>
+<title>待发布商品</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 </head>
 <body>
@@ -14,7 +14,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">待审核商品</strong> / <small>待审核商品</small>
+						<strong class="am-text-primary am-text-lg">待发布商品</strong> / <small>商品的编辑、上架</small>
 					</div>
 				</div>
 				<hr>
@@ -50,12 +50,13 @@
 								<tr>
 									<th width="2%" field="index"></th>
 									<th width="10%" field="goodsNo">货号</th>
-									<th width="40%" field="title" formatter="formatterTitle">标题</th>
+									<th width="30%" field="title" formatter="formatterTitle">标题</th>
 									<th width="8%" field="cateName">分类</th>
 									<th width="8%" field="brandName">品牌</th>
 									<th width="6%" field="goodsSts" formatter="formatterGoodsSts">商品状态</th>
 									<th width="6%" field="auditSts" formatter="formatterAuditSts">审核状态</th>
-									<th width="20%" formatter="formatterAction">操作</th>
+									<th width="14%" field="publishTime" formatter="formatterPublishTime">发布时间</th>
+									<th width="16%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>
 						</table>

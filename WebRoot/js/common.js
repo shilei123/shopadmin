@@ -113,6 +113,12 @@ var showDownTips = function(msg,targetId) {
 };
 
 var showModal = function(id, w, h) {
+	var height = getTotalHeight();
+	if(!h) {
+		setModalContentHeight(id);
+	}
+	h = h || (height-20);
+	
 	var $confirm = $('#'+id);
     var confirm = $confirm.data('amui.modal');
     if (confirm) {
@@ -175,4 +181,20 @@ var pushJson = function(arr, key, val, jsonobj) {
 	}
 	if(!exists)
 		arr.push(jsonobj);
+};
+
+var getTotalHeight = function() {
+	if($.browser.msie) {
+		return document.compatMode == "CSS1Compat"? document.documentElement.clientHeight : document.body.clientHeight;
+	} else {
+		return self.innerHeight;
+	}
+};
+
+var setModalContentHeight = function(modalId) {
+	var height = getTotalHeight();
+	height = height-20-60-80;
+	/*console.log("modalHeight:"+height);
+	console.log($("#priceHistoryModal .frame-modal-content").html());*/
+	$("#"+modalId+" .frame-modal-content").height(height);
 };

@@ -130,7 +130,7 @@ public class GoodsInfoAction extends PageAction {
 	public String querySoldOutList() {
 		try {
 			if(this.getPageBean().getQueryParams() != null) {
-				pageBean.getQueryParams().put("auditSts", AuditStsEnum.PASS.getCode());
+				//pageBean.getQueryParams().put("auditSts", AuditStsEnum.PASS.getCode());
 				pageBean.getQueryParams().put("goodsSts", GoodsStsEnum.OUT.getCode());
 			}
 			PageBean resultData = this.goodsService.queryGoods(this.getPageBean());

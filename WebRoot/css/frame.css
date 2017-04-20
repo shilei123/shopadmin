@@ -232,3 +232,7 @@ legend {
 	margin-top: 0px;
 	margin-bottom: 0px;
 } */
+
+.frame-modal-content {
+	width: 100%;overflow: auto;
+}

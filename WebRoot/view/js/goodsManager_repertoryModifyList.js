@@ -21,6 +21,7 @@ var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showRepEditWin(\""+ row["id"]+ "\")'><i class='am-icon-edit'></i>修改库存</a>";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showPriceEditWin(\""+ row["id"]+ "\")'><i class='am-icon-edit'></i>修改价格</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showPriceHistoryWin(\""+ row["id"]+ "\")'><i class='am-icon-edit'></i>价格历史</a>";
 	html += "</div>";
 	return html;
 };
@@ -30,7 +31,15 @@ $("#closeBtn1").click(function() {
 });
 
 $("#closeBtn2").click(function() {
+	closeModal("childGoodsPriceEditModel");
+});
+
+$("#closeBtn3").click(function() {
 	closeModal("repEditModel");
+});
+
+$("#closeBtn4").click(function() {
+	closeModal("priceHistoryModal");
 });
 
 var showRepEditWin = function(id) {
@@ -39,4 +48,8 @@ var showRepEditWin = function(id) {
 
 var showPriceEditWin = function(id) {
 	showModal("priceEditModel", 300, 300);
+};
+
+var showPriceHistoryWin = function(id) {
+	showModal("priceHistoryModal", 800);
 };

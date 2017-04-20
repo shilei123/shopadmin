@@ -4,7 +4,7 @@
 <head>
 <jsp:include page="/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>待审核商品</title>
+<title>已上架商品</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 </head>
 <body>
@@ -14,7 +14,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">待审核商品</strong> / <small>待审核商品</small>
+						<strong class="am-text-primary am-text-lg">已上架商品</strong> / <small>商品编辑、下架</small>
 					</div>
 				</div>
 				<hr>
