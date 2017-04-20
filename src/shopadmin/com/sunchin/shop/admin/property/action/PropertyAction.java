@@ -16,6 +16,8 @@ public class PropertyAction extends PageAction {
 	
 	private ScProperty property;
 	
+	private String msg;
+	
 	/**
 	 * 分页查询
 	 * @return
@@ -63,7 +65,7 @@ public class PropertyAction extends PageAction {
 	 */
 	public String addProperty() {
 		try {
-			propertyService.addProperty(property);
+			msg = propertyService.addProperty(property);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,6 +91,14 @@ public class PropertyAction extends PageAction {
 
 	public void setProperty(ScProperty property) {
 		this.property = property;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 }

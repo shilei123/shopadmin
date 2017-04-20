@@ -56,20 +56,22 @@ $("#saveBtn").click(function() {
 	var propValueCode = $("#propValueCode").val();
 	var propValueOrder = $("#propValueOrder").val();
 	var url = "";
-	if(propValueId!=null /*&& propValueId!=undefine*/ && propValueId!=""){
+	var data = null;
+	if(propValueId!=null && propValueId!=undefined && propValueId!=""){
 		url = path_ + "/view/shop/propValue/propval!updatePropValue.action"
+		data = { "propValue.id" : propValueId, "propValue.flag" : propValueFlag, 
+				"propValue.valName" : propValueName, "propValue.valCode" : propValueCode, "propValue.order" : propValueOrder };
 	}else{
 		url = path_ + "/view/shop/propValue/propval!addPropValue.action"
+		data = {"propValue.valName" : propValueName, "propValue.valCode" : propValueCode, "propValue.order" : propValueOrder };
 	}
-	var data = { "propValue.id" : propValueId, "propValue.flag" : propValueFlag, 
-			"propValue.valName" : propValueName, "propValue.valCode" : propValueCode, "propValue.order" : propValueOrder };
 	$.ajax({
 		type : "POST",
 		url : url,
 		data : data,
 		dataType : "json",
 		success : function(json) {
-			if(json.msg!=""){
+			if(json.msg!="" && json.msg!=null){
 				$('#errorMsg').text(json.msg);
 				$('#propValueName').focus();
 			}else {
@@ -87,19 +89,19 @@ $("#saveBtn").click(function() {
 
 //表单验证
 var checkPropValueSumbit = function() {
-	var propName = $("#propValueName").val();
-	if(propName.length==0) {
+	var propvalName = $("#propValueName").val();
+	if(propvalName.length==0) {
 		$("#errorMsg").html("属性值名称不能为空！");
 		$("#propValueName").focus();
 		return false;
 	}
-	var propOrder = $("#propValueOrder").val();
-	if(propOrder.length==0) {
+	var propvalOrder = $("#propValueOrder").val();
+	if(propvalOrder.length==0) {
 		$("#errorMsg").html("属性值排序不能为空！");
 		$("#propValueOrder").focus();
 		return false;
 	}
-	if(!isInteger(propOrder)){
+	if(!isInteger(propvalOrder)){
 		$("#errorMsg").html("属性值排序必须为整数！");
 		$("#propValueOrder").focus();
 		return false;

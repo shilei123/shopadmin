@@ -60,6 +60,10 @@ public class ScProperty implements java.io.Serializable {
 	public void setOrder(Integer order) {
 		this.order = order;
 	}
+	
+	public void setOrder(String order) {
+		this.order = Integer.parseInt(order);
+	}
 
 	public String getCreateUserId() {
 		return createUserId;

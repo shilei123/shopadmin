@@ -73,4 +73,15 @@ public class PropertyDAO extends PageDAO{
 		String hql = " update ScProperty set flag=? where id=? ";
 		DBUtil.getInstance().executeHql(hql, SysDict.FLAG_HIS, id);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public ScProperty getPropByPropName(String propName){
+		Map<String, Object> params = new HashMap<String, Object>(2);
+		params.put("flag", FlagEnum.ACT.getCode());
+		params.put("propName", propName);
+		List<ScProperty> list = DBUtil.getInstance().queryByPojo(ScProperty.class,params);
+		if(list!=null && !list.isEmpty())
+			return list.get(0);
+		return null;
+	}
 }

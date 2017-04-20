@@ -49,7 +49,7 @@ public class PropertyServiceImpl implements PropertyService {
 		prop.setPropName(property.getPropName());
 		prop.setPropCode(property.getPropCode());
 		prop.setOrder(property.getOrder());
-		prop.setFlag(property.getFlag());
+//		prop.setFlag(property.getFlag());
 		db.update(prop);
 	}
 	
@@ -57,11 +57,15 @@ public class PropertyServiceImpl implements PropertyService {
 	 * 新增
 	 */
 	@Override
-	public void addProperty(ScProperty property) throws Exception {
+	public String addProperty(ScProperty property) throws Exception {
+		ScProperty property_db = propertyDAO.getPropByPropName(property.getPropName());
+		if(property_db!=null)
+			return "该属性已经存在，请重新输入！";
 		property.setId(UUID.randomUUID().toString());
 		property.setCreateTime(new Date());
 		property.setFlag(FlagEnum.ACT.getCode());
 		db.insert(property);
+		return "";
 	}
 
 	@Override

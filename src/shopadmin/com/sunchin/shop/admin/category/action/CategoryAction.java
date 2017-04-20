@@ -30,7 +30,7 @@ public class CategoryAction {
 	
 	public String saveCategory(){
 		try {
-			categoryService.saveCategory(category);
+			msg = categoryService.saveCategory(category);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

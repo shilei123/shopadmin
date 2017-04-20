@@ -20,7 +20,7 @@ public interface CategoryService {
 	 * @param category
 	 * @throws Exception
 	 */
-	public void saveCategory(ScCategory category) throws Exception;
+	public String saveCategory(ScCategory category) throws Exception;
 	
 	/**
 	 * 修改类别

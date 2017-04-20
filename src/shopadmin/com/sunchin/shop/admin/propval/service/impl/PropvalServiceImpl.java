@@ -47,7 +47,7 @@ public class PropvalServiceImpl implements PropvalService {
 		val.setValName(propValue.getValName());
 		val.setValCode(propValue.getValCode());
 		val.setOrder(propValue.getOrder());
-		val.setFlag(propValue.getFlag());
+		//val.setFlag(propValue.getFlag());
 		db.update(val);
 	}
 	

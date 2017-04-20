@@ -33,7 +33,7 @@ public interface PropertyService {
 	 * @param property
 	 * @throws Exception
 	 */
-	public void addProperty(ScProperty property) throws Exception;
+	public String addProperty(ScProperty property) throws Exception;
 
 	/**
 	 * 查询某个

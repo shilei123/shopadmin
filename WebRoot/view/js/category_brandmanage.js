@@ -87,7 +87,7 @@ $("#saveBtn").click(function() {
 		data : data,
 		dataType : "json",
 		success : function(json) {
-			if(json.msg!=""){
+			if(json.msg!="" && json.msg!=null){
 				$('#errorMsg').text(json.msg);
 				$('#brandName').focus();
 			}else{
