@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="after" extends="json-default" namespace="/view/shop/alterService">
+		<action name="after" class="com.sunchin.shop.admin.afterManagement.action.AfterAction">
+			<result type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+	</package>
+</struts>    

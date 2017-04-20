@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScBill" table="SC_BILL" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="kind" type="java.lang.String">
+             <column name="KIND" length="1">
+                <comment>类型/申请 0  确认 1</comment>
+            </column>
+        </property>
+        <property name="billType" type="java.lang.String">
+             <column name="BILL_TYPE" length="1">
+                <comment>分类/退货 0 换货 1 退款 2 维修 3</comment>
+            </column>
+        </property>
+        <property name="code" type="java.lang.String">
+             <column name="CODE" length="36">
+                <comment>单据编号</comment>
+            </column>
+        </property>
+        <property name="name" type="java.lang.String">
+             <column name="NAME" length="50">
+                <comment>名称</comment>
+            </column>
+        </property>
+        <property name="orderCode" type="java.lang.String">
+             <column name="ORDER_CODE" length="36">
+                <comment>关联订单编号</comment>
+            </column>
+        </property>
+        <property name="reason" type="java.lang.String">
+             <column name="REASON" length="500">
+                <comment>原因</comment>
+            </column>
+        </property>
+        <property name="content" type="java.lang.String">
+             <column name="CONTENT" length="500">
+                <comment>描述</comment>
+            </column>
+        </property>
+        <property name="result" type="java.lang.String">
+             <column name="RESULT" length="500">
+                <comment>处理结果</comment>
+            </column>
+        </property>
+         <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>申请时间</comment>
+            </column>
+        </property>
+         <property name="createUserId" type="java.lang.String">
+             <column name="CREATE_USER_ID" length="36">
+                <comment>申请人</comment>
+            </column>
+        </property>
+         <property name="optionTime" type="java.util.Date">
+               <column name="OPTION_TIME">
+                <comment>操作时间</comment>
+            </column>
+        </property>
+         <property name="optionAdminid" type="java.lang.String">
+             <column name="OPTION_ADMINID" length="36">
+                <comment>操作人</comment>
+            </column>
+        </property>
+         <property name="billStatus" type="java.lang.String">
+               <column name="BILL_STATUS" length="1">
+                <comment>当前状态/审核中 0 审核通过 1 审核不通过 2</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1">
+                <comment>数据有效性/默认1，1有效，0无效</comment>
+            </column>
+        </property>
+        <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="36">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

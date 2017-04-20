@@ -69,9 +69,9 @@ var findDirectoryType = function(){
 				var html = "<option value='-1'>-请选择-</option>";
 				$(data.directoryTypeList).each(function(index) {
 					var dirType = data.directoryTypeList[index];
-					var levels = data.directoryTypeList[index].levels;
+					var levels = data.directoryTypeList[index].level;
 					if(levels != "0"){
-						html += "<option value='" + dirType.id + "'>" + dirType.directoryName + "</option>";
+						html += "<option value='" + dirType.id + "'>" + dirType.dirName + "</option>";
 					}
 				});
 				directoryTypeHtml = html;
