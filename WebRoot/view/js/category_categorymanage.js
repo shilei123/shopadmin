@@ -62,7 +62,7 @@ function initCategoryTree() {
 		url : path_ + "/view/shop/category/category!categoryTree.action",
 		dataType : "json",
 		success : function(json) {
-			console.log(json);
+			//console.log(json);
 			var root = json.trees[0];
 			root.state = "open";
 			$("#ul_category_tree").tree("loadData", json.trees);
@@ -73,7 +73,7 @@ function initCategoryTree() {
 var categoryClick = function(node) {
 	$("#category_detail_table input").each(function(i,n){n.value = "";});
 	var obj = getCategoryInfo(node);
-	console.log(obj);
+	//console.log(obj);
 	for(var key in obj){
 		var inp = document.getElementById("inp_"+key);
 		if(inp != null){
@@ -154,7 +154,7 @@ $("#delCategoryBtn").click(function() {
 	});
 });
 
-$("#openCategoryParamsBtn").click(function() {
+$("#openCatePropCfgBtn").click(function() {
 	var node = $("#ul_category_tree").tree("getSelected");
 	if(node==null){
 		showAlert("请选择一个类别！");
@@ -164,6 +164,23 @@ $("#openCategoryParamsBtn").click(function() {
 		showAlert("请选择一个具体的商品！");
 		return;
 	}
+	$('#modalTitle').text('类别属性配置');
+	var obj = getCategoryInfo(node);
+	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/category/category_property.jsp?categoryId='+obj.categoryId);
+	showModal("doc-modal-1", 600, 450);
+});
+
+$("#openCateBrandCfgBtn").click(function() {
+	var node = $("#ul_category_tree").tree("getSelected");
+	if(node==null){
+		showAlert("请选择一个类别！");
+		return;
+	}
+	if(node.children!=null){
+		showAlert("请选择一个具体的商品！");
+		return;
+	}
+	$('#modalTitle').text('类别品牌配置');
 	var obj = getCategoryInfo(node);
 	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/category/category_property.jsp?categoryId='+obj.categoryId);
 	showModal("doc-modal-1", 600, 450);

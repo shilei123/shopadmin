@@ -14,7 +14,7 @@ public class ScOrder implements java.io.Serializable {
 	private Date splitTime;
 	private String invoice;
 	private String invoiceRecordId;
-	private String addressId;
+	private String deliveryRecordId;
 	private String remark;
 	private String payMode;
 	private Double commisionCharge;
@@ -100,12 +100,12 @@ public class ScOrder implements java.io.Serializable {
 		this.invoiceRecordId = invoiceRecordId;
 	}
 
-	public String getAddressId() {
-		return this.addressId;
+	public String getDeliveryRecordId() {
+		return deliveryRecordId;
 	}
 
-	public void setAddressId(String addressId) {
-		this.addressId = addressId;
+	public void setDeliveryRecordId(String deliveryRecordId) {
+		this.deliveryRecordId = deliveryRecordId;
 	}
 
 	public String getRemark() {

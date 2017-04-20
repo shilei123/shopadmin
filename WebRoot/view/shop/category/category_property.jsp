@@ -19,7 +19,7 @@ request.setAttribute("categoryId", categoryId);
       			<form id="form1" method="post">
       				<input type="hidden" name="queryParams.cateId" id="categoryId" value="${categoryId }"/>
       				<input type="hidden" name="queryParams.checkPropIds" id="checkPropIds" value=""/>
-      				<div style="width: 100%;overflow: auto;">
+      				<div style="width: 100%; height:295px; overflow: auto;">
 		            <table class="am-table am-table-bordered am-table-striped am-table-hover" id="categoryParamsTable">
 		              <thead>
 			              <tr>
@@ -54,7 +54,7 @@ request.setAttribute("categoryId", categoryId);
 			data : formGetCurrentJsp("form1"),
 			dataType: "json",
 			success : function(data) {
-				console.log(data);
+				//console.log(data);
 				writeHidden(data);
 				query();//分页
 			},
@@ -166,7 +166,7 @@ request.setAttribute("categoryId", categoryId);
 			data : params,
 			dataType: "json",
 			success : function(data) {
-				console.log(data);
+				//console.log(data);
 				$('#'+targetId+' tbody').empty();
 				var html = createTrCurrentJsp(data, targetId);
 				$("#"+targetId).append(html);

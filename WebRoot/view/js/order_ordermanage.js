@@ -154,7 +154,7 @@ $('#changeBtn2').click(function() {
 /*******************************************************订单确认功能*****************************************************************/
 
 var showConfirmOrderWin = function(id, orderCode) {
-	$('#modalTitle').text("确认订单(" + orderCode + ")");
+	$('#modalTitle').text("确认订单");
 	/*$('#orderId1').val(id);
 	$('#operate1').val("confirm");
 	queryOrderGoods();*/

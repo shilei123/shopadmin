@@ -1,29 +1,29 @@
-package com.sunchin.shop.admin.propval.action;
+package com.sunchin.shop.admin.category.action;
 
 import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.Action;
-import com.sunchin.shop.admin.pojo.ScPropval;
-import com.sunchin.shop.admin.propval.service.PropvalService;
+import com.sunchin.shop.admin.category.service.BrandService;
+import com.sunchin.shop.admin.pojo.ScBrand;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
 
-public class PropvalAction extends PageAction {
+public class BrandAction extends PageAction {
 	
-	@Resource(name="propvalService")
-	private PropvalService propvalService; 
+	@Resource(name="brandService")
+	private BrandService brandService; 
 	
-	private ScPropval propValue;
+	private ScBrand brand;
 	private String msg;
 	
 	/**
 	 * 查询
 	 * @return
 	 */
-	public String query() {
+	public String queryBrandList() {
 		try {
-			PageBean resultData = propvalService.queryPropvalList(this.getPageBean());
+			PageBean resultData = brandService.queryBrandList(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
@@ -36,9 +36,9 @@ public class PropvalAction extends PageAction {
 	 * 删除
 	 * @return
 	 */
-	public String delete() {
+	public String delBrand() {
 		try {
-			propvalService.delPropval(propValue.getId());
+			brandService.delBrand(brand.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,9 +49,9 @@ public class PropvalAction extends PageAction {
 	 * 修改
 	 * @return
 	 */
-	public String updatePropValue() {
+	public String updateBrand() {
 		try {
-			propvalService.updatePropval(propValue);
+			brandService.updateBrand(brand);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,9 +62,9 @@ public class PropvalAction extends PageAction {
 	 * 新增
 	 * @return
 	 */
-	public String addPropValue() {
+	public String addBrand() {
 		try {
-			msg = propvalService.addPropval(propValue);
+			msg = brandService.addBrand(brand);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,24 +72,24 @@ public class PropvalAction extends PageAction {
 	}
 	
 	/**
-	 * 修改的查询
+	 * 查询某个品牌详情
 	 * @return
 	 */
-	public String queryPropValueById() {
+	public String queryBrandById(){
 		try {
-			propValue = propvalService.queryPropval(propValue.getId());
+			brand = brandService.queryBrandById(brand.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}
 
-	public ScPropval getPropValue() {
-		return propValue;
+	public ScBrand getBrand() {
+		return brand;
 	}
 
-	public void setPropValue(ScPropval propValue) {
-		this.propValue = propValue;
+	public void setBrand(ScBrand brand) {
+		this.brand = brand;
 	}
 
 	public String getMsg() {
@@ -99,5 +99,5 @@ public class PropvalAction extends PageAction {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-
+	
 }

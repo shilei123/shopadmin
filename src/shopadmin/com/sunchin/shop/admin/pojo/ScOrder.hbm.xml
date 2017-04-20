@@ -31,8 +31,8 @@
         <property name="invoiceRecordId" type="java.lang.String">
             <column name="INVOICE_RECORD_ID" length="36" />
         </property>
-        <property name="addressId" type="java.lang.String">
-            <column name="ADDRESS_ID" length="36" />
+        <property name="deliveryRecordId" type="java.lang.String">
+            <column name="DELIVERY_RECORD_ID" length="36" />
         </property>
         <property name="remark" type="java.lang.String">
             <column name="REMARK" length="500" />

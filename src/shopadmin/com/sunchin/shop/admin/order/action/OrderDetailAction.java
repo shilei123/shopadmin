@@ -19,14 +19,28 @@ public class OrderDetailAction extends PageAction{
 	
 	private ScOrder order;
 	private List<Map> orderGoods;//商品信息
+	private String msg;
 	
 	/**
-	 * 确认订单（拆分子订单）
+	 * 查询订单下的商品（确认订单使用）
 	 * @return
 	 */
 	public String queryConfirmOrder(){
 		try {
 			orderGoods = orderDetailService.queryConfirmOrder(order.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 确认订单（拆分子订单）
+	 * @return
+	 */
+	public String confirmOrder(){
+		try {
+			msg = orderDetailService.confirmOrder(order.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,6 +61,14 @@ public class OrderDetailAction extends PageAction{
 
 	public void setOrderGoods(List<Map> orderGoods) {
 		this.orderGoods = orderGoods;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 }

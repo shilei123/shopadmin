@@ -55,11 +55,15 @@ public class PropvalServiceImpl implements PropvalService {
 	 * 新增
 	 */
 	@Override
-	public void addPropval(ScPropval propValue) throws Exception {
-		propValue.setId(UUID.randomUUID().toString());
-		propValue.setCreateTime(new Date());
-		propValue.setFlag(FlagEnum.ACT.getCode());
-		db.insert(propValue);
+	public String addPropval(ScPropval propval) throws Exception {
+		ScPropval propval_db = propvalDAO.queryPropvalByValName(propval.getValName());
+		if(propval_db!=null)
+			return "该属性名已经存在，请重新输入！";
+		propval.setId(UUID.randomUUID().toString());
+		propval.setCreateTime(new Date());
+		propval.setFlag(FlagEnum.ACT.getCode());
+		db.insert(propval);
+		return "";
 	}
 
 	@Override

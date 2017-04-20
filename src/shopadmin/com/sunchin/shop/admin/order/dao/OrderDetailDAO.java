@@ -73,24 +73,36 @@ public class OrderDetailDAO{
 	
 	private void initConfirmParams(String orderId) {
 		StringBuffer tempSql = new StringBuffer();
-		tempSql.append("  ");
-		tempSql.append("  ");
-		tempSql.append("  ");
-		tempSql.append("  ");
-		tempSql.append("  ");
-		tempSql.append("  ");
-		tempSql.append("  ");
-		tempSql.append("  ");
-		tempSql.append("  ");
-		tempSql.append("  "); 
-		tempSql.append("  ");
-		tempSql.append("  ");
+		tempSql.append(" with sc_temp as ( ");
+		tempSql.append(" select t.order_id ");
+		tempSql.append(" ,t.goods_id ");
+		tempSql.append(" ,t.child_goods_id ");
+		tempSql.append(" ,wm_concat(t5.prop_name) prop_names ");
+		tempSql.append(" ,wm_concat(t6.val_name) val_names ");
+		tempSql.append(" from sc_order_detail t ");
+		tempSql.append(" left join sc_goods_cate_prop_propval t2 on t2.goods_id=t.goods_id and t.child_goods_id=t2.child_goods_id ");
+		tempSql.append(" left join sc_cate_prop_propval t3 on t3.id=t2.cppv_id ");
+		tempSql.append(" left join sc_prop_propval t4 on t4.id=t3.ppv_id "); 
+		tempSql.append(" left join sc_property t5 on t5.id=t4.prop_id ");
+		tempSql.append(" left join sc_propval t6 on t6.id=t4.val_id ");
+		tempSql.append(" where t.order_id=? ");
+		tempSql.append(" group by t.order_id,t.goods_id,t.child_goods_id ");
+		tempSql.append(" ) ");
+		tempSql.append(" select tod.count,tod.order_id "); 
+		tempSql.append(" ,tg.goods_name ");
+		tempSql.append(" ,temp.prop_names ");
+		tempSql.append(" ,temp.val_names ");
+		tempSql.append(" ,tr.available_num ");
+		tempSql.append(" from sc_order_detail tod ");
+		tempSql.append(" left join sc_goods tg on tg.id=tod.goods_id ");
+		tempSql.append(" left join sc_temp temp on temp.goods_id=tod.goods_id and temp.child_goods_id=tod.child_goods_id ");
+		tempSql.append(" left join sc_repertory tr on tr.goods_id=tod.goods_id and tr.child_goods_id=tod.child_goods_id ");
+		tempSql.append(" where tod.order_id=? and tod.flag=? ");
 		confirmOrderSql = tempSql.toString();
-		params = new ArrayList<String>(6);
-		String flag = FlagEnum.ACT.getCode();
-		confirmOrderParams.add(flag);
-		confirmOrderParams.add(flag);
+		confirmOrderParams = new ArrayList<String>();
 		confirmOrderParams.add(orderId);
+		confirmOrderParams.add(orderId);
+		confirmOrderParams.add(FlagEnum.ACT.getCode());
 	}
 	
 }

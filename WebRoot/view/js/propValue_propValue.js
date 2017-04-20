@@ -62,16 +62,22 @@ $("#saveBtn").click(function() {
 		url = path_ + "/view/shop/propValue/propval!addPropValue.action"
 	}
 	var data = { "propValue.id" : propValueId, "propValue.flag" : propValueFlag, 
-			"propValue.valName" : propValueName, "propValue.valCode" : propValueCode, "propValue.valOrder" : propValueOrder };
+			"propValue.valName" : propValueName, "propValue.valCode" : propValueCode, "propValue.order" : propValueOrder };
 	$.ajax({
 		type : "POST",
 		url : url,
 		data : data,
 		dataType : "json",
 		success : function(json) {
-			query();
-			closeModal("doc-modal-2");
-			showAlert("操作成功");
+			if(json.msg!=""){
+				$('#errorMsg').text(json.msg);
+				$('#propValueName').focus();
+			}else {
+				query();
+				$('#errorMsg').text("");
+				closeModal("doc-modal-2");
+				showAlert("操作成功");
+			}
 		},
 		error : function(e) {
 			showAlert("操作失败！");
@@ -93,9 +99,19 @@ var checkPropValueSumbit = function() {
 		$("#propValueOrder").focus();
 		return false;
 	}
+	if(!isInteger(propOrder)){
+		$("#errorMsg").html("属性值排序必须为整数！");
+		$("#propValueOrder").focus();
+		return false;
+	}
 	$("#errorMsg").html("&nbsp;");
 	return true;
 };
+
+var isInteger = function(obj){
+	var re = /^[1-9]*[1-9][0-9]*$/;  
+    return re.test(obj);
+}
 
 //修改
 var showEditPropWin = function(id) {

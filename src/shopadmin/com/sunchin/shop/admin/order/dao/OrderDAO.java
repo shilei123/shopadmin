@@ -1,6 +1,7 @@
 package com.sunchin.shop.admin.order.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -288,16 +289,16 @@ public class OrderDAO extends PageDAO{
 	}
 
 	/**
-	 * 确认货到付款订单（修改包括子订单的orderStatus已提交为待发货）
+	 * 确认订单（修改订单的orderStatus待确认为待发货）
 	 * @param id
 	 */
 	public void confirmOrder(String id) {
-		String hql = " update ScOrder set orderStatus=? where id=? and flag=? ";
-		db.executeHql(hql, OrderStsEnum.UNDELIVERY.getCode(), id, FlagEnum.ACT.getCode());
+		String hql = " update ScOrder set orderStatus=? and createTime=? where id=? and flag=? ";
+		db.executeHql(hql, OrderStsEnum.UNDELIVERY.getCode(),new Date(), id, FlagEnum.ACT.getCode());
 	}
 	
 	/**
-	 * 取消订单（修改包括子订单的orderStatus已提交为已取消）
+	 * 取消订单
 	 * @param id
 	 */
 	public void cancelOrder(String id) {

@@ -1,4 +1,4 @@
-package com.sunchin.shop.admin.propval.dao;
+package com.sunchin.shop.admin.category.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,19 +9,18 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
-import com.sunchin.shop.admin.pojo.ScPropval;
+import com.sunchin.shop.admin.pojo.ScBrand;
 
 import framework.bean.PageBean;
-import framework.config.SysDict;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
-@Repository("propvalDAO")
-public class PropvalDAO extends PageDAO{
+@Repository("brandDAO")
+public class BrandDAO extends PageDAO{
 	
-	public final String SELECT_SQL = " select t.id,t.val_code,t.val_name,t.order_,to_char(t.create_time,'yyyy-MM-dd hh24:mm:ss')as create_time from SC_PROPVAL t where flag=? ";
+	public final String SELECT_SQL = " select t.id,t.brand_code,t.brand_name,to_char(t.create_time,'yyyy-MM-dd hh24:mm:ss')as create_time from SC_brand t where flag=? ";
 
-	public int queryPropvalCount(PageBean pageBean) {
+	public int queryBrandCount(PageBean pageBean) {
 		List<String> params = new ArrayList<String>(2);
 		params.add(FlagEnum.ACT.getCode());
 		String sql = this.buildWhereSql(pageBean, params);
@@ -29,11 +28,11 @@ public class PropvalDAO extends PageDAO{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ScPropval> queryPropvalPagination(PageBean pageBean) {
+	public List<ScBrand> queryBrandPagination(PageBean pageBean) {
 		List<String> params = new ArrayList<String>(2);
 		params.add(FlagEnum.ACT.getCode());
 		String sql = this.buildWhereSql(pageBean, params);
-		List<ScPropval> pageData = this.query(sql, params, DBUtil.getInstance(), pageBean);
+		List<ScBrand> pageData = this.query(sql, params, DBUtil.getInstance(), pageBean);
 		return pageData;
 	}
 
@@ -41,15 +40,15 @@ public class PropvalDAO extends PageDAO{
 		// 拼接查询条件
 		StringBuffer sql = new StringBuffer(SELECT_SQL);
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
-			String propValueName = pageBean.getQueryParams().get("propValueName");
-			if (StringUtils.isNotBlank(propValueName)){
-				params.add("%"+propValueName+"%");
-				sql.append(" and t.val_name like ? ");
+			String brandName = pageBean.getQueryParams().get("brandName");
+			if (StringUtils.isNotBlank(brandName)){
+				params.add("%" + brandName + "%");
+				sql.append(" and t.brand_name like ? ");
 			}
-			String propValueCode = pageBean.getQueryParams().get("propValueCode");
-			if (StringUtils.isNotBlank(propValueCode)){
-				params.add("%"+propValueCode+"%");
-				sql.append(" and t.val_code like ? ");
+			String brandCode = pageBean.getQueryParams().get("brandCode");
+			if (StringUtils.isNotBlank(brandCode)){
+				params.add("%" + brandCode + "%");
+				sql.append(" and t.brand_code like ? ");
 			}
 		}
 		sql.append(" order by t.create_time desc ");
@@ -57,28 +56,29 @@ public class PropvalDAO extends PageDAO{
 	}
 	
 	/**
-	 *	获得属性值信息
+	 *	获得品牌信息
 	 */
 	@SuppressWarnings("unchecked")
-	public List<ScPropval> getPropval(String id) {
+	public List<ScBrand> getBrand(String id) {
 		Map<String, Object> params = new HashMap<String, Object>(1);
 		params.put("flag", FlagEnum.ACT.getCode());
-		return DBUtil.getInstance().queryByPojo(ScPropval.class,params);
+		return DBUtil.getInstance().queryByPojo(ScBrand.class,params);
 	}
 	
-	public void delPropval(String id){
-		String hql = " update ScPropval set flag=? where id=? ";
-		DBUtil.getInstance().executeHql(hql, SysDict.FLAG_HIS, id);
+	public void delBrand(String id){
+		String hql = " update ScBrand set flag=? where id=? ";
+		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), id);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public ScPropval queryPropvalByValName(String valName){
+	public ScBrand queryBrandByBrandName(String brandName) {
 		Map<String, Object> params = new HashMap<String, Object>(2);
-		params.put("valName",valName);
+		params.put("brandName",brandName);
 		params.put("flag", FlagEnum.ACT.getCode());
-		List<ScPropval> list = DBUtil.getInstance().queryByPojo(ScPropval.class,params);
+		List<ScBrand> list = DBUtil.getInstance().queryByPojo(ScBrand.class,params);
 		if(list!=null && !list.isEmpty())
 			return list.get(0);
 		return null;
 	}
+	
 }

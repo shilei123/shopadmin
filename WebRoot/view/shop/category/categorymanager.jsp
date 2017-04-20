@@ -20,11 +20,11 @@
 		      	<div class="am-u-sm-12">
 					<div class="am-btn-toolbar frame-div-paddbottom20">
 			            <div class="am-btn-group am-btn-group-sm">
-
 			              <button type="button" class="am-btn am-btn-primary" id="addCategoryBtn"><span class="am-icon-plus"></span> 新增</button>
 			              <button type="button" class="am-btn am-btn-success" id="editCategoryBtn"><span class="am-icon-edit"></span> 编辑</button>
 			              <button type="button" class="am-btn am-btn-danger" id="delCategoryBtn"><span class="am-icon-trash-o"></span> 删除</button> 
-			              <button type="button" class="am-btn am-btn-primary" id="openCategoryParamsBtn"><span class="am-icon-cog"></span> 类别属性配置</button> 
+			              <button type="button" class="am-btn am-btn-secondary" id="openCatePropCfgBtn"><span class="am-icon-cog"></span> 类别属性配置</button> 
+			              <button type="button" class="am-btn am-btn-primary" id="openCateBrandCfgBtn"><span class="am-icon-cog"></span> 类别品牌配置</button>
 			            </div>
 		          	</div>
 				</div>
@@ -145,7 +145,7 @@
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
 				<form id="form1" method="post">
-	    		<table border="0" bordercolor="red" align="center" id="category_detail_table">
+	    		<table border="0" bordercolor="red" align="center" id="category_detail_table" class="">
 	    			<tr>
 						<td width="100" class="table_title">
 		        				<label for="cateName" class="am-form-label">类别名称：</label>
@@ -241,7 +241,7 @@
   	
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
 		<div class="am-modal-dialog">
-	    	<div class="am-modal-hd"><span id="modalTitle">类别配置</span>
+	    	<div class="am-modal-hd"><span id="modalTitle">类别属性配置</span>
 	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 	    	</div>
 	    	<hr>
