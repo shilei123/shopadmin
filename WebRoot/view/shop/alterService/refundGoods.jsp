@@ -36,7 +36,7 @@
 											</select>
 										</td>
 										<td class="query_title" width="100px">申请时间：</td>
-					        			<td valign="top">
+					        			<td valign="top" colspan="2">
 					        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
 										  <input type="text" name="queryParams.startRegTime" id="startRegTime" class="am-form-field">
 										  <span class="am-input-group-btn am-datepicker-add-on">
@@ -61,7 +61,12 @@
 										<td>
 											<input name="queryParams.orderCode" class="am-form-field"/>
 										</td>
-										<td style="padding-left: 30px;" colspan="2">
+										<td class="query_title" width="100px">状态：</td>
+										<td width="200px">
+											<select id="status" name="queryParams.status" data-am-selected="{btnWidth: '152px'}">
+											</select>
+										</td>
+										<td>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>
 									</tr>
@@ -81,7 +86,7 @@
 									<th width="8%"  field="code">单据编号</th>
 									<th width="8%"  field="orderCode">订单编号</th>
 									<th width="12%" field="createTime">申请时间</th>
-									<th width="8%"  field="createUserId">申请人</th>
+									<th width="8%"  field="userName">申请人</th>
 									<th width="6%"  field="billStatus">状态</th>
 									<th width="15%" formatter="formatterAction">操作</th>
 								</tr>

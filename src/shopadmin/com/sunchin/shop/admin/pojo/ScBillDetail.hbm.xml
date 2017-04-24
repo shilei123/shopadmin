@@ -38,24 +38,9 @@
                 <comment>成交价格</comment>
             </column>
         </property>
-        <property name="exGoodsId" type="java.lang.String">
-             <column name="EX_GOODS_ID" length="36">
-                <comment>换货商品id</comment>
-            </column>
-        </property>
-        <property name="exGoodsDetailId" type="java.lang.String">
-             <column name="EX_GOODS_DETAIL_ID" length="36">
-                <comment>换货商品子表id</comment>
-            </column>
-        </property>
-         <property name="exPrice" type="java.lang.Double">
-             <column name="EX_PRICE" precision="10">
-                <comment>换货商品成本</comment>
-            </column>
-        </property>
          <property name="order" type="java.lang.Double">
              <column name="ORDER_">
-                <comment>操作人</comment>
+                <comment>顺序</comment>
             </column>
         </property>
         <property name="createTime" type="java.util.Date">

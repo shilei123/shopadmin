@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScBill;
+import com.sunchin.shop.admin.pojo.ScBillDetail;
+import com.sunchin.shop.admin.pojo.ScRepertory;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
@@ -44,10 +46,11 @@ public class AfterDAO extends PageDAO{
 
 	private String buildWhereSql(PageBean pageBean, List<String> params) {
 		// 拼接查询条件
-		StringBuffer sql = new StringBuffer(" select t1.id,t1.code,t1.name,t1.order_code,t1.reason,t1.content,t1.result,to_char(t1.create_time,'yyyy-mm-dd hh24:mi:ss') create_time,t2.name kind,t3.name bill_status,t1.create_user_id ");
+		StringBuffer sql = new StringBuffer(" select t1.id,t1.code,t1.name,t1.order_code,t1.reason,t1.content,t1.result,to_char(t1.create_time,'yyyy-mm-dd hh24:mi:ss') create_time,t2.name kind,t3.name bill_status,t1.create_user_id,t4.user_name ");
 		sql.append(" from sc_bill t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.kind ");
 		sql.append(" left join sc_dictionary t3 on t3.code=t1.bill_status ");
+		sql.append(" left join sc_user t4 on  t4.id=t1.create_user_id ");
 		sql.append(" where t1.flag=? ");
 		sql.append(" and t2.type=? ");
 		sql.append(" and t2.flag=? ");
@@ -68,6 +71,11 @@ public class AfterDAO extends PageDAO{
 			if (StringUtils.isNotBlank(kind) && !"-1".equals(kind)){
 				params.add(kind);
 				sql.append(" and t1.kind=? ");
+			}
+			String status = pageBean.getQueryParams().get("status");
+			if (StringUtils.isNotBlank(status) && !"-1".equals(status)){
+				params.add(status);
+				sql.append(" and t1.bill_status=? ");
 			}
 			String code = pageBean.getQueryParams().get("code");
 			if (StringUtils.isNotBlank(code)){
@@ -96,20 +104,15 @@ public class AfterDAO extends PageDAO{
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> queryBillById(String id) {
 		StringBuffer sql = new StringBuffer(" select t1.id,t1.name,t1.code,t2.name stsus,t1.order_code,t1.reason,t1.content,t1.result,to_char(t1.create_time, 'yyyy-mm-dd hh24:mi:ss') create_time,");
-		sql.append(" t3.purchase_price,t3.done_price,t3.numbs,t4.goods_name,t4.goods_no,t6.user_name,t6.phone,t6.sex,t6.mail,t7.name kind ");
+		sql.append(" t6.user_name,t6.phone,t7.name kind ");
 		sql.append(" from sc_bill t1 ");
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.bill_status ");
-		sql.append(" left join sc_bill_tetail t3 on t1.code=t3.bill_code ");
-		sql.append(" left join sc_goods t4 on t3.goods_id=t4.id ");
-		sql.append(" left join sc_order t5 on t5.order_code=t1.order_code ");
-		sql.append(" left join sc_user_base t6 on  t6.user_id=t5.user_id ");
+		sql.append(" left join sc_user_base t6 on  t6.user_id=t1.create_user_id ");
 		sql.append(" left join sc_dictionary t7 on t7.code=t1.kind ");
-		sql.append(" left join sc_child_goods t8 on t8.id=t3.goods_detail_id ");
 		sql.append(" where t1.flag=? ");
 		sql.append(" and t1.id=? ");
 		sql.append(" and t2.flag=? ");
 		sql.append(" and t2.type=? ");
-		sql.append(" and t5.flag=? ");
 		sql.append(" and t7.type=? ");
 		sql.append(" and t7.flag=? ");
 		List<String> params = new ArrayList<String>();
@@ -117,7 +120,6 @@ public class AfterDAO extends PageDAO{
 		params.add(id);
 		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.BILL_STATUS.getType());
-		params.add(FlagEnum.ACT.getCode());
 		params.add(DictionaryTypeEnum.BILL_KIND.getType());
 		params.add(FlagEnum.ACT.getCode());
 		List<Map<String,Object>> lists = DBUtil.getInstance().queryBySQL(sql.toString(),params);
@@ -135,6 +137,67 @@ public class AfterDAO extends PageDAO{
 		List<ScBill> lists = DBUtil.getInstance().queryByPojo(ScBill.class, params);
 		if(lists != null && !lists.isEmpty()){
 			return  lists.get(0);
+		}
+		return null;
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	public Map<String,Object> queryBillTetailById(String id) {
+		 StringBuffer sql = new StringBuffer(" select t2.* ");
+		 sql.append(" from sc_bill t1 ");
+		 sql.append(" left join sc_bill_tetail t2 on t2.bill_code=t1.code ");
+		 sql.append(" where t1.flag=? ");
+		 sql.append(" and t1.id=? ");
+		 List<Map<String, Object>> lists = DBUtil.getInstance().queryBySQL(sql.toString(),FlagEnum.ACT.getCode(),id);
+		 if(lists != null && !lists.isEmpty()){
+			 return lists.get(0);
+		 }
+		 return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public ScRepertory queryRepertoryByGoodsId(String goodsId) {
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("flag",FlagEnum.ACT.getCode());
+		params.put("goodsId", goodsId);
+		 List<ScRepertory> lists = DBUtil.getInstance().queryByPojo(ScRepertory.class, params);
+		 if(lists != null && !lists.isEmpty()){
+			 return lists.get(0);
+		 }
+		 return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public ScRepertory queryRepertoryByGoodsChildId(String goodsChildId) {
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("flag",FlagEnum.ACT.getCode());
+		params.put("childGoodsId", goodsChildId);
+		 List<ScRepertory> lists = DBUtil.getInstance().queryByPojo(ScRepertory.class, params);
+		 if(lists != null && !lists.isEmpty()){
+			 return lists.get(0);
+		 }
+		 return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> queryGoodsDetailList(String id) {
+		StringBuffer sql = new StringBuffer(" select t3.goods_name,t3.goods_no,t2.numbs,t2.done_price ");
+		sql.append(" from sc_bill t1 ");
+		sql.append(" left join sc_bill_tetail t2 on t1.code=t2.bill_code ");
+		sql.append(" left join sc_goods t3 on t2.goods_id=t3.id ");
+		sql.append(" where t1.flag=? ");
+		sql.append(" and t1.id=? ");
+		sql.append(" and t2.flag=? ");
+		sql.append(" and t3.flag=? ");
+		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
+		params.add(id);
+		params.add(FlagEnum.ACT.getCode());
+		params.add(FlagEnum.ACT.getCode());
+		List<Map<String, Object>> lists = DBUtil.getInstance().queryBySQL(sql.toString(), params);
+		if(lists != null && !lists.isEmpty()){
+			return lists;
 		}
 		return null;
 	}

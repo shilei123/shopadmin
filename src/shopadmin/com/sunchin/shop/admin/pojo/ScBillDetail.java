@@ -16,9 +16,6 @@ public class ScBillDetail  implements java.io.Serializable {
      private Double numbs;
      private Double purchasePrice;
      private Double donePrice;
-     private String exGoodsId;
-     private String exGoodsDetailId;
-     private Double exPrice;
      private Double order;
      private Date	createTime;
      private String flag;
@@ -81,30 +78,6 @@ public class ScBillDetail  implements java.io.Serializable {
 
 	public void setDonePrice(Double donePrice) {
 		this.donePrice = donePrice;
-	}
-
-	public String getExGoodsId() {
-		return exGoodsId;
-	}
-
-	public void setExGoodsId(String exGoodsId) {
-		this.exGoodsId = exGoodsId;
-	}
-
-	public String getExGoodsDetailId() {
-		return exGoodsDetailId;
-	}
-
-	public void setExGoodsDetailId(String exGoodsDetailId) {
-		this.exGoodsDetailId = exGoodsDetailId;
-	}
-
-	public Double getExPrice() {
-		return exPrice;
-	}
-
-	public void setExPrice(Double exPrice) {
-		this.exPrice = exPrice;
 	}
 
 	public Double getOrder() {

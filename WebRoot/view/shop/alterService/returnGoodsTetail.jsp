@@ -18,96 +18,50 @@ request.setAttribute("billId", billId);
 			<div class="am-g">
       				<input type="hidden" name="vo.id" id="billId" value="${billId }"/>
 			        <div align="center">
-			        	<legend>会员信息</legend>
-			        	<table class="frame-modal-table" border="0" bordercolor="black">
-			        	<tr>
-				  				<td width="100px" class="table_title">姓名：</td>
-				  				<td>
-				  					<input id="userName" disabled="disabled"/> 
-				  				</td>
-				  				<td class="table_title">电话：</td>
-						   		<td>
-						   		<div>
-						   		<input id="phone" disabled="disabled"/>
-						   		</div>
-								</td>
-				  		</tr>
-				  		<tr>
-				  				<td width="100px" class="table_title">邮箱：</td>
-				  				<td>
-				  					<input id="mail" disabled="disabled"/> 
-				  				</td>
-				  				<td class="table_title">性别：</td>
-						   		<td>
-									<select id="sex" disabled="disabled">
-									<option value="">请选择</option>
-									<option value="0">男</option>
-									<option value="1">女</option>
-									</select>
-								</td>
-				  		</tr>
-			        	</table>
-			        	<legend>商品信息</legend>
-			        	<table class="frame-modal-table" border="0" bordercolor="black">
-			        	<tr>
-				  				<td width="100px" class="table_title">商品名称：</td>
-				  				<td>
-				  					<input id="goodsName" disabled="disabled"/> 
-				  				</td>
-				  				<td class="table_title">商品价格：</td>
-						   		<td>
-						   		<div>
-						   		<input id="goodsPrice" disabled="disabled"/>
-						   		</div>
-								</td>
-				  		</tr>
-				  		<tr>
-				  				<td width="100px" class="table_title">商品数量：</td>
-				  				<td>
-				  					<input id="numbs" disabled="disabled"/> 
-				  				</td>
-				  				<td class="table_title">货号：</td>
-						   		<td>
-						   		<div>
-						   		<input id="goodsNo" disabled="disabled"/>
-						   		</div>
-								</td>
-				  		</tr>
-			        	</table>
 			        	<legend>单据信息</legend>
 			        	<table id="edit_adv_table" class="frame-modal-table" border="0" bordercolor="black">
 			        		<tr>
 				  				<td width="100px" class="table_title">名称：</td>
 				  				<td>
-				  					<input id="name" disabled="disabled"/> 
+				  					<div><span id="name"></span></div> 
 				  				</td>
 				  				<td class="table_title">申请时间：</td>
 						   		<td>
-						   		<div>
-						   		<input id="startTime" disabled="disabled"/>
-						   		</div>
+						   		<div><span id="startTime"></span></div> 
 								</td>
 				  			</tr>
 				  			<tr>
 				        		<td class="table_title">类型：</td>
 								<td>
-									<input id="kind"  disabled="disabled"/>
+									<div><span id="kind"></span></div> 
 								</td>
 								<td class="table_title">状态：</td>
 								<td>
-									<input id="status"  disabled="disabled"/>
+									<div><span id="status"></span></div> 
 								</td>
 				        	</tr>
 				  			<tr>
 				        		<td class="table_title">单据编号：</td>
 								<td>
-									<input id="code"  disabled="disabled"/>
+									<div><span id="code"></span></div> 
 								</td>
 								<td class="table_title">订单编号：</td>
 								<td>
-									<input id="orderCode"  disabled="disabled"/>
+									<div><span id="orderCode"></span></div> 	
 								</td>
 				        	</tr>
+				        	<tr>
+				  				<td width="100px" class="table_title">申请人姓名：</td>
+				  				<td>
+				  					<div><span id="userName"></span></div>
+				  				</td>
+				  				<td class="table_title">电话：</td>
+						   		<td>
+						   		<div>
+						   			<div><span id="phone"></span></div>
+						   		</div>
+								</td>
+				  			</tr>
 				  			<tr>
 				  				<td class="table_title">原因：</td>
 				  				<td valign="top" colspan="4">

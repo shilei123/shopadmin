@@ -33,6 +33,11 @@
                 <comment>关联订单编号</comment>
             </column>
         </property>
+        <property name="attachId" type="java.lang.String">
+             <column name="ATTACH_ID" length="36">
+                <comment>附单据ID/退货退款使用，退款使用退货id</comment>
+            </column>
+        </property>
         <property name="reason" type="java.lang.String">
              <column name="REASON" length="500">
                 <comment>原因</comment>

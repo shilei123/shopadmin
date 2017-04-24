@@ -23,12 +23,6 @@ var queryBill = function(id) {
 var clearForm = function(){
 	$("#userName").val("");
 	$("#phone").val("");
-	$("#mail").val("");
-	$("#sex").val("");
-	$("#goodsName").val("");
-	$("#goodsPrice").val("");
-	$("#numbs").val("");
-	$("#goodsNo").val("");
 	$("#kind").val("");
 	$("#status").val("");
 	$("#name").val("");
@@ -41,20 +35,41 @@ var clearForm = function(){
 }
 
 var setBillForm = function(data){
-	$("#userName").val(data.billList[0].userName);
-	$("#phone").val(data.billList[0].phone);
-	$("#mail").val(data.billList[0].mail);
-	$("#sex").val(data.billList[0].sex);
-	$("#goodsName").val(data.billList[0].goodsName);
-	$("#goodsPrice").val(data.billList[0].donePrice);
-	$("#numbs").val(data.billList[0].numbs);
-	$("#goodsNo").val(data.billList[0].goodsNo);
-	$("#kind").val(data.billList[0].kind);
-	$("#status").val(data.billList[0].stsus);
-	$("#name").val(data.billList[0].name);
-	$("#startTime").val(data.billList[0].createTime);
-	$("#code").val(data.billList[0].code);
-	$("#orderCode").val(data.billList[0].orderCode);
+	if(data.billList[0].userName != null){
+		$("#userName").text(data.billList[0].userName);
+	}else{
+		$("#userName").text("");
+	}
+	if(data.billList[0].kind != null){
+		$("#kind").text(data.billList[0].kind);
+	}else{
+		$("#kind").text("");
+	}
+	if(data.billList[0].status != null){
+		$("#status").text(data.billList[0].status);
+	}else{
+		$("#status").text("");
+	}
+	if(data.billList[0].name != null){
+		$("#name").text(data.billList[0].name);
+	}else{
+		$("#name").text("");
+	}
+	if(data.billList[0].startTime != null){
+		$("#startTime").text(data.billList[0].startTime);
+	}else{
+		$("#startTime").text("");
+	}
+	if(data.billList[0].code != null){
+		$("#code").text(data.billList[0].code);
+	}else{
+		$("#code").text("");
+	}
+	if(data.billList[0].orderCode != null){
+		$("#orderCode").text(data.billList[0].orderCode);
+	}else{
+		$("#orderCode").text("");
+	}
 	$("#reason").val(data.billList[0].reason);
 	$("#content").val(data.billList[0].content);
 	$("#result").val(data.billList[0].result);

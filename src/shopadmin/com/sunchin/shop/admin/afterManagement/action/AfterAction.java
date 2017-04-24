@@ -10,6 +10,7 @@ import com.sunchin.shop.admin.afterManagement.service.IAfterService;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.pojo.ScBill;
 import com.sunchin.shop.admin.pojo.ScDictionary;
+import com.sunchin.shop.admin.pojo.ScUserBase;
 import com.sunchin.shop.admin.system.service.DictService;
 
 import framework.action.PageAction;
@@ -23,8 +24,11 @@ public class AfterAction extends PageAction{
 		private DictService dictService;
 		
 		private List<ScDictionary> kindList;  //类型
-		private ScBill bill;
-		private List<Map<String,Object>> billList;
+		private List<ScDictionary> statusList;  //状态
+		private ScBill bill; 
+		private List<Map<String,Object>> billList; //查询详情List
+		private String relus; //接受radio参数
+		private ScUserBase userBase; 
 		
 		/**
 		 * 查询
@@ -36,7 +40,6 @@ public class AfterAction extends PageAction{
 				this.setTotal(resultData.getTotal());
 				this.setDataRows(resultData.getPageData());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return Action.SUCCESS;
@@ -50,7 +53,6 @@ public class AfterAction extends PageAction{
 			try {
 				billList = afterSerivce.findBillTetail(bill.getId());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return Action.SUCCESS;
@@ -62,9 +64,8 @@ public class AfterAction extends PageAction{
 		 */
 		public String passReturnGoods(){
 			try {
-				afterSerivce.passReturnGoods(bill.getId(),bill.getResult());
+				afterSerivce.passReturnGoods(bill.getId(),bill.getResult(),relus);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return Action.SUCCESS;
@@ -77,11 +78,47 @@ public class AfterAction extends PageAction{
 			try {
 				afterSerivce.NopassReturnGoods(bill.getId(),bill.getResult());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return Action.SUCCESS;
 		}
+		
+		/**
+		 * 换货通过
+		 * @return
+		 */
+		public String passChangeGoods(){
+			try {
+				afterSerivce.passChangeGoods(bill.getId(),bill.getResult(),relus);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return Action.SUCCESS;
+		}
+		
+		/**
+		 * 维修通过
+		 */
+		public String passRepairGoods(){
+			try {
+				afterSerivce.passRepairGoods(bill.getId(),bill.getResult());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return Action.SUCCESS;
+		}
+		
+		/**
+		 * 退款通过
+		 */
+		public String passRefundGoods(){
+			try {
+				afterSerivce.passRefundGoods(bill.getId(),bill.getResult(),relus);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return Action.SUCCESS;
+		}		
 		
 		/**
 		 * 查询单据类型 
@@ -90,28 +127,38 @@ public class AfterAction extends PageAction{
 		public String queryBillType(){
 			try {
 				kindList = dictService.getDictByType(DictionaryTypeEnum.BILL_KIND.getType());
+				statusList = dictService.getDictByType(DictionaryTypeEnum.BILL_STATUS.getType());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return Action.SUCCESS;
 		}
-
+		
 		/**
-		 * 删除
+		 * 查询商品信息
 		 * @return
 		 */
-		public String deleteBill(){
+		public String queryGoodsDetail(){
 			try {
-				afterSerivce.deleteBill(bill.getId());
+				billList = afterSerivce.queryGoodsDetail(bill.getId());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return Action.SUCCESS;
 		}
 		
-		
+		/**
+		 * 查询会员信息
+		 * @return
+		 */
+		public String queryUserBase(){
+			try {
+				userBase = afterSerivce.queryUserBase(userBase.getUserId());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return Action.SUCCESS;
+		}
 		
 		public List<ScDictionary> getKindList() {
 			return kindList;
@@ -136,5 +183,28 @@ public class AfterAction extends PageAction{
 		public void setBillList(List<Map<String, Object>> billList) {
 			this.billList = billList;
 		}
-		
+
+		public List<ScDictionary> getStatusList() {
+			return statusList;
+		}
+
+		public void setStatusList(List<ScDictionary> statusList) {
+			this.statusList = statusList;
+		}
+
+		public String getRelus() {
+			return relus;
+		}
+
+		public void setRelus(String relus) {
+			this.relus = relus;
+		}
+
+		public ScUserBase getUserBase() {
+			return userBase;
+		}
+
+		public void setUserBase(ScUserBase userBase) {
+			this.userBase = userBase;
+		}
 }

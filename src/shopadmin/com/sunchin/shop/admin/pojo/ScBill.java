@@ -15,6 +15,7 @@ public class ScBill  implements java.io.Serializable {
      private String code;
      private String name;
      private String orderCode;
+     private String attachId;
      private String reason;
      private String content;
      private String result;
@@ -75,6 +76,14 @@ public class ScBill  implements java.io.Serializable {
 
 	public void setOrderCode(String orderCode) {
 		this.orderCode = orderCode;
+	}
+
+	public String getAttachId() {
+		return attachId;
+	}
+
+	public void setAttachId(String attachId) {
+		this.attachId = attachId;
 	}
 
 	public String getReason() {

@@ -17,8 +17,6 @@ import com.sunchin.shop.admin.advertise.service.IAdvertiseService;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
 import com.sunchin.shop.admin.pojo.ScUserBase;
-import com.sunchin.shop.admin.pojo.ScBrand;
-import com.sunchin.shop.admin.pojo.ScEvents;
 import com.sunchin.shop.admin.pojo.ScGoods;
 
 import framework.bean.PageBean;
