@@ -103,7 +103,7 @@ $('#addCategoryBtn').click(function() {
 	$("#inp2-isuse").val("");
 	$("#inp2-parentId").val(obj.categoryId);
 	$("#inp2-level").val(parseInt(obj.levels)+1);
-	showModal("doc-modal-add", 600, 420);
+	showModal("doc-modal-add", 520, 420);
 });
 
 $('#editCategoryBtn').click(function() {
@@ -125,7 +125,7 @@ $('#editCategoryBtn').click(function() {
 	$("#inp2-logo").val(obj.logo);
 	$("#inp2-url").val(obj.url);
 	$("#inp2-isuse").val(obj.isuse);
-	showModal("doc-modal-add", 600, 420);
+	showModal("doc-modal-add", 520, 420);
 });
 
 $("#delCategoryBtn").click(function() {
@@ -174,7 +174,7 @@ $("#openCatePropCfgBtn").click(function() {
 	$('#modalTitle').text('类别属性配置');
 	var obj = getCategoryInfo(node);
 	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/category/catePropCfg.jsp?categoryId='+obj.categoryId);
-	showModal("doc-modal-1", 600, 450);
+	showModal("doc-modal-1", 520, 450);
 });
 
 $("#openCateBrandCfgBtn").click(function() {
@@ -190,7 +190,7 @@ $("#openCateBrandCfgBtn").click(function() {
 	$('#modalTitle').text('类别品牌配置');
 	var obj = getCategoryInfo(node);
 	$('#categoryParamsFrame').attr('src', path_ + '/view/shop/category/cateBrandCfg.jsp?categoryId='+obj.categoryId);
-	showModal("doc-modal-1", 600, 450);
+	showModal("doc-modal-1", 520, 450);
 });
 
 var closeParamsModal = function(id) {

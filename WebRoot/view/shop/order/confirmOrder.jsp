@@ -27,7 +27,7 @@ request.setAttribute("orderCode", orderCode);
       				<table>
       					<tr>
       						<td>${orderCode }：</td>
-      						<td>根据库存是否足够拆分子订单</td>
+      						<td>根据库存是否足够拆分子订单<input type='hidden' id='checkOrders'/></td>
       					</tr>
       				</table>
 				</div>
@@ -79,7 +79,6 @@ request.setAttribute("orderCode", orderCode);
 			dataType: "json",
 			success : function(data) {
 				console.log(data.orderGoods);
-//				writeHidden(data);
 				appendHtml(data.orderGoods);
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -94,30 +93,57 @@ request.setAttribute("orderCode", orderCode);
 		for (var i in orderGoods) {
 			html += "<tr>"
 			html += "<td style='vertical-align: middle;text-align:center'>" + (parseInt(i)+1) + "</td>";
-			html += "<td style='vertical-align: middle;text-align:center'><input name='goodsCheck' type='checkbox'/></td>";
-			html += "<td>" + orderGoods[i].goodsName + "</br>[" + orderGoods[i].valNames + "]" + "</td>";
+			html += "<td style='vertical-align: middle;text-align:center'>";
+			var str = "";
+			if(orderGoods[i].childGoodsId==null){
+				str = "goodsId:" + orderGoods[i].goodsId;
+			}else if(orderGoods[i].childGoodsId!=null){
+				str = "childGoodsId:" + orderGoods[i].childGoodsId;
+			}
+			html += "<input id='checkbox"+i+"' name='goodsCheck' type='checkbox' onclick='checkOrder(\""+str+"\",\"checkbox"+i+"\")'/></td>";
+			var valName = orderGoods[i].valNames==null?"":"</br>[" + orderGoods[i].valNames + "]";
+			html += "<td>" + orderGoods[i].goodsName + valName + "</td>";
 			html += "<td style='vertical-align: middle;text-align:center'>" + orderGoods[i].count + "</td>";
-			/* html += "<td>" + orderGoods[i].propNames + "</td>";
-			html += "<td>" + orderGoods[i].valNames + "</td>"; */
 			html += "<td style='vertical-align: middle;text-align:center'>" + orderGoods[i].availableNum + "</td>";
 			html += "</tr>"
 		}
 		tbody.append(html);
 	}
+	
+	var checkOrder = function(str, checkboxId){
+		var checkOrders = $("#checkOrders").val();
+		var arr = checkOrders.split(",");
+		var checkOrdersNew = "";
+		var isCheck = $("#"+checkboxId).attr('checked');
+		if(isCheck=="checked"){
+			checkOrdersNew += str + ",";
+		}
+		for(x in arr){
+			if(arr[x]!="" && arr[x]!=null && arr[x]!=undefined && arr[x]!=str){
+				checkOrdersNew += arr[x];
+				checkOrdersNew += ",";
+			}
+		};
+		$("#checkOrders").val(checkOrdersNew);
+	}
 
 	//确认订单（修改该订单以及子订单的orderStatus、拆分子订单）
 	$('#confirmBtn').click(function() {
-		//var val = $('#operate').val();
-		var data = {"order.id":$('#orderId').val()};
-		var url = path_ + "/view/shop/order/orderDetail!confirmOrder.action";
+		var data = {"order.id":$('#orderId').val(),"splitOrderStr",$('#checkOrders').val()};
+		var url = path_ + "/view/shop/order/order!confirmOrder.action";
 		$.ajax({
 			type : "POST",
 			url : url,
 			data : data,
 			dataType : "json",
-			success : function(json) {
-				showAlert("操作成功");
-				closeCurrentWin();
+			success : function(data) {
+				if(data.msg!=null && data.msg!=""){
+					showAlert(data.msg);
+					closeCurrentWin();
+				}else{
+					showAlert("操作成功");
+					closeCurrentWin();
+				}
 			},
 			error : function(e) {
 				showAlert("操作失败！");

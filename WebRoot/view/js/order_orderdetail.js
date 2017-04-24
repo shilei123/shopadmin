@@ -40,15 +40,19 @@ var setSonOrdersInfo = function(data){
 	var orderMap = data.orderMap;
 	var sonOrders = data.sonOrders;
 	var orderGoods = data.orderGoods;
-//	console.log(orderMap);
-//	console.log(sonOrders);
+	console.log(orderMap);
+	console.log(sonOrders);
 	console.log(orderGoods);
-	if(sonOrders[0]==undefined){
+	if(orderMap.orderStatus=="待确认"){
+		var temp = "<ul><li style='width: 100%;'>待确认是否拆分订单</li></ul>";
+		$('#sonOrdersInfo_td').append(temp);
+	}else if(sonOrders[0]==undefined){
 		var temp = "<ul><li style='width: 100%;'>无子订单</li></ul>";
 		$('#sonOrdersInfo_td').append(temp);
 	}
 	var invoice = orderMap.invoice;
 	var invoiceRecordId = orderMap.invoiceRecordId;
+//	console.log(sonOrders[0]);
 	var html = "";
 	//invoice==0	不开发票
 	if(invoice=='0'){
@@ -116,7 +120,7 @@ var setGoodsInfo = function(orderGoods){
 			html += "<th>件数</th>";
 			html += "<th>小计</th>";
 			html += "</tr><tr>";
-			html += "<td style='width:10%;'><div><span class=''><a href='javascript:void(0);' target='_blank'><img src=''/>" + orderGoods[i].imgPath + orderGoods[i].fileName + "</a></span></div></td>";
+			html += "<td style='width:10%;'><div><span class=''><a href='javascript:void(0);' target='_blank'><img src=''/>" + "缺少主图字段，暂未关联图片"/*orderGoods[i].imgPath + orderGoods[i].fileName*/ + "</a></span></div></td>";
 			html += "<td><a href='' target='_blank'>" + orderGoods[i].goodsName + "</a></td>";
 			html += "<td><span class='red'>￥" + orderGoods[i].unitPrice + "</span></td>";
     		/*<script type="text/javascript">

@@ -24,7 +24,7 @@ public interface OrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Map queryOrderById(String id) throws Exception;
+	public Map queryOrderBasicInfoById(String id) throws Exception;
 	
 	/**
 	 * 删除订单（empty method）
@@ -41,11 +41,12 @@ public interface OrderService {
 	public List<ScOrder> querySonOrderById(String id) throws Exception;
 
 	/**
-	 * 确认货到付款订单（包括子订单）
+	 * 确认订单（拆分子订单）
 	 * @param id
+	 * @param splitOrderStr（拆分的子订单之一的字符串）
 	 * @throws Exception
 	 */
-	public void confirmOrder(String id) throws Exception;
+	public String confirmOrder(String id, String splitOrderStr) throws Exception;
 
 	/**
 	 * 取消订单（包括子订单）

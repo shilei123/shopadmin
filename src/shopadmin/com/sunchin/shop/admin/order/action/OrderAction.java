@@ -33,6 +33,8 @@ public class OrderAction extends PageAction{
 	private Map orderMap;//订单基础信息
 	private List<ScOrder> sonOrders;//子订单信息
 	private List<Map> orderGoods;//商品信息
+	private String msg;
+	private String splitOrderStr;//拆分后的子商品id
 	
 	public String queryOrderList(){
 		try {
@@ -47,9 +49,9 @@ public class OrderAction extends PageAction{
 	
 	public String queryOrderById(){
 		try {
-			orderMap = orderService.queryOrderById(order.getId());//订单基础信息
+			orderMap = orderService.queryOrderBasicInfoById(order.getId());//订单基础信息
 			sonOrders = orderService.querySonOrderById(order.getId()); //子订单信息
-			orderGoods = orderDetailService.queryOrderDetailByOrderId(order.getId());//商品信息
+			orderGoods = orderDetailService.queryOrderGoodsByOrderId(order.getId());//商品信息
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +64,7 @@ public class OrderAction extends PageAction{
 	 */
 	public String delOrder(){
 		try {
-			orderService.delOrder(order.getId());
+			//orderService.delOrder(order.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -93,7 +95,7 @@ public class OrderAction extends PageAction{
 	 */
 	public String confirmOrder(){
 		try {
-			//orderService.confirmOrder(order.getId());
+			msg = orderService.confirmOrder(order.getId(), splitOrderStr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,7 +135,7 @@ public class OrderAction extends PageAction{
 	 */
 	public String queryOrderGoods(){
 		try {
-			orderGoods = orderDetailService.queryOrderDetailByOrderId("id3");//商品信息
+			orderGoods = orderDetailService.queryOrderGoodsByOrderId("id3");//商品信息
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -186,6 +188,22 @@ public class OrderAction extends PageAction{
 
 	public void setSonOrders(List<ScOrder> sonOrders) {
 		this.sonOrders = sonOrders;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public String getSplitOrderStr() {
+		return splitOrderStr;
+	}
+
+	public void setSplitOrderStr(String splitOrderStr) {
+		this.splitOrderStr = splitOrderStr;
 	}
 
 }

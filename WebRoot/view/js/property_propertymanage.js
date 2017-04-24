@@ -295,7 +295,7 @@ var checkProp = function(row){
 	};
 	return false;
 };
-//check或者uncheck在修改hidden
+//check或者uncheck再修改hidden
 var checkIt = function(propValueId, checkboxId){
 	var checkPropValueIds = $("#checkPropValueIds").val();
 	var arr = checkPropValueIds.split(",");

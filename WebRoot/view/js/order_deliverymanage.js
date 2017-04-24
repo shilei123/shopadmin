@@ -47,9 +47,9 @@ var query = function() {
 var formatterAction = function(value, row) {
 	var orderstatus = row["orderstatus"];
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a id='a1' href='javascript:void(0)' onclick='showQueryOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-search'></span><span id='a1span'>查看详情</span></a>";
+	html += "<a id='a1' href='javascript:void(0)' onclick='showQueryOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-search'></span><span id='a1span'>查看详情</span></a>&nbsp;";
 	if(orderstatus=="已确认" || orderstatus=="待发货"){
-		html += "<a id='a2' href='javascript:void(0)' onclick='showDeliveryWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-send'></span>发货</a>";
+		html += "<a id='a2' href='javascript:void(0)' onclick='showDeliveryWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-paper-plane-o'></span>发货</a>";
 	}
 	html += "</div>";
 	return html;

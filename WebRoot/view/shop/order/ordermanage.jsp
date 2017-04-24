@@ -187,7 +187,7 @@
 			        		<td><input id="nickName2" class="am-form-field" style="width:85%" disabled="disabled"/></td>
 			        	</tr>
 			        	<tr>
-			        		<td class="table_title">支付总额：</td>
+			        		<td class="table_title">实付总额：</td>
 			        		<td><input id="actual_price2" class="am-form-field" style="width:85%"/></td>
 			        	</tr>
 		       	 	</table>

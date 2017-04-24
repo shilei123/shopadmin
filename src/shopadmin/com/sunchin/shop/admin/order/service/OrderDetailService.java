@@ -12,7 +12,7 @@ public interface OrderDetailService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Map> queryOrderDetailByOrderId(String id) throws Exception;
+	public List<Map> queryOrderGoodsByOrderId(String id) throws Exception;
 	
 	/**
 	 * 确认订单处查询订单的商品
@@ -21,12 +21,5 @@ public interface OrderDetailService {
 	 * @throws Exception
 	 */
 	public List<Map> queryConfirmOrder(String id) throws Exception;
-
-	/**
-	 * 确认订单操作
-	 * @param id
-	 * @throws Exception
-	 */
-	public String confirmOrder(String id) throws Exception;
 
 }

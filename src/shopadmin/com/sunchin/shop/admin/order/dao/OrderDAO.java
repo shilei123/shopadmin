@@ -180,7 +180,7 @@ public class OrderDAO extends PageDAO{
 	 * @param order
 	 * @return
 	 */
-	public Map queryOrderDetailById(String id, ScOrder order){
+	public Map queryOrderBasicInfoById(String id, ScOrder order){
 		this.initDetailSqlParams(id, order);
 		List<Map> list = db.queryBySQL(DETAIL_SQL, detailParams);
 		if(list!=null && !list.isEmpty())
@@ -191,18 +191,22 @@ public class OrderDAO extends PageDAO{
 	private void initDetailSqlParams(String id, ScOrder order){
 		String invoice = CommonUtils.getString(order.getInvoice()); 
 		String invoiceRecordId = CommonUtils.getString(order.getInvoiceRecordId());
+//		String split = CommonUtils.getString(order.getIssplit());
 		boolean isInvoice = false;
-		if(OrderInvoiceEnum.YES.getCode().equals(invoice) 
-				&& !invoiceRecordId.isEmpty()){
-			isInvoice = true;//开单张发票	null在CommonUtils中处理
+//		boolean issplit = false;
+		if(OrderInvoiceEnum.YES.getCode().equals(invoice) && !invoiceRecordId.isEmpty()){
+			isInvoice = true;//开单张发票
 		}
+		/*if(!split.isEmpty() && OrderIssplitEnum.YES.getCode().equals(split)){
+			issplit = true;
+		}*/
 		StringBuffer sql = new StringBuffer();
 		sql.append(" select t.order_code ,t1.name as order_status ,t.invoice ,t.invoice_record_id ");//订单状态
 		sql.append(" ,decode(t.total_price,t.total_price,'￥'||t.total_price)as total_price ");
 		sql.append(" ,decode(t.actual_price,t.actual_price,'￥'||t.actual_price)as actual_price ");
 		sql.append(" ,decode(t.commision_charge,'0','免运费',t.commision_charge,t.commision_charge) as commision_charge ");//订单信息
 		sql.append(" ,decode(t.num,t.num,t.num||'件')as num ,to_char(t.create_time, 'yyyy-MM-dd hh24:mm:ss') as create_time ,t.remark ,t2.name as pay_mode ,t3.name as issplit ,t4.nick_name ");//订单信息
-		sql.append("  ,t5.name as rec_name ,t5.phone ,t5.post_code ,t5.province ,t5.city ,t5.county ,t5.address_detail ");//收货信息
+		sql.append("  ,t5.name as rec_name ,t5.phone_num ,t5.post_num ,t5.province ,t5.city ,t5.county ,t5.address_detail ");//收货信息
 		sql.append("  ");//商品信息
 		sql.append("  ");//操作历史
 		if(isInvoice){
@@ -213,7 +217,7 @@ public class OrderDAO extends PageDAO{
 		sql.append(" left join sc_dictionary t2 on t2.code=t.pay_mode and t2.type=? ");
 		sql.append(" left join sc_dictionary t3 on t3.code=t.issplit and t3.type=? ");
 		sql.append(" left join sc_user t4 on t4.id=t.user_id ");
-		sql.append(" left join sc_address t5 on t5.id=t.address_id ");
+		sql.append(" left join sc_delivery_record t5 on t5.id=t.delivery_record_id ");
 		if(isInvoice){
 			sql.append(" left join sc_invoice_record t6 on t6.id=t.invoice_record_id ");
 			sql.append(" left join sc_invoice_header t7 on t7.id=t6.invoice_header_id ");
@@ -224,6 +228,10 @@ public class OrderDAO extends PageDAO{
 		sql.append(" and t3.flag = ? ");
 		sql.append(" and t4.flag = ? ");
 		sql.append(" and t5.flag = ? ");
+		/*if(issplit){
+			sql.append(" and t.parent_order_id = ? ");
+		}else {
+		}*/
 		sql.append(" and t.id = ? ");
 		if(isInvoice){
 			sql.append(" and t6.flag = ? ");
@@ -289,12 +297,15 @@ public class OrderDAO extends PageDAO{
 	}
 
 	/**
-	 * 确认订单（修改订单的orderStatus待确认为待发货）
+	 * 确认订单（修改订单的orderStatus）
 	 * @param id
 	 */
-	public void confirmOrder(String id) {
+	public void confirmOrder(String id, String orderStatus) {
 		String hql = " update ScOrder set orderStatus=? and createTime=? where id=? and flag=? ";
-		db.executeHql(hql, OrderStsEnum.UNDELIVERY.getCode(),new Date(), id, FlagEnum.ACT.getCode());
+		if(orderStatus==null){
+			orderStatus = CommonUtils.getString(orderStatus);
+		}
+		db.executeHql(hql, orderStatus, new Date(), id, FlagEnum.ACT.getCode());
 	}
 	
 	/**
@@ -307,7 +318,7 @@ public class OrderDAO extends PageDAO{
 	}
 	
 	/**
-	 * 查询子订单
+	 * 查询订单的子订单
 	 * @param parentOrderId
 	 * @return
 	 */

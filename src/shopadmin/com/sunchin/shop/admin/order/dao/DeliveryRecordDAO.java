@@ -12,14 +12,15 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.OrderStsEnum;
+import com.sunchin.shop.admin.pojo.ScDeliveryRecord;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
-@Repository("deliveryManageDAO")
-public class DeliveryManageDAO extends PageDAO{
+@SuppressWarnings("unchecked")
+@Repository("deliveryRecordDAO")
+public class DeliveryRecordDAO extends PageDAO{
 
 	public String DELIVERY_SQL;
 	public List<String> deliveryParams;
@@ -104,6 +105,20 @@ public class DeliveryManageDAO extends PageDAO{
 		}
 		sql.append(" order by t.create_time desc ");
 		return sql.toString();
+	}
+	
+	public ScDeliveryRecord queryDeliveryByOrderId(String orderId){
+		String hql = " from ScDeliveryRecord where flag=? and orderId=? ";
+		List<ScDeliveryRecord> list = db.queryByHql(hql, FlagEnum.HIS.getCode(), orderId);
+		if(list!=null && !list.isEmpty()){
+			return list.get(0);
+		}
+		return null;
+	}
+	
+	public void delDelivery(String id){
+		String hql = " update ScDeliveryRecord set flag=? where id=? ";
+		db.executeHql(hql, FlagEnum.HIS.getCode(), id);
 	}
 	
 }

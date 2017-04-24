@@ -2,7 +2,7 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="delivery" extends="json-default" namespace="/view/shop/order">
-		<action name="delivery" class="com.sunchin.shop.admin.order.action.DeliveryAction">
+		<action name="delivery" class="com.sunchin.shop.admin.order.action.DeliveryRecordAction">
 			<result type="json"><param name="ignoreHierarchy">false</param></result>
 		</action>
 	</package>

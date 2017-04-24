@@ -101,8 +101,8 @@ request.setAttribute("orderId", orderId);
             <td>
             	<ul>
 	                <li>收货人姓名：<span id='recName'></span></li>
-					<li>收货人手机：<span id='phone'></span></li>
-					<li>邮编：<span id='postCode'></span></li>
+					<li>收货人手机：<span id='phoneNum'></span></li>
+					<li>邮编：<span id='postNum'></span></li>
 					<li>收货地址：<span id='province'></span><span id='city'></span><span id='county'></span></li>
 					<li>详细地址：<span id='addressDetail'></span></li>
             	</ul>

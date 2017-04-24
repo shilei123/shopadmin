@@ -97,7 +97,7 @@
 	    	<div class="am-modal-bd frame-am-modal-bd">
 	    		<form class="am-form" id="ue-form">
 		        <div align="center">
-		        	<table class="frame-modal-table" border="0" bordercolor="black">
+		        	<table class="frame-modal-table am-table-hover" border="0" bordercolor="black">
 			        	<tr>
 			        		<td width="100" class="table_title">属性名称：</td>
 			        		<td>

@@ -34,19 +34,6 @@ public class OrderDetailAction extends PageAction{
 		return Action.SUCCESS;
 	}
 	
-	/**
-	 * 确认订单（拆分子订单）
-	 * @return
-	 */
-	public String confirmOrder(){
-		try {
-			msg = orderDetailService.confirmOrder(order.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return Action.SUCCESS;
-	}
-	
 	public ScOrder getOrder() {
 		return order;
 	}

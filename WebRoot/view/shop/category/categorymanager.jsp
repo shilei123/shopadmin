@@ -145,7 +145,7 @@
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
 				<form id="form1" method="post">
-	    		<table border="0" bordercolor="red" align="center" id="category_detail_table" class="">
+	    		<table class="am-table-hover" align="center" id="category_detail_table">
 	    			<tr>
 						<td width="100" class="table_title">
 		        				<label for="cateName" class="am-form-label">类别名称：</label>

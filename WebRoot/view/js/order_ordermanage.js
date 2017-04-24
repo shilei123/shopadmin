@@ -62,7 +62,7 @@ var formatterAction = function(value, row) {
 	var orderstatus = row["orderstatus"];
 	var paymode = row["paymode"];
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a id='a1' href='javascript:void(0)' onclick='showQueryOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-search'></span><span id='a1span'>查看详情</span></a>";
+	html += "<a id='a1' href='javascript:void(0)' onclick='showQueryOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-search'></span><span id='a1span'>查看详情</span></a>&nbsp;";
 	/*if(paymode=="货到付款"){
 		if(orderstatus=="已提交"){
 			//"货到付款"且"已提交"加上确认订单功能
@@ -85,7 +85,7 @@ var formatterAction = function(value, row) {
 		html += "<a id='a2' href='javascript:void(0)' onclick='showChangePriceOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\",\""+ row["nickName"]+ "\",\""+ row["actualPrice"]+ "\")'><span class='am-icon-adjust'></span>调整费用</a>";
 	}else if(orderstatus=="待确认"){
 		//"待确认"加上确认订单功能（拆分订单）
-		html += "<a id='a2' href='javascript:void(0)' onclick='showConfirmOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-check'></span>确认订单</a>";
+		html += "<a id='a2' href='javascript:void(0)' onclick='showConfirmOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-check-square-o'></span>确认订单</a>";
 	}else if(orderstatus=="申请退款"){
 		//"申请退款"加上处理退款申请功能（取消订单）
 		//html += "<a id='a2' href='javascript:void(0)' onclick='showCancelOrderWin(\""+ row["id"]+ "\",\""+ row["orderCode"]+ "\")'><span class='am-icon-adjust'></span>退款申请处理</a>";

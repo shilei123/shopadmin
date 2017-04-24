@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.sunchin.shop.admin.order.service.DeliveryManageService;
+import com.sunchin.shop.admin.order.service.DeliveryRecordService;
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
@@ -18,10 +18,10 @@ import framework.bean.PageBean;
 import framework.db.DBUtil;
 
 @SuppressWarnings("unchecked")
-public class DeliveryAction extends PageAction{
+public class DeliveryRecordAction extends PageAction{
 
-	@Resource(name="deliveryManageService")
-	private DeliveryManageService deliveryManageService;
+	@Resource(name="deliveryRecordService")
+	private DeliveryRecordService deliveryRecordService;
 	@Resource(name = "dictService")
 	private DictService dictService;
 	
@@ -43,7 +43,7 @@ public class DeliveryAction extends PageAction{
 	
 	public String queryDeliveryOrder(){
 		try {
-			PageBean resultData = deliveryManageService.queryDeliveryOrderList(this.getPageBean());
+			PageBean resultData = deliveryRecordService.queryDeliveryOrderList(this.getPageBean());
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
