@@ -96,9 +96,9 @@ request.setAttribute("orderCode", orderCode);
 			html += "<td style='vertical-align: middle;text-align:center'>";
 			var str = "";
 			if(orderGoods[i].childGoodsId==null){
-				str = "goodsId:" + orderGoods[i].goodsId;
+				str = orderGoods[i].goodsId;
 			}else if(orderGoods[i].childGoodsId!=null){
-				str = "childGoodsId:" + orderGoods[i].childGoodsId;
+				str = orderGoods[i].childGoodsId;
 			}
 			html += "<input id='checkbox"+i+"' name='goodsCheck' type='checkbox' onclick='checkOrder(\""+str+"\",\"checkbox"+i+"\")'/></td>";
 			var valName = orderGoods[i].valNames==null?"":"</br>[" + orderGoods[i].valNames + "]";
@@ -129,7 +129,7 @@ request.setAttribute("orderCode", orderCode);
 
 	//确认订单（修改该订单以及子订单的orderStatus、拆分子订单）
 	$('#confirmBtn').click(function() {
-		var data = {"order.id":$('#orderId').val(),"splitOrderStr",$('#checkOrders').val()};
+		var data = {"order.id":$('#orderId').val(),"splitOrderStr":$('#checkOrders').val()};
 		var url = path_ + "/view/shop/order/order!confirmOrder.action";
 		$.ajax({
 			type : "POST",
