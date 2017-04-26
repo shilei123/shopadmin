@@ -56,21 +56,29 @@ $("#saveBtn").click(function() {
 	var propCode = $("#propCode").val();
 	var propOrder = $("#propOrder").val();
 	var url = "";
+	var data = "";
 	if(propId!=null && propId!=undefined && propId!=""){
 		url = path_ + "/view/shop/property/property!updateProperty.action"
+		data = {"property.id" : propId, "property.flag" : propFlag, "property.propName" : propName, "property.propCode" : propCode, "property.order" : propOrder };
 	}else{
 		url = path_ + "/view/shop/property/property!addProperty.action"
+		data = {"property.propName" : propName, "property.propCode" : propCode, "property.order" : propOrder };
 	}
-	var data = { "property.id" : propId, "property.flag" : propFlag, "property.propName" : propName, "property.propCode" : propCode, "property.order" : propOrder };
 	$.ajax({
 		type : "POST",
 		url : url,
 		data : data,
 		dataType : "json",
 		success : function(json) {
-			query();
-			closeModal("doc-modal-2");
-			showAlert("操作成功");
+			if(json.msg!=null && json.msg!=""){
+				$('#errorMsg').text(json.msg);
+				$('#propName').focus();
+			}else{
+				query();
+				$('#errorMsg').text("");
+				closeModal("doc-modal-2");
+				showAlert("操作成功");
+			}
 		},
 		error : function(e) {
 			showAlert("操作失败！");
@@ -92,9 +100,19 @@ var checkPropertySumbit = function() {
 		$("#propOrder").focus();
 		return false;
 	}
+	if(!isInteger(propOrder)){
+		$("#errorMsg").html("属性值排序必须为整数！");
+		$("#propOrder").focus();
+		return false;
+	}
 	$("#errorMsg").html("&nbsp;");
 	return true;
 };
+
+var isInteger = function(obj){
+	var re = /^[1-9]*[1-9][0-9]*$/;  
+	return re.test(obj);
+}
 
 //修改
 var showEditPropWin = function(id) {
@@ -277,7 +295,7 @@ var checkProp = function(row){
 	};
 	return false;
 };
-//check或者uncheck在修改hidden
+//check或者uncheck再修改hidden
 var checkIt = function(propValueId, checkboxId){
 	var checkPropValueIds = $("#checkPropValueIds").val();
 	var arr = checkPropValueIds.split(",");

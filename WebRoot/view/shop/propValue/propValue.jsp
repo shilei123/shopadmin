@@ -96,7 +96,7 @@
 	    	<div class="am-modal-bd frame-am-modal-bd">
 	    		<form class="am-form" id="ue-form">
 		        <div align="center">
-		        	<table class="frame-modal-table" border="0" bordercolor="black">
+		        	<table class="frame-modal-table am-table-hover" border="0" bordercolor="black">
 			        	<tr>
 			        		<td width="100" class="table_title">属性值名称：</td>
 			        		<td>
@@ -119,7 +119,7 @@
 			        		<td class="table_title">属性值排序：</td>
 			        		<td>
 			        			<div class="frame-div-padd10">
-			        				<input name="propValue.propOrder" id="propValueOrder" placeholder="属性值排序" class="am-form-field" style="width:90%"/>
+			        				<input name="propValue.order" id="propValueOrder" placeholder="属性值排序" class="am-form-field" style="width:90%"/>
 			        			</div>
 			        		</td>
 			        	</tr>

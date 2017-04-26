@@ -26,15 +26,42 @@ var showConfirm = function(msg,callbackfun) {
 		window.top.showConfirm_(msg,callbackfun);
 	}
 };
+var openTab = function(tabId, tabName, tabUrl) {
+	if(window.parent.parent!=null) {
+		window.parent.parent.addMenu(tabId, tabName, tabUrl);
+	} else if(window.parent!=null) { 
+		window.top.addMenu(tabId, tabName, tabUrl);
+	} else if(window.top!=null) {
+		window.top.addMenu(tabId, tabName, tabUrl);
+	}
+};
+var closeTab = function(tabId) {
+	if(window.parent.parent!=null) {
+		window.parent.parent.closeTab(tabId);
+	} else if(window.parent!=null) { 
+		window.top.closeTab(tabId);
+	} else if(window.top!=null) {
+		window.top.closeTab(tabId);
+	}
+};
 
+var closeThisTab = function() {
+	if(window.parent.parent!=null) {
+		window.parent.parent.closeTab(thisTabId);
+	} else if(window.parent!=null) { 
+		window.top.closeTab(thisTabId);
+	} else if(window.top!=null) {
+		window.top.closeTab(thisTabId);
+	}
+};
 var showLoading = function() {
 	/*var index = layer.load(2, {
     	shade: [0.1,'#fff'] //0.1透明度的白色背景
     });*/
 	//加载层-默认风格
-	//layer.load();
+	layer.load();
 	//加载层-风格2
-	layer.load(1);
+	//layer.load(1);
 	//加载层-风格3
 	//layer.load(2);
 	//加载层-风格4
@@ -86,6 +113,12 @@ var showDownTips = function(msg,targetId) {
 };
 
 var showModal = function(id, w, h) {
+	var height = getTotalHeight();
+	if(!h) {
+		setModalContentHeight(id);
+	}
+	h = h || (height-20);
+	
 	var $confirm = $('#'+id);
     var confirm = $confirm.data('amui.modal');
     if (confirm) {
@@ -148,4 +181,20 @@ var pushJson = function(arr, key, val, jsonobj) {
 	}
 	if(!exists)
 		arr.push(jsonobj);
+};
+
+var getTotalHeight = function() {
+	if($.browser.msie) {
+		return document.compatMode == "CSS1Compat"? document.documentElement.clientHeight : document.body.clientHeight;
+	} else {
+		return self.innerHeight;
+	}
+};
+
+var setModalContentHeight = function(modalId) {
+	var height = getTotalHeight();
+	height = height-20-60-80;
+	/*console.log("modalHeight:"+height);
+	console.log($("#priceHistoryModal .frame-modal-content").html());*/
+	$("#"+modalId+" .frame-modal-content").height(height);
 };

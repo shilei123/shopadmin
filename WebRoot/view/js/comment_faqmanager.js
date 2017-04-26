@@ -80,10 +80,13 @@ var queryFaqInfoWin = function(id) {
 };
 
 var setFaqInfo = function(faq) {
-	console.log(faq);
-	$("#faqType2").html("<option value='1'>" + faq.faqType + "</option>");
-	$("#category2").html("<option value='1'>" + faq.category + "</option>");
-	$("#hotQuestion2").html("<option value='1'>" + faq.hotQuestion + "</option>");
+	//console.log(faq);
+	//$("#faqType2").html("<option value='1'>" + faq.faqType + "</option>");
+	//$("#category2").html("<option value='1'>" + faq.category + "</option>");
+	//$("#hotQuestion2").html("<option value='1'>" + faq.hotQuestion + "</option>");
+	$("#faqType2").val(faq.faqType);
+	$("#category2").val(faq.category);
+	$("#hotQuestion2").val(faq.hotQuestion);
 	$("#order2").val(faq.order);
 	$("#faqContent2").val(faq.faqContent);
 };

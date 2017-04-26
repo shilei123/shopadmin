@@ -2,6 +2,7 @@ package com.sunchin.shop.admin.goodsManager.bean;
 
 public class GoodsBean {
 	private String id;
+	private String cateId;
 	private String title;
 	private String subTitle;
 	private String brandId;
@@ -35,6 +36,12 @@ public class GoodsBean {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getCateId() {
+		return cateId;
+	}
+	public void setCateId(String cateId) {
+		this.cateId = cateId;
 	}
 	public String getImgs() {
 		return imgs;

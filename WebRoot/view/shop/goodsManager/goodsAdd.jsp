@@ -1,6 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.sunchin.shop.admin.dict.PublishTypeEnum"%>
 <%@ page import="com.sunchin.shop.admin.dict.FreightTypeEnum"%>
+<%@ page import="com.sunchin.shop.admin.dict.EmptyStoreEnum"%>
+<%@ page import="com.sunchin.shop.admin.dict.VirtualEnum"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -15,14 +17,19 @@
 <script type="text/javascript" charset="utf-8" src="${path }/ueditor/lang/zh-cn/zh-cn.js"></script>
 <link rel="stylesheet" href="goodsAdd.css" />
 <%
-	String selectValue = request.getParameter("selectValue");
-	String selectText = new String(request.getParameter("selectText").getBytes("ISO-8859-1"),"UTF-8");
+	String goodsId = request.getParameter("goodsId")==null?"":request.getParameter("goodsId");
+	String cateId = request.getParameter("cateId")==null?"":request.getParameter("cateId");
+	String cateName = request.getParameter("cateName")==null?"":new String(request.getParameter("cateName").getBytes("ISO-8859-1"),"UTF-8");
 %>
 <script type="text/javascript">
-	var cateId = "<%=selectValue %>";
+	var goodsId = "<%=goodsId %>";
+	var cateId = "<%=cateId %>";
+	var cateName = "<%=cateName %>";
 </script>
 </head>
 <body>
+	<input type="hidden" id="cateId" value="<%=cateId %>"/>
+	<input type="hidden" id="goodsId" value="<%=goodsId %>"/>
 	<!-- content start -->
 	<div class="am-cf ">
 		<div class="admin-content">
@@ -40,8 +47,9 @@
 							<tr>
 								<td class="table_title frame-required"><span>*</span>商品分类：</td>
 								<td valign="bottom">
-									<%=selectText %>&nbsp;<button class="am-btn am-btn-warning am-btn-xs am-round" onclick="window.location.href='${path}/view/shop/goods/goodsTypeSelect.jsp'">编辑</button>
-									<input type="hidden" id="cateId" value="<%=selectValue %>"/>
+									<span id="cateName"><%=cateName %></span>&nbsp;
+									<button class="am-btn am-btn-warning am-btn-xs am-round" 
+									onclick="window.location.href='${path}/view/shop/goodsManager/goodsTypeSelect.jsp'">编辑</button>
 								</td>
 							</tr>
 							<tr>
@@ -50,20 +58,27 @@
 							</tr>
 							<tr>
 								<td class="table_title frame-required"><span>*</span>商品标题：</td>
-								<td><input name="goods.title" id="title" placeholder="商品标题" class="am-form-field" style="width:500px;"/></td>
+								<td><input name="goods.title" id="title" placeholder="商品标题" class="am-form-field" style="width:600px;"/></td>
 							</tr>
 							<tr>
 								<td class="table_title">商品副标题：</td>
 								<td><input name="goods.subTitle" id="subTitle" placeholder="商品副标题" class="am-form-field" style="width:600px;"/></td>
 							</tr>
 							<tr>
-								<td class="table_title">商品属性：</td>
-								<td><div id="propertyDiv"></div></td>
+								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">无库存销售：</div></td>
+								<td>
+									<label class="am-radio am-success" style="display: inline-block;margin-bottom:5px;"><input type="radio" name="goods.emptyStore" id="emptyStore1" value="<%=EmptyStoreEnum.Y.getCode() %>" data-am-ucheck/>是</label>
+									<label class="am-radio am-success" style="display: inline-block;margin-top: 11px;margin-bottom:5px;"><input type="radio" name="goods.emptyStore" id="emptyStore2" value="<%=EmptyStoreEnum.N.getCode() %>" data-am-ucheck/>否</label>
+								</td>
+							</tr>
+							<tr>
+								<td class="table_title"><div style="margin-bottom: 12px;display: inline-block;">商品属性：</div></td>
+								<td><div id="propertyDiv" style="margin-bottom: 10px;"></div></td>
 							</tr>
 							<tr style="display:none;">
-								<td class="table_title"><span id="propValSpan"></span>商品属性值：</td>
+								<td class="table_title" valign="top"><span id="propValSpan"></span>商品属性值：</td>
 								<td>
-									<table style="margin-bottom: 5px;">
+									<table style="margin-bottom: 10px;">
 										<tr>
 											<td valign="middle">
 												<table id="propertyEditTable"><thead><tr></tr></thead><tbody><tr></tr></tbody></table>
@@ -181,7 +196,7 @@
 							<tr>
 								<td class="table_title" valign="top"><div style="margin-top: 13px;">商品参数：</div></td>
 								<td>
-									<div style="margin-top: 10px;" id="paramsDiv">
+									<div style="margin-top: 9px;" id="paramsDiv">
 										<div style="padding: 1px;">
 											参数名：<input class="am-form-field" name="paramName" style="width:150px;display: inline;"/>&nbsp;
 											参数值：<input class="am-form-field" name="paramVal" style="width:150px;display: inline;"/>&nbsp;&nbsp;<a 
@@ -191,6 +206,18 @@
 								</td>
 							</tr>
 							<tr>
+								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 10px;display: inline-block;">电脑版描述：</div></td>
+								<td>
+									<script id="pceditor" name="goods.goodsDetail" type="text/plain" style="width:99%;height:300px;margin-top: 10px;"></script>
+								</td>
+							</tr>
+							<tr>
+								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 10px;display: inline-block;">手机版描述：</div></td>
+								<td>
+									<script id="mobileeditor" name="" type="text/plain" style="width:99%;height:300px;margin-top: 10px;"></script>
+								</td>
+							</tr>
+							<!-- <tr>
 								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 10px;display: inline-block;">商品描述：</div></td>
 								<td>
 									<div class="am-tabs" style="margin-top: 10px;" data-am-tabs>
@@ -208,26 +235,29 @@
 										</div>
 									</div>
 								</td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">运费：</div></td>
 								<td>
-									<div>
-										<label class="am-radio am-success"><input type="radio" name="goods.freightType" id="freightType1" value="<%=FreightTypeEnum.BIZ.getCode() %>" data-am-ucheck/>卖家承担运费</label>
-										<label class="am-radio am-success"><input type="radio" name="goods.freightType" id="freightType2" value="<%=FreightTypeEnum.BUYER.getCode() %>" data-am-ucheck/>买家承担运费</label>
-										<input type="hidden" id="freightId">
-									</div>
+									<label class="am-radio am-success"><input type="radio" name="goods.freightType" id="freightType1" value="<%=FreightTypeEnum.BIZ.getCode() %>" data-am-ucheck/>卖家承担运费</label>
+									<label class="am-radio am-success"><input type="radio" name="goods.freightType" id="freightType2" value="<%=FreightTypeEnum.BUYER.getCode() %>" data-am-ucheck/>买家承担运费</label>
+									<input type="hidden" id="freightId">
 								</td>
 							</tr>
 							<tr>
 								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">商品发布：</div></td>
 								<td>
-									<div>
-										<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType1" value="<%=PublishTypeEnum.IN_STORE.getCode() %>" data-am-ucheck/>放入仓库</label>
-										<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType2" value="<%=PublishTypeEnum.PUBLISH.getCode() %>" data-am-ucheck/>立即发布</label>
-										<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="goods.publishType" id="publishType3" value="<%=PublishTypeEnum.DELAY.getCode() %>" data-am-ucheck/>发布时间</label>
-										<input class="am-form-field" style="display: inline-block;width: 150px;margin-top: -15px;" id="publishTime"></div>
-									</div>
+									<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType1" value="<%=PublishTypeEnum.IN_STORE.getCode() %>" data-am-ucheck/>放入仓库</label>
+									<label class="am-radio am-success"><input type="radio" name="goods.publishType" id="publishType2" value="<%=PublishTypeEnum.PUBLISH.getCode() %>" data-am-ucheck/>立即发布</label>
+									<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="goods.publishType" id="publishType3" value="<%=PublishTypeEnum.TIMER_PUBLISH.getCode() %>" data-am-ucheck/>发布时间</label>
+									<input class="am-form-field" style="display: inline-block;width: 150px;margin-top: -15px;" id="publishTime"></div>
+								</td>
+							</tr>
+							<tr>
+								<td class="table_title frame-required" valign="top"><span>*</span><div style="margin-top: 9px;display: inline-block;">虚拟商品：</div></td>
+								<td>
+									<label class="am-radio am-success" style="display: inline-block;"><input type="radio" name="goods.virtual" id="virtual1" value="<%=VirtualEnum.Y.getCode() %>" data-am-ucheck/>是</label>
+									<label class="am-radio am-success" style="display: inline-block;margin-top: 11px;"><input type="radio" name="goods.virtual" id="virtual12" value="<%=VirtualEnum.N.getCode() %>" data-am-ucheck/>否</label>
 								</td>
 							</tr>
 						</table>

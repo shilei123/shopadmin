@@ -8,6 +8,9 @@
             <column name="ID" length="36" />
             <generator class="assigned" />
         </id>
+        <property name="cateId" type="java.lang.String">
+            <column name="CATE_ID" length="36" />
+        </property>
         <property name="brandId" type="java.lang.String">
             <column name="BRAND_ID" length="36" />
         </property>
@@ -71,8 +74,11 @@
         <property name="publishTime" type="java.util.Date">
             <column name="PUBLISH_TIME" length="7" />
         </property>
-        <property name="sts" type="java.lang.String">
-            <column name="STS" length="1" />
+        <property name="goodsSts" type="java.lang.String">
+            <column name="GOODS_STS" length="1" />
+        </property>
+        <property name="auditSts" type="java.lang.String">
+            <column name="AUDIT_STS" length="1" />
         </property>
         <property name="createTime" type="java.util.Date">
             <column name="CREATE_TIME" length="7" />

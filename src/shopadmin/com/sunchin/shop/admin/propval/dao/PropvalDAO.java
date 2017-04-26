@@ -67,7 +67,18 @@ public class PropvalDAO extends PageDAO{
 	}
 	
 	public void delPropval(String id){
-		String hql = " update ScPropValue set flag=? where id=? ";
+		String hql = " update ScPropval set flag=? where id=? ";
 		DBUtil.getInstance().executeHql(hql, SysDict.FLAG_HIS, id);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ScPropval queryPropvalByValName(String valName){
+		Map<String, Object> params = new HashMap<String, Object>(2);
+		params.put("valName",valName);
+		params.put("flag", FlagEnum.ACT.getCode());
+		List<ScPropval> list = DBUtil.getInstance().queryByPojo(ScPropval.class,params);
+		if(list!=null && !list.isEmpty())
+			return list.get(0);
+		return null;
 	}
 }

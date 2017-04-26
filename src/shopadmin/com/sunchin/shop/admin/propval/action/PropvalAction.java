@@ -15,6 +15,7 @@ public class PropvalAction extends PageAction {
 	private PropvalService propvalService; 
 	
 	private ScPropval propValue;
+	private String msg;
 	
 	/**
 	 * 查询
@@ -63,7 +64,7 @@ public class PropvalAction extends PageAction {
 	 */
 	public String addPropValue() {
 		try {
-			propvalService.addPropval(propValue);
+			msg = propvalService.addPropval(propValue);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,6 +90,14 @@ public class PropvalAction extends PageAction {
 
 	public void setPropValue(ScPropval propValue) {
 		this.propValue = propValue;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 }

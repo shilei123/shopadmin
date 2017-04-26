@@ -66,4 +66,14 @@ public class CategoryDAO {
 		String hql = " update ScCategory set flag=? where id=? ";
 		DBUtil.getInstance().executeHql(hql, SysDict.FLAG_HIS, id);
 	}
+	
+	public ScCategory queryCategoryByCateName(String cateName) {
+		Map params = new HashMap<>(2);
+		params.put("cateName", "cateName");
+		params.put("flag", FlagEnum.ACT.getCode());
+		List<ScCategory> list = DBUtil.getInstance().queryByPojo(ScCategory.class, params);
+		if(list!=null && !list.isEmpty())
+			return list.get(0);
+		return null;
+	}
 }

@@ -33,7 +33,7 @@ public interface PropvalService {
 	 * @param propval
 	 * @throws Exception
 	 */
-	public void addPropval(ScPropval propval) throws Exception;
+	public String addPropval(ScPropval propval) throws Exception;
 
 	/**
 	 * 查询某个

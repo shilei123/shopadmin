@@ -2,11 +2,11 @@ package com.sunchin.shop.admin.dict;
 
 public enum AuditStsEnum {
 
-	WAIT_AUDIT("1", "待审核"),
+	WAIT("1", "待审核"),
 
 	PASS("2", "通过"),
 	
-	NO_PASS("1", "不通过");
+	NO_PASS("3", "不通过");
 
 	private String code;
 

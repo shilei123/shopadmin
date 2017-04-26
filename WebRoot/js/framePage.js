@@ -49,6 +49,15 @@ function pageData(url, targetId, params, currPageNum, rowCount, page) {
 	rowCount = rowCount || 'rowCount';
 	page = page || 'page';
 	//console.log("rowCount, page:"+rowCount+":"+ page);
+	
+	$("#"+targetId).ajaxStart(function(){
+		showLoading();
+    })//开始上传文件时显示一个图片
+    .ajaxComplete(function(){
+    	closeLoading();
+    });//文件上传完成将图片隐藏起来
+	
+	//showLoading();
 	$.ajax({
 		url : url,
 		type : 'POST',
@@ -76,6 +85,7 @@ function pageData(url, targetId, params, currPageNum, rowCount, page) {
 					}
 				}
 			});
+			//closeLoading();
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			//alert('e:' + XMLHttpRequest.responseText);

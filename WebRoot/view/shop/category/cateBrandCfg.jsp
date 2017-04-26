@@ -8,7 +8,7 @@ request.setAttribute("categoryId", categoryId);
 <head>
 <jsp:include page="/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>类别属性配置</title>
+<title>类别品牌配置</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 </head>
 <body>
@@ -18,14 +18,14 @@ request.setAttribute("categoryId", categoryId);
       		<div class="am-g">
       			<form id="form1" method="post">
       				<input type="hidden" name="queryParams.cateId" id="categoryId" value="${categoryId }"/>
-      				<input type="hidden" name="queryParams.checkPropIds" id="checkPropIds" value=""/>
-      				<div style="width: 100%;overflow: auto;">
+      				<input type="hidden" name="queryParams.checkBrandIds" id="checkPropIds" value=""/>
+      				<div style="width: 100%; height:295px; overflow: auto;">
 		            <table class="am-table am-table-bordered am-table-striped am-table-hover" id="categoryParamsTable">
 		              <thead>
 			              <tr>
 			                <th field="index">序号</th>
 			                <th field="checkbox">选择</th>
-							<th field="propName">属性名称</th>
+							<th field="brandName">品牌名称</th>
 			              </tr>
 		              </thead>
 		            </table>
@@ -33,7 +33,7 @@ request.setAttribute("categoryId", categoryId);
 		            <div class="am-u-sm-12">
 						<div class="am-cf">共<span id="rowCount"></span>条记录<div id="page" class="am-fr"></div></div>
 					</div>
-	            	<div align="center" style="display: ;">
+	            	<div align="center" style="">
 	            		<button type="button" class="am-btn am-btn-success" id="saveBtn"><span class="am-icon-save"></span> 保存</button>
 						<button type="button" class="am-btn am-btn-default" id="closeBtn"><span class="am-icon-undo"></span> 取消</button>
 	            	</div>
@@ -49,12 +49,11 @@ request.setAttribute("categoryId", categoryId);
 	});
 	var queryPropCateCheck = function(){
 		$.ajax({
-			url : "${path }/view/shop/category/cateProp!queryPropCateCheck.action",
+			url : "${path }/view/shop/category/cateBrand!queryCateBrandCheck.action",
 			type : 'POST',
 			data : formGetCurrentJsp("form1"),
 			dataType: "json",
 			success : function(data) {
-				console.log(data);
 				writeHidden(data);
 				query();//分页
 			},
@@ -65,17 +64,17 @@ request.setAttribute("categoryId", categoryId);
 	};
 	//写到hidden
 	var writeHidden = function(data){
-		var checkPropIds = "";
+		var checkBrandIds = "";
 		for(i in data.listCheck){
-			checkPropIds += data.listCheck[i].propId;
-			checkPropIds += ",";
+			checkBrandIds += data.listCheck[i].brandId;
+			checkBrandIds += ",";
 		};
-		$("#checkPropIds").val(checkPropIds);
+		$("#checkPropIds").val(checkBrandIds);
 	};
 	
 	var query = function() {
 		var data = formGetCurrentJsp("form1");
-		var url = "${path }/view/shop/category/cateProp!queryPropCate.action";
+		var url = "${path }/view/shop/category/brand!queryBrandList.action";
 		pageDataCurrentJsp(url, "categoryParamsTable", data);
 	};
 	
@@ -166,7 +165,7 @@ request.setAttribute("categoryId", categoryId);
 			data : params,
 			dataType: "json",
 			success : function(data) {
-				console.log(data);
+				//console.log(data);
 				$('#'+targetId+' tbody').empty();
 				var html = createTrCurrentJsp(data, targetId);
 				$("#"+targetId).append(html);
@@ -208,7 +207,7 @@ request.setAttribute("categoryId", categoryId);
 		$("#form1").validate({
 			submitHandler:function(form) {
 	            $("#form1").form('submit', {
-		    		url:  "${path }/view/shop/category/cateProp!savePropCate.action",
+		    		url:  "${path }/view/shop/category/cateBrand!saveCateBrand.action",
 		    		success:function(data) {
 		    			window.parent.showAlert("操作成功！");
 		    			closeCurrentWin();

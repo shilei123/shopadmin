@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 	private DBUtil db;
 	
 	@Override
-	public void saveCategory(ScCategory category) throws Exception {
+	public String saveCategory(ScCategory category) throws Exception {
 		/*String cateOrder = CommonUtils.getString(category.getCateOrder());
 		if(cateOrder.length()==1){
 			cateOrder = "0" + cateOrder;
@@ -48,11 +48,14 @@ public class CategoryServiceImpl implements CategoryService {
 		if(levels==null || levels.isEmpty()) return;
 		Integer level = Integer.parseInt(levels) + 1;
 		category.setLevels(level.toString());*/
-		
+		ScCategory category_db = categoryDAO.queryCategoryByCateName(category.getCateName());
+		if(category_db!=null)
+			return "该类别名称已经存在，请重新输入！";
 		category.setId(UUID.randomUUID().toString());
 		category.setFlag(FlagEnum.ACT.getCode());
 		category.setCreateTime(new Date());
 		db.insert(category);
+		return "";
 	}
 
 	@Override
