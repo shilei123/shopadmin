@@ -113,7 +113,7 @@ public class AfterAction extends PageAction{
 		 */
 		public String passRefundGoods(){
 			try {
-				afterSerivce.passRefundGoods(bill.getId(),bill.getResult(),relus);
+				afterSerivce.passRefundGoods(bill.getId(),bill.getResult());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

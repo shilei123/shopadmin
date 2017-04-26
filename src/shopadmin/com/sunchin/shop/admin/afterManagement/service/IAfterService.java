@@ -22,7 +22,7 @@ public interface IAfterService {
 
 	void passRepairGoods(String id, String result) throws Exception;
 
-	void passRefundGoods(String id, String result, String relus) throws Exception;
+	void passRefundGoods(String id, String result) throws Exception;
 
 	ScUserBase queryUserBase(String userId) throws Exception;
 

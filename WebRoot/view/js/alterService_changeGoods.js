@@ -103,10 +103,10 @@ var formatterUserName = function(value,row){
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
 	html += "<a href='javascript:void(0)' onclick='showqueryBillWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span>查看详情</a>";
-	if(row.billStatus == "待审核"){
+	//if(row.billStatus == "待审核"){
 		html += "&nbsp;&nbsp;<a href='javascript:void(0)'  onclick='pass(\""+ row["id"]+ "\")'><span class='am-icon-check-square-o'></i>通过</a>";
 		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='noPass(\""+ row["id"]+ "\")'><span class='am-icon-ban'></i>不通过</a>";
-	}
+	//}
 	html += "</div>";
 	return html;
 };

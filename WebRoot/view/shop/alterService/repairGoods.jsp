@@ -127,7 +127,7 @@
 			        	<tr>
 			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">处理结果：</div></td>
 			        		<td valign="top" > 
-			        			<textarea name="bill.result" id="result" placeholder="不通过,请填写处理结果" style="width:96%;height:100px;margin-top: 5px;" class="am-form-field"></textarea> 
+			        			<textarea name="bill.result" id="result" placeholder="请填写处理结果" style="width:96%;height:100px;margin-top: 5px;" class="am-form-field"></textarea> 
 			        		</td>
 		        		</tr>
 		       	 	</table>

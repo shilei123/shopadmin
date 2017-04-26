@@ -1,18 +1,22 @@
 package com.sunchin.shop.admin.afterManagement.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
+import com.sunchin.shop.admin.dict.repertoryTypeEnum;
 import com.sunchin.shop.admin.pojo.ScBill;
 import com.sunchin.shop.admin.pojo.ScBillDetail;
 import com.sunchin.shop.admin.pojo.ScRepertory;
+import com.sunchin.shop.admin.pojo.ScRepertoryFlowing;
 
 import framework.bean.PageBean;
 import framework.db.DBUtil;
@@ -201,5 +205,60 @@ public class AfterDAO extends PageDAO{
 		}
 		return null;
 	}
+
+	//库存流水表插入数据
+	public void insertFowingByChildId(String id,String goodsChildId,String num,String type,String aboutType) {
+		Integer nums = Integer.valueOf(num);
+		ScRepertoryFlowing flowing = new ScRepertoryFlowing();
+		flowing.setId(UUID.randomUUID().toString());
+		flowing.setChildGoodsId(goodsChildId);
+		flowing.setAboutId(id);
+		if(repertoryTypeEnum.BILL.getCode().equals(aboutType)){
+			flowing.setAboutType(repertoryTypeEnum.BILL.getCode());
+		}else if(repertoryTypeEnum.DELIVERY.getCode().equals(aboutType)){
+			flowing.setAboutType(repertoryTypeEnum.DELIVERY.getCode());
+		}
+		flowing.setRepertoryNum(nums);
+		flowing.setFlag(FlagEnum.ACT.getCode());
+		flowing.setCreateTime(new Date());
+		if(repertoryTypeEnum.BAD_NUM.getCode().equals(type)){
+			flowing.setRepertoryType(repertoryTypeEnum.BAD_NUM.getCode());
+		}else if(repertoryTypeEnum.AVAILABLE_NUM.getCode().equals(type)){
+			flowing.setRepertoryType(repertoryTypeEnum.AVAILABLE_NUM.getCode());
+		}else if(repertoryTypeEnum.SALES_NUM.getCode().equals(type)){
+			flowing.setRepertoryType(repertoryTypeEnum.SALES_NUM.getCode());
+		}else if(repertoryTypeEnum.FREEZE_NUM.getCode().equals(type)){
+			flowing.setRepertoryType(repertoryTypeEnum.FREEZE_NUM.getCode());
+		}
+		DBUtil.getInstance().insert(flowing);
+	}
+
+	//库存流水表插入数据
+	public void insertFowingByGoodsId(String id, String goodsId, String num,String type,String aboutType) {
+		Integer nums = Integer.valueOf(num);
+		ScRepertoryFlowing flowing = new ScRepertoryFlowing();
+		flowing.setId(UUID.randomUUID().toString());
+		flowing.setGoodsId(goodsId);
+		flowing.setAboutId(id);
+		if(repertoryTypeEnum.BILL.getCode().equals(aboutType)){
+			flowing.setAboutType(repertoryTypeEnum.BILL.getCode());
+		}else if(repertoryTypeEnum.DELIVERY.getCode().equals(aboutType)){
+			flowing.setAboutType(repertoryTypeEnum.DELIVERY.getCode());
+		}
+		flowing.setRepertoryNum(nums);
+		flowing.setFlag(FlagEnum.ACT.getCode());
+		flowing.setCreateTime(new Date());
+		if(repertoryTypeEnum.BAD_NUM.getCode().equals(type)){
+			flowing.setRepertoryType(repertoryTypeEnum.BAD_NUM.getCode());
+		}else if(repertoryTypeEnum.AVAILABLE_NUM.getCode().equals(type)){
+			flowing.setRepertoryType(repertoryTypeEnum.AVAILABLE_NUM.getCode());
+		}else if(repertoryTypeEnum.SALES_NUM.getCode().equals(type)){
+			flowing.setRepertoryType(repertoryTypeEnum.SALES_NUM.getCode());
+		}else if(repertoryTypeEnum.FREEZE_NUM.getCode().equals(type)){
+			flowing.setRepertoryType(repertoryTypeEnum.FREEZE_NUM.getCode());
+		}
+		DBUtil.getInstance().insert(flowing);
+	}
+	
 	
 }

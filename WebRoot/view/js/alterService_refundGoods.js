@@ -61,12 +61,45 @@ var openWin = function(title) {
 
 var openPassWin = function(title){
 	$("#titles").text(title);
-	showModal("noPassModal",450,300);
+	showModal("noPassModal",450,260);
 }
 
 $("#closePassBtn").click(function(){
 	closeModal("noPassModal");
 });
+
+var openOrderCode = function(){
+	showModal("orderCodeModal",500,280);
+	$("#goodsName").text("");
+	$("#goodsPrice").text("");
+	$("#numbs").text("");
+	$("#goodsNo").text("");
+}
+
+$("#closeCodeBtn").click(function(){
+	closeModal("orderCodeModal");
+})
+
+var openUserName = function(){
+	showModal("userNameModal",500,280);
+	$("#userName").text("");
+	$("#phone").text("");
+	$("#mail").text("");
+	$("#sex").text("");
+}
+
+$("#closeUserBtn").click(function(){
+	showModal("userNameModal");
+});
+
+var formatterOrderCode = function(value,row){
+	return "<a href='javascript:void(0);' onclick='showOrderCodeWin(\""+ row["id"]+ "\")'>"+value+"</a>";
+	
+}
+
+var formatterUserName = function(value,row){
+	return "<a href='javascript:void(0);' onclick='showUserNameWin(\""+ row["createUserId"]+ "\")'>"+value+"</a>";
+}
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
@@ -78,6 +111,73 @@ var formatterAction = function(value, row) {
 	html += "</div>";
 	return html;
 };
+
+var showOrderCodeWin = function(id){
+	openOrderCode();
+	$.ajax({
+		type:'POST',
+		url : path_ + "/view/shop/alterService/after!queryGoodsDetail.action",
+		data:{"bill.id":id},
+		dataType:"json",
+		success : function(data){
+			if(data.billList[0].goodsName != null){
+				$("#goodsName").text(data.billList[0].goodsName);
+			}else{
+				$("#goodsName").text("");
+			}
+			if(data.billList[0].donePrice != null){
+				$("#goodsPrice").text("￥"+data.billList[0].donePrice);
+			}else{
+				$("#goodsPrice").text("");
+			}
+			if(data.billList[0].numbs != null){
+				$("#numbs").text(data.billList[0].numbs);
+			}else{
+				$("#numbs").text("");
+			}
+			if(data.billList[0].goodsNo != null){
+				$("#goodsNo").text(data.billList[0].goodsNo);
+			}else{
+				$("#goodsNo").text("");
+			}
+		}
+	});
+}
+
+var showUserNameWin = function(userId){
+	openUserName();
+	$.ajax({
+		type:'POST',
+		url : path_ + "/view/shop/alterService/after!queryUserBase.action",
+		data:{"userBase.userId":userId},
+		dataType:"json",
+		success : function(data){
+			if(data.userBase.userName != null){
+				$("#userName").text(data.userBase.userName);
+			}else{
+				$("#userName").text("");
+			}
+			if(data.userBase.phone != null){
+				$("#phone").text(data.userBase.phone);
+			}else{
+				$("#phone").text("");
+			}
+			if(data.userBase.mail != null){
+				$("#mail").text(data.userBase.mail);
+			}else{
+				$("#mail").text("");
+			}
+			var sex = data.userBase.sex;
+			if(sex != null && sex == "0"){
+				$("#sex").text("男");
+			}else if(sex != null && sex == "1"){
+				$("#sex").text("女");
+			}else{
+				$("#sex").text("");
+			}
+		}
+	});
+}
 
 //通过
 var pass = function(id){

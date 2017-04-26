@@ -84,9 +84,9 @@
 									<th width="8%"  field="name">名称</th>
 									<th width="6%"  field="kind">类型</th>
 									<th width="8%"  field="code">单据编号</th>
-									<th width="8%"  field="orderCode">订单编号</th>
+									<th width="8%"  field="orderCode" formatter="formatterOrderCode">订单编号</th>
 									<th width="12%" field="createTime">申请时间</th>
-									<th width="8%"  field="userName">申请人</th>
+									<th width="8%"  field="userName" formatter="formatterUserName">申请人</th>
 									<th width="6%"  field="billStatus">状态</th>
 									<th width="15%" formatter="formatterAction">操作</th>
 								</tr>
@@ -110,6 +110,118 @@
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
 		        <iframe id="billParamsFrame" scrolling="no" frameborder="0" style="width:720px; height: 380px;overflow: hidden;overflow-x:hidden;overflow-y:hidden;"></iframe>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="noPassModal">
+		<div class="am-modal-dialog">
+	    	<div class="am-modal-hd"><span id="titles">审核不通过</span>
+	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+	    	</div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd">
+		        <div align="center">
+		        	<table id="edit_coupon_table" class="frame-modal-table" border="0" bordercolor="black">
+		        		<input type="hidden"  id="billId"/>
+			        	<tr>
+			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">处理结果：</div></td>
+			        		<td valign="top" > 
+			        			<textarea name="bill.result" id="result" placeholder="请填写处理结果" style="width:96%;height:100px;margin-top: 5px;" class="am-form-field"></textarea> 
+			        		</td>
+		        		</tr>
+		       	 	</table>
+		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
+		       	 	<div align="center">
+						<button type="button" class="am-btn am-btn-success" id="savePassBtn"><span class="am-icon-save"></span> 保存</button>
+						<button type="button" class="am-btn am-btn-success" id="saveNoPassBtn" style="display:none"><span class="am-icon-save"></span> 保存</button>
+						<button type="button" class="am-btn am-btn-default" id="closePassBtn"><span class="am-icon-undo"></span> 取消</button>
+					</div>
+	           	</div>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="orderCodeModal">
+		<div class="am-modal-dialog">
+	    	<div class="am-modal-hd"><span id="titles">商品信息</span>
+	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+	    	</div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd">
+		        <div align="center">
+			        	<table class="frame-modal-table" border="0" bordercolor="black">
+			        	<tr>
+			  				<td width="100px" class="table_title">商品名称：</td>
+			  				<td>
+			  					<div><span id="goodsName"></span></div> 
+			  				</td>
+				  		</tr>
+				  		<tr>
+				  			<td class="table_title">商品价格：</td>
+					   		<td>
+					   			<div><span id="goodsPrice"></span></div> 
+							</td>
+				  		</tr>
+				  		<tr>
+			  				<td width="100px" class="table_title">商品数量：</td>
+			  				<td>
+			  					<div><span id="numbs"></span></div> 
+			  				</td>
+				  		</tr>
+				  		<tr>
+				  			<td width="100px" class="table_title">货号：</td>
+			  				<td>
+			  					<div><span id="goodsNo"></span></div> 
+			  				</td>
+				  		</tr>
+			        	</table>  
+		       	 	<div align="center">
+						<button type="button" class="am-btn am-btn-default" id="closeCodeBtn"><span class="am-icon-undo"></span> 取消</button>
+					</div>
+	           	</div>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="userNameModal">
+		<div class="am-modal-dialog">
+	    	<div class="am-modal-hd"><span id="titles">会员信息</span>
+	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+	    	</div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd">
+		        <div align="center">
+			        	<table class="frame-modal-table" border="0" bordercolor="black">
+			        	<tr>
+			  				<td width="100px" class="table_title">姓名：</td>
+			  				<td>
+			  					<div><span id="userName"></span></div> 
+			  				</td>
+				  		</tr>
+				  		<tr>
+					  		<td class="table_title">电话：</td>
+						   		<td>
+						   			<div><span id="phone"></span></div> 
+							</td>
+				  		</tr>
+				  		<tr>
+			  				<td width="100px" class="table_title">邮箱：</td>
+			  				<td>
+			  					<div><span id="mail"></span></div> 
+			  				</td>
+				  		</tr>
+				  		<tr>
+				  			<td class="table_title">性别：</td>
+					   		<td>
+						   		<div><span id="sex"></span></div> 
+							</td>
+				  		</tr>
+			        	</table> 
+		       	 	<div align="center">
+						<button type="button" class="am-btn am-btn-default" id="closeUserBtn"><span class="am-icon-undo"></span> 取消</button>
+					</div>
+	           	</div>
 	    	</div>
 		</div>
 	</div>

@@ -15,6 +15,7 @@ import com.sunchin.shop.admin.afterManagement.service.IAfterService;
 import com.sunchin.shop.admin.dict.BillKindEnum;
 import com.sunchin.shop.admin.dict.BillStatusEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
+import com.sunchin.shop.admin.dict.repertoryTypeEnum;
 import com.sunchin.shop.admin.pojo.ScBill;
 import com.sunchin.shop.admin.pojo.ScBillHistory;
 import com.sunchin.shop.admin.pojo.ScDeliveryRecord;
@@ -78,56 +79,56 @@ public class AfterSerivceImpl implements IAfterService{
 			history.setBillStatus(BillStatusEnum.PASS_STATUS.getCode());
 			DBUtil.getInstance().insert(history);
 		}
-		
 		Map<String, Object> billDetail = afterDAO.queryBillTetailById(id);//查询单据详情
 		String goodsId = billDetail.get("goodsId").toString();
 		String goodsChildId = billDetail.get("goodsDetailId").toString();
 		if(goodsChildId != null){
 			ScRepertory  repertory = afterDAO.queryRepertoryByGoodsChildId(goodsChildId);//根据商品子表id,查询库存表
 			if(relus.equals("0")){ //如果损坏
-				if(repertory.getBadNum() != null && repertory.getSalesCount() != null){
 					repertory.setBadNum(repertory.getBadNum()+1);//破损+1
-					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售+1
-				}else{
-					repertory.setBadNum(1);
-					repertory.setSalesCount(0);
-				}
-				
+					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
+					String BadNum = repertory.getBadNum().toString();
+					String type = repertoryTypeEnum.BAD_NUM.getCode();
+					String aboutType = repertoryTypeEnum.BILL.getCode();
+					afterDAO.insertFowingByChildId(id,goodsChildId,BadNum,type,aboutType);
 			}else if(relus.equals("1")){//如果二次销售
-				if(repertory.getAvailableNum() != null && repertory.getBadNum() != null && repertory.getSalesCount() != null){
 					repertory.setAvailableNum(repertory.getAvailableNum()+1);//可用+1
 					repertory.setSalesNum(repertory.getSalesNum()+1);//销售+1
-					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售+1
-				}else{
-					repertory.setAvailableNum(1);//可用+1
-					repertory.setSalesNum(1);//销售+1
-					repertory.setSalesCount(0);//累计销售+1
-				}
+					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
+					String AvailableNum = repertory.getAvailableNum().toString();
+					String SalesNum =repertory.getSalesNum().toString();
+					String type1 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
+					String type2 = repertoryTypeEnum.SALES_NUM.getCode();
+					String aboutType = repertoryTypeEnum.BILL.getCode();
+					afterDAO.insertFowingByChildId(id,goodsChildId,AvailableNum,type1,aboutType);
+					afterDAO.insertFowingByChildId(id,goodsChildId,SalesNum,type2,aboutType);
 			}
 			DBUtil.getInstance().update(repertory);
 		}else{
 			ScRepertory repertory =	afterDAO.queryRepertoryByGoodsId(goodsId);//根据商品id,查询库存表
 			if(relus.equals("0")){ //如果损坏
-				if(repertory.getBadNum() != null && repertory.getSalesCount() != null){
 					repertory.setBadNum(repertory.getBadNum()+1);
 					repertory.setSalesCount(repertory.getSalesCount()-1);
-				}else{
-					repertory.setBadNum(1);
-					repertory.setSalesCount(0);
-				}
+					String BadNum = repertory.getBadNum().toString();
+					String type = repertoryTypeEnum.BAD_NUM.getCode();
+					String aboutType = repertoryTypeEnum.BILL.getCode();
+					afterDAO.insertFowingByGoodsId(id,goodsId,BadNum,type,aboutType);
 			}else if(relus.equals("1")){
-				if(repertory.getAvailableNum() != null && repertory.getBadNum() != null){
-					repertory.setAvailableNum(repertory.getAvailableNum()+1);
-					repertory.setSalesNum(repertory.getSalesNum()+1);
-				}else{
-					repertory.setAvailableNum(1);
-					repertory.setSalesNum(1);
-				}
+					repertory.setAvailableNum(repertory.getAvailableNum()+1);//可用+1
+					repertory.setSalesNum(repertory.getSalesNum()+1);//销售+1
+					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
+					String AvailableNum = repertory.getAvailableNum().toString();
+					String SalesNum =repertory.getSalesNum().toString();
+					String type1 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
+					String type2 = repertoryTypeEnum.SALES_NUM.getCode();
+					String aboutType = repertoryTypeEnum.BILL.getCode();
+					afterDAO.insertFowingByGoodsId(id,goodsId,AvailableNum,type1,aboutType);
+					afterDAO.insertFowingByGoodsId(id,goodsId,SalesNum,type2,aboutType);
 			}
 			DBUtil.getInstance().update(repertory);
 		}
 }
-
+	
 	/**
 	 * 退货不通过
 	 */
@@ -179,56 +180,95 @@ public class AfterSerivceImpl implements IAfterService{
 		if(goodsChildId != null){
 			ScRepertory  repertory = afterDAO.queryRepertoryByGoodsChildId(goodsChildId);//根据商品子表id,查询库存表
 			if(relus.equals("0")){ //如果损坏
-				if(repertory.getBadNum() != null && repertory.getSalesCount() != null){
 					repertory.setBadNum(repertory.getBadNum()+1);//破损+1
-					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售+1
-				}else{
-					repertory.setBadNum(1);
-					repertory.setSalesCount(0);
-				}
-				
+					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
+					String BadNum = repertory.getBadNum().toString();
+					String type = repertoryTypeEnum.BAD_NUM.getCode();
+					String aboutType = repertoryTypeEnum.BILL.getCode();
+					afterDAO.insertFowingByChildId(id,goodsChildId,BadNum,type,aboutType);
 			}else if(relus.equals("1")){//如果二次销售
-				if(repertory.getAvailableNum() != null && repertory.getBadNum() != null && repertory.getSalesCount() != null){
 					repertory.setAvailableNum(repertory.getAvailableNum()+1);//可用+1
 					repertory.setSalesNum(repertory.getSalesNum()+1);//销售+1
-					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售+1
-				}else{
-					repertory.setAvailableNum(1);//可用+1
-					repertory.setSalesNum(1);//销售+1
-					repertory.setSalesCount(0);//累计销售+1
-				}
+					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
+					String AvailableNum = repertory.getAvailableNum().toString();
+					String SalesNum =repertory.getSalesNum().toString();
+					String type1 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
+					String type2 = repertoryTypeEnum.SALES_NUM.getCode();
+					String aboutType = repertoryTypeEnum.BILL.getCode();
+					afterDAO.insertFowingByChildId(id,goodsChildId,AvailableNum,type1,aboutType);
+					afterDAO.insertFowingByChildId(id,goodsChildId,SalesNum,type2,aboutType);
 			}
 			DBUtil.getInstance().update(repertory);
 		}else{
 			ScRepertory repertory =	afterDAO.queryRepertoryByGoodsId(goodsId);//根据商品id,查询库存表
 			if(relus.equals("0")){ //如果损坏
-				if(repertory.getBadNum() != null && repertory.getSalesCount() != null){
 					repertory.setBadNum(repertory.getBadNum()+1);
 					repertory.setSalesCount(repertory.getSalesCount()-1);
-				}else{
-					repertory.setBadNum(1);
-					repertory.setSalesCount(0);
-				}
+					String BadNum = repertory.getBadNum().toString();
+					String type = repertoryTypeEnum.BAD_NUM.getCode();
+					String aboutType = repertoryTypeEnum.DELIVERY.getCode();
+					afterDAO.insertFowingByGoodsId(id,goodsId,BadNum,type,aboutType);
 			}else if(relus.equals("1")){//如果二次销售
-				if(repertory.getAvailableNum() != null && repertory.getBadNum() != null){
-					repertory.setAvailableNum(repertory.getAvailableNum()+1);
-					repertory.setSalesNum(repertory.getSalesNum()+1);
-				}else{
-					repertory.setAvailableNum(1);
-					repertory.setSalesNum(1);
-				}
+					repertory.setAvailableNum(repertory.getAvailableNum()+1);//可用+1
+					repertory.setSalesNum(repertory.getSalesNum()+1);//销售+1
+					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
+					String AvailableNum = repertory.getAvailableNum().toString();
+					String SalesNum =repertory.getSalesNum().toString();
+					String type1 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
+					String type2 = repertoryTypeEnum.SALES_NUM.getCode();
+					String aboutType = repertoryTypeEnum.BILL.getCode();
+					afterDAO.insertFowingByGoodsId(id,goodsId,AvailableNum,type1,aboutType);
+					afterDAO.insertFowingByGoodsId(id,goodsId,SalesNum,type2,aboutType);
 			}
 			DBUtil.getInstance().update(repertory);
 		}
 		//发货记录插入记录
 		ScDeliveryRecord record = new ScDeliveryRecord();
-		record.setId(UUID.randomUUID().toString());
+		String recordId = UUID.randomUUID().toString();
+		record.setId(recordId);
 		record.setOrderId(id);
 		record.setFlag(FlagEnum.ACT.getCode());
 		record.setCreateTime(new Date());
 		record.setSts(FlagEnum.HIS.getCode());
 		//类型待添加
 		DBUtil.getInstance().insert(record);
+		
+		if(goodsChildId != null){
+			ScRepertory  repertory = afterDAO.queryRepertoryByGoodsChildId(goodsChildId);//根据商品子表id,查询库存表
+				repertory.setFreezeNum(repertory.getFreezeNum()+1);//冻结库存+1
+				repertory.setAvailableNum(repertory.getAvailableNum()-1);//可用库存-1
+				repertory.setSalesNum(repertory.getSalesNum()-1);//销售库存-1
+				repertory.setSalesCount(repertory.getSalesCount()+1);//累计销售库存+1
+				DBUtil.getInstance().update(repertory);
+				String freezeNum = repertory.getFreezeNum().toString();
+				String availableNum = repertory.getAvailableNum().toString();
+				String salesNum = repertory.getAvailableNum().toString();
+				String type1 = repertoryTypeEnum.FREEZE_NUM.getCode();
+				String type2 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
+				String type3 = repertoryTypeEnum.SALES_NUM.getCode();
+				String aboutType = repertoryTypeEnum.DELIVERY.getCode();
+				afterDAO.insertFowingByChildId(recordId,goodsChildId,freezeNum,type1,aboutType);
+				afterDAO.insertFowingByChildId(recordId,goodsChildId,availableNum,type2,aboutType);
+				afterDAO.insertFowingByChildId(recordId,goodsChildId,salesNum,type3,aboutType);
+		}else{
+			ScRepertory repertory =	afterDAO.queryRepertoryByGoodsId(goodsId);//根据商品id,查询库存表
+			repertory.setFreezeNum(repertory.getFreezeNum()+1);//冻结库存+1
+			repertory.setAvailableNum(repertory.getAvailableNum()-1);//可用库存-1
+			repertory.setSalesNum(repertory.getSalesNum()-1);//销售库存-1
+			repertory.setSalesCount(repertory.getSalesCount()+1);//累计销售库存+1
+			DBUtil.getInstance().update(repertory);
+			String freezeNum = repertory.getFreezeNum().toString();
+			String availableNum = repertory.getAvailableNum().toString();
+			String salesNum = repertory.getAvailableNum().toString();
+			String type1 = repertoryTypeEnum.FREEZE_NUM.getCode();
+			String type2 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
+			String type3 = repertoryTypeEnum.SALES_NUM.getCode();
+			String aboutType = repertoryTypeEnum.DELIVERY.getCode();
+			afterDAO.insertFowingByChildId(recordId,goodsId,freezeNum,type1,aboutType);
+			afterDAO.insertFowingByChildId(recordId,goodsId,availableNum,type2,aboutType);
+			afterDAO.insertFowingByChildId(recordId,goodsId,salesNum,type3,aboutType);
+		}
+		
 	}
 
 	/**
@@ -259,7 +299,7 @@ public class AfterSerivceImpl implements IAfterService{
 	 */
 	@Override
 	@Transactional
-	public void passRefundGoods(String id, String result, String relus) throws Exception {
+	public void passRefundGoods(String id, String result) throws Exception {
 		if(id != null){
 			ScBill bill = afterDAO.findBillById(id);//查询单据信息
 			bill.setResult(result);

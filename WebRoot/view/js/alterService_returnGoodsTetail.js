@@ -45,8 +45,8 @@ var setBillForm = function(data){
 	}else{
 		$("#kind").text("");
 	}
-	if(data.billList[0].status != null){
-		$("#status").text(data.billList[0].status);
+	if(data.billList[0].stsus != null){
+		$("#status").text(data.billList[0].stsus);
 	}else{
 		$("#status").text("");
 	}
@@ -55,8 +55,8 @@ var setBillForm = function(data){
 	}else{
 		$("#name").text("");
 	}
-	if(data.billList[0].startTime != null){
-		$("#startTime").text(data.billList[0].startTime);
+	if(data.billList[0].createTime != null){
+		$("#startTime").text(data.billList[0].createTime);
 	}else{
 		$("#startTime").text("");
 	}
@@ -69,6 +69,11 @@ var setBillForm = function(data){
 		$("#orderCode").text(data.billList[0].orderCode);
 	}else{
 		$("#orderCode").text("");
+	}
+	if(data.billList[0].phone != null){
+		$("#phone").text(data.billList[0].phone);
+	}else{
+		$("#phone").text("");
 	}
 	$("#reason").val(data.billList[0].reason);
 	$("#content").val(data.billList[0].content);
