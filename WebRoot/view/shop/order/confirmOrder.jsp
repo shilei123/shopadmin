@@ -129,6 +129,8 @@ request.setAttribute("orderCode", orderCode);
 
 	//确认订单（修改该订单以及子订单的orderStatus、拆分子订单）
 	$('#confirmBtn').click(function() {
+		//增加二次确认
+		
 		var data = {"order.id":$('#orderId').val(),"splitOrderStr":$('#checkOrders').val()};
 		var url = path_ + "/view/shop/order/order!confirmOrder.action";
 		$.ajax({
@@ -139,11 +141,11 @@ request.setAttribute("orderCode", orderCode);
 			success : function(data) {
 				if(data.msg!=null && data.msg!=""){
 					showAlert(data.msg);
-					closeCurrentWin();
 				}else{
 					showAlert("操作成功");
-					closeCurrentWin();
 				}
+				closeCurrentWin();
+				window.parent.query();
 			},
 			error : function(e) {
 				showAlert("操作失败！");

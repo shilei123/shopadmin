@@ -50,7 +50,7 @@ public class OrderAction extends PageAction{
 	public String queryOrderById(){
 		try {
 			orderMap = orderService.queryOrderBasicInfoById(order.getId());//订单基础信息
-			sonOrders = orderService.querySonOrderById(order.getId()); //子订单信息
+			sonOrders = orderService.querySonOrderById(order.getId()); //子订单信息和发票信息
 			orderGoods = orderDetailService.queryOrderGoodsByOrderId(order.getId());//商品信息
 		} catch (Exception e) {
 			e.printStackTrace();

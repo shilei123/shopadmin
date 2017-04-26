@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 
+import framework.config.SysDict;
 import framework.db.DBUtil;
 
 @Repository("orderDetailDAO")
@@ -35,7 +36,7 @@ public class OrderDetailDAO{
 	private void initOrderGoodsParams(String orderId) {
 		StringBuffer tempSql = new StringBuffer();
 		tempSql.append("select t.id,t.order_id,t.child_order_id,t.goods_id,t.child_goods_id, t.unit_price,t.amount ");
-		tempSql.append(" ,decode(t.count,t.count,t.count||'件')as count ");
+		tempSql.append(" ,t.count ");
 //		tempSql.append(" ,nvl(t4.img_path,'暂无图片')as img_path,t4.file_name ");
 		tempSql.append(" ,t1.goods_name ");
 		tempSql.append(" from sc_order_detail t ");
@@ -87,7 +88,7 @@ public class OrderDetailDAO{
 		tempSql.append(" where t.order_id=? ");
 		tempSql.append(" group by t.order_id,t.goods_id,t.child_goods_id ");
 		tempSql.append(" ) ");
-		tempSql.append(" select tod.count,tod.order_id "); 
+		tempSql.append(" select tod.id as order_detail_id,tod.count,tod.order_id "); 
 		tempSql.append(" ,tod.goods_id,tod.child_goods_id ");
 		tempSql.append(" ,tg.goods_name ");
 		tempSql.append(" ,temp.prop_names ");
@@ -99,7 +100,7 @@ public class OrderDetailDAO{
 		tempSql.append(" left join sc_repertory tr on tr.goods_id=tod.goods_id and tr.child_goods_id=tod.child_goods_id ");
 		tempSql.append(" where tod.order_id=? and tod.flag=? and tr.child_goods_id is not null ");
 		tempSql.append(" union ");
-		tempSql.append(" select tod.count,tod.order_id "); 
+		tempSql.append(" select tod.id as order_detail_id,tod.count,tod.order_id "); 
 		tempSql.append(" ,tod.goods_id,tod.child_goods_id ");
 		tempSql.append(" ,tg.goods_name ");
 		tempSql.append(" ,temp.prop_names ");
@@ -117,6 +118,16 @@ public class OrderDetailDAO{
 		confirmOrderParams.add(FlagEnum.ACT.getCode());
 		confirmOrderParams.add(orderId);
 		confirmOrderParams.add(FlagEnum.ACT.getCode());
+	}
+	
+	/**
+	 * 确认订单时插入订单id
+	 * @param childOrderId
+	 * @param id
+	 */
+	public void updateOrderDetail(String childOrderId, String id) {
+		String hql = " update ScOrderDetail set childOrderId=? where id=? and flag=? ";
+		DBUtil.getInstance().executeHql(hql, childOrderId, id, FlagEnum.ACT.getCode());
 	}
 	
 }

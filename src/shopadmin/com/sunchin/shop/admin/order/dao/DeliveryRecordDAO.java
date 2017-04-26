@@ -109,7 +109,7 @@ public class DeliveryRecordDAO extends PageDAO{
 	
 	public ScDeliveryRecord queryDeliveryByOrderId(String orderId){
 		String hql = " from ScDeliveryRecord where flag=? and orderId=? ";
-		List<ScDeliveryRecord> list = db.queryByHql(hql, FlagEnum.HIS.getCode(), orderId);
+		List<ScDeliveryRecord> list = db.queryByHql(hql, FlagEnum.ACT.getCode(), orderId);
 		if(list!=null && !list.isEmpty()){
 			return list.get(0);
 		}

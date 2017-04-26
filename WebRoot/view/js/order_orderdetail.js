@@ -52,6 +52,7 @@ var setSonOrdersInfo = function(data){
 	}
 	var invoice = orderMap.invoice;
 	var invoiceRecordId = orderMap.invoiceRecordId;
+	//1		invoiceRecord2
 //	console.log(sonOrders[0]);
 	var html = "";
 	//invoice==0	不开发票
@@ -63,7 +64,7 @@ var setSonOrdersInfo = function(data){
 		html += "<ul><li style='width: 100%;'>未关联到发票信息</li></ul>";
 	}
 	//invoice==1	且	子订单sonOrders为空		且	父订单invoiceRecordId不为空	开单张发票
-	if(invoice=='1' && sonOrders[0]==undefined && invoiceRecordId!=null){
+	/*if(invoice=='1' && sonOrders[0]==undefined && invoiceRecordId!=null){
 		html += "<ul>"
 		html += "<li class='prop_li'>订单编号：<span id=''>" + orderMap.orderCode + "</span></li>";
 		html += "<li class='prop_li'>发票编号：<span id='invoiceCode'>" + orderMap.invoiceCode + "</span></li>";
@@ -72,9 +73,9 @@ var setSonOrdersInfo = function(data){
 		html += "<li class='prop_li'>发票内容：<span id='content'>" + orderMap.content + "</span></li>";
 		html += "<li class='prop_li'>备注：<span id='remark'>" + orderMap.remark + "</span></li>";
 		html += "</ul>"
-	}
-	//invoice==1	且	子订单sonOrders不为空	且	父订单invoiceRecordId为空	开多张发票
-	if(invoice=='1' && sonOrders[0]!=undefined && invoiceRecordId==null){
+	}*/
+	//invoice==1	且	子订单sonOrders不为空	且	父订单invoiceRecordId不为空	开发票
+	if(invoice=='1' /*&& sonOrders[0]!=undefined*/ && invoiceRecordId!=null){
 		var temp = "";
 		for (var i in sonOrders) {
 			temp += "<ul>"
@@ -127,7 +128,7 @@ var setGoodsInfo = function(orderGoods){
 				var price = number_format(10488,2);
 				document.write(price);
 			</script>*/
-			html += "<td>" + orderGoods[i].count + "</td>";
+			html += "<td>" + orderGoods[i].count + "件</td>";
 			html += "<td><span class='red'>￥" + orderGoods[i].amount + "</span></td>";
 			/*<script type="text/javascript">
 				var payprice = number_format(20976,2);

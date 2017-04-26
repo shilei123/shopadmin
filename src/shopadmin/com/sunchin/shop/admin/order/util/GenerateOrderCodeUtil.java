@@ -7,7 +7,7 @@ public class GenerateOrderCodeUtil {
 	 * @return
 	 */
 	public static String generateOrderCode(){
-		return "";
+		return "orderCode";
 	}
 	
 }
