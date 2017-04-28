@@ -87,4 +87,14 @@ public class LogisticsSettingDAO extends PageDAO{
 		}
 		return null;
 	}
+
+	/**
+	 * 发货页面初始化快递服务商的选择框 modify by aobingcheng 2017/04/28
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<Map> queryAllCompany() {
+		String hql = " from ScExpressProvider where flag=? ";
+		return DBUtil.getInstance().queryByHql(hql, FlagEnum.ACT.getCode());
+	}
 }
