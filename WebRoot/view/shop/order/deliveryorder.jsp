@@ -101,13 +101,7 @@ request.setAttribute("orderId", orderId);
             <th class='bigTh'>第四步：填写物流信息<small>（虚拟商品无须填写快递信息）</small></th>
         </tr>
         <tr>
-            <td id='logisticsInfo_td'>
-            	<table style="width: 100%;">
-            		<tr><td style="width: 150px; text-align: center;">物流公司：</td><td><input type='text' id='expressCompany'/></td></tr>
-            		<tr><td style="width: 150px; text-align: center;">物流单号：</td><td><input type='text' id='expressNum'/></td></tr>
-            		<tr><td style="width: 150px; text-align: center;"><input type="checkbox" id='isVirtual'/>是否虚拟商品</td><td><button id='submitBtn'>提交</button></td></tr>
-            	</table>
-            </td>
+            <td id='logisticsInfo_td'></td>
         </tr>
 		</tbody>
 	</table>
@@ -119,6 +113,7 @@ request.setAttribute("orderId", orderId);
 <script type="text/javascript">
 $(function() {
 	initPage();
+	initLogisticsInfo();
 });
 
 var initPage = function(){
@@ -139,13 +134,30 @@ var initPage = function(){
 			setGoodsInfo(data.goodsList);
 			setAddressInfo(data.addressMap);
 			setInvoiceInfo(data.invoiceList);
-			//setLogisticsInfo(data);
 		}, error : function(e) {
 			showAlert("操作失败！");
 		}
 	});
 }
 
+var initLogisticsInfo = function(){
+	$.ajax({
+		type : "POST",
+		url : path_ + "/view/shop/logisticsSetting/logisticsSetting!queryAllCompany.action",
+		dataType : "json",
+		success : function(data) {
+			console.log(data);
+		}, error : function(e) {
+			//showAlert("操作失败！");
+		}
+	});
+	
+	/* <table style="width: 100%;">
+	<tr><td style="width: 150px; text-align: center;">物流公司：</td><td><input type='text' id='expressCompany'/></td></tr>
+	<tr><td style="width: 150px; text-align: center;">物流单号：</td><td><input type='text' id='expressNum'/></td></tr>
+	<tr><td style="width: 150px; text-align: center;"><input type="checkbox" id='isVirtual'/>是否虚拟商品</td><td><button id='submitBtn'>提交</button></td></tr>
+	</table> */
+}
 
 var setGoodsInfo = function(goodsList){
 	var html = "";
