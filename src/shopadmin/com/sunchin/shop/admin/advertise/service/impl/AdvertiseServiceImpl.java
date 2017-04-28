@@ -78,7 +78,6 @@ public class AdvertiseServiceImpl implements IAdvertiseService{
 			advertise.setCreateTime(new Date());
 			advertise.setFlag(FlagEnum.ACT.getCode());
 			db.insert(advertise);
-			//添加商品待写
 		} else { // 修改
 			ScAdvertise vo = (ScAdvertise) db.get(ScAdvertise.class, advertise.getId());
 			vo.setName(advertise.getName());

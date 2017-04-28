@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.IsEditEnum;
-import com.sunchin.shop.admin.dict.IsUseEnum;
+import com.sunchin.shop.admin.dict.IsuseEnum;
 import com.sunchin.shop.admin.pojo.ScDictionary;
 import com.sunchin.shop.admin.system.dao.ScDictionaryDAO;
 import com.sunchin.shop.admin.system.service.DictService;
@@ -60,7 +60,7 @@ public class DictServiceImpl implements DictService {
 			dict.setId(id);
 			dict.setCreateTime(new Date());
 			dict.setFlag(FlagEnum.ACT.getCode());
-			dict.setIsuse(IsUseEnum.VALID.getCode());
+			dict.setIsuse(IsuseEnum.VALID.getCode());
 			dict.setIsedit(IsEditEnum.EDIT.getCode());
 			db.insert(dict);
 		} else { // 淇敼

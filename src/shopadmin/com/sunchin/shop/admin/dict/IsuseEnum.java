@@ -1,16 +1,16 @@
 package com.sunchin.shop.admin.dict;
 
-public enum IsUseEnum {
+public enum IsuseEnum {
 
-	VALID("0", "有效"),
+	VALID("1", "有效"),
 
-	INVALID("1", "无效");
+	INVALID("0", "无效");
 
 	private String code;
 
 	private String desc;
 
-	private IsUseEnum(String code, String desc) {
+	private IsuseEnum(String code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}

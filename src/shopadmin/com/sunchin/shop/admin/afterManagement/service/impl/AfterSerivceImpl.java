@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sunchin.shop.admin.afterManagement.dao.AfterDAO;
 import com.sunchin.shop.admin.afterManagement.service.IAfterService;
+import com.sunchin.shop.admin.dict.AfterSalesTypeEnum;
 import com.sunchin.shop.admin.dict.BillKindEnum;
 import com.sunchin.shop.admin.dict.BillStatusEnum;
+import com.sunchin.shop.admin.dict.DeleveryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.repertoryTypeEnum;
 import com.sunchin.shop.admin.pojo.ScBill;
@@ -230,7 +232,8 @@ public class AfterSerivceImpl implements IAfterService{
 		record.setFlag(FlagEnum.ACT.getCode());
 		record.setCreateTime(new Date());
 		record.setSts(FlagEnum.HIS.getCode());
-		//类型待添加
+		record.setDeleveryType(DeleveryTypeEnum.CUSTOMER.getCode());
+		record.setAfterSalesType(AfterSalesTypeEnum.CHANGE_GOODS.getCode());
 		DBUtil.getInstance().insert(record);
 		
 		if(goodsChildId != null){
@@ -315,7 +318,7 @@ public class AfterSerivceImpl implements IAfterService{
 			history.setBillStatus(BillStatusEnum.PASS_STATUS.getCode());
 			DBUtil.getInstance().insert(history);
 		}
-		
+		//TODO 退款流程待写
 		
 	}
 

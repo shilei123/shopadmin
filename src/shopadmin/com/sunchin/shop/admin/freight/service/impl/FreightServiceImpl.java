@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sunchin.shop.admin.dict.FlagEnum;
+import com.sunchin.shop.admin.dict.IsuseEnum;
 import com.sunchin.shop.admin.freight.dao.FreightDAO;
 import com.sunchin.shop.admin.freight.service.IFreightService;
 import com.sunchin.shop.admin.pojo.ScEvents;
@@ -227,14 +228,14 @@ public class FreightServiceImpl implements IFreightService{
 		List<ScFreight> lsits = freightDAO.findFreightIsuse();
 		if(lsits != null && !lsits.isEmpty()){
 		   for(int i=0;i<lsits.size();i++){
-			   ScFreight freight  = lsits.get(0);
-			   freight.setIsuse(FlagEnum.HIS.getCode());
+			   ScFreight freight  = lsits.get(i);
+			   freight.setIsuse(IsuseEnum.INVALID.getCode());
 			   DBUtil.getInstance().update(freight);
 		   }
 		}
 		if(id != null && !id.equals("")){
 			ScFreight freights = freightDAO.findFreight(id);
-			freights.setIsuse(FlagEnum.ACT.getCode());
+			freights.setIsuse(IsuseEnum.VALID.getCode());
 			DBUtil.getInstance().update(freights);
 		}
 	}

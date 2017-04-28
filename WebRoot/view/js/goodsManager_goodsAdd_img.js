@@ -15,7 +15,6 @@ var selectImg = function(obj) {
 		if($("#imgId"+obj.id).length==0) {
 			var imgObj = $('#'+currentImgId);
 			imgObj.attr("src", obj.src);
-			currentImgId = null;
 			//给隐藏域赋值
 			imgObj.parent().children("input:eq(0)").val(obj.id);
 		}

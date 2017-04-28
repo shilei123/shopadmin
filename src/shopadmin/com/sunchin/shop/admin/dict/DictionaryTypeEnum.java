@@ -58,7 +58,9 @@ public enum DictionaryTypeEnum {
 	
 	BILL_KIND("BILL_KIND"),//单据类型(申请、确认)
 	
-	BILL_STATUS("BILL_STATUS"); //审核状态(待审核、通过、不通过)
+	BILL_STATUS("BILL_STATUS"), //审核状态(待审核、通过、不通过)
+	
+	EXPRESS_TYPE("EXPRESS_TYPE");//快递类型
 	
 	private String type;
 
