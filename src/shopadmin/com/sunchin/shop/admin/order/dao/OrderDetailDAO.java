@@ -129,5 +129,5 @@ public class OrderDetailDAO{
 		String hql = " update ScOrderDetail set childOrderId=? where id=? and flag=? ";
 		DBUtil.getInstance().executeHql(hql, childOrderId, id, FlagEnum.ACT.getCode());
 	}
-	
+
 }

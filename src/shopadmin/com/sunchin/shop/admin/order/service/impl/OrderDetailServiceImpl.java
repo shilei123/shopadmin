@@ -30,5 +30,5 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		List<Map> list = orderDetailDAO.queryConfirmOrder(id);
 		return list;
 	}
-	
+
 }

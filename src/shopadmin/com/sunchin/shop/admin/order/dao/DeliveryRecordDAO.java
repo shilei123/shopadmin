@@ -18,7 +18,7 @@ import framework.bean.PageBean;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked","rawtypes"})
 @Repository("deliveryRecordDAO")
 public class DeliveryRecordDAO extends PageDAO{
 
@@ -29,7 +29,7 @@ public class DeliveryRecordDAO extends PageDAO{
 	private DBUtil db;
 	
 	/**
-	 * 初始化发货管理订单查询分页
+	 * 发货管理订单查询分页
 	 */
 	private void initDeliverySqlParams(){
 		StringBuffer sql = new StringBuffer();
@@ -47,30 +47,29 @@ public class DeliveryRecordDAO extends PageDAO{
 		sql.append(" left join Sc_Dictionary t5 on t5.code=t.delivery_mode and t5.type=? ");
 		sql.append(" left join Sc_User t6 on t6.id=t.user_id ");
 		sql.append(" where t.flag = ? "); 
-		sql.append(" and t1.flag = ? ");
+		/*sql.append(" and t1.flag = ? ");
 		sql.append(" and t2.flag = ? ");
 		sql.append(" and t3.flag = ? ");
 		sql.append(" and t4.flag = ? ");
 		sql.append(" and t5.flag = ? ");
 		sql.append(" and t6.flag = ? ");
-		sql.append(" and t.parent_order_id is null ");
-		sql.append(" and t.parent_order_id is null ");
+		sql.append(" and t.parent_order_id is null ");*/
 		sql.append(" and t4.code in (?,?,?) ");
 		DELIVERY_SQL = sql.toString();
 		
-		deliveryParams = new ArrayList<String>(15);
+		deliveryParams = new ArrayList<String>();
 		deliveryParams.add(DictionaryTypeEnum.ORDER_PAY_MODE.getType());
 		deliveryParams.add(DictionaryTypeEnum.ORDER_INVOICE.getType());
 		deliveryParams.add(DictionaryTypeEnum.ORDER_SPLIT.getType());
 		deliveryParams.add(DictionaryTypeEnum.ORDER_STS.getType());
 		deliveryParams.add(DictionaryTypeEnum.ORDER_DELIVERY_MODE.getType());
 		deliveryParams.add(FlagEnum.ACT.getCode());
+		/*deliveryParams.add(FlagEnum.ACT.getCode());
 		deliveryParams.add(FlagEnum.ACT.getCode());
 		deliveryParams.add(FlagEnum.ACT.getCode());
 		deliveryParams.add(FlagEnum.ACT.getCode());
 		deliveryParams.add(FlagEnum.ACT.getCode());
-		deliveryParams.add(FlagEnum.ACT.getCode());
-		deliveryParams.add(FlagEnum.ACT.getCode());
+		deliveryParams.add(FlagEnum.ACT.getCode());*/
 		deliveryParams.add(OrderStsEnum.UNDELIVERY.getCode());
 		deliveryParams.add(OrderStsEnum.UNRECEIPT.getCode());
 		deliveryParams.add(OrderStsEnum.FINISH.getCode());
@@ -119,6 +118,73 @@ public class DeliveryRecordDAO extends PageDAO{
 	public void delDelivery(String id){
 		String hql = " update ScDeliveryRecord set flag=? where id=? ";
 		db.executeHql(hql, FlagEnum.HIS.getCode(), id);
+	}
+	
+	/**
+	 * 发货页面查询商品信息
+	 * @param id
+	 * @return
+	 */
+	public List<Map> queryDeliveryGoodsById(String id) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select tod.*,tor.order_code,tg.goods_name,tod.unit_price,tod.count,tod.amount ");
+		sql.append(" from sc_order_detail tod ");
+		sql.append(" left join sc_order tor on tor.id=tod.order_id ");
+		sql.append(" left join sc_goods tg on tg.id=tod.goods_id ");
+		sql.append(" where tod.flag=? and tod.order_id=? ");
+		sql.append(" union ");
+		sql.append(" select tod.*,tor.order_code,tg.goods_name,tod.unit_price,tod.count,tod.amount ");
+		sql.append(" from sc_order_detail tod ");
+		sql.append(" left join sc_order tor on tor.id=tod.child_order_id ");
+		sql.append(" left join sc_goods tg on tg.id=tod.goods_id ");
+		sql.append(" where tod.flag=? and tod.child_order_id=? ");
+		List params = new ArrayList();
+		params.add(FlagEnum.ACT.getCode());
+		params.add(id);
+		params.add(FlagEnum.ACT.getCode());
+		params.add(id);
+		List<Map> list = DBUtil.getInstance().queryBySQL(sql.toString(), params);
+		return list;
+	}
+
+	/**
+	 * 发货页面查询收货地址信息
+	 * @param id
+	 * @return
+	 */
+	public Map queryDeliveryAddressById(String id) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select tor.*,tdr.* ");
+		sql.append(" from sc_order tor ");
+		sql.append(" left join sc_delivery_record tdr on tdr.id=tor.delivery_record_id ");
+		sql.append(" where tor.flag=? and tor.id=? ");
+		List params = new ArrayList();
+		params.add(FlagEnum.ACT.getCode());
+		params.add(id);
+		List<Map> list = DBUtil.getInstance().queryBySQL(sql.toString(), params);
+		if(list!=null && !list.isEmpty())
+			return list.get(0);
+		return null;
+	}
+	
+	/**
+	 * 发货页面查询发票信息
+	 * @param id
+	 * @return
+	 */
+	public List<Map> queryDeliveryInvoiceById(String id) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select tor.invoice,tor.invoice_record_id,tir.* ");
+		sql.append(" ,tih.name as invoice_name,tih.header,tih.content ");
+		sql.append(" from sc_order tor ");
+		sql.append(" left join sc_invoice_record tir on tir.id=tor.invoice_record_id ");
+		sql.append(" left join sc_invoice_header tih on tih.id=tir.invoice_header_id ");
+		sql.append(" where tor.flag=? and tor.id=? ");
+		List params = new ArrayList();
+		params.add(FlagEnum.ACT.getCode());
+		params.add(id);
+		List<Map> list = DBUtil.getInstance().queryBySQL(sql.toString(), params);
+		return list;
 	}
 	
 }

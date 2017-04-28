@@ -12,6 +12,7 @@ import com.sunchin.shop.admin.order.service.DeliveryRecordService;
 
 import framework.bean.PageBean;
 
+@SuppressWarnings("rawtypes")
 @Repository("deliveryRecordService")
 public class DeliveryRecordServiceImpl implements DeliveryRecordService {
 
@@ -27,4 +28,21 @@ public class DeliveryRecordServiceImpl implements DeliveryRecordService {
 		return pageBean;
 	}
 	
+	@Override
+	public List<Map> queryDeliveryGoodsById(String id) throws Exception {
+		List<Map> list = deliveryRecordDAO.queryDeliveryGoodsById(id);
+		return list;
+	}
+
+	@Override
+	public Map queryDeliveryAddressById(String id) throws Exception {
+		Map map = deliveryRecordDAO.queryDeliveryAddressById(id);
+		return map;
+	}
+	
+	@Override
+	public List<Map> queryDeliveryInvoiceById(String id) throws Exception {
+		List<Map> list = deliveryRecordDAO.queryDeliveryInvoiceById(id);
+		return list;
+	}
 }
