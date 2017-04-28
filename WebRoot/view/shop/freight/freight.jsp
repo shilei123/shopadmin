@@ -43,15 +43,15 @@
 							<thead>
 									<tr>
 										<th width="2%"   field="index"></th>
-										<th width="10%"  field="templateName">模板名称</th>
-										<th width="10%"  field="transportMode">运送方式</th>
-										<th width="10%"  field="transportRange">运送范围</th>
-										<th width="10%"  field="initialInt">首件(个)</th>
-										<th width="10%"  field="initialPrice">运费(元)</th>
-										<th width="10%"  field="stackInt">续件(个)</th>
-										<th width="10%"  field="stackPrice">续费(元)</th>
-										<th width="8%"  field="isuse">是否默认</th>
-										<th width="20%"  formatter="formatterAction">操作</th>
+										<th width="12%"  field="templateName">模板名称</th>
+										<th width="6%"  field="transportMode">运送方式</th>
+										<th width="20%"  field="transportRange">运送范围</th>
+										<th width="6%"  field="initialInt">首件(个)</th>
+										<th width="6%"  field="initialPrice">运费(元)</th>
+										<th width="6%"  field="stackInt">续件(个)</th>
+										<th width="6%"  field="stackPrice">续费(元)</th>
+										<th width="6%"  field="isuse">是否默认</th>
+										<th width="25%"  formatter="formatterAction">操作</th>
 									</tr>
 								</thead>
 						</table>
