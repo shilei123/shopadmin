@@ -1,16 +1,15 @@
-package com.sunchin.shop.admin.dict;
+package com.sunchin.shop.admin.order.util;
 
-public enum OrderIssplitEnum {
-
-	YES("1", "已拆分"),
+public enum DeliveryRecordStsEnum {
+	UNDELIVERY("0", "待发货"),
 	
-	NO("0", "待拆分");
-
+	ALDELIVERY("1", "已发货");
+	
 	private String code;
 
 	private String name;
 
-	private OrderIssplitEnum(String code, String name) {
+	private DeliveryRecordStsEnum(String code, String name) {
 		this.code = code;
 		this.name = name;
 	}

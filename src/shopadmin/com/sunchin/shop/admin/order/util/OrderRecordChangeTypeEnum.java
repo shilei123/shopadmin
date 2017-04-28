@@ -1,16 +1,18 @@
-package com.sunchin.shop.admin.dict;
+package com.sunchin.shop.admin.order.util;
 
-public enum OrderIssplitEnum {
-
-	YES("1", "已拆分"),
+public enum OrderRecordChangeTypeEnum {
 	
-	NO("0", "待拆分");
-
+	ORDER_STATUS_CHANGE("1", "订单状态变动"),
+	
+	ORDER_PRICE_CHANGE("2", "订单价格变动"),
+	
+	OTHER_CHANGE("3", "其他变动");
+	
 	private String code;
 
 	private String name;
 
-	private OrderIssplitEnum(String code, String name) {
+	private OrderRecordChangeTypeEnum(String code, String name) {
 		this.code = code;
 		this.name = name;
 	}

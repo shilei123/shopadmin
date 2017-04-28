@@ -41,7 +41,7 @@ request.setAttribute("orderId", orderId);
 </head>
 <body>
 	<input type="hidden" id="orderId" value="${orderId }"/>
-	<table class="am-tabl am-table-hover orderTable" style="width:100%; margin:10px;" id="orderDetailTable">
+	<table class="am-tabl am-table-hover orderTable" style="width:95%; margin:10px;" id="orderDetailTable">
 		<tbody>
 		<tr>
 			<th style="background-color: '#e2e2e2';" class='bigTh'>订单状态</th>

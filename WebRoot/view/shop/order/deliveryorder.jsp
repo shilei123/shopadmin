@@ -11,9 +11,47 @@ request.setAttribute("orderId", orderId);
 <title>发货管理</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <style>
+ /*  .orderTable ul li,.prop_li{
+	width:50%;
+	float:left;
+	padding:0px;
+  }
+  #a_connet:hover{
+  	cursor: pointer;
+  }
+  th{
+  	height:30px;
+  }
+  body{
+  	overflow-y: scroll;
+  	overflow-x: hidden;
+  }
+  .bigTh{
+  	height: 40px;
+  	font-size: 16px;
+  	background-color: #fbfbfb;
+  }
+  th{
+  	border-top: #fbfbfb solid 1px;
+  	border-bottom: #fbfbfb solid 1px;
+  }
+  .red{
+  	color:red;
+  } */
+  .goodsInfo_table td, .goodsInfo_table th{
+  	border:1px solid gray;
+  }
+  .bigTh{
+  	height: 40px;
+  	font-size: 16px;
+  }
+  th, td{
+  	padding:5px;
+  }
 </style>
 </head>
 <body>
+<input type="hidden" id="orderId" value="${orderId }"/>
 <div class="am-cf ">
 	<div class="admin-content">
 		<div class="admin-content-body">
@@ -23,80 +61,169 @@ request.setAttribute("orderId", orderId);
 				</div>
 			</div>
 			<hr>
-	<input type="hidden" id="orderId" value="${orderId }"/>
-	<table class="am-tabl am-table-hover orderTable" style="width:100%; margin:10px;" id="orderDetailTable">
+	<table class="orderTable" style="width:95%; margin:10px;" id="orderDetailTable">
 		<tbody>
 		<tr>
-			<th style="background-color: '#e2e2e2';" class='bigTh'>订单状态</th>
+			<th style="background-color: '#e2e2e2';" class='bigTh'>第一步：确认商品信息</th>
 		</tr>
 		<tr>
 			<td>
-				<ul>
-					<li>订单编号：<span id='orderCode'></span></li>
-					<li>订单状态：<span id='orderStatus'></span></li>
-					<li>订单金额：<span id='totalPrice' class='red'></span></li>
-					<li>运费：<span id='commisionCharge'></span></li>
-					<li>支付金额：<span id='actualPrice' class='red'></span></li>
-				</ul>
+				<table style="width:100%; vertical-align:middle;">
+					<tbody>
+						<!-- <tr>
+							<th></th>
+							<th>订单编号</th>
+							<th>商品名称</th>
+							<th>单价</th>
+							<th>件数</th>
+							<th>小计</th>
+						</tr> -->
+						<tr>
+							<td id="goodsInfo_td"></td>
+						</tr>
+					</tbody>
+				</table>
 			</td>
 		</tr>
 		<tr>
-            <th class='bigTh'>订单详情</th>
-        </tr>
-        <tr><td></td></tr>
-        <tr>
-            <th style="border-top: none;">订单信息</th>
+            <th class='bigTh'>第二步：确认收货信息</th>
         </tr>
         <tr>
-            <td>
-            	<ul>
-	                <li>买家：<span id='nickName'></span></li>
-					<li>件数：<span id='num'></span></li>
-					<li>支付方式：<span id='payMode'></span></li>
-					<li>下单时间：<span id='createTime'></span></li>
-					<li>是否拆分：<span id='issplit'></span></li>
-					<!-- <li><strong id='strong_connect'>关联订单：<span id='connectOrder'></span></li> -->
-            	</ul>
-            </td>
+            <td id='addressInfo_td'></td>
         </tr>
         <tr>
-            <th>子订单信息</th>
-        </tr>
-        <tr>
-            <td id='sonOrdersInfo_td'></td>
-        </tr>
-        <tr>
-            <th>发票信息</th>
+            <th class='bigTh'>第三步：确认发票信息</th>
         </tr>
         <tr>
             <td id='invoiceInfo_td'></td>
         </tr>
         <tr>
-            <th>商品信息</th>
+            <th class='bigTh'>第四步：填写物流信息<small>（虚拟商品无须填写快递信息）</small></th>
         </tr>
         <tr>
-            <td id='goodsInfo_td'></td>
-        </tr>
-        <tr>
-            <th>收货信息</th>
-        </tr>
-         <tr>
-            <td>
-            	<ul>
-	                <li>收货人姓名：<span id='recName'></span></li>
-					<li>收货人手机：<span id='phone'></span></li>
-					<li>邮编：<span id='postCode'></span></li>
-					<li>收货地址：<span id='province'></span><span id='city'></span><span id='county'></span></li>
-					<li>详细地址：<span id='addressDetail'></span></li>
-            	</ul>
+            <td id='logisticsInfo_td'>
+            	<table style="width: 100%;">
+            		<tr><td style="width: 150px; text-align: center;">物流公司：</td><td><input type='text' id='expressCompany'/></td></tr>
+            		<tr><td style="width: 150px; text-align: center;">物流单号：</td><td><input type='text' id='expressNum'/></td></tr>
+            		<tr><td style="width: 150px; text-align: center;"><input type="checkbox" id='isVirtual'/>是否虚拟商品</td><td><button id='submitBtn'>提交</button></td></tr>
+            	</table>
             </td>
         </tr>
 		</tbody>
 	</table>
-	<button class='am-btn am-btn-primary frame-search-button' id='retBtn' style="margin: 20px;">关闭</button>
+	<!-- <button class='am-btn am-btn-primary frame-search-button' id='retBtn' style="margin: 20px;">关闭</button> -->
 		</div>
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="${path }/view/js/order_orderdetail.js"></script>
+<script type="text/javascript">
+$(function() {
+	initPage();
+});
+
+var initPage = function(){
+	var data = {"order.id" : $('#orderId').val()};
+	$.ajax({
+		type : "POST",
+		url : path_ + "/view/shop/order/deliveryRecord!initDeliveryPageByOrderId.action",
+		data : data,
+		dataType : "json",
+		success : function(data) {
+			var goodsList = data.goodsList;
+			var addressMap = data.addressMap;
+			var invoiceList = data.invoiceList;
+			console.log(goodsList);
+			console.log(addressMap);
+			console.log(invoiceList);
+			
+			setGoodsInfo(data.goodsList);
+			setAddressInfo(data.addressMap);
+			setInvoiceInfo(data.invoiceList);
+			//setLogisticsInfo(data);
+		}, error : function(e) {
+			showAlert("操作失败！");
+		}
+	});
+}
+
+
+var setGoodsInfo = function(goodsList){
+	var html = "";
+	if(goodsList[0]==undefined || goodsList[0]==null){
+		html += "<ul><li style='width: 100%;'>未关联到商品信息</li></ul>";
+	}else{
+		html += "<table style='width:100%; vertical-align:middle;' class='goodsInfo_table'><tbody>"
+		for (var i in goodsList) {
+			html += "<tr>";
+			html += "<th></th>";
+			html += "<th>商品名称</th>";
+			html += "<th>单价</th>";
+			html += "<th>件数</th>";
+			html += "<th>小计</th>";
+			html += "</tr><tr>";
+			html += "<td style='width:15%;'><div><span class=''><a href='javascript:void(0);' target='_blank'><img src=''/>" + "缺少主图字段，暂未关联" + "</a></span></div></td>";
+			html += "<td><a href='' target='_blank'>" + goodsList[i].goodsName + "</a></td>";
+			html += "<td><span class='red'>￥" + goodsList[i].unitPrice + "</span></td>";
+			html += "<td>" + goodsList[i].count + "件</td>";
+			html += "<td><span class='red'>￥" + goodsList[i].amount + "</span></td>";
+            html += "</tr>"
+		}
+		html += "</table></tbody>"
+	}
+	$("#goodsInfo_td").append(html);
+}
+
+var setAddressInfo = function(addressMap){
+	var html = "";
+	if(addressMap==null || addressMap==undefined || addressMap.deliveryRecordId==null || addressMap.deliveryRecordId==undefined){
+		html += "<ul><li style='width: 100%;'>未关联到收货信息</li></ul>";
+	}else{
+		html += "<table style='width:100%;'>";
+		html += "<tr>";
+		html += "<td style='width:150px;'>收货人姓名：</td><td><span id='recName'>" + addressMap.name + "</span></td>";
+		html += "<td style='width:150px;'>收货人手机：</td><td><span id='phone'></span>" + addressMap.phoneNum + "</td>";
+		html += "</tr>";
+		html += "<tr>";
+		html += "<td>邮编：</td><td><span id='postCode'>" + addressMap.postNum + "</span></td>";
+		html += "<td>收货地址：</td><td><span id='province'>" + addressMap.province + "</span><span id='city'>" + addressMap.city + "</span><span id='county'>" + addressMap.county + "</span></td>";
+		html += "</tr>";
+		html += "<tr>";
+		html += "<td>详细地址：</td><td><span id='addressDetail'>" + addressMap.addressDetail + "</span></td>";
+		html += "</tr>";
+		html += "</ul>";
+	}
+	$("#addressInfo_td").append(html);
+}
+
+var setInvoiceInfo = function(invoiceList){
+	var html = "";
+	if(invoiceList==null || invoiceList==undefined){
+		html += "<ul><li style='width: 100%;'>未关联到发票信息</li></ul>";
+	}else if(invoiceList.invoice=="0"){
+		html += "<ul><li style='width: 100%;'>不开发票</li></ul>";
+	}else{
+		for (var i in invoiceList) {
+			html += "<ul>"
+			html += "<li class='prop_li'>发票编号：<span id=''>" + invoiceList[i].invoiceCode + "</span></li>";
+			html += "<li class='prop_li'>抬头：<span id=''>" + invoiceList[i].header + "</span></li>";
+			html += "<li class='prop_li'>姓名：<span id=''>" + invoiceList[i].invoiceName + "</span></li>";
+			html += "<li class='prop_li'>发票内容：<span id=''>" + invoiceList[i].content + "</span></li>";
+			var remark = judgeNull(invoiceList[i].remark, "暂无备注");
+			html += "<li class='prop_li'>备注：<span id=''>" + remark + "</span></li>";
+			html += "</ul>"
+		}
+	}
+	$("#invoiceInfo_td").append(html);
+}
+
+$("#retBtn").click(function() {
+	closeThisTab();
+});
+
+var judgeNull = function(tempVar, tempRet){
+	if(tempVar==null || tempVar==undefined)
+		return tempRet;
+	return tempVar;
+}
+</script>
 </html>

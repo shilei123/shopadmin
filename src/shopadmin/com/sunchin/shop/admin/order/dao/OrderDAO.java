@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.OrderInvoiceEnum;
+import com.sunchin.shop.admin.dict.OrderIssplitEnum;
 import com.sunchin.shop.admin.dict.OrderStsEnum;
 import com.sunchin.shop.admin.pojo.ScOrder;
 
@@ -53,28 +54,28 @@ public class OrderDAO extends PageDAO{
 		sql.append(" left join Sc_Dictionary t5 on t5.code=t.delivery_mode and t5.type=? ");
 		sql.append(" left join Sc_User t6 on t6.id=t.user_id ");
 		sql.append(" where t.flag = ? "); 
-		sql.append(" and t1.flag = ? ");
+		/*sql.append(" and t1.flag = ? ");
 		sql.append(" and t2.flag = ? ");
 		sql.append(" and t3.flag = ? ");
 		sql.append(" and t4.flag = ? ");
 		sql.append(" and t5.flag = ? ");
-		sql.append(" and t6.flag = ? ");
+		sql.append(" and t6.flag = ? ");*/
 		sql.append(" and t.parent_order_id is null ");
 		PAGE_SQL = sql.toString();
 		
-		pageParams = new ArrayList<String>(12);
+		pageParams = new ArrayList<String>();
 		pageParams.add(DictionaryTypeEnum.ORDER_PAY_MODE.getType());
 		pageParams.add(DictionaryTypeEnum.ORDER_INVOICE.getType());
 		pageParams.add(DictionaryTypeEnum.ORDER_SPLIT.getType());
 		pageParams.add(DictionaryTypeEnum.ORDER_STS.getType());
 		pageParams.add(DictionaryTypeEnum.ORDER_DELIVERY_MODE.getType());
 		pageParams.add(FlagEnum.ACT.getCode());
+		/*pageParams.add(FlagEnum.ACT.getCode());
 		pageParams.add(FlagEnum.ACT.getCode());
 		pageParams.add(FlagEnum.ACT.getCode());
 		pageParams.add(FlagEnum.ACT.getCode());
 		pageParams.add(FlagEnum.ACT.getCode());
-		pageParams.add(FlagEnum.ACT.getCode());
-		pageParams.add(FlagEnum.ACT.getCode());
+		pageParams.add(FlagEnum.ACT.getCode());*/
 	}
 
 	public int queryOrderCount(PageBean pageBean) {
@@ -223,36 +224,36 @@ public class OrderDAO extends PageDAO{
 			sql.append(" left join sc_invoice_header t7 on t7.id=t6.invoice_header_id ");
 		}
 		sql.append(" where t.flag = ? "); 
-		sql.append(" and t1.flag = ? ");
+		/*sql.append(" and t1.flag = ? ");
 		sql.append(" and t2.flag = ? ");
 		sql.append(" and t3.flag = ? ");
 		sql.append(" and t4.flag = ? ");
-		sql.append(" and t5.flag = ? ");
+		sql.append(" and t5.flag = ? ");*/
 		/*if(issplit){
 			sql.append(" and t.parent_order_id = ? ");
 		}else {
 		}*/
 		sql.append(" and t.id = ? ");
 		if(isInvoice){
-			sql.append(" and t6.flag = ? ");
-			sql.append(" and t7.flag = ? ");
+			/*sql.append(" and t6.flag = ? ");
+			sql.append(" and t7.flag = ? ");*/
 		}
 		DETAIL_SQL = sql.toString();
-		detailParams = new ArrayList<String>(10);
+		detailParams = new ArrayList<String>();
 		detailParams.add(DictionaryTypeEnum.ORDER_STS.getType());
 		detailParams.add(DictionaryTypeEnum.ORDER_PAY_MODE.getType());
 		detailParams.add(DictionaryTypeEnum.ORDER_SPLIT.getType());
 		String flag = FlagEnum.ACT.getCode();
 		detailParams.add(flag);
+		/*detailParams.add(flag);
 		detailParams.add(flag);
 		detailParams.add(flag);
 		detailParams.add(flag);
-		detailParams.add(flag);
-		detailParams.add(flag);
+		detailParams.add(flag);*/
 		detailParams.add(id);
 		if(isInvoice){
-			detailParams.add(flag);
-			detailParams.add(flag);
+			/*detailParams.add(flag);
+			detailParams.add(flag);*/
 		}
 	}
 
@@ -267,18 +268,18 @@ public class OrderDAO extends PageDAO{
 		sql.append(" ,decode(t.total_price,t.total_price,'￥'||t.total_price)as total_price ");
 		sql.append(" ,decode(t.actual_price,t.actual_price,'￥'||t.actual_price)as actual_price ");
 		sql.append(" ,decode(t.commision_charge,'0','免运费',t.commision_charge,t.commision_charge) as commision_charge ");//订单信息
-		if(invoiceRecordId.isEmpty()){
+		if(!invoiceRecordId.isEmpty()){
 			sql.append(" ,t1.invoice_code,t1.content,nvl(t1.remark,'无') as remark,t2.name as invoice_name,t2.header ");
 		}
 		sql.append(" from sc_order t ");
 		sql.append(" left join sc_dictionary t0 on t0.code=t.order_status and t0.type=? ");
-		if(invoiceRecordId.isEmpty()){
+		if(!invoiceRecordId.isEmpty()){
 			sql.append(" left join sc_invoice_record t1 on t1.id=t.invoice_record_id ");
 			sql.append(" left join sc_invoice_header t2 on t2.id=t1.invoice_header_id ");
 		}
 		sql.append(" where t.parent_order_id=? and t.flag=? ");
 		sql.append(" and t0.flag=? ");
-		if(invoiceRecordId.isEmpty()){
+		if(!invoiceRecordId.isEmpty()){
 			sql.append(" and t1.flag=? ");
 			sql.append(" and t2.flag=? ");
 		}
@@ -288,7 +289,7 @@ public class OrderDAO extends PageDAO{
 		params.add(id);
 		params.add(FlagEnum.ACT.getCode());
 		params.add(FlagEnum.ACT.getCode());
-		if(invoiceRecordId.isEmpty()){
+		if(!invoiceRecordId.isEmpty()){
 			params.add(FlagEnum.ACT.getCode());
 			params.add(FlagEnum.ACT.getCode());
 		}
@@ -297,15 +298,15 @@ public class OrderDAO extends PageDAO{
 	}
 
 	/**
-	 * 确认订单（修改订单的orderStatus）
+	 * 确认订单（修改订单的orderStatus/issplit/createTime/splitTime）
 	 * @param id
 	 */
 	public void confirmOrder(String id, String orderStatus) {
-		String hql = " update ScOrder set orderStatus=? and createTime=? where id=? and flag=? ";
+		String hql = " update ScOrder set orderStatus=?, createTime=?, issplit=?, splitTime=? where id=? and flag=? ";
 		if(orderStatus==null){
 			orderStatus = CommonUtils.getString(orderStatus);
 		}
-		db.executeHql(hql, orderStatus, new Date(), id, FlagEnum.ACT.getCode());
+		db.executeHql(hql, orderStatus, new Date(), OrderIssplitEnum.YES.getCode(), new Date(), id, FlagEnum.ACT.getCode());
 	}
 	
 	/**

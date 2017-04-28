@@ -232,7 +232,7 @@ public class AfterSerivceImpl implements IAfterService{
 		record.setFlag(FlagEnum.ACT.getCode());
 		record.setCreateTime(new Date());
 		record.setSts(FlagEnum.HIS.getCode());
-		record.setDeleveryType(DeleveryTypeEnum.CUSTOMER.getCode());
+		record.setDeliveryType(DeleveryTypeEnum.CUSTOMER.getCode());
 		record.setAfterSalesType(AfterSalesTypeEnum.CHANGE_GOODS.getCode());
 		DBUtil.getInstance().insert(record);
 		

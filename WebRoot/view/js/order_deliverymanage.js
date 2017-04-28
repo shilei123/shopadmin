@@ -11,7 +11,7 @@ var initOrderType = function() {
 				"initType.orderPayMode":"ORDER_PAY_MODE"};*/
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/shop/order/delivery!initDeliveryManage.action",
+		url : path_ + "/view/shop/order/deliveryRecord!initDeliveryManage.action",
 		//data : data,
 		dataType : "json",
 		success : function(data) {
@@ -40,7 +40,7 @@ $('#closeBtn').click(function() {
 
 var query = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/shop/order/delivery!queryDeliveryOrder.action";
+	var url = path_ + "/view/shop/order/deliveryRecord!queryDeliveryOrder.action";
 	pageData(url, "orderListTable", data);
 };
 
@@ -62,7 +62,7 @@ var showQueryOrderWin = function(id, orderCode) {
 
 var showDeliveryWin = function(id, orderCode) {
 	closeTab("queryOrderDetailTabId");
-	openTab("queryOrderDetailTabId","订单详情("+orderCode+")",path_+"/view/shop/order/deliveryorder.jsp?tabId=queryOrderDetailTabId&orderId="+id);
+	openTab("queryOrderDetailTabId","订单发货("+orderCode+")",path_+"/view/shop/order/deliveryorder.jsp?tabId=queryOrderDetailTabId&orderId="+id);
 };
 
 
@@ -84,7 +84,7 @@ var showDeliveryWin = function(id, orderCode) {
 
 
 
-var showChangePriceOrderWin = function(id, orderCode, nickName, actualPrice) {
+/*var showChangePriceOrderWin = function(id, orderCode, nickName, actualPrice) {
 	//调整费用、修改该订单以及子订单的actual_price
 	$('#orderId2').val(id);
 	$('#orderCode2').val(orderCode);
@@ -147,4 +147,4 @@ $('#changeBtn2').click(function() {
 			showAlert("操作失败！");
 		}
 	});
-});
+});*/

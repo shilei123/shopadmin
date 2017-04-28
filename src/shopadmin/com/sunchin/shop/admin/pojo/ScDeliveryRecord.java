@@ -29,7 +29,7 @@ public class ScDeliveryRecord implements java.io.Serializable {
 	private String flag;
 	private String belong;
 	private String sts;
-	private String deleveryType;
+	private String deliveryType;
 	private String afterSalesType;
 
 	public String getId() {
@@ -224,12 +224,12 @@ public class ScDeliveryRecord implements java.io.Serializable {
 		this.sts = sts;
 	}
 
-	public String getDeleveryType() {
-		return deleveryType;
+	public String getDeliveryType() {
+		return deliveryType;
 	}
 
-	public void setDeleveryType(String deleveryType) {
-		this.deleveryType = deleveryType;
+	public void setDeliveryType(String deliveryType) {
+		this.deliveryType = deliveryType;
 	}
 
 	public String getAfterSalesType() {
