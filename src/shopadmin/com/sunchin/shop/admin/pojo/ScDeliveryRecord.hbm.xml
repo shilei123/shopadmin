@@ -76,8 +76,8 @@
         <property name="sts" type="java.lang.String">
             <column name="STS" length="1" />
         </property>
-         <property name="deleveryType" type="java.lang.String">
-            <column name="DELIVERY_TYPE" length="1" />
+         <property name="deliveryType" type="java.lang.String">
+            <column name="delivery_type" length="1" />
         </property>
          <property name="afterSalesType" type="java.lang.String">
             <column name="AFTER_SALES_TYPE" length="1" />
