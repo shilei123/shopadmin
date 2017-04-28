@@ -19,6 +19,32 @@ String articleId = request.getParameter("articleId")==null?"":request.getParamet
 tr {
 	height: 50px;
 }
+.img {
+	width: 100px;
+	height: 100px; 
+	border:0px solid #D1DEEA;
+	background-image: url('../../../images/add.png')
+}
+.imgDiv {
+	display: inline-block;cursor: pointer;position: relative;
+}
+.closediv {
+	position: absolute;
+	bottom: 0;	
+	right: 0;
+	left: 0;
+	display: none;
+	background-color: #606060;
+	width:95%;
+	margin-left: 0px;
+	margin-bottom: 1px;
+	text-align: center;
+}
+
+.closediv>span {
+	color: white;
+}
+
 </style>
 </head>
 <body>
@@ -37,49 +63,57 @@ tr {
 					<input type="hidden" id="articleId" name="queryParams.id" placeholder="文章ID" class="am-form-field" value="<%=articleId %>"/>
   					<table class="frame-query-table" border="0" bordercolor="black" style="width: 850px;margin-left: 20px;">
 					    <tr>
-					    	<td style="width: 120px;"><span style="color:red;">*</span>&nbsp;文章标题：</td>
+					    	<td style="width: 140px;" class="table_title"><span style="color:red;">*</span>&nbsp;文章标题：</td>
 							<td style="width: 500px;">
 								<input name="art.articleTitle" id="articleTitle" minlength="50" class="am-form-field" style="width: 90%;"/>
 							</td>
-							<td style="width: 120px;"><span style="color:red;">*</span>&nbsp;作者：</td>
+							<td style="width: 120px;" class="table_title"><span style="color:red;">*</span>&nbsp;作者：</td>
 							<td style="width: 500px;">
 								<input name="art.author" id="author" minlength="50" class="am-form-field" style="width: 90%;"/>
 							</td>
 					   	</tr>
 					    <tr>
-					  	    <td style="width: 120px;">&nbsp;&nbsp;摘要：</td>
+					  	    <td style="width: 120px;" class="table_title">&nbsp;&nbsp;摘要：</td>
 			  				<td valign="top" colspan="3">
 			  					<textarea name="atr.abstracts" id="abstracts" rows="5" placeholder="摘要" style="width:96%;height:75px;margin-top: 5px;" class="am-form-field" ></textarea>
 			  				</td>
 					    </tr>
 					   	<tr>
-					   		<td style="width: 100px;"><span style="color:red;">*</span>&nbsp;分类：</td>
+					   		<td style="width: 100px;" class="table_title"><span style="color:red;">*</span>&nbsp;分类：</td>
 					    	<td style="width: 200px;">
 								<select name="art.articleType" id="articleType" data-am-selected="{btnWidth: '152px'}">
 							</td>
-							<td style="width: 100px;"><span style="color:red;">*</span>&nbsp;文章目录：</td>
+							<td style="width: 140px;" class="table_title"><span style="color:red;">*</span>&nbsp;文章目录：</td>
 					    	<td style="width: 200px;">
 								<select name="art.directoryType" id="directoryType" data-am-selected="{btnWidth: '152px'}">
 							</td>
 					   	</tr>
 					   	<tr>
-							<td style="width: 100px;"><span style="color:red;">*</span>&nbsp;来源：</td>
+							<td style="width: 100px;" class="table_title"><span style="color:red;">*</span>&nbsp;来源：</td>
 							<td style="width: 500px;">
 								<input name="art.source" id="source" minlength="50" class="am-form-field" style="width: 90%;"/>
 							</td>
-							<td style="width: 120px;">URL路径：</td>
+							<td style="width: 120px;" class="table_title">URL路径：</td>
 							<td style="width: 500px;">
 								<input name="art.url" id="url" minlength="200" class="am-form-field" style="width: 90%;"/>
 							</td>
 					   	</tr>
 					   	<tr>
-					   		<td style="width: 120px;">引导图：</td>
+					   		<td style="width: 120px;" class="table_title">引导图：</td>
 							<td style="width: 120px;">
-							 <button class="am-btn am-btn-secondary" type="button" id="uploadBtn">上传图片</button>
+								<div class="imgDiv">
+			        			<div id="close1" class="closediv">
+											<!-- <span class='am-icon-arrow-left' style="width: 33%;"></span>&nbsp;
+											<span class='am-icon-arrow-right' style="width: 33%;"></span>&nbsp; -->
+											<span class='am-icon-close' style="width: auto;">删除</span>
+								</div>
+			        			 <img id="img1" alt="" src="" class="img">
+								<input type="hidden" id="imgIdHidden" class="am-form-field" name="logistics.url" style="width:90%"/>
+			        			<div class="imgDiv">
 							</td>
-					   	</tr>
+ -->					   	</tr>
 						<tr>
-					     	<td colspan="4"><textarea class="am-validate" name="myue" id="memo" onchange="change()" style="height: 300px;"></textarea></td>
+					     	<td colspan="4"><textarea class="am-validate" name="myue" id="memo" onchange="change()" style="height: 280px;width: 98%;"></textarea></td>
 					    </tr>
 					    <tr>
 					    	<td colspan="4">

@@ -34,6 +34,8 @@ var initArticleInfo = function() {
 				$("#source").val(data.article.source);
 			    $("#url").val(data.article.url);
 			    $("#abstracts").val(data.article.abstracts);
+			    $("#imgIdHidden").val(data.article.picture);
+				$("#img1").attr("src",data.article.picture);
 			    var iscontent = data.article.iscontent;
 			    if(iscontent == "0"){
 			    	$("#iscontenty").removeAttr("checked");
@@ -100,6 +102,37 @@ var findArticleType = function() {
 		});
 };
 
+//打开图片上传的窗口
+$("#img1").click(function() {
+		showImgUploadModal();
+});
+
+//选择图片的回调函数
+var selectImg = function(obj) {
+		if($("#img1"+obj.id).length==0) {
+			var imgObj = $('#img1');
+			imgObj.attr("src", obj.src);
+			currentImgId = null;
+			//给隐藏域赋值
+			imgObj.parent().children("input:eq(0)").val(obj.src);
+		}
+};
+
+$(".imgDiv").mouseover(function(){
+	var src = $(this).children("img:eq(0)").attr("src");
+	if(src!=undefined && src.length>0) {
+		$(this).children("div:eq(0)").show();
+	}
+}).mouseout(function(){
+	$(this).children("div:eq(0)").hide();
+});
+
+//删除
+$(".am-icon-close").click(function(){
+	$("#imgIdHidden").val('');
+	$("#img1").attr("src","");
+	$(this).hide();
+});
 
 //表单验证
 var checkBankSumbit = function() {
@@ -166,6 +199,7 @@ $("#saveBtn").click(function() {
 	var url = $("#url").val();
 	var abstracts = $("#abstracts").val();
 	var iscontent = $("#iscontent").val();
+	var imgIdHidden = $("#imgIdHidden").val();
 	var memo = ue.getContent();
 	var data = {
 		"article.id" : articleId,
@@ -178,6 +212,7 @@ $("#saveBtn").click(function() {
 		"article.abstracts" : abstracts,
 		"article.iscontent" : iscontent,
 		"article.memo": memo,
+		"article.picture": imgIdHidden,
 	};
 	$.ajax({
 		type : "POST",

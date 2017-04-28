@@ -139,7 +139,7 @@
 											<span class='am-icon-close' style="width: auto;">删除</span>
 								</div>
 			        			 <img id="img1" alt="" src="" class="img">
-								<input type="hidden" id="imgIdHidden" class="am-form-field" name="logistics.url" style="width:90%"/>
+								<input type="hidden" id="imgIdHidden" name="logistics.url"/>
 			        			<div class="imgDiv">
 			        		</td>
 			        	</tr> 
