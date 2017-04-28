@@ -373,4 +373,15 @@ public class UserDAO extends PageDAO{
 		}
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public ScUserBase queryUserBaseByUserId(String userId){
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("userId",userId);
+		List<ScUserBase> lists = DBUtil.getInstance().queryByPojo(ScUserBase.class, params);
+		if(lists != null && !lists.isEmpty()){
+			return lists.get(0);
+		}
+		return null;
+	}
 }

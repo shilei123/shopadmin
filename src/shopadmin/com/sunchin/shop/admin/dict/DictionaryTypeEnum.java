@@ -54,7 +54,13 @@ public enum DictionaryTypeEnum {
 	
 	USER_GRADE("USER_GRADE"),//会员等级
 	
-	SCOPE("SCOPE");
+	SCOPE("SCOPE"),
+	
+	BILL_KIND("BILL_KIND"),//单据类型(申请、确认)
+	
+	BILL_STATUS("BILL_STATUS"), //审核状态(待审核、通过、不通过)
+	
+	EXPRESS_TYPE("EXPRESS_TYPE");//快递类型
 	
 	private String type;
 

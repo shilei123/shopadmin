@@ -17,8 +17,6 @@ import com.sunchin.shop.admin.advertise.service.IAdvertiseService;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScAdvertise;
 import com.sunchin.shop.admin.pojo.ScUserBase;
-import com.sunchin.shop.admin.pojo.ScBrand;
-import com.sunchin.shop.admin.pojo.ScEvents;
 import com.sunchin.shop.admin.pojo.ScGoods;
 
 import framework.bean.PageBean;
@@ -80,7 +78,6 @@ public class AdvertiseServiceImpl implements IAdvertiseService{
 			advertise.setCreateTime(new Date());
 			advertise.setFlag(FlagEnum.ACT.getCode());
 			db.insert(advertise);
-			//添加商品待写
 		} else { // 修改
 			ScAdvertise vo = (ScAdvertise) db.get(ScAdvertise.class, advertise.getId());
 			vo.setName(advertise.getName());

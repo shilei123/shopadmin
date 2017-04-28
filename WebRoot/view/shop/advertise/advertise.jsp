@@ -100,7 +100,7 @@
 		        <div align="center">
 		        	<table id="edit_adv_table" class="frame-modal-table" border="0" bordercolor="black">
 		        		<tr>
-			  				<td width="100" class="table_title">广告名称:</td>
+			  				<td width="100" class="table_title">广告名称：</td>
 			  				<td colspan="3">
 			  					<input type="hidden" name="advertise.id" id="id" /> 
 			  					<input name="advertise.name" id="name" style="width: 92%;" class="am-form-field" required="true"/> 
@@ -131,14 +131,14 @@
 			  				</td>
 			  			</tr> -->
 			  			<tr>
-			  				<td class="table_title">广告类型:</td>
+			  				<td class="table_title">广告类型：</td>
 			  				<td colspan="3">
 			  					<select name="advertise.linkkind" id="linkkinds" data-am-selected="{btnWidth: '163px'}">
 			  					</select> 
 			  				</td>
 			  			</tr>
 			  			<tr>
-			  				<td class="table_title">广告对象:</td>
+			  				<td class="table_title">广告对象：</td>
 			  				<td width="300px">
 			  					<input type="hidden" name="advertise.imglink" id="imglink" />
 			  					<input id="imglinkLabel" readonly="readonly" style="width: 97%;" class="am-form-field"/> 
@@ -150,21 +150,21 @@
 			  				</td>
 			  			</tr>
 			  			<tr>
-			  				<td class="table_title">显示顺序:</td>
+			  				<td class="table_title">显示顺序：</td>
 			  				<td colspan="1"><input name="advertise.ordernumb" id="ordernumb" class="am-form-field" data-options="increment:1" required="true" /> </td>
-			  				<td class="table_title">所属分组:</td>
+			  				<td class="table_title">所属分组：</td>
 			  				<td colspan="1">
 			  					<input class="am-form-field" name="advertise.kind" id="kind" style="width: 163px"/>
 			  				</td>
 			  			</tr>
 			  				
 			  			<tr>
-			  				<td  class="table_title">广告位置:</td>
+			  				<td  class="table_title">广告位置：</td>
 			  				<td colspan="1">
 			  					<select name="advertise.type" id="advType"  data-am-selected="{btnWidth: '162px'}">
 			  					</select> 
 			  				</td>
-			  				<td class="table_title">是否启用:</td>
+			  				<td class="table_title">是否启用：</td>
 			  				<td colspan="1">
 			  					<select name="advertise.isuse" id="isuse" data-am-selected="{btnWidth: '162px'}">
 			  					</select>
@@ -172,7 +172,7 @@
 			  			</tr>
 			  			
 			  			<tr>
-			  				<td class="table_title">广告介绍:</td>
+			  				<td class="table_title">广告介绍：</td>
 			  				<td valign="top" colspan="3">
 			  					<textarea name="advertise.memo" id="memo" rows="5" placeholder="广告介绍" style="width:94%;height:150px;margin-top: 5px;" class="am-form-field" ></textarea>
 			  				</td>

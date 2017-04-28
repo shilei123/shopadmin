@@ -1,16 +1,16 @@
 package com.sunchin.shop.admin.dict;
 
-public enum IsUseEnum {
+public enum DeleveryTypeEnum {
 
-	VALID("0", "有效"),
-
-	INVALID("1", "无效");
-
+	CUSTOMER("0", "售后"),
+	
+	ORDER("1","订单");
+	
 	private String code;
 
 	private String desc;
 
-	private IsUseEnum(String code, String desc) {
+	private DeleveryTypeEnum(String code, String desc) {
 		this.code = code;
 		this.desc = desc;
 	}

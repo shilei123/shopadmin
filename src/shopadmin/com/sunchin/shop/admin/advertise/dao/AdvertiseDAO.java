@@ -52,8 +52,8 @@ public class AdvertiseDAO extends PageDAO{
 		sql.append(" left join sc_dictionary t2 on t2.code=t1.linkkind ");
 		sql.append(" left join sc_dictionary t3 on t3.code=t1.isuse ");
 		sql.append(" where t1.flag=? ");
-		sql.append(" and t2.type=?");
-		sql.append(" and t3.type=?");
+		sql.append(" and t2.type=? ");
+		sql.append(" and t3.type=? ");
 		
 		if (pageBean.getQueryParams() != null && !pageBean.getQueryParams().isEmpty()) {
 			String name = pageBean.getQueryParams().get("name");
