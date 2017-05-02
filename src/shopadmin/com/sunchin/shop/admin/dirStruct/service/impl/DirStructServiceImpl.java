@@ -133,10 +133,14 @@ public class DirStructServiceImpl implements IDirStructService{
 			directory.setCreateTime(new Date());
 			DBUtil.getInstance().insert(directory);
 		}else { // 修改
-			ScDirStruct vo = (ScDirStruct) DBUtil.getInstance().get(ScDirStruct.class, directory.getId());
+			ScDirStruct vo = dirStructDAO.queryDirectoryById(directory.getId());
+			ScDirStruct vo2 = dirStructDAO.queryDirectoryById(directory.getParentDirId());
+			int level =Integer.parseInt(vo2.getLevel());
+			String levels =String.valueOf(level+1); 
 			vo.setDirName(directory.getDirName());
 			vo.setDirPath(directory.getDirPath());
 			vo.setParentDirId(directory.getParentDirId());
+			vo.setLevel(levels);
 			vo.setOrder(directory.getOrder());
 			vo.setIsuse(directory.getIsuse());
 			vo.setUpdateTime(new Date());
