@@ -76,7 +76,7 @@
 									<th width="8%"  field="couponExpiryDate">有效期天数</th>
 									<th width="8%"  field="couponStatus">状态</th>
 									<th width="10%" field="couponRemark">备注</th>
-									<th width="12%" field="createTime">创建时间</th>
+									<th width="15%" field="createTime">创建时间</th>
 									<th width="15%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>

@@ -53,7 +53,7 @@ var showEditWin = function(id) {
 			data : data,
 			dataType : "json",
 			success : function(json) {
-				showAlert("操作成功");
+				showMsg("操作成功");
 				queryUserIdentity();
 			},
 			error : function(e) {
@@ -90,7 +90,7 @@ $("#saveBtn").click(function() {
 		dataType : "json",
 		success : function(json) {
 			closeModal("editUserIdentityModal");
-			showAlert("操作成功");
+			showMsg("操作成功");
 			queryUserIdentity();
 		},
 		error : function(e) {

@@ -151,7 +151,7 @@ $("#saveBtn").click(function() {
 		success : function(json) {
 			queryUserGrade();
 			closeModal("editGradeModal");
-			showAlert("操作成功");
+			showMsg("操作成功");
 		},
 		error : function(e) {
 			showAlert("操作失败！");

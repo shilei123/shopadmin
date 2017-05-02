@@ -53,7 +53,7 @@ var showEditWin = function(id) {
 			dataType : "json",
 			success : function(json) {
 				//自动认证待讨论
-				//showAlert("操作成功");
+				//showMsg("操作成功");
 				//queryUserIdentity();
 			},
 			error : function(e) {
@@ -90,7 +90,7 @@ $("#saveBtn").click(function() {
 		dataType : "json",
 		success : function(json) {
 			closeModal("editUserIdentityModal");
-			showAlert("操作成功");
+			showMsg("操作成功");
 			queryUserIdentity();
 		},
 		error : function(e) {

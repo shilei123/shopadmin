@@ -54,7 +54,7 @@ tr {
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">文章发布</strong> / <small>文章的发布</small>
+						<strong class="am-text-primary am-text-lg">文章发布</strong> / <small>文章的发布、编辑</small>
 					</div>
 					<div align="left" id="errorMsg" style="margin-left:350px;color: red;">&nbsp;</div>
 				</div>
@@ -111,7 +111,7 @@ tr {
 								<input type="hidden" id="imgIdHidden" class="am-form-field" name="logistics.url" style="width:90%"/>
 			        			<div class="imgDiv">
 							</td>
- -->					   	</tr>
+						</tr>
 						<tr>
 					     	<td colspan="4"><textarea class="am-validate" name="myue" id="memo" onchange="change()" style="height: 280px;width: 98%;"></textarea></td>
 					    </tr>
@@ -135,8 +135,7 @@ tr {
 					     	<td colspan="4">
 					     		<div align="center">
 								    <button class="am-btn am-btn-secondary" type="button" id="saveBtn">保存</button>
-								    <button class="am-btn am-btn-secondary" type="button" id="closeBtn" style="display:<%=StringUtils.isBlank(articleId)?"":"none" %>">重置</button>
-								    <button class="am-btn am-btn-secondary" type="button" id="cancelBtn" style="display:<%=StringUtils.isBlank(articleId)?"none":"" %>">取消</button>
+								    <button class="am-btn am-btn-secondary" type="button" id="closeBtn">取消</button>
 								</div>
 					     	</td>
 					    </tr>

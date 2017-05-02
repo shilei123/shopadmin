@@ -57,7 +57,7 @@ var showOrHideDefault = function(id){
 			data : data,
 			dataType : "json",
 			success : function(json) {
-				showAlert("操作成功");
+				showMsg("操作成功");
 				queryFreight();
 			},
 			error : function(e) {
@@ -77,7 +77,7 @@ var deleteDict = function(id) {
 			data : data,
 			dataType : "json",
 			success : function(json) {
-				showAlert("操作成功");
+				showMsg("操作成功");
 				queryFreight();
 			},
 			error : function(e) {

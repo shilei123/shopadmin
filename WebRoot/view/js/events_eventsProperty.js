@@ -147,7 +147,7 @@ $("#endTime").click(function() {
 			data : {"eventsGoods.id":eventsgoodsid},
 			dataType: "json",
 			success : function(data) {
-				window.parent.showAlert("活动商品删除成功");
+				window.parent.showMsg("活动商品删除成功");
 			},
 			error : function(e) {
 				window.parent.showAlert("操作失败");
@@ -210,7 +210,7 @@ $("#endTime").click(function() {
 			dataType : "json",
 			success : function(json) {
 				closeCurrentWin();
-				window.parent.showAlert("操作成功!");
+				window.parent.showMsg("操作成功!");
 				window.parent.queryEvents();
 			},
 			error : function(e) {

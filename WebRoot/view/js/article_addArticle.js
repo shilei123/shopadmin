@@ -220,8 +220,10 @@ $("#saveBtn").click(function() {
 		data : data,
 		dataType : "json",
 		success : function(data) {
-				showAlert("操作成功");
-				window.location.href=path_ + "/view/shop/article/article.jsp";
+			showMsg("操作成功");
+			window.location.href=path_ + "/view/shop/article/article.jsp";
+		},error : function(e) {
+			showAlert("操作失败！");
 		}
 	});
 });
@@ -237,15 +239,10 @@ var checkRequiredRadio = function(radioName, errormsg) {
 	return true;
 };
 
-//重置
-$("#closeBtn").click(function(){
-	refresh();
-});
 //取消
-$("#cancelBtn").click(function(){
-	window.location.href=path_ + "/view/shop/article/article.jsp";
+$("#closeBtn").click(function(){
+	showConfirm("确定取消？",function(){
+		showMsg("取消成功");
+		closeThisTab();
+	});
 });
-
-function refresh(){
-	 window.location.reload();//刷新当前页面.
-};

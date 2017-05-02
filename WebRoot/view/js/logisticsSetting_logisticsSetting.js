@@ -137,7 +137,7 @@ $("#saveBtn").click(function() {
 		success : function(json) {
 			queryLogistics();
 			closeModal("editeLogisticsModal");
-			showAlert("操作成功");
+			showMsg("操作成功");
 		},
 		error : function(e) {
 			showAlert("操作失败！");
@@ -198,7 +198,7 @@ var showOrHideDefault = function(id){
 			data : data,
 			dataType : "json",
 			success : function(json) {
-				showAlert("操作成功");
+				showMsg("操作成功");
 				queryLogistics();
 			},
 			error : function(e) {
@@ -219,7 +219,7 @@ var deleteDict = function(id) {
 			data : data,
 			dataType : "json",
 			success : function(json) {
-				showAlert("操作成功");
+				showMsg("操作成功");
 				queryLogistics();
 			},
 			error : function(e) {

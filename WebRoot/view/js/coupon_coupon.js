@@ -103,7 +103,7 @@ $("#saveBtn").click(function() {
 		success : function(json) {
 			queryCoupon();
 			closeModal("editCouponModal");
-			showAlert("操作成功");
+			showMsg("操作成功");
 		},
 		error : function(e) {
 			showAlert("操作失败！");
@@ -174,7 +174,7 @@ var deleteDict = function(id) {
 			data : data,
 			dataType : "json",
 			success : function(json) {
-				showAlert("操作成功");
+				showMsg("操作成功");
 				queryCoupon();
 			},
 			error : function(e) {

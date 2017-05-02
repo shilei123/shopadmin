@@ -209,7 +209,7 @@ request.setAttribute("freightId", freightId);
 	            $("#form1").form('submit', {
 		    		url:  "${path }/view/shop/freight/freight!saveFreightAndExpress.action",
 		    		success:function(data) {
-		    			window.parent.showAlert("操作成功！");
+		    			window.parent.showMsg("操作成功！");
 		    			closeCurrentWin();
 		    		}
 		    	});

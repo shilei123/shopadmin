@@ -1,6 +1,6 @@
 //加载layui的laydate组件
 layui.use('laydate', function(){});
-$("#starttime").click(function() {
+$("#startTime").click(function() {
 	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
 });
 $("#endTime").click(function() {

@@ -30,7 +30,7 @@ $(function() {
 		    			return checkForm();
 		    		},
 		    		success:function(data) {
-		    			showAlert("操作成功！");
+		    			showMsg("操作成功！");
 		    			initDirectoryTree();
 		    			$("#directory_detail_table input").each(function(i,n){n.value = "";});
 		    			closeParamsModal("doc-modal-add");
@@ -44,14 +44,14 @@ $(function() {
 
 //表单验证
 var checkBankSumbit = function() {
-	var inp2_directoryName = $("#inp2_directoryName").val();
+	var inp2_dirName = $("#inp2_dirName").val();
 	var inp2_parentName = $("#inp2_parentName").val();
-	var inp2_cateOrder = $("#inp2_cateOrder").val();
+	var inp2_order = $("#inp2_order").val();
 	var inp2_isuse = $("#inp2_isuse").val();
 	
-	if(inp2_directoryName == null || inp2_directoryName=="") {
+	if(inp2_dirName == null || inp2_dirName=="") {
 		$("#errorMsg").html("栏目名称不能为空！");
-		$("#inp2_directoryName").focus();
+		$("#inp2_dirName").focus();
 		return false;
 	}
 	
@@ -60,9 +60,9 @@ var checkBankSumbit = function() {
 		$("#inp2_parentName").focus();
 		return false;
 	}
-	if(inp2_cateOrder == null || inp2_cateOrder=="" ) {
+	if(inp2_order == null || inp2_order=="" ) {
 		$("#errorMsg").html("排序序号不能为空！");
-		$("#inp2_cateOrder").focus();
+		$("#inp2_order").focus();
 		return false;
 	}
 	if(inp2_isuse==null || inp2_isuse == "-1"){
@@ -122,6 +122,7 @@ function initDirectoryTree() {
 		url : path_ + "/view/shop/dirStruct/dirStruct!queryDirStruct.action",
 		dataType : "json",
 		success : function(json) {
+			console.log(json);
 			var root = json.directoryList[0];
 			root.state = "open";
 			$("#ul_directory_tree").tree("loadData", json.directoryList);
@@ -130,6 +131,13 @@ function initDirectoryTree() {
 }
 
 var directoryClick = function(node) {
+	if(node.level == "0"){
+		$("#editDirectoryBtn").hide();
+		$("#delDirectoryBtn").hide();
+	}else{
+		$("#editDirectoryBtn").show();
+		$("#delDirectoryBtn").show();
+	}
 	$("#directory_detail_table input").each(function(i,n){n.value = "";});
 	var obj = getDirectoryInfo(node);
 	for(var key in obj){
@@ -147,13 +155,13 @@ $('#addDirectoryBtn').click(function() {
 		return;
 	}
 	$('#modalTitle-add').text('新增栏目');
+	$("#errorMsg").html("&nbsp;");
 	var obj = getDirectoryInfo(node);
 	setParentNameType();
 	setIsuseType();
 	$("#inp2_isuse").val('1');
 	$("#inp2_parentName").attr('disabled','disabled');
 	$("#inp2_parentName").val(obj.dirId);
-	var a = $("#inp2_parentName").val();
 	$("#directory_detail_table input").each(function(i,n){n.value = "";});
 	$("#inp2_levels").val(parseInt(obj.level)+1);
 	showModal("doc-modal-add", 500, 320);
@@ -167,13 +175,14 @@ $('#editDirectoryBtn').click(function() {
 	}
 	$('#modalTitle-add').text('编辑栏目');
 	var obj = getDirectoryInfo(node);
+	$("#errorMsg").html("&nbsp;");
 	setParentNameType();
 	setIsuseType();
 	$("#inp2_parentName").removeAttr('disabled');
 	$("#inp2_parentName").val(obj.parentId);
 	$("#inp2_id").val(obj.dirId);
-	$("#inp2_directoryName").val(obj.dirName);
-	$("#inp2_cateOrder").val(obj.order);
+	$("#inp2_dirName").val(obj.dirName);
+	$("#inp2_order").val(obj.order);
 	$("#inp2_levels").val(obj.level);
 	$("#inp2_isuse").val(obj.isuse);
 	showModal("doc-modal-add", 500, 320);
@@ -200,7 +209,7 @@ $("#delDirectoryBtn").click(function() {
 				if(json.msg==null || json.msg=="null") {
 					$("#directory_detail_table input").each(function(i,n){n.value = "";});
 					initDirectoryTree();//初始化菜单
-					showAlert("删除成功");
+					showMsg("删除成功");
 				} else {
 					showAlert(json.msg);
 				}

@@ -73,7 +73,7 @@ public class AdvertiseDAO extends PageDAO{
 			}
 			String endTime = pageBean.getQueryParams().get("endRegTime");
 			if (StringUtils.isNotBlank(endTime)){
-				params.add(endTime+" 23:59:59 ");
+				params.add(endTime);
 				sql.append(" and t1.end_time <= to_date(?,'yyyy-MM-dd hh24:mi:ss')");
 			}
 		}
