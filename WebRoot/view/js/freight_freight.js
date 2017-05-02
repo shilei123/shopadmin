@@ -43,8 +43,9 @@ var showEditWin = function(id) {
 };
 
 var ShowContactLogistics = function(id){
-	closeTab("contactLogisticsTabId");
-	openTab("contactLogisticsTabId","关联物流",path_+"/view/shop/order/orderdetail.jsp?tabId=contactLogisticsTabId&freightId="+id);
+	var freightId = id;
+	$('#freAndExpParamsFrame').attr('src', path_ + '/view/shop/freight/expressAndFreight.jsp?freightId='+freightId);
+	showModal("doc-modal-1", 520, 450);
 }
 
 var showOrHideDefault = function(id){

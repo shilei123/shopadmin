@@ -77,6 +77,18 @@
 	    	</div>
 		</div>
 	</div>
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+		<div class="am-modal-dialog">
+	    	<div class="am-modal-hd"><span id="modalTitle">运费服务商配置</span>
+	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+	    	</div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd">
+	      		<iframe id="freAndExpParamsFrame" scrolling="no" frameborder="0" style="width:100%; height: 360px;overflow: hidden;overflow-x:hidden;overflow-y:hidden;"></iframe>
+	    	</div>
+		</div>
+	</div>
 </body>
 <script type="text/javascript" src="${path }/view/js/freight_freight.js"></script>
 </html>
