@@ -37,14 +37,14 @@ $('#queryBtn').click(function() {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='showEditWin(\""+ row["id"]+ "\")'><span class='am-icon-check-square-o'></span>认证成功</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-success' onclick='showEditWin(\""+ row["id"]+ "\")'><span class='am-icon-check-square-o'></span>通过</a>";
 	html += "</div>";
 	return html;
 };
 
 //自动认证成功
 var showEditWin = function(id) {
-	showConfirm("确认认证成功？", function() {
+	showConfirm("确认认证通过？", function() {
 		var data = {"identity.id" : id};
 		$.ajax({
 			type : "POST",
@@ -67,7 +67,7 @@ var showEditWin = function(id) {
 var checkSumbit = function() {
 	var failureReason=$("#failureReason").val();
 	if(failureReason.length == 0){
-		$("#errorMsg").html("认证失败理由不能为空！");
+		$("#errorMsg").html("不通过,理由不能为空！");
 		$("#failureReason").focus();
 		return false;
 	}

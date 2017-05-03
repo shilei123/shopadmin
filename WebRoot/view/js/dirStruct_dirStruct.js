@@ -173,12 +173,27 @@ $('#editDirectoryBtn').click(function() {
 		showAlert("请选择一个分类！");
 		return;
 	}
+	$.ajax( {
+		type : "POST",
+		url : path_ + "/view/shop/dirStruct/dirStruct!findDirParent.action",
+		dataType : "json",
+		data: {"directory.id": $("#inp_dirId").val()},
+		success : function(json) {
+			if(json.msg==null || json.msg=="null") {
+				$("#inp2_parentName").removeAttr('disabled');
+			} else {
+				$("#inp2_parentName").attr('disabled','disabled');
+			}
+		},
+		error: function(e) {
+			showAlert("编辑失败，请检查该类别是否有子类别！");
+		}
+	});
 	$('#modalTitle-add').text('编辑栏目');
 	var obj = getDirectoryInfo(node);
 	$("#errorMsg").html("&nbsp;");
 	setParentNameType();
 	setIsuseType();
-	$("#inp2_parentName").removeAttr('disabled');
 	$("#inp2_parentName").val(obj.parentId);
 	$("#inp2_id").val(obj.dirId);
 	$("#inp2_dirName").val(obj.dirName);

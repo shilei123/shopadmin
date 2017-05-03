@@ -221,7 +221,7 @@ $("#saveBtn").click(function() {
 		dataType : "json",
 		success : function(data) {
 			showMsg("操作成功");
-			window.location.href=path_ + "/view/shop/article/article.jsp";
+			closeThisTab();
 		},error : function(e) {
 			showAlert("操作失败！");
 		}

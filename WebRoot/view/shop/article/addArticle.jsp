@@ -134,8 +134,8 @@ tr {
 						<tr>
 					     	<td colspan="4">
 					     		<div align="center">
-								    <button class="am-btn am-btn-secondary" type="button" id="saveBtn">保存</button>
-								    <button class="am-btn am-btn-secondary" type="button" id="closeBtn">取消</button>
+								    <button type="button" class="am-btn am-btn-success" id="saveBtn"><span class="am-icon-save"></span> 提交</button>
+									<button type="button" class="am-btn am-btn-default" id="closeBtn"><span class="am-icon-undo"></span> 取消</button>
 								</div>
 					     	</td>
 					    </tr>

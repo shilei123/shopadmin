@@ -75,7 +75,7 @@
 									<th width="11%" field="identityHoldFrontal">手持身份证正面</th>
 									<th width="12%" field="applicationTime">申请认证时间</th>
 									<th width="5%"  field="applicant">申请人</th>
-									<th width="10%" field="failureReason">失败理由</th>
+									<th width="10%" field="failureReason">不通过理由</th>
 									<th width="13%" formatter="formatterAction">操作</th>
 								</tr>
 							</thead>
@@ -91,7 +91,7 @@
 	<!-- content end -->
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="editUserIdentityModal">
 		<div class="am-modal-dialog">
-	    	<div class="am-modal-hd"><span id="title">认证失败</span>
+	    	<div class="am-modal-hd"><span id="title">认证不通过</span>
 	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
 	    	</div>
 	    	<hr>
@@ -100,9 +100,9 @@
 		        	<table id="edit_user_identity_table" class="frame-modal-table" border="0" bordercolor="black">
 		        		<input type="hidden" name="identity.id" id="identityId"/>
 			        	<tr>
-		        		<td valign="top" class="table_title"><div style="margin-top: 5px;">失败理由：</div></td>
+		        		<td valign="top" class="table_title"><div style="margin-top: 5px;">不通过理由：</div></td>
 		        		<td valign="top"> 
-		        			<textarea name="identity.failureReason" id="failureReason" placeholder="失败理由" style="width:96%;height:100px;margin-top: 5px;" class="am-form-field"></textarea> 
+		        			<textarea name="identity.failureReason" id="failureReason" placeholder="不通过理由" style="width:96%;height:100px;margin-top: 5px;" class="am-form-field"></textarea> 
 		        		</td>
 		        		</tr>
 		       	 	</table>

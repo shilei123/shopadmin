@@ -34,6 +34,12 @@ var queryExpressType = function() {
 	});
 };
 
+var showType = function(){
+	var type = $("#type");
+	type.empty();
+	type.append(expressTypeHtml);
+}
+
 //打开图片上传的窗口
 $("#img1").click(function() {
 		showImgUploadModal();
@@ -82,7 +88,7 @@ $("#closeBtn").click(function() {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='showOrHideDefault(\""+ row["id"]+ "\")'><span class='am-icon-check-square-o'></span>是否设置默认</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showOrHideDefault(\""+ row["id"]+ "\")'><span class='am-icon-check-square-o'></span>是否设置默认</a>";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditWin(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>编辑</a>";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteDict(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
 	html += "</div>";
@@ -92,7 +98,9 @@ var formatterAction = function(value, row) {
 //弹出新增窗口
 $("#addBtn").click(function() {
 	clearForm();
+	showType();
 	openWin("新增");
+	
 });
 
 //表单验证
@@ -181,9 +189,7 @@ var showEditWin = function(id) {
 		dataType : "json",
 		success : function(data) {
 			openWin("编辑");
-			var type = $("#type");
-			type.empty();
-			type.append(expressTypeHtml);
+			showType();
 			setExpressForm(data);
 		}
 	});
