@@ -23,7 +23,7 @@ public class OrderDetailDAO{
 	private List<String> confirmOrderParams;
 	
 	/**
-	 * 订单详情对应的商品信息查询
+	 * 订单详情页面查询商品信息
 	 * @param orderId
 	 * @return
 	 */
@@ -49,15 +49,16 @@ public class OrderDetailDAO{
 //		tempSql.append(" and t2.flag = ? ");
 //		tempSql.append(" and t3.flag = ? ");
 //		tempSql.append(" and t4.flag = ? ");
-		tempSql.append(" and t.order_id = ? ");
+		tempSql.append(" and (t.order_id=? or t.child_order_id=?) ");
 		sql = tempSql.toString();
-		params = new ArrayList<String>(2);
+		params = new ArrayList<String>();
 		String flag = FlagEnum.ACT.getCode();
 		params.add(flag);
 //		params.add(flag);
 //		params.add(flag);
 //		params.add(flag);
 //		params.add(flag);
+		params.add(orderId);
 		params.add(orderId);
 	}
 	
@@ -121,7 +122,7 @@ public class OrderDetailDAO{
 	}
 	
 	/**
-	 * 确认订单时插入订单id
+	 * 确认订单时插入订单详情表的子订单id
 	 * @param childOrderId
 	 * @param id
 	 */
@@ -129,5 +130,31 @@ public class OrderDetailDAO{
 		String hql = " update ScOrderDetail set childOrderId=? where id=? and flag=? ";
 		DBUtil.getInstance().executeHql(hql, childOrderId, id, FlagEnum.ACT.getCode());
 	}
-
+	
+	/**
+	 * 发货页面查询是否虚拟商品
+	 * @param id
+	 * @return
+	 */
+	public List<Map> judgeVirtualGoods(String id) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select tod.order_id,tod.child_goods_id,tg.goods_name,tg.virtual ");
+		sql.append(" from sc_order_detail tod ");
+		sql.append(" left join sc_goods tg on tg.id=tod.goods_id ");
+		sql.append(" where tod.order_id=? and tod.flag=? ");
+		sql.append(" union ");
+		sql.append(" select tod.order_id,tod.child_goods_id,tg.goods_name,tg.virtual ");
+		sql.append(" from sc_order_detail tod ");
+		sql.append(" left join sc_child_goods tcg on tcg.id=tod.child_goods_id ");
+		sql.append(" left join sc_goods tg on tg.id=tcg.goods_id ");
+		sql.append(" where tod.child_order_id=? and tod.flag=? ");
+		
+		List params = new ArrayList();
+		params.add(id);
+		params.add(FlagEnum.ACT.getCode());
+		params.add(id);
+		params.add(FlagEnum.ACT.getCode());
+		List<Map> list = DBUtil.getInstance().queryBySQL(sql.toString(), params);
+		return list;
+	}
 }

@@ -27,8 +27,21 @@ public class InvoiceRecordDAO extends PageDAO {
 		return null;
 	}
 	
+	/**
+	 * 订单拆分
+	 * @param id
+	 */
 	public void delInvoiceRecordById(String id){
 		db.executeHql(" update ScInvoiceRecord set flag=? where id=? ", FlagEnum.ACT.getCode(), id);
 	}
 	
+	/**
+	 * 确认订单插入发票税务编号
+	 * @param invoiceCode
+	 * @param id
+	 */
+	public void updateInvoiceCode(String invoiceCode, String id) {
+		String hql = " update ScInvoiceRecord set invoiceCode=? where flag=? and id=? ";
+		db.executeHql(hql, invoiceCode, FlagEnum.ACT.getCode(), id);
+	}
 }

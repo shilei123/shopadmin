@@ -3,6 +3,8 @@ package com.sunchin.shop.admin.order.service;
 import java.util.List;
 import java.util.Map;
 
+import com.sunchin.shop.admin.util.UserDefinedException;
+
 import framework.bean.PageBean;
 
 @SuppressWarnings("rawtypes")
@@ -39,4 +41,28 @@ public interface DeliveryRecordService {
 	 * @throws Exception
 	 */
 	public List<Map> queryDeliveryInvoiceById(String id) throws Exception;
+	
+	/**
+	 * 发货页面查询是否虚拟商品
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Map> judgeVirtualGoods(String id) throws Exception;
+	
+	/**
+	 * 发货页面发货
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public String delivery(String orderId, Map deliveryMap) throws Exception, UserDefinedException;
+
+	/**
+	 * 查询发货记录表的发货状态，控制重复发货
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public String checkOrderDeliverySts(String id) throws Exception;
 }

@@ -119,7 +119,6 @@ public class OrderServiceImpl implements OrderService {
 		String deliveryId_son2 = UUID.randomUUID().toString();
 		String orderId_son1 = UUID.randomUUID().toString();
 		String orderId_son2 = UUID.randomUUID().toString();
-		
 		String orderId = CommonUtils.getString(order.getId());
 		
 		//订单表修改父订单状态（已处理），增加子订单记录
@@ -296,7 +295,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public void changePriceOrder(String id, Double actualPrice)throws Exception {
-		orderDAO.changePriceOrder(id, actualPrice);
+		orderDAO.updatePriceOrder(id, actualPrice);
 	}
 	
 }

@@ -30,7 +30,8 @@ var clearOrderInfo = function() {
 var setOrderInfo = function(data) {
 	var orderMap = data.orderMap;
 	$('ul li span').each(function(){
-		$("#" + this.id).text(orderMap[this.id]);
+		var temp = orderMap[this.id]==null?"":orderMap[this.id];
+		$("#" + this.id).text(temp);
 	});
 	setSonOrdersInfo(data);
 };
@@ -53,14 +54,16 @@ var setSonOrdersInfo = function(data){
 	var invoice = orderMap.invoice;
 	var invoiceRecordId = orderMap.invoiceRecordId;
 	//1		invoiceRecord2
-//	console.log(sonOrders[0]);
+	console.log(invoice);
+	console.log(sonOrders[0]);
+	console.log(invoiceRecordId);
 	var html = "";
 	//invoice==0	不开发票
 	if(invoice=='0'){
 		html += "<ul><li style='width: 100%;'>不开发票</li></ul>";
 	}
 	//异常情况。关联不到发票信息。
-	if(invoice=='1' && sonOrders[0]==undefined && invoiceRecordId==null){
+	if((invoice=='1' && sonOrders[0]==undefined) || invoiceRecordId==null){
 		html += "<ul><li style='width: 100%;'>未关联到发票信息</li></ul>";
 	}
 	//invoice==1	且	子订单sonOrders为空		且	父订单invoiceRecordId不为空	开单张发票

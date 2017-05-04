@@ -334,9 +334,19 @@ public class OrderDAO extends PageDAO{
 	 * @param id
 	 * @param actualPrice
 	 */
-	public void changePriceOrder(String id, Double actualPrice) {
+	public void updatePriceOrder(String id, Double actualPrice) {
 		String hql = " update ScOrder set actualPrice=? where id=? and flag=? ";
 		db.executeHql(hql, actualPrice, id, FlagEnum.ACT.getCode());
+	}
+	
+	/**
+	 * 修改订单状态
+	 * @param id
+	 * @param actualPrice
+	 */
+	public void updateOrderStatus(String id, String orderStatus) {
+		String hql = " update ScOrder set orderStatus=? where id=? and flag=? ";
+		db.executeHql(hql, orderStatus, id, FlagEnum.ACT.getCode());
 	}
 }
 	

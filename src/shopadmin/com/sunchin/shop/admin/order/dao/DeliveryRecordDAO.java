@@ -29,7 +29,7 @@ public class DeliveryRecordDAO extends PageDAO{
 	private DBUtil db;
 	
 	/**
-	 * 发货管理订单查询分页
+	 * 发货页面的分页
 	 */
 	private void initDeliverySqlParams(){
 		StringBuffer sql = new StringBuffer();
@@ -106,6 +106,11 @@ public class DeliveryRecordDAO extends PageDAO{
 		return sql.toString();
 	}
 	
+	/**
+	 * 通过订单id查询发货记录
+	 * @param orderId
+	 * @return
+	 */
 	public ScDeliveryRecord queryDeliveryByOrderId(String orderId){
 		String hql = " from ScDeliveryRecord where flag=? and orderId=? ";
 		List<ScDeliveryRecord> list = db.queryByHql(hql, FlagEnum.ACT.getCode(), orderId);
@@ -115,6 +120,10 @@ public class DeliveryRecordDAO extends PageDAO{
 		return null;
 	}
 	
+	/**
+	 * 订单拆分后删除父订单
+	 * @param id
+	 */
 	public void delDelivery(String id){
 		String hql = " update ScDeliveryRecord set flag=? where id=? ";
 		db.executeHql(hql, FlagEnum.HIS.getCode(), id);
@@ -122,18 +131,18 @@ public class DeliveryRecordDAO extends PageDAO{
 	
 	/**
 	 * 发货页面查询商品信息
-	 * @param id
+	 * @param id	该表的orderId或者childOrderId
 	 * @return
 	 */
 	public List<Map> queryDeliveryGoodsById(String id) {
 		StringBuffer sql = new StringBuffer();
-		sql.append(" select tod.*,tor.order_code,tg.goods_name,tod.unit_price,tod.count,tod.amount ");
+		sql.append(" select tod.*,tor.order_code,tg.goods_name,tod.unit_price,tod.count,tod.amount,tod.goods_id,tod.child_goods_id ");
 		sql.append(" from sc_order_detail tod ");
 		sql.append(" left join sc_order tor on tor.id=tod.order_id ");
 		sql.append(" left join sc_goods tg on tg.id=tod.goods_id ");
 		sql.append(" where tod.flag=? and tod.order_id=? ");
 		sql.append(" union ");
-		sql.append(" select tod.*,tor.order_code,tg.goods_name,tod.unit_price,tod.count,tod.amount ");
+		sql.append(" select tod.*,tor.order_code,tg.goods_name,tod.unit_price,tod.count,tod.amount,tod.goods_id,tod.child_goods_id ");
 		sql.append(" from sc_order_detail tod ");
 		sql.append(" left join sc_order tor on tor.id=tod.child_order_id ");
 		sql.append(" left join sc_goods tg on tg.id=tod.goods_id ");
@@ -186,5 +195,5 @@ public class DeliveryRecordDAO extends PageDAO{
 		List<Map> list = DBUtil.getInstance().queryBySQL(sql.toString(), params);
 		return list;
 	}
-	
+
 }

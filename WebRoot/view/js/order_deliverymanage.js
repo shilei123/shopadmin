@@ -56,13 +56,31 @@ var formatterAction = function(value, row) {
 };
 
 var showQueryOrderWin = function(id, orderCode) {
-	closeTab("queryOrderDetailTabId");
-	openTab("queryOrderDetailTabId","订单详情("+orderCode+")",path_+"/view/shop/order/orderdetail.jsp?tabId=queryOrderDetailTabId&orderId="+id);
+	closeTab("orderDetailTabId");
+	openTab("orderDetailTabId","订单详情("+orderCode+")",path_+"/view/shop/order/orderdetail.jsp?tabId=orderDetailTabId&orderId="+id);
 };
 
 var showDeliveryWin = function(id, orderCode) {
-	closeTab("queryOrderDetailTabId");
-	openTab("queryOrderDetailTabId","订单发货("+orderCode+")",path_+"/view/shop/order/deliveryorder.jsp?tabId=queryOrderDetailTabId&orderId="+id);
+	var data = {"order.id":id}
+	$.ajax({
+		type : "POST",
+		url : path_ + "/view/shop/order/deliveryRecord!checkOrderDeliverySts.action",
+		data : data,
+		dataType : "json",
+		success : function(data) {
+			if(data.msg==""){
+				closeTab("deliveryOrderTabId");
+				openTab("deliveryOrderTabId","订单发货("+orderCode+")",path_+"/view/shop/order/deliveryorder.jsp?tabId=deliveryOrderTabId&orderId="+id);
+			}else{
+				showAlert("该订单已发货，请刷新页面！");
+			}
+//			console.log(data.msg);
+//			console.log(data.msg=="error");
+		},
+		error : function(e) {
+			
+		}
+	});
 };
 
 

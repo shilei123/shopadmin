@@ -10,6 +10,10 @@ public enum repertoryTypeEnum {
 	
 	BAD_NUM("4","报损数量"),
 	
+	SALES_COUNT("5","累计销售数量"),
+	
+	PURCHASE_COUNT("6","累计采购数量"),
+	
 	BILL("1","单据"),
 	
 	DELIVERY("2","发货单");

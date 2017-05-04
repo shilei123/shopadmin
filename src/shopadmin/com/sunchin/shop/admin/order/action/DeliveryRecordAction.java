@@ -6,14 +6,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.sunchin.shop.admin.order.service.DeliveryRecordService;
 import com.opensymphony.xwork2.Action;
 import com.sunchin.shop.admin.dict.DictionaryTypeEnum;
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.OrderStsEnum;
+import com.sunchin.shop.admin.order.service.DeliveryRecordService;
 import com.sunchin.shop.admin.pojo.ScDictionary;
 import com.sunchin.shop.admin.pojo.ScOrder;
 import com.sunchin.shop.admin.system.service.DictService;
+import com.sunchin.shop.admin.util.UserDefinedException;
 
 import framework.action.PageAction;
 import framework.bean.PageBean;
@@ -32,6 +33,9 @@ public class DeliveryRecordAction extends PageAction{
 	private List<Map> goodsList;//需要发货的订单对应的商品信息
 	private Map addressMap;//收货地址信息
 	private List<Map> invoiceList;//发票信息
+	private List<Map> isVirtualGoodsList;//判断是否为虚拟商品
+	private String msg;
+	private Map<String, String> deliveryMap;//invoiceCode、expressId、expressNum
 	
 	public String initDeliveryManage(){
 		//待发货、发货中、已完成
@@ -63,7 +67,7 @@ public class DeliveryRecordAction extends PageAction{
 	}
 	
 	/**
-	 * 发货初始化信息
+	 * 发货页面初始化信息
 	 * @return
 	 */
 	public String initDeliveryPageByOrderId(){
@@ -83,7 +87,38 @@ public class DeliveryRecordAction extends PageAction{
 	 */
 	public String delivery(){
 		try {
-			
+			//invoiceCode、expressId、expressNum
+			msg = deliveryRecordService.delivery(order.getId(), deliveryMap);
+		} catch (UserDefinedException e) {
+			e.printStackTrace();
+			msg = e.getMessage();
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg = e.getMessage();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 判断是否为虚拟商品
+	 * @return
+	 */
+	public String judgeVirtualGoods(){
+		try {
+			isVirtualGoodsList = deliveryRecordService.judgeVirtualGoods(order.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 查询发货记录表的发货状态，控制重复发货
+	 * @return
+	 */
+	public String checkOrderDeliverySts(){
+		try {
+			msg = deliveryRecordService.checkOrderDeliverySts(order.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -128,6 +163,30 @@ public class DeliveryRecordAction extends PageAction{
 
 	public void setInvoiceList(List<Map> invoiceList) {
 		this.invoiceList = invoiceList;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public List<Map> getIsVirtualGoodsList() {
+		return isVirtualGoodsList;
+	}
+
+	public void setIsVirtualGoodsList(List<Map> isVirtualGoodsList) {
+		this.isVirtualGoodsList = isVirtualGoodsList;
+	}
+
+	public Map<String, String> getDeliveryMap() {
+		return deliveryMap;
+	}
+
+	public void setDeliveryMap(Map<String, String> deliveryMap) {
+		this.deliveryMap = deliveryMap;
 	}
 
 }
