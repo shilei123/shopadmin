@@ -234,5 +234,13 @@ legend {
 } */
 
 .frame-modal-content {
-	width: 100%;overflow: auto;
+	width: 100%;overflow: auto;margin-top: 10px;text-align: center;
+}
+.frame-modal-bottom {
+	text-align: center;margin-top: 10px;
+}
+
+.inputerror {
+	border: 1px solid red; 
+	background-color: #FFF3F3;
 }
