@@ -29,6 +29,7 @@ public class GoodsInfoAction extends PageAction {
 	private Map goodsMap;
 	private List goodsImgList;
 	private List childGoodsList;
+	private List repList;
 	
 	//保存商品
 	public String saveGoods() {
@@ -40,7 +41,7 @@ public class GoodsInfoAction extends PageAction {
 		return Action.SUCCESS;
 	}
 	
-	//查询商品
+	//查询单个商品信息
 	public String loadGoods() {
 		try {
 			this.goodsMap = this.goodsService.loadGoods(goodsVO);
@@ -53,7 +54,7 @@ public class GoodsInfoAction extends PageAction {
 	}
 	
 	/**
-	 * 查询待审核商品
+	 * 查询所有商品列表
 	 * @return
 	 */
 	public String queryAllGoodsList() {
@@ -68,7 +69,7 @@ public class GoodsInfoAction extends PageAction {
 	}
 	
 	/**
-	 * 查询待审核商品
+	 * 查询待审核商品列表
 	 * @return
 	 */
 	public String queryNoAuditList() {
@@ -86,7 +87,7 @@ public class GoodsInfoAction extends PageAction {
 	}
 	
 	/**
-	 * 查询未上架商品
+	 * 查询未上架商品列表
 	 * @return
 	 */
 	public String queryNoPutawayList() {
@@ -105,7 +106,7 @@ public class GoodsInfoAction extends PageAction {
 	}
 	
 	/**
-	 * 查询已上架商品
+	 * 查询已上架商品列表
 	 * @return
 	 */
 	public String queryPutawayList() {
@@ -124,7 +125,7 @@ public class GoodsInfoAction extends PageAction {
 	}
 	
 	/**
-	 * 查询已下架商品
+	 * 查询已下架商品列表
 	 * @return
 	 */
 	public String querySoldOutList() {
@@ -213,6 +214,19 @@ public class GoodsInfoAction extends PageAction {
 		return Action.SUCCESS;
 	}
 	
+	/**
+	 * 查询商品库存
+	 * @return
+	 */
+	public String queryGoodsRep() {
+		try {
+			this.repList = this.goodsService.queryGoodsRep(this.goods.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
 	public GoodsBean getGoods() {
 		return goods;
 	}
@@ -239,5 +253,9 @@ public class GoodsInfoAction extends PageAction {
 	
 	public List getChildGoodsList() {
 		return childGoodsList;
+	}
+
+	public List getRepList() {
+		return repList;
 	}
 }

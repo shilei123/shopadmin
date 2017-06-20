@@ -43,8 +43,7 @@ public class ScChildGoodsDAO extends PageDAO {
 		sql.append(" where cg.goods_id=? ");
 		sql.append(" and   cg.flag=? ");
 		sql.append(" order by cg.create_time desc ");
-		List list = DBUtil.getInstance().queryBySQL(sql.toString(), goodsId, goodsId, FlagEnum.ACT.getCode());
-		return list;
+		return DBUtil.getInstance().queryBySQL(sql.toString(), goodsId, goodsId, FlagEnum.ACT.getCode());
 	}
 	
 	public List<ScChildGoods> queryPojoListByGoodsId(String goodsId) {
