@@ -3,10 +3,16 @@ var AdvertiseTypeHtml = "";
 var AdvertiseIsuseHtml = "";
 //加载layui的laydate组件
 layui.use('laydate', function(){});
-$("#starttime").click(function() {
+$("#startTime").click(function() {
 	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
 });
-$("#endtime").click(function() {
+$("#endTime").click(function() {
+	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
+});
+$("#startTimes").click(function() {
+	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
+});
+$("#endTimes").click(function() {
 	layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'});
 });	
 $(function() {
@@ -76,7 +82,7 @@ $('#queryBtn').click(function() {
 
 var openWin = function(title) {
 	$("#title").text(title);
-	showModal("editAdvertiseModal",720,530);
+	showModal("editAdvertiseModal",720,480);
 	
 };
 
@@ -204,7 +210,7 @@ $("#saveBtn").click(function() {
 		success : function(json) {
 			queryAdvertise();
 			closeModal("editAdvertiseModal");
-			showAlert("操作成功");
+			showMsg("操作成功");
 		},
 		error : function(e) {
 			showAlert("操作失败！");
@@ -218,8 +224,8 @@ var clearForm = function() {
 	$("#imglinkLabel").val('');
 	$("#imglink").val('');
 	$("#ordernumb").val('');
-	$("#starttime").val('');
-	$("#endtime").val('');
+	$("#startTimes").val('');
+	$("#endTimes").val('');
 	$("#kind").val('');
 	$("#memo").val('');
 	$("#errorMsg").html('&nbsp;');
@@ -231,8 +237,8 @@ var setAdvertiseForm = function(data) {
 	$("#imglink").val(data.map.imglink);
 	$("#ordernumb").val(data.map.ordernumb);
 	$("#memo").val(data.map.memo);
-	$("#starttime").val(data.map.startTime);
-	$("#endtime").val(data.map.endTime);
+	$("#startTimes").val(data.map.startTime);
+	$("#endTimes").val(data.map.endTime);
 	$("#linkkinds").val(data.map.linkkind);
 	$("#advType").val(data.map.type);
 	$("#isuse").val(data.map.isuse);
@@ -296,7 +302,7 @@ var selectCategocy = function(obj) {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='showEditWin(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>编辑</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditWin(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>编辑</a>";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteDict(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
 	html += "</div>";
 	return html;
@@ -332,7 +338,7 @@ var deleteDict = function(id) {
 			data : data,
 			dataType : "json",
 			success : function(json) {
-				showAlert("操作成功");
+				showMsg("操作成功");
 				queryAdvertise();
 			},
 			error : function(e) {

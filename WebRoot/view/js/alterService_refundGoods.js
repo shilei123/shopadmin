@@ -103,15 +103,16 @@ var formatterUserName = function(value,row){
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='showqueryBillWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span>查看详情</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showqueryBillWin(\""+ row["id"]+ "\")'><span class='am-icon-search'></span>查看详情</a>";
 	if(row.billStatus == "待审核"){
-		html += "&nbsp;&nbsp;<a href='javascript:void(0)'  onclick='pass(\""+ row["id"]+ "\")'><span class='am-icon-check-square-o'></i>通过</a>";
-		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='noPass(\""+ row["id"]+ "\")'><span class='am-icon-ban'></i>不通过</a>";
+		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-success' onclick='pass(\""+ row["id"]+ "\")'><span class='am-icon-check-square-o'></i>通过</a>";
+		html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-warning' onclick='noPass(\""+ row["id"]+ "\")'><span class='am-icon-minus-square-o'></i>不通过</a>";
 	}
 	html += "</div>";
 	return html;
 };
 
+//商品信息
 var showOrderCodeWin = function(id){
 	openOrderCode();
 	$.ajax({
@@ -144,6 +145,7 @@ var showOrderCodeWin = function(id){
 	});
 }
 
+//会员信息
 var showUserNameWin = function(userId){
 	openUserName();
 	$.ajax({
@@ -219,7 +221,7 @@ $("#savePassBtn").click(function(){
 		dataType : "json",
 		success : function(json) {
 			closeModal("noPassModal");
-			showAlert("操作成功");
+			showMsg("操作成功");
 			queryBill();
 		},
 		error : function(e) {
@@ -245,7 +247,7 @@ $("#saveNoPassBtn").click(function(){
 		dataType : "json",
 		success : function(json) {
 			closeModal("noPassModal");
-			showAlert("操作成功");
+			showMsg("操作成功");
 			queryBill();
 		},
 		error : function(e) {
@@ -270,25 +272,5 @@ var checkSumbit = function() {
 var showqueryBillWin = function(id) {
 	$('#billParamsFrame').attr('src', path_ + '/view/shop/alterService/returnGoodsTetail.jsp?billId='+id);
 	openWin();
-};
-
-//删除
-var deleteBill = function(id) {
-	showConfirm("确认删除？", function() {
-		var data = {"bill.id" : id};
-		$.ajax({
-			type : "POST",
-			url : path_ + "/view/shop/alterService/after!deleteBill.action",
-			data : data,
-			dataType : "json",
-			success : function(json) {
-				showAlert("操作成功");
-				queryBill();
-			},
-			error : function(e) {
-				showAlert("操作失败");
-			}
-		});
-	});
 };
 

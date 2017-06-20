@@ -51,7 +51,17 @@ public class DirStructDAO extends PageDAO{
 		return null;
 	}
 
-	
+	@SuppressWarnings("unchecked")
+	public ScDirStruct queryDirectoryById(String id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("flag",FlagEnum.ACT.getCode());
+		params.put("id", id);
+		List<ScDirStruct> directoryList = DBUtil.getInstance().queryByPojo(ScDirStruct.class, params);
+		if(directoryList != null && !directoryList.isEmpty()){
+			return directoryList.get(0);
+		}
+		return null;
+	}
 	
 	
 	

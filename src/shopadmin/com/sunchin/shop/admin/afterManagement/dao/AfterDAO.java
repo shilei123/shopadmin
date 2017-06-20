@@ -206,7 +206,7 @@ public class AfterDAO extends PageDAO{
 		return null;
 	}
 
-	//库存流水表插入数据
+	//有子商品 库存流水表插入数据
 	public void insertFowingByChildId(String id,String goodsChildId,String num,String type,String aboutType) {
 		Integer nums = Integer.valueOf(num);
 		ScRepertoryFlowing flowing = new ScRepertoryFlowing();
@@ -233,7 +233,7 @@ public class AfterDAO extends PageDAO{
 		DBUtil.getInstance().insert(flowing);
 	}
 
-	//库存流水表插入数据
+	//无子商品 库存流水表插入数据
 	public void insertFowingByGoodsId(String id, String goodsId, String num,String type,String aboutType) {
 		Integer nums = Integer.valueOf(num);
 		ScRepertoryFlowing flowing = new ScRepertoryFlowing();

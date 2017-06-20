@@ -84,12 +84,14 @@ public class AfterSerivceImpl implements IAfterService{
 		Map<String, Object> billDetail = afterDAO.queryBillTetailById(id);//查询单据详情
 		String goodsId = billDetail.get("goodsId").toString();
 		String goodsChildId = billDetail.get("goodsDetailId").toString();
+		String BadNum = "1";
+		String AvailableNum = "1";
+		String SalesNum = "1";
 		if(goodsChildId != null){
 			ScRepertory  repertory = afterDAO.queryRepertoryByGoodsChildId(goodsChildId);//根据商品子表id,查询库存表
 			if(relus.equals("0")){ //如果损坏
 					repertory.setBadNum(repertory.getBadNum()+1);//破损+1
 					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
-					String BadNum = repertory.getBadNum().toString();
 					String type = repertoryTypeEnum.BAD_NUM.getCode();
 					String aboutType = repertoryTypeEnum.BILL.getCode();
 					afterDAO.insertFowingByChildId(id,goodsChildId,BadNum,type,aboutType);
@@ -97,8 +99,6 @@ public class AfterSerivceImpl implements IAfterService{
 					repertory.setAvailableNum(repertory.getAvailableNum()+1);//可用+1
 					repertory.setSalesNum(repertory.getSalesNum()+1);//销售+1
 					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
-					String AvailableNum = repertory.getAvailableNum().toString();
-					String SalesNum =repertory.getSalesNum().toString();
 					String type1 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
 					String type2 = repertoryTypeEnum.SALES_NUM.getCode();
 					String aboutType = repertoryTypeEnum.BILL.getCode();
@@ -111,7 +111,6 @@ public class AfterSerivceImpl implements IAfterService{
 			if(relus.equals("0")){ //如果损坏
 					repertory.setBadNum(repertory.getBadNum()+1);
 					repertory.setSalesCount(repertory.getSalesCount()-1);
-					String BadNum = repertory.getBadNum().toString();
 					String type = repertoryTypeEnum.BAD_NUM.getCode();
 					String aboutType = repertoryTypeEnum.BILL.getCode();
 					afterDAO.insertFowingByGoodsId(id,goodsId,BadNum,type,aboutType);
@@ -119,8 +118,6 @@ public class AfterSerivceImpl implements IAfterService{
 					repertory.setAvailableNum(repertory.getAvailableNum()+1);//可用+1
 					repertory.setSalesNum(repertory.getSalesNum()+1);//销售+1
 					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
-					String AvailableNum = repertory.getAvailableNum().toString();
-					String SalesNum =repertory.getSalesNum().toString();
 					String type1 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
 					String type2 = repertoryTypeEnum.SALES_NUM.getCode();
 					String aboutType = repertoryTypeEnum.BILL.getCode();
@@ -179,12 +176,14 @@ public class AfterSerivceImpl implements IAfterService{
 		Map<String, Object> billDetail = afterDAO.queryBillTetailById(id);//查询单据详情
 		String goodsId = billDetail.get("goodsId").toString();
 		String goodsChildId = billDetail.get("goodsDetailId").toString();
+		String BadNum = "1";
+		String AvailableNum = "1";
+		String SalesNum = "1";
 		if(goodsChildId != null){
 			ScRepertory  repertory = afterDAO.queryRepertoryByGoodsChildId(goodsChildId);//根据商品子表id,查询库存表
 			if(relus.equals("0")){ //如果损坏
 					repertory.setBadNum(repertory.getBadNum()+1);//破损+1
 					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
-					String BadNum = repertory.getBadNum().toString();
 					String type = repertoryTypeEnum.BAD_NUM.getCode();
 					String aboutType = repertoryTypeEnum.BILL.getCode();
 					afterDAO.insertFowingByChildId(id,goodsChildId,BadNum,type,aboutType);
@@ -192,8 +191,6 @@ public class AfterSerivceImpl implements IAfterService{
 					repertory.setAvailableNum(repertory.getAvailableNum()+1);//可用+1
 					repertory.setSalesNum(repertory.getSalesNum()+1);//销售+1
 					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
-					String AvailableNum = repertory.getAvailableNum().toString();
-					String SalesNum =repertory.getSalesNum().toString();
 					String type1 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
 					String type2 = repertoryTypeEnum.SALES_NUM.getCode();
 					String aboutType = repertoryTypeEnum.BILL.getCode();
@@ -206,7 +203,6 @@ public class AfterSerivceImpl implements IAfterService{
 			if(relus.equals("0")){ //如果损坏
 					repertory.setBadNum(repertory.getBadNum()+1);
 					repertory.setSalesCount(repertory.getSalesCount()-1);
-					String BadNum = repertory.getBadNum().toString();
 					String type = repertoryTypeEnum.BAD_NUM.getCode();
 					String aboutType = repertoryTypeEnum.DELIVERY.getCode();
 					afterDAO.insertFowingByGoodsId(id,goodsId,BadNum,type,aboutType);
@@ -214,8 +210,6 @@ public class AfterSerivceImpl implements IAfterService{
 					repertory.setAvailableNum(repertory.getAvailableNum()+1);//可用+1
 					repertory.setSalesNum(repertory.getSalesNum()+1);//销售+1
 					repertory.setSalesCount(repertory.getSalesCount()-1);//累计销售-1
-					String AvailableNum = repertory.getAvailableNum().toString();
-					String SalesNum =repertory.getSalesNum().toString();
 					String type1 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
 					String type2 = repertoryTypeEnum.SALES_NUM.getCode();
 					String aboutType = repertoryTypeEnum.BILL.getCode();
@@ -235,7 +229,9 @@ public class AfterSerivceImpl implements IAfterService{
 		record.setDeliveryType(DeleveryTypeEnum.CUSTOMER.getCode());
 		record.setAfterSalesType(AfterSalesTypeEnum.CHANGE_GOODS.getCode());
 		DBUtil.getInstance().insert(record);
-		
+		String freezeNum = "1";
+		String availableNum = "-1";
+		String salesNum = "-1";
 		if(goodsChildId != null){
 			ScRepertory  repertory = afterDAO.queryRepertoryByGoodsChildId(goodsChildId);//根据商品子表id,查询库存表
 				repertory.setFreezeNum(repertory.getFreezeNum()+1);//冻结库存+1
@@ -243,9 +239,6 @@ public class AfterSerivceImpl implements IAfterService{
 				repertory.setSalesNum(repertory.getSalesNum()-1);//销售库存-1
 				repertory.setSalesCount(repertory.getSalesCount()+1);//累计销售库存+1
 				DBUtil.getInstance().update(repertory);
-				String freezeNum = repertory.getFreezeNum().toString();
-				String availableNum = repertory.getAvailableNum().toString();
-				String salesNum = repertory.getAvailableNum().toString();
 				String type1 = repertoryTypeEnum.FREEZE_NUM.getCode();
 				String type2 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
 				String type3 = repertoryTypeEnum.SALES_NUM.getCode();
@@ -260,9 +253,6 @@ public class AfterSerivceImpl implements IAfterService{
 			repertory.setSalesNum(repertory.getSalesNum()-1);//销售库存-1
 			repertory.setSalesCount(repertory.getSalesCount()+1);//累计销售库存+1
 			DBUtil.getInstance().update(repertory);
-			String freezeNum = repertory.getFreezeNum().toString();
-			String availableNum = repertory.getAvailableNum().toString();
-			String salesNum = repertory.getAvailableNum().toString();
 			String type1 = repertoryTypeEnum.FREEZE_NUM.getCode();
 			String type2 = repertoryTypeEnum.AVAILABLE_NUM.getCode();
 			String type3 = repertoryTypeEnum.SALES_NUM.getCode();

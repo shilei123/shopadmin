@@ -48,7 +48,7 @@
 											<tr>
 												<td width="150">
 													<div class="frame-div-padd10">
-								        				<label for="inp_directoryName" class="am-form-label">栏目名称：</label>
+								        				<label for="inp_dirName" class="am-form-label">栏目名称：</label>
 								        			</div>
 												</td>
 												<td>
@@ -92,7 +92,7 @@
 												<td>
 													<div class="frame-div-padd10">
 								        				<!-- <input type="text" id="inp_isuse" style="width: 120px;" disabled="disabled"/> -->
-								        				<select name="directory.isuse" id="inp_isuse_" disabled="disabled" >
+								        				<select id="inp_isuse" disabled="disabled" >
 								        					<option value="-1">--请选择--</option>
 								        					<option value="1">有效</option>
 								        					<option value="0">无效</option>
@@ -121,9 +121,9 @@
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
 				<form id="form1" method="post">
-	    		<table border="0" bordercolor="red" align="center" id="directory_detail_table">
+	    		<table border="0" align="center" id="directory_detail_table">
 	    			<tr>
-						<td width="150">
+						<td>
 							<div class="frame-div-padd10">
 		        				<label for="directoryName" class="am-form-label">栏目名称：</label>
 		        			</div>
@@ -131,20 +131,20 @@
 						<td>
 							<div class="frame-div-padd10">
 		        				<input type="hidden"  id="inp2_id" name="directory.id" style="width:300px;"/>
-		        				<input type="hidden"  id="inp2_levels" name="directory.levels" style="width:300px;"/>
-		        				<input type="text"  name="directory.directoryName" id="inp2_directoryName" style="width:300px;" placeholder="请输入栏目名称"/>
+		        				<input type="hidden"  id="inp2_levels" name="directory.level" style="width:300px;"/>
+		        				<input type="text"  name="directory.dirName" id="inp2_dirName" style="width:300px;" placeholder="请输入栏目名称"/>
 		        			</div>
 						</td>
 					</tr>
 					<tr>
-						<td width="150">
+						<td>
 							<div class="frame-div-padd10">
 		        				<label for="inp2_parentName" class="am-form-label">上级栏目：</label>
 		        			</div>
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<select name="directory.parentDirectoryId" id="inp2_parentName">
+		        				<select name="directory.parentDirId" id="inp2_parentName">
 		        			</div>
 						</td>
 					</tr>
@@ -156,7 +156,7 @@
 						</td>
 						<td>
 							<div class="frame-div-padd10">
-		        				<input type="text"  name="directory.cateOrder" id="inp2_cateOrder" style="width: 300px;" placeholder="请输入排序序号">
+		        				<input type="text"  name="directory.order" id="inp2_order" style="width: 300px;" placeholder="请输入排序序号">
 		        			</div>
 						</td>
 					</tr>

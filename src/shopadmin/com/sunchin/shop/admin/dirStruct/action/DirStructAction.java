@@ -29,7 +29,6 @@ public class DirStructAction extends PageAction{
 		try {
 			directoryList = dirStructService.queryDirStruct();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -43,7 +42,6 @@ public class DirStructAction extends PageAction{
 		try {
 			dirStructService.save(directory);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -62,7 +60,6 @@ public class DirStructAction extends PageAction{
 				dirStructService.delDirectory(directory.getId());
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -76,12 +73,28 @@ public class DirStructAction extends PageAction{
 		try {
 			directoryTypeList = dirStructService.queryDirType();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}
 	
+	/**
+	 * 查询有否有子类别
+	 * @return
+	 */
+	public String findDirParent(){
+		try {
+			List<ScDirStruct> list = dirStructService.queryDirParent(directory.getId());
+			if(list!=null && !list.isEmpty()){
+				this.msg = "该类别下已有子类别，无法编辑！";
+			}else{
+				this.msg = "null";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
 
 	public List<Map<String, Object>> getDirectoryList() {
 		return directoryList;

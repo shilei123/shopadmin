@@ -85,7 +85,7 @@ var delUserFre = function(obj){
 		data :{"userFre.id":userFreightId},
 		dataType : "json",
 		success : function(data) {
-			window.parent.showAlert("删除成功!");
+			window.parent.showMsg("删除成功!");
 		}
 	});
 	$(obj).parent().parent().remove();
@@ -247,7 +247,7 @@ $("#saveBtn").click(function() {
 		dataType : "json",
 		success : function(json) {
 			closeCurrentWin();
-			window.parent.showAlert("操作成功!");
+			window.parent.showMsg("操作成功!");
 			window.parent.queryFreight();
 		},
 		error : function(e) {

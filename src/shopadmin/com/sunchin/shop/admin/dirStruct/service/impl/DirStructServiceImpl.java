@@ -8,21 +8,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
-
 import javax.annotation.Resource;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dirStruct.dao.DirStructDAO;
 import com.sunchin.shop.admin.dirStruct.service.IDirStructService;
 import com.sunchin.shop.admin.dirStruct.util.ComparatorDirStructVO;
 import com.sunchin.shop.admin.pojo.ScDirStruct;
-
 import framework.db.DBUtil;
-import framework.util.ComparatorCategoryVO;
 
 @Repository("dirStructService")
 public class DirStructServiceImpl implements IDirStructService{
@@ -137,10 +132,15 @@ public class DirStructServiceImpl implements IDirStructService{
 			directory.setFlag(FlagEnum.ACT.getCode());
 			directory.setCreateTime(new Date());
 			DBUtil.getInstance().insert(directory);
-		} else { // 修改
-			ScDirStruct vo = (ScDirStruct) DBUtil.getInstance().get(ScDirStruct.class, directory.getId());
+		}else { // 修改
+			ScDirStruct vo = dirStructDAO.queryDirectoryById(directory.getId());
+			ScDirStruct vo2 = dirStructDAO.queryDirectoryById(directory.getParentDirId());
+			int level =Integer.parseInt(vo2.getLevel());
+			String levels =String.valueOf(level+1); 
 			vo.setDirName(directory.getDirName());
 			vo.setDirPath(directory.getDirPath());
+			vo.setParentDirId(directory.getParentDirId());
+			vo.setLevel(levels);
 			vo.setOrder(directory.getOrder());
 			vo.setIsuse(directory.getIsuse());
 			vo.setUpdateTime(new Date());

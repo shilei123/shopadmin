@@ -103,7 +103,7 @@ $("#saveBtn").click(function() {
 		success : function(json) {
 			queryCoupon();
 			closeModal("editCouponModal");
-			showAlert("操作成功");
+			showMsg("操作成功");
 		},
 		error : function(e) {
 			showAlert("操作失败！");
@@ -137,7 +137,7 @@ var setCouponForm = function(data) {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='showEditWin(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>修改</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditWin(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>编辑</a>";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteDict(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
 	html += "</div>";
 	return html;
@@ -174,7 +174,7 @@ var deleteDict = function(id) {
 			data : data,
 			dataType : "json",
 			success : function(json) {
-				showAlert("操作成功");
+				showMsg("操作成功");
 				queryCoupon();
 			},
 			error : function(e) {

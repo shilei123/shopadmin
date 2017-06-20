@@ -35,7 +35,7 @@ $('#queryBtn').click(function() {
 
 //弹出新增窗口
 $("#addBtn").click(function() {
-	window.location.href=path_ + "/view/shop/article/addArticle.jsp";
+	openTab("aadArticleTabId","文章发布",path_+"/view/shop/article/addArticle.jsp?tabId=aadArticleTabId");
 });
 
 var formatterArticleTitle = function(value, row) {
@@ -44,7 +44,7 @@ var formatterArticleTitle = function(value, row) {
 
 var formatterAction = function(value, row) {
 	var html = "<div class=\"am-btn-group am-btn-group-xs\">";
-	html += "<a href='javascript:void(0)' onclick='showEditWin(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>编辑</a>";
+	html += "&nbsp;&nbsp;<a href='javascript:void(0)' onclick='showEditWin(\""+ row["id"]+ "\")'><span class='am-icon-edit'></span>编辑</a>";
 	html += "&nbsp;&nbsp;<a href='javascript:void(0)' class='am-text-danger' onclick='deleteDict(\""+ row["id"]+ "\")'><span class='am-icon-remove'></i>删除</a>";
 	html += "</div>";
 	return html;
@@ -52,7 +52,7 @@ var formatterAction = function(value, row) {
 
 //编辑
 var showEditWin = function(id) {
-	window.location.href=path_ + "/view/shop/article/addArticle.jsp?articleId="+id;
+	openTab("editArticleTabId_"+id,"文章编辑",path_+"/view/shop/article/addArticle.jsp?tabId=editArticleTabId_"+id+"&articleId="+id);
 };
 
 
@@ -66,7 +66,7 @@ var deleteDict = function(id) {
 			data : data,
 			dataType : "json",
 			success : function(json) {
-				showAlert("操作成功");
+				showMsg("操作成功");
 				queryArticle();
 			},
 			error : function(e) {

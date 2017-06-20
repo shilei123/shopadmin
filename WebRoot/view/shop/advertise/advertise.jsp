@@ -27,32 +27,26 @@
 									<tr>
 										<td class="query_title" >广告名称：</td>
 										<td><input name="queryParams.Name" class="am-form-field"/></td>
+										<td class="query_title">广告开始时间：</td>
+					        			<td valign="top">
+						        			<div>
+						        				<input class="am-form-field" name="queryParams.startRegTime" id="startTime" style="width:152px"/>
+						        			</div>
+										</td>
+										<td class="query_title">广告结束时间：</td>
+										<td>
+											<div>
+											<input class="am-form-field" name="queryParams.endRegTime" id="endTime" style="width:152px"/>
+											</div>
+					        			</td>
 										<td class="query_title">广告类型：</td>
 										<td>
 											<select id="linkkind" name="queryParams.linkkind" data-am-selected="{btnWidth: '164px'}">
 											</select>
 										</td>
-										<td class="query_title">广告开始时间：</td>
-					        			<td valign="top">
-						        			<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-											  <input type="text" name="queryParams.startRegTime" id="startRegTime" class="am-form-field">
-											  <span class="am-input-group-btn am-datepicker-add-on">
-											    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-											  </span>
-											</div>
-										</td>
-										<td class="query_title">广告结束时间：</td>
-										<td>
-											<div class="am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd'}">
-												  <input type="text" name="queryParams.endRegTime" id="endRegTime" class="am-form-field">
-												  <span class="am-input-group-btn am-datepicker-add-on">
-												    <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
-												  </span>
-											</div>
-					        			</td>
 									</tr>
 									<tr>
-										<td colspan="6" align="center">
+										<td colspan="8"  style="padding-left: 400px;">
 											<button type="button" id="addBtn" class="am-btn am-btn-primary frame-search-button">新增</button>
 											<button type="button" id="queryBtn" class="am-btn am-btn-primary frame-search-button">查询</button>
 										</td>
@@ -110,13 +104,13 @@
 			        		<td>广告开始时间：</td>
 					   		<td valign="top">
 					   		<div>
-					   		<input class="am-form-field" name="advertise.startTime" id="starttime" style="width:152px"/>
+					   		<input class="am-form-field" name="advertise.startTime" id="startTimes" style="width:152px"/>
 					   		</div>
 							</td>
 							<td>广告结束时间：</td>
 							<td>
 							<div>
-							<input class="am-form-field" name="advertise.endTime" id="endtime" style="width:152px"/>
+							<input class="am-form-field" name="advertise.endTime" id="endTimes" style="width:152px"/>
 							</div>
 	        				</td>
 			        	</tr>
@@ -174,7 +168,7 @@
 			  			<tr>
 			  				<td class="table_title">广告介绍：</td>
 			  				<td valign="top" colspan="3">
-			  					<textarea name="advertise.memo" id="memo" rows="5" placeholder="广告介绍" style="width:94%;height:150px;margin-top: 5px;" class="am-form-field" ></textarea>
+			  					<textarea name="advertise.memo" id="memo" rows="5" placeholder="广告介绍" style="width:94%;height:100px;margin-top: 5px;" class="am-form-field" ></textarea>
 			  				</td>
 			  			</tr>
 		       	 	</table>

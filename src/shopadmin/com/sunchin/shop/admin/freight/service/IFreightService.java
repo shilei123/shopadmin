@@ -21,4 +21,10 @@ public interface IFreightService {
 
 	void saveIsuse(String id) throws Exception;
 
+	PageBean queryFreAndExpList(PageBean pageBean) throws Exception;
+
+	List<Map<String, Object>> queryFreAndExpCheck(PageBean pageBean) throws Exception;
+
+	void saveFreightAndExpress(PageBean pageBean) throws Exception;
+
 }

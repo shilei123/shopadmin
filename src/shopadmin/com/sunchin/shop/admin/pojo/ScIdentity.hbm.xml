@@ -30,7 +30,7 @@
         </property>
         <property name="identityStatus" type="java.lang.String">
              <column name="IDENTITY_STATUS" length="1">
-                <comment>身份证状态/未认证0 申请中1 已认证2</comment>
+                <comment>身份证状态/未认证0 申请中1 认证通过2 认证不通过 3</comment>
             </column>
         </property>
         <property name="identityFrontal" type="java.lang.String">
@@ -70,7 +70,7 @@
         </property>
         <property name="failureReason" type="java.lang.String">
             <column name="FAILURE_REASON" length="100">
-                <comment>失败理由</comment>
+                <comment>不通过理由</comment>
             </column>
         </property>
          <property name="belong" type="java.lang.String">

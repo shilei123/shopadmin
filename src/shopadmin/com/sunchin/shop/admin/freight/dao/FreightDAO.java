@@ -115,5 +115,55 @@ public class FreightDAO extends PageDAO{
 		}
 		return null;
 	}
+
+	public int queryFreAndExpCount(PageBean pageBean) {
+		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
+		String sql = this.FreAndExpWhereSql(pageBean, params);
+		return DBUtil.getInstance().queryCountBySQL(sql, params);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ScFreight> queryFreAndExpPagination(PageBean pageBean) {
+		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
+		String sql = this.FreAndExpWhereSql(pageBean, params);
+		return this.query(sql, params, DBUtil.getInstance(), pageBean);
+	}
 	
+	private String FreAndExpWhereSql(PageBean pageBean, List<String> params) {
+		StringBuffer sql = new StringBuffer(" select t1.id,t1.code,t1.for_short,to_char(t1.create_time,'yyyy-MM-dd hh24:mm:ss') create_time from sc_express_provider t1 ");
+		sql.append(" where t1.flag=? ");
+		sql.append(" order by t1.create_time desc ");
+		return sql.toString();
+	}
+	
+	
+	/**
+	 * 查询该运费模板的运费-服务商关系
+	 * @param cateId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> queryFreAndExpByFreightId(String freightId) {
+		StringBuffer sql = new StringBuffer(" select * from sc_express_and_freight t1 where t1.flag=? and freight_id=? ");
+		List<String> params = new ArrayList<String>();
+		params.add(FlagEnum.ACT.getCode());
+		params.add(freightId);
+		List<Map<String, Object>> lists = DBUtil.getInstance().queryBySQL(sql.toString(), params);
+		if(lists != null && !lists.isEmpty()){
+			return lists;
+		}
+		return null;
+	}
+
+	/**
+	 * 删除该运费模板的运费-服务商关系
+	 * @param freightId
+	 * @param expressId
+	 */
+	public void delFreAndExp(String freightId, String expressId) {
+		String hql = " update ScExpressAndFreight set flag=? where freight_id=? and express_id=? ";
+		DBUtil.getInstance().executeHql(hql, FlagEnum.HIS.getCode(), freightId, expressId);
+	}
 }

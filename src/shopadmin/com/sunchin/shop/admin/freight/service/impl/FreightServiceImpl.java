@@ -5,13 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import javax.annotation.Resource;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -19,11 +16,9 @@ import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.IsuseEnum;
 import com.sunchin.shop.admin.freight.dao.FreightDAO;
 import com.sunchin.shop.admin.freight.service.IFreightService;
-import com.sunchin.shop.admin.pojo.ScEvents;
-import com.sunchin.shop.admin.pojo.ScEventsGoods;
+import com.sunchin.shop.admin.pojo.ScExpressAndFreight;
 import com.sunchin.shop.admin.pojo.ScFreight;
 import com.sunchin.shop.admin.pojo.ScUserFreight;
-
 import framework.bean.PageBean;
 import framework.db.DBUtil;
 import framework.util.CommonUtils;
@@ -33,7 +28,9 @@ public class FreightServiceImpl implements IFreightService{
 
 	@Resource(name="freightDAO")
 	private FreightDAO freightDAO;
-
+	@Resource(name="dbUtil")
+	private DBUtil db;
+	
 	/**
 	 * 查询
 	 */
@@ -238,5 +235,107 @@ public class FreightServiceImpl implements IFreightService{
 			freights.setIsuse(IsuseEnum.VALID.getCode());
 			DBUtil.getInstance().update(freights);
 		}
+	}
+
+	/**
+	 * 查询服务商列表
+	 */
+	@Override
+	public PageBean queryFreAndExpList(PageBean pageBean) throws Exception {
+		int total = freightDAO.queryFreAndExpCount(pageBean);
+		pageBean.setTotal(total);
+		List<ScFreight> pageData = freightDAO.queryFreAndExpPagination(pageBean);
+		pageBean.setPageData(pageData);
+		return pageBean;
+	}
+
+	/**
+	 * 查询选中的服务商、运费关系
+	 */
+	@Override
+	public List<Map<String, Object>> queryFreAndExpCheck(PageBean pageBean) throws Exception {
+		String freightId = CommonUtils.getString(pageBean.getQueryParams().get("freightId"));
+		List<Map<String, Object>> lists = freightDAO.queryFreAndExpByFreightId(freightId);
+		if(lists != null && !lists.isEmpty()){
+			return lists;
+		}
+		return null;
+	}
+
+	/**
+	 * 保存服务商、运费关系
+	 */
+	@Override
+	public void saveFreightAndExpress(PageBean pageBean) throws Exception {
+		String freightId = CommonUtils.getString(pageBean.getQueryParams().get("freightId"));
+		String checkExpressIds = CommonUtils.getString(pageBean.getQueryParams().get("checkExpressIds"));
+		List<Map<String, Object>> list = freightDAO.queryFreAndExpByFreightId(freightId);//查询和运费相关的所有服务商
+		if( checkExpressIds==null || freightId==null
+				|| ("".equals(checkExpressIds) && (list==null || list.isEmpty())) ) {//异常情况
+			return;
+		}
+		
+		//这里待补充：需要查询该条运费-服务商关系是否被引用， 如果被引用就逻辑删除
+		
+		
+		//传入为空，全删
+		if("".equals(checkExpressIds)){
+			for (int i = 0; i < list.size(); i++) {
+				String expressId = CommonUtils.getString(list.get(i).get("expressId"));
+				this.delFreAndExp(freightId, expressId);
+			}
+			return;
+		}
+		//结果集为空，全加
+		String[] arr = checkExpressIds.split(",");
+		if(list==null || list.isEmpty()){
+			for (int i = 0; i < arr.length; i++) {
+				this.addFreAndExp(freightId, arr[i]);
+			}
+			return;
+		}
+		//传入和结果集都不为空（传入有，结果集无）
+		for (int i = 0; i < arr.length; i++) {
+			boolean addFlag = true;
+			for (int j = 0; j < list.size(); j++) {
+				String expressId = CommonUtils.getString(list.get(j).get("expressId"));
+				if(arr[i].equals(expressId)){
+					addFlag = false;
+					break;
+				}
+			}
+			if(addFlag){
+				this.addFreAndExp(freightId, arr[i]);
+			}
+		}
+		//传入和结果集都不为空（传入无，结果集有）
+		for (int i = 0; i < list.size(); i++) {
+			boolean delFlag = true;
+			String expressId = CommonUtils.getString(list.get(i).get("expressId"));
+			for (int j = 0; j < arr.length; j++) {
+				if(expressId.equals(arr[j])){
+					delFlag = false;
+					break;
+				}
+			}
+			if(delFlag){
+				this.delFreAndExp(freightId, expressId);
+			}
+		}
+		
+	}
+
+	private void addFreAndExp(String freightId, String expressId) {
+		ScExpressAndFreight FreAndExp = new ScExpressAndFreight();
+		FreAndExp.setId(UUID.randomUUID().toString());
+		FreAndExp.setFreightId(freightId);
+		FreAndExp.setExpressId(expressId);
+		FreAndExp.setCreateTime(new Date());
+		FreAndExp.setFlag(FlagEnum.ACT.getCode());
+		db.insert(FreAndExp);
+	}
+
+	private void delFreAndExp(String freightId, String expressId) {
+		freightDAO.delFreAndExp(freightId,expressId);
 	}
 }

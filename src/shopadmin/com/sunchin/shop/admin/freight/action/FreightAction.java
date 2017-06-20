@@ -39,7 +39,6 @@ public class FreightAction extends PageAction{
 			this.setTotal(resultData.getTotal());
 			this.setDataRows(resultData.getPageData());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -52,7 +51,6 @@ public class FreightAction extends PageAction{
 		try {
 			freightService.saveIsuse(fre.getId());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -65,7 +63,6 @@ public class FreightAction extends PageAction{
 		try {
 			freightList = freightService.findFreightList(fre.getId());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -79,7 +76,6 @@ public class FreightAction extends PageAction{
 		try {
 			freightService.save(fre,childUserFreightList);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -93,17 +89,61 @@ public class FreightAction extends PageAction{
 		try {
 			freightService.deleteFreight(fre.getId());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}
 	
+	/**
+	 * 删除运费子表数据
+	 * @return
+	 */
 	public String delUserFreight(){
 		try {
 			freightService.delUserFreight(userFre.getId());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 查询服务商列表
+	 * @return
+	 */
+	public String queryFreAndExpList(){
+		try {
+			PageBean resultData = freightService.queryFreAndExpList(this.getPageBean());
+			this.setTotal(resultData.getTotal());
+			this.setDataRows(resultData.getPageData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	/**
+	 * 查询选中的服务商、运费关系
+	 * @return
+	 */
+	public String queryFreAndExpCheck(){
+		try {
+			freightList = freightService.queryFreAndExpCheck(this.getPageBean());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	
+	
+	/**
+	 * 保存服务商、运费关系
+	 * @return
+	 */
+	public String saveFreightAndExpress(){
+		try {
+			freightService.saveFreightAndExpress(this.getPageBean());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
