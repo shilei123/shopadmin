@@ -166,9 +166,9 @@ public class GoodsServiceImpl implements GoodsService {
 			db.update(goodsVo);
 			
 			//分别判断增加、删除、修改的子商品
-			List<ScChildGoods> insertCgList = new ArrayList();
-			List<ScChildGoods> updateCgList = new ArrayList();
-			List<ScChildGoods> deleteCgList = new ArrayList();
+			List<ScChildGoods> insertCgList = new ArrayList<ScChildGoods>();
+			List<ScChildGoods> updateCgList = new ArrayList<ScChildGoods>();
+			List<ScChildGoods> deleteCgList = new ArrayList<ScChildGoods>();
 			
 			//查询数据库已有的子商品列表
 			List<ScChildGoods> dbCgList = this.childGoodsDAO.queryPojoListByGoodsId(goodsBean.getId());
@@ -190,7 +190,10 @@ public class GoodsServiceImpl implements GoodsService {
 			
 			//覆盖商品-类别、属性、属性值数据
 			if(gcppList != null) { 
-				this.goodsCatePropPropValDAO.deleteByGoodsId(goodsVo.getId());
+				List<ScChildGoods> list = new ArrayList<ScChildGoods>();
+				list.addAll(insertCgList);
+				list.addAll(updateCgList);
+				this.goodsCatePropPropValDAO.deleteByGoodsId(goodsVo.getId(), list);				
 				db.insert(gcppList);
 			}
 			
@@ -428,5 +431,10 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void soldOutGoods(String goodsId) throws Exception {
 		this.goodsDAO.updateGoodsStsById(goodsId, GoodsStsEnum.OUT.getCode());
+	}
+
+	@Override
+	public List queryGoodsRep(String goodsId) throws Exception {
+		return this.goodsDAO.queryRepertoryListById(goodsId);
 	}
 }

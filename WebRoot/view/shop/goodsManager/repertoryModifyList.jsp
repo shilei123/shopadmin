@@ -4,8 +4,27 @@
 <head>
 <jsp:include page="/include/common.jsp"></jsp:include>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>待审核商品</title>
+<title>库存价格维护</title>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+<style type="text/css">
+#goodsChildTable th  {
+	border: 1px solid #CCCCCC;
+}
+
+#goodsChildTable td {
+	border: 1px solid #CCCCCC;
+}
+
+#goodsChildTable thead tr:first-child {
+	height: 25px;
+	background-color: #F5F5F5;
+}
+
+#goodsChildTable thead tr th {
+	width:120px;
+	text-align: center;
+}
+</style>
 </head>
 <body>
 	<div class="am-cf ">
@@ -14,7 +33,7 @@
 			<div class="admin-content-body">
 				<div class="am-cf am-padding am-padding-bottom-0">
 					<div class="am-fl am-cf">
-						<strong class="am-text-primary am-text-lg">待审核商品</strong> / <small>待审核商品</small>
+						<strong class="am-text-primary am-text-lg">库存价格维护</strong> / <small>修改商品的库存、价格</small>
 					</div>
 				</div>
 				<hr>
@@ -164,27 +183,55 @@
 		    </div>
 	    	<hr>
 	    	<div class="am-modal-bd frame-am-modal-bd">
-		        <div align="center">
+	           	<div class="frame-modal-content">
 		        	<table class="frame-modal-table" border="0" bordercolor="black">
 			        	<tr>
 			        		<td valign="top" style="width:80px;" class="table_title"><div style="margin-top: 5px;">可用库存：</div></td>
 			        		<td valign="top"> 
-			        			<input  class="am-form-field" type="text" value=""/>
+			        			<input class="am-form-field" type="text" id="availableNum" value=""/>
+			        			<input type="hidden" id="pkId" value=""/>
 			        		</td>
 			        	</tr>
 			        	<tr>
 			        		<td valign="top" class="table_title"><div style="margin-top: 5px;">销售库存：</div></td>
 			        		<td valign="top"> 
-			        			<input  class="am-form-field" type="text" value=""/>
+			        			<input class="am-form-field" type="text" id="salesNum" value=""/>
 			        		</td>
 			        	</tr>
 		       	 	</table>
-		       	 	<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
-		       	 	<div align="center">
-		       	 		<button type="button" class="am-btn am-btn-success" id="saveBtn3"><span class="am-icon-save"></span> 保存</button>
-						<button type="button" class="am-btn am-btn-default" id="closeBtn3"><span class="am-icon-undo"></span> 取消</button>
-					</div>
-	           	</div>
+				</div>
+				<div align="center" id="errorMsg" style="color: red;margin-top: 5px;margin-bottom: 10px;">&nbsp;</div>
+	       	 	<div align="center">
+	       	 		<button type="button" class="am-btn am-btn-success" id="saveBtn3"><span class="am-icon-save"></span> 保存</button>
+					<button type="button" class="am-btn am-btn-default" id="closeBtn3"><span class="am-icon-undo"></span> 取消</button>
+				</div>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="childGoodsRepEditModel">
+		<div class="am-modal-dialog">
+		 	<div class="am-modal-hd"><span id="title">编辑库存</span>
+		    	<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+		    </div>
+	    	<hr>
+	    	<div class="am-modal-bd frame-am-modal-bd">
+	           	<div class="frame-modal-content">
+		        	<table id="goodsChildTable">
+						<thead>
+							<tr>
+								<th>商品属性</th>
+								<th><span style="color: red;">*</span>可用库存</th>
+								<th><span style="color: red;">*</span>销售库存</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+	       	 	<div class="frame-modal-bottom">
+	       	 		<button type="button" class="am-btn am-btn-success" id="saveBtn4"><span class="am-icon-save"></span> 保存</button>
+					<button type="button" class="am-btn am-btn-default" id="closeBtn4"><span class="am-icon-undo"></span> 关闭</button>
+				</div>
 	    	</div>
 		</div>
 	</div>
@@ -206,14 +253,12 @@
 						</thead>
 					</table>
 				</div>
-		        <div>
-					<div class="am-u-sm-12">
-						<div class="am-cf">共<span id="rowCount1"></span>条记录<div id="page1" class="am-fr"></div></div>
-					</div>
-		       	 	<div align="center">
-						<button type="button" class="am-btn am-btn-default" id="closeBtn4"><span class="am-icon-undo"></span> 关闭</button>
-					</div>
-	           	</div>
+				<div class="am-u-sm-12">
+					<div class="am-cf">共<span id="rowCount1"></span>条记录<div id="page1" class="am-fr"></div></div>
+				</div>
+	       	 	<div align="center">
+					<button type="button" class="am-btn am-btn-default" id="closeBtn5"><span class="am-icon-undo"></span> 关闭</button>
+				</div>
 	    	</div>
 		</div>
 	</div>

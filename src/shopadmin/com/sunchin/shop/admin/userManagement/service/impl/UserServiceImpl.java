@@ -12,13 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.dict.IdentityStatusEnum;
-import com.sunchin.shop.admin.dict.StatusEnum;
 import com.sunchin.shop.admin.pojo.ScGrade;
-import com.sunchin.shop.admin.pojo.ScUserBase;
-import com.sunchin.shop.admin.pojo.ScCoupon;
 import com.sunchin.shop.admin.pojo.ScIdentity;
 import com.sunchin.shop.admin.pojo.ScPurse;
 import com.sunchin.shop.admin.pojo.ScUser;
+import com.sunchin.shop.admin.pojo.ScUserBase;
 import com.sunchin.shop.admin.pojo.ScWallet;
 import com.sunchin.shop.admin.userManagement.dao.UserDAO;
 import com.sunchin.shop.admin.userManagement.service.IUserService;

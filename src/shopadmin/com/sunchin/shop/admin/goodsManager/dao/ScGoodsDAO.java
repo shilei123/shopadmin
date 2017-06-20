@@ -95,4 +95,32 @@ public class ScGoodsDAO extends PageDAO {
 	public int updateGoodsStsById(String id, String goodsSts) {
 		return DBUtil.getInstance().executeHql(" update ScGoods t set t.goodsSts=? where t.id=? ", goodsSts, id);
 	}
+	
+	public List queryRepertoryListById(String goodsId) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" with temp as ( ");
+		sql.append(" 	 select gcpp.goods_id, ");
+		sql.append("     		gcpp.child_goods_id, ");
+		sql.append("     		wm_concat(p.prop_name||':'||pv.val_name) child_name ");
+		sql.append("     from sc_goods_cate_prop_propval gcpp ");
+		sql.append("     left join sc_cate_prop_propval cppv on cppv.id=gcpp.cppv_id ");
+		sql.append("     left join sc_prop_propval ppv on ppv.id=cppv.ppv_id ");
+		sql.append("     left join sc_property p on ppv.prop_id=p.id ");
+		sql.append("     left join sc_propval pv on ppv.val_id=pv.id ");
+		sql.append("     where gcpp.goods_id=? ");
+		sql.append("     group by gcpp.goods_id,gcpp.child_goods_id ");
+		sql.append(" ) ");
+		sql.append(" select g.id as goods_id, ");
+		sql.append("        g.title, ");
+		sql.append("        g.empty_store, ");
+		sql.append("        t.child_name, ");
+		sql.append("        r.child_goods_id, ");
+		sql.append("        r.* ");
+		sql.append(" from sc_repertory r ");
+		sql.append(" left join sc_goods g on g.id=r.goods_id ");
+		sql.append(" left join sc_child_goods cg on cg.id=r.child_goods_id ");
+		sql.append(" left join temp t on t.goods_id=r.goods_id and r.child_goods_id=t.child_goods_id ");
+		sql.append(" where r.goods_id=? ");
+		return DBUtil.getInstance().queryBySQL(sql.toString(), goodsId, goodsId);
+	}
 }

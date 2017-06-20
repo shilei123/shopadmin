@@ -84,4 +84,11 @@ public interface GoodsService {
 	 * @throws Exception
 	 */
 	void soldOutGoods(String goodsId) throws Exception;
+	
+	/**
+	 * 查询商品库存
+	 * @param goodsId
+	 * @throws Exception
+	 */
+	List queryGoodsRep(String goodsId) throws Exception;
 }
