@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScDeliveryRecord" table="SC_DELIVERY_RECORD">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="code" type="java.lang.String">
+            <column name="CODE" length="50" />
+        </property>
+        <property name="orderId" type="java.lang.String">
+            <column name="ORDER_ID" length="36" />
+        </property>
+        <property name="deliveryTime" type="java.util.Date">
+            <column name="DELIVERY_TIME" length="7" />
+        </property>
+        <property name="deliveryUserId" type="java.lang.String">
+            <column name="DELIVERY_USER_ID" length="36" />
+        </property>
+        <property name="editUserId" type="java.lang.String">
+            <column name="EDIT_USER_ID" length="36" />
+        </property>
+        <property name="editTime" type="java.util.Date">
+            <column name="EDIT_TIME" length="7" />
+        </property>
+        <property name="expressNum" type="java.lang.String">
+            <column name="EXPRESS_NUM" length="50" />
+        </property>
+        <property name="expressId" type="java.lang.String">
+            <column name="EXPRESS_ID" length="50" />
+        </property>
+        <property name="addressId" type="java.lang.String">
+            <column name="ADDRESS_ID" length="50" />
+        </property>
+        <property name="province" type="java.lang.String">
+            <column name="PROVINCE" length="20" />
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="CITY" length="20" />
+        </property>
+        <property name="county" type="java.lang.String">
+            <column name="COUNTY" length="20" />
+        </property>
+        <property name="addressDetail" type="java.lang.String">
+            <column name="ADDRESS_DETAIL" length="100" />
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" length="20" />
+        </property>
+        <property name="postNum" type="java.lang.String">
+            <column name="POST_NUM" length="6" />
+        </property>
+        <property name="phoneNum" type="java.lang.String">
+            <column name="PHONE_NUM" length="15" />
+        </property>
+        <property name="telphoneNum" type="java.lang.String">
+            <column name="TELPHONE_NUM" length="20" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" length="30" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7" />
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+        <property name="belong" type="java.lang.String">
+            <column name="BELONG" length="10" />
+        </property>
+        <property name="sts" type="java.lang.String">
+            <column name="STS" length="1" />
+        </property>
+         <property name="deleveryType" type="java.lang.String">
+            <column name="DELEVERY_TYPE" length="1" />
+        </property>
+         <property name="afterSalesType" type="java.lang.String">
+            <column name="AFTER_SALES_TYPE" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

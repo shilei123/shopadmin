@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScCateProp" table="SC_CATE_PROP">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="propId" type="java.lang.String">
+            <column name="PROP_ID" length="36">
+                <comment>属性id</comment>
+            </column>
+        </property>
+        <property name="cateId" type="java.lang.String">
+            <column name="CATE_ID" length="36">
+                <comment>类别id</comment>
+            </column>
+        </property>
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_">
+                <comment>排序</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1">
+                <comment>状态</comment>
+            </column>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36">
+                <comment>创建人</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

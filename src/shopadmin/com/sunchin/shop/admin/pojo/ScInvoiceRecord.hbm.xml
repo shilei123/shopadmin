@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScInvoiceRecord" table="SC_INVOICE_RECORD">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="userId" type="java.lang.String">
+            <column name="USER_ID" length="36" />
+        </property>
+        <property name="invoiceId" type="java.lang.String">
+            <column name="INVOICE_ID" length="36" />
+        </property>
+        <property name="invoiceCode" type="java.lang.String">
+            <column name="INVOICE_CODE" length="50" />
+        </property>
+        <property name="invoiceHeaderId" type="java.lang.String">
+            <column name="INVOICE_HEADER_ID" length="36" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="CONTENT" length="100" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" length="100" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7" />
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+        <property name="belong" type="java.lang.String">
+            <column name="BELONG" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScCategory" table="Sc_Category">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="cateName" type="java.lang.String">
+            <column name="CATE_NAME" length="100">
+                <comment>类别名称</comment>
+            </column>
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" length="100">
+                <comment>类别描述</comment>
+            </column>
+        </property>
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_">
+                <comment>排序</comment>
+            </column>
+        </property>
+        <property name="level" type="java.lang.String">
+            <column name="LEVEL_" length="1">
+                <comment>所属级别.0根节点，1一级类别，2二级类别，3三级类别</comment>
+            </column>
+        </property>
+        <property name="logo" type="java.lang.String">
+            <column name="LOGO" length="100">
+                <comment>类别图标</comment>
+            </column>
+        </property>
+        <property name="url" type="java.lang.String">
+            <column name="URL" length="100">
+                <comment>导航链接</comment>
+            </column>
+        </property>
+        <property name="isuse" type="java.lang.String">
+            <column name="ISUSE" length="1">
+                <comment>是否有效</comment>
+            </column>
+        </property>
+        <property name="parentId" type="java.lang.String">
+            <column name="PARENT_ID" length="36">
+                <comment>上级类别ID</comment>
+            </column>
+        </property>
+        <property name="cateCode" type="java.lang.String">
+            <column name="CATE_CODE" length="10">
+                <comment>类别代码</comment>
+            </column>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="updateTime" type="java.util.Date">
+            <column name="UPDATE_TIME" length="7">
+                <comment>修改时间</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1">
+                <comment>数据有效性</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

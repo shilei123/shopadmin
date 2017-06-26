@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScChildGoods" table="SC_CHILD_GOODS">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="childCode" type="java.lang.String">
+            <column name="CHILD_CODE" length="36" />
+        </property>
+        <property name="goodsId" type="java.lang.String">
+            <column name="GOODS_ID" length="36" />
+        </property>
+        <property name="childName" type="java.lang.String">
+            <column name="CHILD_NAME" length="100" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" length="100" />
+        </property>
+        <property name="purchasePrice" type="java.lang.Double">
+            <column name="PURCHASE_PRICE" precision="10" />
+        </property>
+        <property name="marketPrice" type="java.lang.Double">
+            <column name="MARKET_PRICE" precision="10" />
+        </property>
+        <property name="salePrice" type="java.lang.Double">
+            <column name="SALE_PRICE" precision="10" />
+        </property>
+        <property name="promotionPrice" type="java.lang.Double">
+            <column name="PROMOTION_PRICE" precision="10" />
+        </property>
+        <property name="childNo" type="java.lang.String">
+            <column name="CHILD_NO" length="36" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7" />
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

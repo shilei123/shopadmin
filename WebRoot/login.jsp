@@ -57,7 +57,7 @@
 	<div class="myapp-login-logo-block tpl-login-max">
 		<div class="myapp-login-logo-text">
 			<div class="myapp-login-logo-text">
-				<span></span> 后台管理系统
+				<span>${title }</span> 
 			</div>
 		</div>
 		<div class="login-font">

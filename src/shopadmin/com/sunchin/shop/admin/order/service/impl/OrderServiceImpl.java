@@ -1,7 +1,83 @@
 package com.sunchin.shop.admin.order.service.impl;
 
-import com.sunchin.shop.admin.order.service.IOrderService;
+import java.util.List;
+import java.util.Map;
 
-public class OrderServiceImpl implements IOrderService {
+import javax.annotation.Resource;
 
+import org.springframework.stereotype.Repository;
+
+import com.sunchin.shop.admin.order.dao.OrderDAO;
+import com.sunchin.shop.admin.order.service.OrderService;
+import com.sunchin.shop.admin.pojo.ScOrder;
+
+import framework.bean.PageBean;
+import framework.util.CommonUtils;
+
+@SuppressWarnings("rawtypes")
+@Repository("orderService")
+public class OrderServiceImpl implements OrderService {
+
+	@Resource(name="orderDAO")
+	private OrderDAO orderDAO;
+
+	@Override
+	public PageBean queryOrderList(PageBean pageBean) throws Exception {
+		int total = orderDAO.queryOrderCount(pageBean);
+		pageBean.setTotal(total);
+		List<Map<String, Object>> pageData = orderDAO.queryOrderPagination(pageBean);
+		pageBean.setPageData(pageData);
+		return pageBean;
+	}
+
+	@Override
+	public Map queryOrderById(String id) throws Exception {
+		ScOrder order = orderDAO.queryOrderById(id);
+		if(order==null) return null;
+		Map map = orderDAO.queryOrderDetailById(id, order);
+		return map;
+	}
+
+	/**
+	 * empty method
+	 */
+	@Override
+	public void delOrder(String id) throws Exception {
+		
+	}
+
+	@Override
+	public List<ScOrder> querySonOrderById(String id) throws Exception {
+		ScOrder order = orderDAO.queryOrderById(id);
+		if(order==null) return null;
+		String invoiceRecordId = CommonUtils.getString(order.getInvoiceRecordId());
+		List<ScOrder> list = orderDAO.querySonOrderById(id, invoiceRecordId);
+		return list;
+	}
+
+	@Override
+	public void confirmOrder(String id) throws Exception {
+		List<ScOrder> list = orderDAO.querySonOrderByParentOrderId(id);
+		for (ScOrder order : list) {
+			String orderId = order.getId();
+			orderDAO.confirmOrder(orderId);
+		}
+		orderDAO.confirmOrder(id);
+	}
+
+	@Override
+	public void cancelOrder(String id) throws Exception {
+		List<ScOrder> list = orderDAO.querySonOrderByParentOrderId(id);
+		for (ScOrder order : list) {
+			String orderId = order.getId();
+			orderDAO.cancelOrder(orderId);
+		}
+		orderDAO.cancelOrder(id);
+	}
+
+	@Override
+	public void changePriceOrder(String id, Double actualPrice)throws Exception {
+		orderDAO.changePriceOrder(id, actualPrice);
+	}
+	
 }

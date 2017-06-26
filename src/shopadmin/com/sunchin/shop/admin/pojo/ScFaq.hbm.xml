@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScFaq" table="SC_FAQ">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="faqTitle" type="java.lang.String">
+            <column name="FAQ_TITLE" length="100">
+                <comment>标题</comment>
+            </column>
+        </property>
+        <property name="faqContent" type="java.lang.String">
+            <column name="FAQ_CONTENT">
+                <comment>内容</comment>
+            </column>
+        </property>
+        <property name="faqType" type="java.lang.String">
+            <column name="FAQ_TYPE" length="1">
+                <comment>商品、常见问题分类</comment>
+            </column>
+        </property>
+        <property name="faqTypeId" type="java.lang.String">
+            <column name="FAQ_TYPE_ID" length="36">
+                <comment>外联id（关联到的商品或者分类id）</comment>
+            </column>
+        </property>
+        <property name="category" type="java.lang.String">
+            <column name="CATEGORY" length="1">
+                <comment>类型</comment>
+            </column>
+        </property>
+        <property name="parentFaqId" type="java.lang.String">
+            <column name="PARENT_Faq_ID" length="36">
+                <comment>父id</comment>
+            </column>
+        </property>
+        <property name="hotQuestion" type="java.lang.String">
+            <column name="HOT_QUESTION" length="1">
+                <comment>是否热点问题</comment>
+            </column>
+        </property>
+        <property name="order" type="java.lang.Integer">
+            <column name="ORDER_">
+                <comment>顺序</comment>
+            </column>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36">
+                <comment>创建人</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1">
+                <comment>数据有效性</comment>
+            </column>
+        </property>
+        <property name="belong" type="java.lang.String">
+            <column name="BELONG" length="36">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
