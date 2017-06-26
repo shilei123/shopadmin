@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScAddress" table="SC_ADDRESS">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="userId" type="java.lang.String">
+            <column name="USER_ID" length="36" />
+        </property>
+        <property name="province" type="java.lang.String">
+            <column name="PROVINCE" length="20" />
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="CITY" length="20" />
+        </property>
+        <property name="county" type="java.lang.String">
+            <column name="COUNTY" length="20" />
+        </property>
+        <property name="addressDetail" type="java.lang.String">
+            <column name="ADDRESS_DETAIL" length="100" />
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" length="20" />
+        </property>
+        <property name="postCode" type="java.lang.String">
+            <column name="POST_CODE" length="6" />
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="PHONE" length="15" />
+        </property>
+        <property name="tel" type="java.lang.String">
+            <column name="TEL" length="20" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" length="30" />
+        </property>
+        <property name="isuse" type="java.lang.String">
+            <column name="ISUSE" length="1" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7" />
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+        <property name="belong" type="java.lang.String">
+            <column name="BELONG" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

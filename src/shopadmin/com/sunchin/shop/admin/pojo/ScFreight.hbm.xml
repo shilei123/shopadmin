@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScFreight" table="SC_FREIGHT" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="templateName" type="java.lang.String">
+             <column name="TEMPLATE_NAME" length="50">
+                <comment>模板名称</comment>
+            </column>
+        </property>
+        <property name="valuation" type="java.lang.String">
+             <column name="VALUATION" length="1">
+                <comment>计价方式/件数 0 重量 1 体积 2</comment>
+            </column>
+        </property>
+        <property name="unit" type="java.lang.String">
+             <column name="UNIT" length="1">
+                <comment>单位/件 0 kg 1  m3 2</comment>
+            </column>
+        </property>
+        <property name="isuse" type="java.lang.String">
+            <column name="ISUSE" length="1">
+                <comment>是否默认/默认1，1有效，0无效</comment>
+            </column>
+        </property>
+      <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+         <property name="updateTime" type="java.util.Date">
+               <column name="UPDATE_TIME">
+                <comment>修改时间</comment>
+            </column>
+        </property>
+         <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1">
+                <comment>数据有效性/默认0，0有效，1无效</comment>
+            </column>
+        </property>
+        <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="50">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

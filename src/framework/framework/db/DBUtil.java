@@ -1,5 +1,8 @@
 package framework.db;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -28,7 +31,6 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
 import common.Logger;
-
 import framework.bean.UserMsg;
 import framework.helper.RequestHelper;
 import framework.config.SysDict;
@@ -1108,15 +1110,33 @@ class MapResultTransformer implements ResultTransformer{
 		for (int i = 0; i < keys.length; i++) {
 			if(values[i]!=null && SerializableClob.class.equals(values[i].getClass())){
 				SerializableClob s = (SerializableClob)values[i];
+				BufferedReader br = null;
 				try {
-					int len = s.getAsciiStream().available();
+					/*int len = s.getAsciiStream().available();
 					byte[] tmp = new byte[len];
 					s.getAsciiStream().read(tmp,0, len);
 					map.put(ToUtils.dbMapKeyToBeanFieldName(keys[i]), new String(tmp));
-					s.getAsciiStream().close();
+					s.getAsciiStream().close();*/
+					Reader reader = s.getCharacterStream();
+					br = new BufferedReader(reader);
+					String temp = null;
+					StringBuffer sb = new StringBuffer();
+					while ((temp=br.readLine()) != null) {
+						sb = new StringBuffer();
+						sb.append(temp);
+					}
+					map.put(ToUtils.dbMapKeyToBeanFieldName(keys[i]), sb.toString());
 				} catch (Exception e) {
 					log.error("", e);
-				} 
+				} finally {
+					if(br != null) {
+						try {
+							br.close();
+						} catch (IOException e) {
+							log.error("", e);
+						}
+					}
+				}
 			}else{
 				map.put(ToUtils.dbMapKeyToBeanFieldName(keys[i]), values[i]);
 			}

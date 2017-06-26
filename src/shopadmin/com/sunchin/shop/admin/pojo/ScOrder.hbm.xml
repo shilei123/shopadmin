@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScOrder" table="SC_ORDER">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="orderCode" type="java.lang.String">
+            <column name="ORDER_CODE" length="36" />
+        </property>
+        <property name="num" type="java.lang.Integer">
+            <column name="NUM" precision="22" scale="0" />
+        </property>
+        <property name="deliveryMode" type="java.lang.String">
+            <column name="DELIVERY_MODE" length="1" />
+        </property>
+        <property name="orderStatus" type="java.lang.String">
+            <column name="ORDER_STATUS" length="1" />
+        </property>
+        <property name="issplit" type="java.lang.String">
+            <column name="ISSPLIT" length="1" />
+        </property>
+        <property name="splitTime" type="java.util.Date">
+            <column name="SPLIT_TIME" length="7" />
+        </property>
+        <property name="invoice" type="java.lang.String">
+            <column name="INVOICE" length="1" />
+        </property>
+        <property name="invoiceRecordId" type="java.lang.String">
+            <column name="INVOICE_RECORD_ID" length="36" />
+        </property>
+        <property name="deliveryRecordId" type="java.lang.String">
+            <column name="DELIVERY_RECORD_ID" length="36" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" length="500" />
+        </property>
+        <property name="payMode" type="java.lang.String">
+            <column name="PAY_MODE" length="1" />
+        </property>
+        <property name="commisionCharge" type="java.lang.Double">
+            <column name="COMMISION_CHARGE" precision="22" scale="0" />
+        </property>
+        <property name="totalPrice" type="java.lang.Double">
+            <column name="TOTAL_PRICE" precision="22" scale="0" />
+        </property>
+        <property name="orderPrice" type="java.lang.Double">
+            <column name="ORDER_PRICE" precision="22" scale="0" />
+        </property>
+        <property name="actualPrice" type="java.lang.Double">
+            <column name="ACTUAL_PRICE" precision="22" scale="0" />
+        </property>
+        <property name="parentOrderId" type="java.lang.String">
+            <column name="PARENT_ORDER_ID" length="36" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7" />
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36" />
+        </property>
+        <property name="userId" type="java.lang.String">
+            <column name="USER_ID" length="36" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+        <property name="belong" type="java.lang.String">
+            <column name="BELONG" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScArticle" table="SC_ARTICLE" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="directoryId" type="java.lang.String">
+             <column name="DIRECTORY_ID" length="36">
+                <comment>栏目id</comment>
+            </column>
+        </property>
+        <property name="articleTitle" type="java.lang.String">
+             <column name="ARTICLE_TITLE" length="50">
+                <comment>文章标题</comment>
+            </column>
+        </property>
+        <property name="author" type="java.lang.String">
+             <column name="AUTHOR" length="50">
+                <comment>作者</comment>
+            </column>
+        </property>
+        <property name="source" type="java.lang.String">
+            <column name="SOURCE" length="50">
+                <comment>来源</comment>
+            </column>
+        </property>
+        <property name="memo" type="java.lang.String">
+            <column name="MEMO">
+                <comment>描述</comment>
+            </column>
+        </property>
+        <property name="articleType" type="java.lang.String">
+            <column name="ARTICLE_TYPE" length="1">
+                <comment>分类/文章 0</comment>
+            </column>
+        </property>
+        <property name="picture" type="java.lang.String">
+            <column name="PICTURE" length="200">
+                <comment>图片</comment>
+            </column>
+        </property>
+        <property name="url" type="java.lang.String">
+            <column name="URL" length="200">
+                <comment>导航链接</comment>
+            </column>
+        </property>
+        <property name="abstracts" type="java.lang.String">
+            <column name="ABSTRACTS" length="200">
+                <comment>摘要</comment>
+            </column>
+        </property>
+        <property name="iscontent" type="java.lang.String">
+            <column name="ISCONTENT" length="1">
+                <comment>是否评论/1 是 0 否</comment>
+            </column>
+        </property>
+      <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+         <property name="updateTime" type="java.util.Date">
+               <column name="UPDATE_TIME">
+                <comment>修改时间</comment>
+            </column>
+        </property>
+         <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1">
+                <comment>数据有效性/默认0，0有效，1无效</comment>
+            </column>
+        </property>
+        <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="50">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

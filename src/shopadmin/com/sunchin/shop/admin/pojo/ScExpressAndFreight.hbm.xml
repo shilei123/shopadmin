@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScExpressAndFreight" table="SC_EXPRESS_AND_FREIGHT" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="freightId" type="java.lang.String">
+             <column name="FREIGHT_ID" length="36">
+                <comment>运费id</comment>
+            </column>
+        </property>
+        <property name="expressId" type="java.lang.String">
+             <column name="EXPRESS_ID" length="36">
+                <comment>服务商id</comment>
+            </column>
+        </property>
+         <property name="createTime" type="java.util.Date">
+             <column name="CREATE_TIME">
+                <comment>修改时间</comment>
+            </column>
+        </property>
+        <property name="createUserId" type="java.lang.String">
+             <column name="CREATE_USER_ID" length="36">
+                <comment>创建人</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1">
+                <comment>数据有效性/默认1，1有效，0无效</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

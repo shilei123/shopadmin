@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScBillHistory" table="SC_BILL_HISTORY" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+         <property name="billStatus" type="java.lang.String">
+               <column name="BILL_STATUS" length="1">
+                <comment>当前状态/审核中 0 审核通过 1 审核不通过 2</comment>
+            </column>
+        </property>
+        <property name="billId" type="java.lang.String">
+             <column name="BILL_ID" length="36">
+                <comment>单据id</comment>
+            </column>
+        </property>
+        <property name="remark" type="java.lang.String">
+             <column name="REMARK" length="500">
+                <comment>备注</comment>
+            </column>
+        </property>
+         <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>申请时间</comment>
+            </column>
+        </property>
+         <property name="optionAdminid" type="java.lang.String">
+             <column name="OPTION_ADMINID" length="36">
+                <comment>操作人</comment>
+            </column>
+        </property>
+        
+        <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1">
+                <comment>数据有效性/默认1，1有效，0无效</comment>
+            </column>
+        </property>
+        <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="36">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScWallet" table="SC_WALLET" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="userId" type="java.lang.String">
+             <column name="USER_ID" length="36">
+                <comment>用户id</comment>
+            </column>
+        </property>
+        <property name="purseType" type="java.lang.String">
+             <column name="PURSE_TYPE" length="1">
+                <comment>钱包类型/账户余额 0 积分 1</comment>
+            </column>
+        </property>
+        <property name="unit" type="java.lang.String">
+             <column name="UNIT" length="1">
+                <comment>单位/元 0 分 1</comment>
+            </column>
+        </property>
+         <property name="userMoney" type="java.lang.Double">
+            <column name="USER_MONEY">
+                <comment>金额</comment>
+            </column>
+        </property> 
+      <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+         <property name="updateTime" type="java.util.Date">
+               <column name="UPDATE_TIME">
+                <comment>更新时间</comment>
+            </column>
+        </property>
+        <property name="remark" type="java.lang.String">
+               <column name="REMARK" length="100">
+                <comment>备注</comment>
+            </column>
+        </property>
+        <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="50">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScIdentity" table="SC_IDENTITY" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="userId" type="java.lang.String">
+             <column name="USER_ID" length="36">
+                <comment>会员id</comment>
+            </column>
+        </property>
+        <property name="identityCard" type="java.lang.String">
+            <column name="IDENTITY_CARD" length="50">
+                <comment>身份证号码</comment>
+            </column>
+        </property>
+        <property name="identityCardValidity" type="java.util.Date">
+            <column name="IDENTITY_CARD_VALIDITY">
+                <comment>身份证有效期</comment>
+            </column>
+        </property>
+        <property name="identityIssuing" type="java.lang.String">
+            <column name="IDENTITY_ISSUING" length="50">
+                <comment>发证机关</comment>
+            </column>
+        </property>
+        <property name="identityStatus" type="java.lang.String">
+             <column name="IDENTITY_STATUS" length="1">
+                <comment>身份证状态/未认证0 申请中1 认证通过2 认证不通过 3</comment>
+            </column>
+        </property>
+        <property name="identityFrontal" type="java.lang.String">
+            <column name="IDENTITY_FRONTAL" length="100">
+                <comment>身份证正面照</comment>
+            </column>
+        </property>
+        <property name="identityBack" type="java.lang.String">
+            <column name="IDENTITY_BACK" length="100">
+                <comment>身份证背面照</comment>
+            </column>
+        </property>
+        <property name="identityHoldFrontal" type="java.lang.String">
+            <column name="IDENTITY_HOLD_FRONTAL" length="100">
+                <comment>手持身份证正面</comment>
+            </column>
+        </property>
+        <property name="applicationTime" type="java.util.Date">
+            <column name="APPLICATION_TIME">
+                <comment>申请认证时间</comment>
+            </column>
+        </property>
+        <property name="applicant" type="java.lang.String">
+            <column name="APPLICANT" length="50">
+                <comment>申请人</comment>
+            </column>
+        </property>
+        <property name="authenticationTime" type="java.util.Date">
+            <column name="AUTHENTICATION_TIME">
+                <comment>认证时间</comment>
+            </column>
+        </property>
+        <property name="authenticator" type="java.lang.String">
+            <column name="AUTHENTICATOR" length="50">
+                <comment>认证人</comment>
+            </column>
+        </property>
+        <property name="failureReason" type="java.lang.String">
+            <column name="FAILURE_REASON" length="100">
+                <comment>不通过理由</comment>
+            </column>
+        </property>
+         <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="50">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

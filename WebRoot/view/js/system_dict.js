@@ -4,7 +4,7 @@ $(function() {
 
 var queryDict = function() {
 	var data = formGet("from_query");
-	var url = path_ + "/view/dict/dict!query.action";
+	var url = path_ + "/view/shop/admin/dict!query.action";
 	pageData(url, "dictListTable", data); 
 };
 
@@ -51,7 +51,7 @@ $("#saveBtn").click(function() {
 	var data = formGet("edit_dict_table");
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/dict/dict!save.action",
+		url : path_ + "/view/shop/admin/dict!save.action",
 		data : data,
 		dataType : "json",
 		success : function(json) {
@@ -114,7 +114,7 @@ var showEditWin = function(id) {
 	var data = {"dict.id" : id};
 	$.ajax({
 		type : "POST",
-		url : path_ + "/view/dict/dict!queryDict.action",
+		url : path_ + "/view/shop/admin/dict!queryDict.action",
 		data : data,
 		dataType : "json",
 		success : function(data) {
@@ -138,7 +138,7 @@ var deleteDict = function(id) {
 		var data = {"dict.id" : id};
 		$.ajax({
 			type : "POST",
-			url : path_ + "/view/dict/dict!delete.action",
+			url : path_ + "/view/shop/admin/dict!delete.action",
 			data : data,
 			dataType : "json",
 			success : function(json) {

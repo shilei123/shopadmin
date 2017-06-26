@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScImage" table="SC_IMAGE">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="imgName" type="java.lang.String">
+            <column name="IMG_NAME" length="240" not-null="true" />
+        </property>
+        <property name="fileName" type="java.lang.String">
+            <column name="FILE_NAME" length="240" not-null="true" />
+        </property>
+        <property name="imgPath" type="java.lang.String">
+            <column name="IMG_PATH" length="320" not-null="true" />
+        </property>
+        <property name="imgType" type="java.lang.String">
+            <column name="IMG_TYPE" length="24" />
+        </property>
+        <property name="imgSize" type="java.lang.Double">
+            <column name="IMG_SIZE" not-null="true" />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="CREATE_TIME" length="26" not-null="true" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" not-null="true">
+                <comment>默认0: 0启用，1停用</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

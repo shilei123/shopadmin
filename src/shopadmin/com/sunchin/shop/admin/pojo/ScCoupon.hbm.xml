@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScCoupon" table="SC_COUPON" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="couponName" type="java.lang.String">
+             <column name="COUPON_NAME" length="36">
+                <comment>优惠券名称</comment>
+            </column>
+        </property>
+        <property name="couponType" type="java.lang.String">
+             <column name="COUPON_TYPE" length="36">
+                <comment>优惠券类型</comment>
+            </column>
+        </property>
+        <property name="couponZsBalance" type="java.lang.Double">
+            <column name="COUPON_ZS_BALANCE" precision="10">
+                <comment>满额赠送</comment>
+            </column>
+        </property>
+        <property name="couponBlance" type="java.lang.Double">
+            <column name="COUPON_BLANCE" precision="10">
+                <comment>优惠券金额</comment>
+            </column>
+        </property>
+        <property name="couponXfBalance" type="java.lang.Double">
+            <column name="COUPON_XF_BALANCE" precision="10">
+                <comment>满足金额使用</comment>
+            </column>
+        </property>
+        <property name="couponExpiryDate" type="java.lang.Integer">
+             <column name="COUPON_EXPIRY_DATE">
+                <comment>有效期天数</comment>
+            </column>
+        </property>
+        <property name="couponRemark" type="java.lang.String">
+               <column name="COUPON_REMARK" length="100" >
+                <comment>备注</comment>
+            </column>
+        </property>
+        <property name="couponStatus" type="java.lang.String">
+               <column name="COUPON_STATUS" length="1" >
+                <comment>状态</comment>
+            </column>
+        </property>
+         <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1" >
+                <comment>是否删除</comment>
+            </column>
+        </property>
+         <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+         <property name="optionAdminid" type="java.lang.String">
+               <column name="OPTION_ADMINID" length="36" >
+                <comment>操作人</comment>
+            </column>
+        </property>
+         <property name="optionTime" type="java.util.Date">
+               <column name="OPTION_TIME">
+                <comment>操作时间</comment>
+            </column>
+        </property>
+
+         <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="50">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
