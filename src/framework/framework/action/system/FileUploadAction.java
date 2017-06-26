@@ -76,7 +76,7 @@ public class FileUploadAction {
         	ids = "";
             for (int i = 0; i < uploadFiles.length; i++) {
             	int filesize = getFileSize(uploadFiles[i]);
-            	System.out.println(uploadFiles[i].getName());
+            	//System.out.println(uploadFiles[i].getName());
             	int indexof = uploadFilesFileName[i].lastIndexOf(".");
             	if(indexof == -1) { //文件中没有"."
             		msg = "文件"+uploadFilesFileName[i]+"是不允许上传类型";return "error";

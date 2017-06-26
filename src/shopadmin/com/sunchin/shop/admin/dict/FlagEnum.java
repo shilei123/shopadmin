@@ -2,9 +2,9 @@ package com.sunchin.shop.admin.dict;
 
 public enum FlagEnum {
 
-	ACT("0", "有效"),
+	ACT("1", "有效"),
 
-	HIS("1", "无效");
+	HIS("0", "无效");
 
 	private String code;
 

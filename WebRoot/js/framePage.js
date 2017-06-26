@@ -22,7 +22,7 @@ var createTr = function(data, targetId) {
 			} else {
 				if(fieldName=="index") {//字段名为index,返回序号列
 					html += "<div style='text-align: center;'>" + index2 + "</div>";
-				} else {
+				} else{
 					if(formatter==undefined) { //格式化为空，则返回文本列
 						html += getColumnValue(row[fieldName]);
 					} else { //格式化不为空，则调用格式化函数
@@ -56,7 +56,7 @@ function pageData(url, targetId, params, currPageNum, rowCount, page) {
 		data : params,
 		dataType: "json",
 		success : function(data) {
-			//console.log(data);
+			console.log(data);
 			$('#'+targetId+' tbody').empty();
 			var html = createTr(data, targetId);
 			$("#"+targetId).append(html);

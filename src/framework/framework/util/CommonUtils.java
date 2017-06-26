@@ -1,5 +1,7 @@
 package framework.util;
 
+import java.util.Date;
+
 public class CommonUtils {
 	public static String getString(Object obj) {
 		if(obj != null) {
@@ -15,6 +17,16 @@ public class CommonUtils {
 			
 		}
 		return new Double(0);
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static Date getDate(Object obj) {
+		try {
+			return new Date(obj.toString());
+		} catch (Exception e) {
+			
+		}
+		return new Date();
 	}
 
 	public static Integer getInteger(Object obj) {
