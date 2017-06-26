@@ -45,7 +45,7 @@
 
 <header class="am-topbar am-topbar-inverse admin-header" id="frameheader">
   <div class="am-topbar-brand">
-    <strong>${title }</strong> <!-- <small>管理平台</small> -->
+    <strong>${title }</strong><!--  <small>后台管理</small> -->
   </div>
 
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
@@ -58,6 +58,7 @@
       	</a>
       </li>
       <!-- <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li> -->
+      <li><a href="javascript:;"><span class="am-icon-shopping-bag"></span> 商城首页</a></li>
       <li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
           <span class="am-icon-users"></span> ${user.UName}<span class="am-icon-caret-down"></span>
@@ -118,12 +119,13 @@
 		
 		  <div class="am-tabs-bd am-tabs-bd-ofv" style="margin-left:0xp;">
 		    <div class="am-tab-panel am-fade am-in am-active" style="margin-left:0xp;" id="tab1">
-		    	<div style="margin-left: 10px;margin-top: 10px;">
+		    	<!-- <div style="margin-left: 10px;margin-top: 10px;">
 			    	<p>开发框架：Spring3 + Hibernate3 + Struts2 + JQuery(jquery validate) + easyui1.4 + AmazeUI2.7.2 + layui(laypage-v1.3)</p>
 			    	<p>开发环境：Tomcat7 + Jdk1.7 </p>
 			    	<p>数据库：Oracle11g r2</p>
 			    	<p>数据源：阿里巴巴 Druid </p>
-		    	 </div>
+		    	 </div> -->
+		    	 <img src="home.png"/>
 		    </div>
 		  </div>
 		</div>
@@ -244,15 +246,31 @@
 	});
     
     //选中最后一个tab
-    var  selectLastTab = function() {
+    var selectLastTab = function() {
     	var index = $nav.children('li').length;
 		$tab.tabs('open', index > 0 ? index - 1 : index + 1);
     };
 	
+  	//关闭tab
+    var closeTab = function(menuId) {
+    	var $menu = $("#"+menuId);
+    	if($menu.length > 0) {
+	    	var $item = $menu.closest('li');
+			var index = $nav.children('li').index($item);
+	      
+			$item.remove();
+			$bd.find('.am-tab-panel').eq(index).remove();
+	
+			$tab.tabs('open', index > 0 ? index - 1 : index + 1);
+			$tab.tabs('refresh');
+			//selectLastTab();
+    	}
+    };
+    
 	var addTab = function(menuId,menuName,menuUrl) {
 		var nav = '<li><span class="am-icon-close" id="'+menuId+'"></span>' +
         	'<a href="#tab'+tabCounter+'"> ' + menuName + '</a></li>';
-      	var content = '<div class="am-tab-panel" style="margin-left:0xp;" id="tab'+tabCounter+'"><iframe src="${basePath }'+menuUrl+'" scrolling="o" frameborder="" style="width:100%; height:'+(contentHeight-5)+'px;overflow: hidden;"/></div>';
+      	var content = '<div class="am-tab-panel" style="margin-left:0xp;" id="tab'+tabCounter+'"><iframe src="'+menuUrl+'" scrolling="o" frameborder="" allowfullscreen mozallowfullscreen webkitallowfullscreen style="width:100%; height:'+(contentHeight-5)+'px;overflow: hidden;"/></div>';
 
       	$nav.append(nav);
       	$bd.append(content);
@@ -261,6 +279,8 @@
     };
     
   	var addMenu = function(menuId,menuName,menuUrl) {
+  		menuUrl += menuUrl.indexOf("?")>0?"&tabId="+menuId:"?tabId="+menuId;
+  		
   		var $menu = $("#"+menuId);
   		if($menu.length==0) {
   			addTab(menuId,menuName,menuUrl);
@@ -280,7 +300,7 @@
   	
   	//初始化菜单
   	var menuInit = function() {
-		$.ajax({type: "POST",url: "${path }/view/menuTree.action",dataType: "json",error:function(){alert("加载菜单异常");},
+		$.ajax({type: "POST",url: "${path }/view/menuTree.action",dataType: "json",error:function(){/* alert("加载菜单异常"); */},
 			success: function(json){
 				var root = json.trees[0];
 		  		var html = buildMenus(root.children, false);
@@ -310,7 +330,7 @@
 				if(childmenu.attributes.openMethod!=null && childmenu.attributes.openMethod=='open') {
 					html += '<li><a href="javascript:window.open(\'${basePath }'+childmenu.attributes.url+'\');"><span class="am-icon-chevron-right"></span>&nbsp;&nbsp;'+childmenu.text+'</a></li>';
 				} else {
-					html += '<li><a href="javascript:addMenu(\''+childmenu.id+'\',\''+childmenu.text+'\',\''+childmenu.attributes.url+'\');"><span class="am-icon-chevron-right"></span>&nbsp;&nbsp;'+childmenu.text+'</a></li>';
+					html += '<li><a href="javascript:addMenu(\''+childmenu.id+'\',\''+childmenu.text+'\',\'${basePath }'+childmenu.attributes.url+'\');"><span class="am-icon-chevron-right"></span>&nbsp;&nbsp;'+childmenu.text+'</a></li>';
 				}
 			}
         	html += '</ul>';
@@ -336,13 +356,26 @@
 		});
 	};
     
+    var showMsg_ = function(msg) {
+    	layer.alert(msg,{icon: 1,shade: 0.1});
+    };
+    
     var showAlert_ = function(msg) {
-    	$("#alertMsg").text(msg);
-    	$('#my-alert').modal("open");
+    	layer.alert(msg,{icon: 7,shade: 0.1});
+    	/* $("#alertMsg").text(msg);
+    	$('#my-alert').modal("open"); */
     };
     
     var showConfirm_ = function(msg,callbackfun) {
-    	$("#confirmMsg").text(msg);
+    	//询问框
+    	layer.confirm(msg, {
+    		icon: 3,btn: ['确认','取消'] //按钮
+    	}, function(){
+    		callbackfun();
+    	}, function(){
+    	 
+    	});
+    	/* $("#confirmMsg").text(msg);
     	var $confirm = $('#my-confirm');
         var confirm = $confirm.data('amui.modal');
         if (confirm) {
@@ -355,7 +388,7 @@
     			onConfirm: callbackfun,
     			onCancel: function() {}
     		});
-        } 
+        }  */
     };
 </script>
 </body>

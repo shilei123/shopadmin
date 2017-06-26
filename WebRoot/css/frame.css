@@ -34,10 +34,10 @@ body table {
 .am-table>thead>tr>th {
 	/* color: #787878; */
 	border-bottom: 0px solid #ddd;
-	/* background-color: #F3F3F3; */
-	background:url(../images/1.png);
+	background-color: #F3F3F3;
+	/* background:url(../images/1.png); */
 	vertical-align: middle;
-	height: 40px;
+	height: auto;
 }
 
 .am-form input[type=number], .am-form input[type=search], .am-form input[type=text], .am-form input[type=password], .am-form input[type=datetime], .am-form input[type=datetime-local], .am-form input[type=date], .am-form input[type=month], .am-form input[type=time], .am-form input[type=week], .am-form input[type=email], .am-form input[type=url], .am-form input[type=tel], .am-form input[type=color], .am-form select, .am-form textarea, .am-form-field {
@@ -80,6 +80,21 @@ body table {
 .table_title {
 	text-align: right;
 	width: 100px;
+	font-weight: bold;
+}
+
+.frame-required>span {
+	color: red;
+	font-weight: bolder;
+}
+
+.table_error_info {
+	width: 200px;
+}
+.table_error_info>div {
+	text-align: left;
+	color: red;
+	margin-left: 5px;
 }
 
 .table_content>input {
@@ -217,3 +232,7 @@ legend {
 	margin-top: 0px;
 	margin-bottom: 0px;
 } */
+
+.frame-modal-content {
+	width: 100%;overflow: auto;
+}

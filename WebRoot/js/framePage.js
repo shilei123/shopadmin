@@ -22,7 +22,7 @@ var createTr = function(data, targetId) {
 			} else {
 				if(fieldName=="index") {//字段名为index,返回序号列
 					html += "<div style='text-align: center;'>" + index2 + "</div>";
-				} else {
+				} else{
 					if(formatter==undefined) { //格式化为空，则返回文本列
 						html += getColumnValue(row[fieldName]);
 					} else { //格式化不为空，则调用格式化函数
@@ -49,6 +49,15 @@ function pageData(url, targetId, params, currPageNum, rowCount, page) {
 	rowCount = rowCount || 'rowCount';
 	page = page || 'page';
 	//console.log("rowCount, page:"+rowCount+":"+ page);
+	
+	$("#"+targetId).ajaxStart(function(){
+		showLoading();
+    })//开始上传文件时显示一个图片
+    .ajaxComplete(function(){
+    	closeLoading();
+    });//文件上传完成将图片隐藏起来
+	
+	//showLoading();
 	$.ajax({
 		url : url,
 		type : 'POST',
@@ -76,6 +85,7 @@ function pageData(url, targetId, params, currPageNum, rowCount, page) {
 					}
 				}
 			});
+			//closeLoading();
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			//alert('e:' + XMLHttpRequest.responseText);

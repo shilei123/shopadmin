@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScExpressProvider" table="SC_EXPRESS_PROVIDER" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="expressType" type="java.lang.String">
+             <column name="EXPRESS_TYPE" length="1">
+                <comment>快递类型</comment>
+            </column>
+        </property>
+        <property name="code" type="java.lang.String">
+             <column name="CODE" length="50">
+                <comment>代码</comment>
+            </column>
+        </property>
+        <property name="forShort" type="java.lang.String">
+             <column name="FOR_SHORT" length="50">
+                <comment>简称</comment>
+            </column>
+        </property>
+        <property name="ename" type="java.lang.String">
+             <column name="ENAME" length="100">
+                <comment>英文</comment>
+            </column>
+        </property>
+        <property name="fullName" type="java.lang.String">
+             <column name="FULL_NAME" length="100">
+                <comment>全称</comment>
+            </column>
+        </property>
+        <property name="url" type="java.lang.String">
+             <column name="URL" length="200">
+                <comment>LOGO</comment>
+            </column>
+        </property>
+        <property name="isuse" type="java.lang.String">
+             <column name="ISUSE" length="1">
+                <comment>是否默认/默认1，1有效，0无效</comment>
+            </column>
+        </property>
+         <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>申请时间</comment>
+            </column>
+        </property>
+         <property name="updateTime" type="java.util.Date">
+             <column name="UPDATE_TIME">
+                <comment>修改时间</comment>
+            </column>
+        </property>
+        <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1">
+                <comment>数据有效性/默认1，1有效，0无效</comment>
+            </column>
+        </property>
+        <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="10">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

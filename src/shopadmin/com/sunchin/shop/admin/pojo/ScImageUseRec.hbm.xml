@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScImageUseRec" table="SC_IMAGE_USE_REC">
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="busiType" type="java.lang.String">
+            <column name="BUSI_TYPE" length="1" />
+        </property>
+        <property name="busiId" type="java.lang.String">
+            <column name="BUSI_ID" length="36" />
+        </property>
+        <property name="imgId" type="java.lang.String">
+            <column name="IMG_ID" length="100" />
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="CREATE_TIME" length="7" />
+        </property>
+        <property name="createUserId" type="java.lang.String">
+            <column name="CREATE_USER_ID" length="36" />
+        </property>
+        <property name="flag" type="java.lang.String">
+            <column name="FLAG" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

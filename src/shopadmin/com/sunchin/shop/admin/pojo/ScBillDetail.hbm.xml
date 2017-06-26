@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.sunchin.shop.admin.pojo.ScBillDetail" table="SC_BILL_DETAIL" >
+        <id name="id" type="java.lang.String">
+            <column name="ID" length="36" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="billCode" type="java.lang.String">
+             <column name="BILL_CODE" length="36">
+                <comment>单据编号</comment>
+            </column>
+        </property>
+        <property name="goodsId" type="java.lang.String">
+             <column name="GOODS_ID" length="36">
+                <comment>商品id</comment>
+            </column>
+        </property>
+        <property name="goodsDetailId" type="java.lang.String">
+             <column name="GOODS_DETAIL_ID" length="36">
+                <comment>商品子表id</comment>
+            </column>
+        </property>
+        <property name="numbs" type="java.lang.Double">
+             <column name="NUMBS">
+                <comment>商品数量</comment>
+            </column>
+        </property>
+        <property name="purchasePrice" type="java.lang.Double">
+             <column name="PURCHASE_PRICE" precision="10">
+                <comment>采购价格</comment>
+            </column>
+        </property>
+        <property name="donePrice" type="java.lang.Double">
+             <column name="DONE_PRICE" precision="10">
+                <comment>成交价格</comment>
+            </column>
+        </property>
+         <property name="order" type="java.lang.Double">
+             <column name="ORDER_">
+                <comment>顺序</comment>
+            </column>
+        </property>
+        <property name="createTime" type="java.util.Date">
+               <column name="CREATE_TIME">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+         <property name="flag" type="java.lang.String">
+               <column name="FLAG" length="1">
+                <comment>数据有效性/默认1，1有效，0无效</comment>
+            </column>
+        </property>
+        <property name="belong" type="java.lang.String">
+               <column name="BELONG" length="36">
+                <comment>所属</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

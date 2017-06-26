@@ -104,7 +104,9 @@
 		        	<table class="frame-modal-table" border="0" bordercolor="black">
 			        	<tr>
 			        		<td width="100" class="table_title">银行名称：</td>
-			        		<td><input name="bankInfo.bankName" id="bankName" placeholder="银行名称" class="am-form-field" style="width:90%" minlength="3" required/></td>
+			        		<td>
+			        			<input name="bankInfo.bankName" id="bankName" placeholder="银行名称" class="am-form-field" style="width:80%;" minlength="3" required/><a href="javascript:void(0);" id="selectBtn">选择</a>
+							</td>
 			        	</tr>
 			        	<tr>
 			        		<td class="table_title">电话：</td>
@@ -161,4 +163,18 @@
 	</div>
 </body>
 <script type="text/javascript" src="${path }/view/js/bank_bankmanager.js"></script>
+<script type="text/javascript">
+$("#selectBtn").click(function(){
+	//iframe层-父子操作
+	layer.open({
+	  type: 2,
+	  area: ['500px', '90%'],
+	  fixed: true, //不固定
+	  maxmin: false,
+	  shadeClose: false,
+	  shade: 0,
+	  content: ['${path}/view/bank/test.jsp', 'no']
+	});
+});
+</script>
 </html>

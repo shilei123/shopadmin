@@ -1,7 +1,9 @@
 package com.sunchin.shop.admin.system.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -10,8 +12,10 @@ import com.sunchin.shop.admin.dict.FlagEnum;
 import com.sunchin.shop.admin.pojo.ScDictionary;
 
 import framework.bean.PageBean;
+import framework.config.SysDict;
 import framework.db.DBUtil;
 import framework.db.PageDAO;
+import framework.db.pojo.TXtSysCode;
 
 @Repository("scDictionaryDAO")
 public class ScDictionaryDAO extends PageDAO {
@@ -75,4 +79,15 @@ public class ScDictionaryDAO extends PageDAO {
 		sql.append(" order by t.create_time desc ");
 		return sql.toString();
 	}
+
+	
+	@SuppressWarnings("unchecked")
+	public List<ScDictionary> queryDictionaryType(String type) {
+		DBUtil db = DBUtil.getInstance();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("type", type);
+		params.put("flag", FlagEnum.ACT.getCode());
+		return db.queryByPojo(ScDictionary.class, params);
+	}
+	
 }
